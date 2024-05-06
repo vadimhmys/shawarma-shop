@@ -1,4 +1,4 @@
-import sequelize from '../sequelize';
+import sequelize from '../sequelize.js';
 import database from 'sequelize';
 
 const { DataTypes } = database;
@@ -130,3 +130,4 @@ export {
   Order,
   OrderItem,
 };
+
