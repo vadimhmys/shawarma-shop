@@ -1,4 +1,4 @@
- import sequelize from '../sequelize.js';
+import sequelize from '../sequelize.js';
 import database from 'sequelize';
 
 const { DataTypes } = database;
@@ -109,6 +109,9 @@ CategoryShawarma.belongsTo(Category);
 Shawarma.hasMany(CategoryShawarma);
 CategoryShawarma.belongsTo(Shawarma);
 
+Shawarma.hasMany(ShawarmaProp, { as: 'props', onDelete: 'CASCADE' });
+ShawarmaProp.belongsTo(Shawarma);
+
 Shawarma.hasMany(Ingredient, { as: 'ingrs', onDelete: 'CASCADE' });
 Ingredient.belongsTo(Shawarma);
 
@@ -130,4 +133,3 @@ export {
   Order,
   OrderItem,
 };
-
