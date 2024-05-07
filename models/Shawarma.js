@@ -1,14 +1,20 @@
 import { Shawarma as ShawarmaMapping } from './mapping.js';
+import { ShawarmaProp as ShawarmaPropMapping } from './mapping.js';
 import FileService from '../services/File.js';
 
 class Shawarma {
   async getAll() {
-    const shawarmas = await ShawarmaMapping.findAll();
+    const shawarmas = await ShawarmaMapping.findAll({
+      include: [{ model: ShawarmaPropMapping, as: 'props' }],
+    });
     return shawarmas;
   }
 
   async getOne(id) {
-    const shawarma = await ShawarmaMapping.findByPk(id);
+    const shawarma = await ShawarmaMapping.findOne({
+      where: { id: id },
+      include: [{ model: ShawarmaPropMapping, as: 'props' }],
+    });
     if (!shawarma) {
       throw new Error('Shawarma not found in DB');
     }
@@ -25,11 +31,23 @@ class Shawarma {
       throw new Error('Shawarma name missing');
     }
     const shawarma = await ShawarmaMapping.create({ name, title, novelty, presence, image });
+    if (data.props) {
+      const props = JSON.parse(data.props);
+      for (let prop of props) {
+        await ShawarmaPropMapping.create({
+          weight: prop.weight,
+          price: prop.price,
+          shawarmaId: shawarma.id,
+        });
+      }
+    }
     return shawarma;
   }
 
   async update(id, data, img) {
-    const shawarma = await ShawarmaMapping.findByPk(id);
+    const shawarma = await ShawarmaMapping.findByPk(id, {
+      include: [{ model: ShawarmaPropMapping, as: 'props' }],
+    });
     if (!shawarma) {
       throw new Error('Shawarma not found in DB');
     }
@@ -48,6 +66,18 @@ class Shawarma {
       image = file ? file : shawarma.image,
     } = data;
     await shawarma.update({ name, title, image, novelty, presence });
+    if (data.props) {
+      await ShawarmaPropMapping.destroy({ where: { shawarmaId: id } });
+      const props = JSON.parse(data.props);
+      for (let prop of props) {
+        await ShawarmaPropMapping.create({
+          weight: prop.weight,
+          price: prop.price,
+          shawarmaId: shawarma.id,
+        });
+      }
+    }
+    await shawarma.reload();
     return shawarma;
   }
 
@@ -55,6 +85,9 @@ class Shawarma {
     const shawarma = await ShawarmaMapping.findByPk(id);
     if (!shawarma) {
       throw new Error('Shawarma not found in DB');
+    }
+    if (shawarma.image) {
+      FileService.delete(shawarma.image);
     }
     await shawarma.destroy();
     return shawarma;
