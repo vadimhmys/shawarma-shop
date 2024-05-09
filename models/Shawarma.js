@@ -1,11 +1,15 @@
 import { Shawarma as ShawarmaMapping } from './mapping.js';
 import { ShawarmaProp as ShawarmaPropMapping } from './mapping.js';
+import { ShawarmaComponent as ShawarmaComponentMapping } from './mapping.js';
 import FileService from '../services/File.js';
 
 class Shawarma {
   async getAll() {
     const shawarmas = await ShawarmaMapping.findAll({
-      include: [{ model: ShawarmaPropMapping, as: 'props' }],
+      include: [
+        { model: ShawarmaPropMapping, as: 'props' },
+        { model: ShawarmaComponentMapping, as: 'components' },
+      ],
     });
     return shawarmas;
   }
@@ -13,7 +17,10 @@ class Shawarma {
   async getOne(id) {
     const shawarma = await ShawarmaMapping.findOne({
       where: { id: id },
-      include: [{ model: ShawarmaPropMapping, as: 'props' }],
+      include: [
+        { model: ShawarmaPropMapping, as: 'props' },
+        { model: ShawarmaComponentMapping, as: 'components' },
+      ],
     });
     if (!shawarma) {
       throw new Error('Shawarma not found in DB');
@@ -41,12 +48,25 @@ class Shawarma {
         });
       }
     }
+    if (data.components) {
+      const components = JSON.parse(data.components);
+      for (let component of components) {
+        await ShawarmaComponentMapping.create({
+          name: component.name,
+          necessity: component.necessity,
+          shawarmaId: shawarma.id,
+        });
+      }
+    }
     return shawarma;
   }
 
   async update(id, data, img) {
     const shawarma = await ShawarmaMapping.findByPk(id, {
-      include: [{ model: ShawarmaPropMapping, as: 'props' }],
+      include: [
+        { model: ShawarmaPropMapping, as: 'props' },
+        { model: ShawarmaComponentMapping, as: 'components' },
+      ],
     });
     if (!shawarma) {
       throw new Error('Shawarma not found in DB');
@@ -73,6 +93,17 @@ class Shawarma {
         await ShawarmaPropMapping.create({
           weight: prop.weight,
           price: prop.price,
+          shawarmaId: shawarma.id,
+        });
+      }
+    }
+    if (data.components) {
+      await ShawarmaComponentMapping.destroy({ where: { shawarmaId: id } });
+      const components = JSON.parse(data.components);
+      for (let component of components) {
+        await ShawarmaComponentMapping.create({
+          name: component.name,
+          necessity: component.necessity,
           shawarmaId: shawarma.id,
         });
       }

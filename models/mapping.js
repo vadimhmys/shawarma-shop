@@ -39,6 +39,12 @@ const ShawarmaProp = sequelize.define('shawarma_prop', {
   price: { type: DataTypes.DECIMAL(5, 2), allowNull: false },
 });
 
+const ShawarmaComponent = sequelize.define('shawarma_component', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, allowNull: false },
+  necessity: { type: DataTypes.BOOLEAN, defaultValue: true }
+});
+
 const Order = sequelize.define('order', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, allowNull: false },
@@ -113,6 +119,9 @@ CategoryShawarma.belongsTo(Shawarma);
 Shawarma.hasMany(ShawarmaProp, { as: 'props', onDelete: 'CASCADE' });
 ShawarmaProp.belongsTo(Shawarma);
 
+Shawarma.hasMany(ShawarmaComponent, { as: 'components', onDelete: 'CASCADE' });
+ShawarmaComponent.belongsTo(Shawarma);
+
 Shawarma.hasMany(Ingredient, { as: 'ingrs', onDelete: 'CASCADE' });
 Ingredient.belongsTo(Shawarma);
 
@@ -129,6 +138,7 @@ export {
   Ingredient,
   BasketShawarma,
   ShawarmaProp,
+  ShawarmaComponent,
   Category,
   CategoryShawarma,
   Order,
