@@ -1,17 +1,16 @@
 import express from 'express';
+import UserController from '../controllers/User.js';
 
 const router = new express.Router();
 
-router.post('/signup', (req, res) => res.status(200).send('Регистрация пользователя'));
-router.post('/login', (req, res) => res.status(200).send('Вход в личный кабинет'));
-router.get('/check', (req, res) => res.status(200).send('Проверка авторизации'));
+router.post('/signup', UserController.signup);
+router.post('/login', UserController.login);
+router.get('/check', UserController.check);
 
-router.get('/getall', (req, res) => res.status(200).send('Список всех пользователй'));
-router.get('/getone/:id([0-9]+)', (req, res) =>
-  res.status(200).send('Получение одного пользователя'),
-);
-router.post('/create', (req, res) => res.status(200).send('Создание нового пользователя'));
-router.put('/update/:id([0-9]+)', (req, res) => res.status(200).send('Обновление пользователя'));
-router.delete('/delete/:id([0-9]+)', (req, res) => res.status(200).send('Удаление пользователя'));
+router.get('/getall', UserController.getAll);
+router.get('/getone/:id([0-9]+)', UserController.getOne);
+router.post('/create', UserController.create);
+router.put('/update/:id([0-9]+)', UserController.update);
+router.delete('/delete/:id([0-9]+)', UserController.delete);
 
 export default router;
