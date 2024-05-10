@@ -27,6 +27,8 @@ const Shawarma = sequelize.define('shawarma', {
 const Ingredient = sequelize.define('ingredient', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING },
+  image: { type: DataTypes.STRING, allowNull: false },
+  price: { type: DataTypes.FLOAT, allowNull: false },
 });
 
 const BasketShawarma = sequelize.define('basket_shawarma', {
@@ -117,9 +119,6 @@ ShawarmaProp.belongsTo(Shawarma);
 
 Shawarma.hasMany(ShawarmaComponent, { as: 'components', onDelete: 'CASCADE' });
 ShawarmaComponent.belongsTo(Shawarma);
-
-Shawarma.hasMany(Ingredient, { as: 'ingrs', onDelete: 'CASCADE' });
-Ingredient.belongsTo(Shawarma);
 
 Order.hasMany(OrderItem, { as: 'items', onDelete: 'CASCADE' });
 OrderItem.belongsTo(Order);
