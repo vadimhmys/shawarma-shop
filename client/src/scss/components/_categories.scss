@@ -1,0 +1,32 @@
+.categories {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      background-color: $bg-btn;
+      color: $dark-font;
+      padding: 15px 30px;
+      border-radius: 30px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+      @include noselect();
+
+      &:hover {
+        background-color: darken($bg-btn, 5%);
+      }
+
+      &:active {
+        background-color: darken($bg-btn, 8%);
+      }
+
+      &.active {
+        background-color: $bg-btn-active;
+        color: $white;
+      }
+    }
+  }
+}
