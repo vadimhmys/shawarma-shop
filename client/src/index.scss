@@ -1,0 +1,21 @@
+@import './scss/variables';
+@import './scss/libs/normalize';
+@import './scss/components/all';
+
+body {
+  background-color: $bg;
+}
+
+.wrapper {
+  width: calc(100vw - 100px);
+  height: 100%;
+  background-color: darken($color: $white, $amount: 3%) ;
+  margin: 0 auto;
+  border-radius: 10px;
+  max-width: 1400px;
+}
+
+.container {
+  width: $container-width;
+  margin: 0 auto;
+}
