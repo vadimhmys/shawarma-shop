@@ -27,9 +27,9 @@ class Ingredient {
     const ingredient = await IngredientMapping.create({
       name,
       price,
-      image
+      image,
     });
-    
+
     return ingredient;
   }
 
@@ -50,7 +50,7 @@ class Ingredient {
       price = ingredient.price,
       image = file ? file : ingredient.image,
     } = data;
-    await ingredient.update({ name, price, image});
+    await ingredient.update({ name, price, image });
     await ingredient.reload();
     return ingredient;
   }

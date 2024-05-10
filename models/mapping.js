@@ -31,6 +31,14 @@ const Ingredient = sequelize.define('ingredient', {
   price: { type: DataTypes.FLOAT, allowNull: false },
 });
 
+const Sauce = sequelize.define('sauce', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING },
+  image: { type: DataTypes.STRING },
+  price: { type: DataTypes.FLOAT, allowNull: false },
+});
+
+
 const BasketShawarma = sequelize.define('basket_shawarma', {
   quantity: { type: DataTypes.INTEGER, defaultValue: 1 },
 });
@@ -131,6 +139,7 @@ export {
   Basket,
   Shawarma,
   Ingredient,
+  Sauce,
   BasketShawarma,
   ShawarmaProp,
   ShawarmaComponent,
