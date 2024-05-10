@@ -30,14 +30,14 @@ class Shawarma {
 
   async create(data, img) {
     const image = FileService.save(img) ?? '';
-    const { name, title, novelty = false, presence = true } = data;
+    const { name, title, novelty = false, presence = true, categoryId = null } = data;
     if (!name) {
       throw new Error('Shawarma name missing');
     }
     if (!title) {
       throw new Error('Shawarma name missing');
     }
-    const shawarma = await ShawarmaMapping.create({ name, title, novelty, presence, image });
+    const shawarma = await ShawarmaMapping.create({ name, title, novelty, presence, image, categoryId });
     if (data.props) {
       const props = JSON.parse(data.props);
       for (let prop of props) {
@@ -84,8 +84,9 @@ class Shawarma {
       novelty = shawarma.novelty,
       presence = shawarma.presence,
       image = file ? file : shawarma.image,
+      categoryId = shawarma.categoryId
     } = data;
-    await shawarma.update({ name, title, image, novelty, presence });
+    await shawarma.update({ name, title, image, novelty, presence, categoryId });
     if (data.props) {
       await ShawarmaPropMapping.destroy({ where: { shawarmaId: id } });
       const props = JSON.parse(data.props);

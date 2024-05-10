@@ -42,7 +42,7 @@ const ShawarmaProp = sequelize.define('shawarma_prop', {
 const ShawarmaComponent = sequelize.define('shawarma_component', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, allowNull: false },
-  necessity: { type: DataTypes.BOOLEAN, defaultValue: true }
+  necessity: { type: DataTypes.BOOLEAN, defaultValue: true },
 });
 
 const Order = sequelize.define('order', {
@@ -109,12 +109,8 @@ BasketShawarma.belongsTo(Basket);
 Shawarma.hasMany(BasketShawarma);
 BasketShawarma.belongsTo(Shawarma);
 
-Category.belongsToMany(Shawarma, { through: CategoryShawarma, onDelete: 'CASCADE' });
-Shawarma.belongsToMany(Category, { through: CategoryShawarma, onDelete: 'CASCADE' });
-Category.hasMany(CategoryShawarma);
-CategoryShawarma.belongsTo(Category);
-Shawarma.hasMany(CategoryShawarma);
-CategoryShawarma.belongsTo(Shawarma);
+Category.hasMany(Shawarma, { onDelete: 'RESTRICT' });
+Shawarma.belongsTo(Category);
 
 Shawarma.hasMany(ShawarmaProp, { as: 'props', onDelete: 'CASCADE' });
 ShawarmaProp.belongsTo(Shawarma);
@@ -140,7 +136,6 @@ export {
   ShawarmaProp,
   ShawarmaComponent,
   Category,
-  CategoryShawarma,
   Order,
   OrderItem,
 };
