@@ -108,10 +108,6 @@ const Category = sequelize.define('category', {
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
 });
 
-const CategoryShawarma = sequelize.define('category_shawarma', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-});
-
 Basket.belongsToMany(Shawarma, { through: BasketShawarma, onDelete: 'CASCADE' });
 Shawarma.belongsToMany(Basket, { through: BasketShawarma, onDelete: 'CASCADE' });
 Basket.hasMany(BasketShawarma);
