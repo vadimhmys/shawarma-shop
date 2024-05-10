@@ -46,7 +46,7 @@ const BasketShawarma = sequelize.define('basket_shawarma', {
 const ShawarmaProp = sequelize.define('shawarma_prop', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   weight: { type: DataTypes.INTEGER, allowNull: false },
-  price: { type: DataTypes.DECIMAL(5, 2), allowNull: false },
+  price: { type: DataTypes.FLOAT, allowNull: false },
 });
 
 const ShawarmaComponent = sequelize.define('shawarma_component', {
