@@ -4,8 +4,12 @@ import { ShawarmaComponent as ShawarmaComponentMapping } from './mapping.js';
 import FileService from '../services/File.js';
 
 class Shawarma {
-  async getAll() {
+  async getAll(params) {
+    const { categoryId } = params;
+    const where = {};
+    if (categoryId) where.categoryId = categoryId;
     const shawarmas = await ShawarmaMapping.findAll({
+      where,
       include: [
         { model: ShawarmaPropMapping, as: 'props' },
         { model: ShawarmaComponentMapping, as: 'components' },
@@ -37,7 +41,14 @@ class Shawarma {
     if (!title) {
       throw new Error('Shawarma name missing');
     }
-    const shawarma = await ShawarmaMapping.create({ name, title, novelty, presence, image, categoryId });
+    const shawarma = await ShawarmaMapping.create({
+      name,
+      title,
+      novelty,
+      presence,
+      image,
+      categoryId,
+    });
     if (data.props) {
       const props = JSON.parse(data.props);
       for (let prop of props) {
@@ -84,7 +95,7 @@ class Shawarma {
       novelty = shawarma.novelty,
       presence = shawarma.presence,
       image = file ? file : shawarma.image,
-      categoryId = shawarma.categoryId
+      categoryId = shawarma.categoryId,
     } = data;
     await shawarma.update({ name, title, image, novelty, presence, categoryId });
     if (data.props) {
