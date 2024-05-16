@@ -1,6 +1,7 @@
 import Card from './components/Card';
 import Categories from './components/Categories';
 import Header from './components/Header';
+import Sorting from './components/Sorting';
 import { data } from './data';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <div className="container">
           <div className="content__top">
             <Categories/>
+            <Sorting/>
           </div>
           <h2 className="content__title">Все шавухи</h2>
           <div className="content__items">

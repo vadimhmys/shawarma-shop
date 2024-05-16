@@ -1,0 +1,42 @@
+.sorting {
+  position: relative;
+  min-width: 200px;
+  &__top {
+    display: flex;
+    align-items: center;
+
+    &-title {
+      margin-right: 10px;
+    }
+  }
+
+  &__popup {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    margin-top: 10px;
+    background: $white;
+    box-shadow: 0px 10px 20px $black;
+    border-radius: 10px;
+    overflow: hidden;
+    
+    ul {
+      overflow: hidden;
+      li {
+        padding: 10px 15px;
+        color: $gray-font;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          background: rgba(77, 56, 49, 0.1);
+        }
+
+        &.active {
+          font-weight: bold;
+          color: $dark-font
+        }
+      }
+    }
+  }
+}
