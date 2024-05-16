@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Categories() {
+  const [categories, setCategories] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleClick = (index) => {
+    setActiveIndex(index);
+  };
+
+  useEffect(() => {
+    fetch('http://localhost:7000/api/category/getall')
+      .then((res) => res.json())
+      .then((arr) => setCategories(arr));
+  }, []);
+
   return (
     <div className="categories">
       <ul>
-        <li className="active">Все</li>
-        <li>Новинки</li>
-        <li>Курица</li>
-        <li>Говядина</li>
-        <li>Баранина</li>
-        <li>Рыба</li>
-        <li>Грибы</li>
-        <li>Острые</li>
-        <li>Вегетарианские</li>
-        <li>Сыр</li>
-        <li>Без лука</li>
+        {categories.map((c, i) => (
+          <li
+            key={c.id}
+            className={i === activeIndex ? 'active' : ''}
+            onClick={() => handleClick(i)}>
+            {c.name}
+          </li>
+        ))}
       </ul>
     </div>
   );
