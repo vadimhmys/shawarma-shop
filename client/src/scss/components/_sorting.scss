@@ -7,6 +7,13 @@
 
     &-title {
       margin-right: 10px;
+
+      & span {
+        color: $orange;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: underline;
+      } 
     }
   }
 
