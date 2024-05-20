@@ -14,7 +14,7 @@ export default function Card({ shawarma }) {
           </div>
           <div className="variants">
             {shawarma.props.map((p) => (
-              <Variant key={p.id} weight={p.weight} />
+              <Variant key={p.id} weight={p.weight} price={p.price}/>
             ))}
           </div>
         </div>

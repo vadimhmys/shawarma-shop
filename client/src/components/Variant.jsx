@@ -1,14 +1,11 @@
 import React from 'react';
+import Price from './Price';
 
-export default function Variant({weight}) {
+export default function Variant({weight, price}) {
   return (
     <div className="variants__item">
       <div className="weight">{weight} г.</div>
-      <div className="price">
-        <span className="rubles">5</span>
-        <sup className="kopecks">90</sup>
-        <sub className="currency">р.</sub>
-      </div>
+      <Price price={price}/>
     </div>
   );
 }
