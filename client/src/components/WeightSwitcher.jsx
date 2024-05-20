@@ -4,7 +4,8 @@ import RadioBox from './RadioBox';
 export default function WeightSwitcher({ variants }) {
   const [items, setItems] = useState([true, ...Array(variants.length - 1).fill(false)]);
   const handleChange = (e) => {
-    setItems(variants.map((v) => v.id === e.target.id));
+    const newVariants = variants.map((v) => v.id === +e.target.id);
+    setItems(newVariants);
   };
   return (
     <div className="card__weight-switcher">

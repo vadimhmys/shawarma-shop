@@ -1,8 +1,7 @@
-import Card from './components/Card';
 import Categories from './components/Categories';
 import Header from './components/Header';
 import Sorting from './components/Sorting';
-import { data } from './data';
+import Main from './pages/Main';
 
 function App() {
   return (
@@ -14,15 +13,7 @@ function App() {
             <Categories/>
             <Sorting/>
           </div>
-          <h2 className="content__title">Все шавухи</h2>
-          <div className="content__items">
-            {
-              data.shawarmas.map(s => <Card
-                key={s.id}
-                shawarma={s}
-              />)
-            }
-          </div>
+          <Main/>
         </div>
       </div>
     </div>
