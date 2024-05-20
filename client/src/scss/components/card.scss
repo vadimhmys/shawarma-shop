@@ -110,8 +110,12 @@
     color: $dark-font;
   }
 
-  &__description {
+  &__components {
     padding: 0 10px 10px;
+
+    & span:not(:last-child)::after {
+      content: ', '
+    }
   }
 
   &__weight-switcher {
