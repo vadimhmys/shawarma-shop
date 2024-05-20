@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card.jsx';
+import Categories from '../components/Categories.jsx';
+import Sorting from '../components/Sorting.jsx';
 
 export default function Main() {
   const [shawarmas, setShawarmas] = useState([]);
@@ -12,6 +14,10 @@ export default function Main() {
 
   return (
     <>
+      <div className="content__top">
+        <Categories />
+        <Sorting />
+      </div>
       <h2 className="content__title">Все шавухи</h2>
       <div className="content__items">
         {shawarmas.map((s) => (
