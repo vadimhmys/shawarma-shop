@@ -16,10 +16,6 @@ app.use(express.static('static'));
 app.use(fileUpload());
 app.use('/api', router);
 
-app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Hello, world!' });
-});
-
 app.use(ErrorHandler);
 
 const start = async () => {
