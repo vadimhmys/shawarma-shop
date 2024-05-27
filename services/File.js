@@ -5,7 +5,10 @@ import fs from 'fs';
 class File {
   save(file) {
     if (!file) return null;
-    const [, ext] = file.mimetype.split('/');
+    let [, ext] = file.mimetype.split('/');
+    if (ext.endsWith('+xml')) {
+      ext = ext.slice(0, -4);
+    }
     const fileName = uuid.v4() + '.' + ext;
     const filePath = path.resolve('static', fileName);
     file.mv(filePath);
