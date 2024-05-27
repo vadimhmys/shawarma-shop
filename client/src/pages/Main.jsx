@@ -21,7 +21,7 @@ export default function Main() {
       <h2 className="content__title">Все шавухи</h2>
       <div className="content__items">
         {shawarmas.map((s) => (
-          <Card key={s.id} shawarma={s} />
+          s.presence && <Card key={s.id} shawarma={s} />
         ))}
       </div>
     </>
