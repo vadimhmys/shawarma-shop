@@ -32,8 +32,9 @@ class Shawarma {
     return shawarma;
   }
 
-  async create(data, img) {
+  async create(data, img, logo) {
     const image = FileService.save(img) ?? '';
+    const icon = FileService.save(logo);
     const { name, title, novelty = false, presence = true, categoryId = null } = data;
     if (!name) {
       throw new Error('Shawarma name missing');
@@ -47,6 +48,7 @@ class Shawarma {
       novelty,
       presence,
       image,
+      icon,
       categoryId,
     });
     if (data.props) {
@@ -72,7 +74,7 @@ class Shawarma {
     return shawarma;
   }
 
-  async update(id, data, img) {
+  async update(id, data, img, logo) {
     const shawarma = await ShawarmaMapping.findByPk(id, {
       include: [
         { model: ShawarmaPropMapping, as: 'props' },
@@ -83,10 +85,15 @@ class Shawarma {
       throw new Error('Shawarma not found in DB');
     }
 
-    const file = FileService.save(img);
+    const fileImg = FileService.save(img);
+    const fileIcon = FileService.save(logo);
 
-    if (file && shawarma.image) {
+    if (fileImg && shawarma.image) {
       FileService.delete(shawarma.image);
+    }
+
+    if (fileIcon && shawarma.icon) {
+      FileService.delete(shawarma.icon);
     }
 
     const {
@@ -94,10 +101,11 @@ class Shawarma {
       title = shawarma.title,
       novelty = shawarma.novelty,
       presence = shawarma.presence,
-      image = file ? file : shawarma.image,
+      image = fileImg ? fileImg : shawarma.image,
+      icon = fileIcon ? fileIcon : shawarma.icon,
       categoryId = shawarma.categoryId,
     } = data;
-    await shawarma.update({ name, title, image, novelty, presence, categoryId });
+    await shawarma.update({ name, title, image, icon, novelty, presence, categoryId });
     if (data.props) {
       await ShawarmaPropMapping.destroy({ where: { shawarmaId: id } });
       const props = JSON.parse(data.props);
@@ -131,6 +139,9 @@ class Shawarma {
     }
     if (shawarma.image) {
       FileService.delete(shawarma.image);
+    }
+    if (shawarma.icon) {
+      FileService.delete(shawarma.icon);
     }
     await shawarma.destroy();
     return shawarma;

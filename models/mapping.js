@@ -20,6 +20,7 @@ const Shawarma = sequelize.define('shawarma', {
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
   title: { type: DataTypes.STRING, unique: true, allowNull: false },
   image: { type: DataTypes.STRING, allowNull: false },
+  icon: { type: DataTypes.STRING },
   novelty: { type: DataTypes.BOOLEAN, defaultValue: false },
   presence: { type: DataTypes.BOOLEAN, defaultValue: true },
 });

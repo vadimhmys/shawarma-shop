@@ -8,11 +8,11 @@ import sauce from './sauce.js';
 
 const router = new express.Router();
 
-router.use('/shawarma', shawarma);
-router.use('/category', category);
-router.use('/user', user);
-router.use('/basket', basket);
-router.use('/ingredient', ingredient);
-router.use('/sauce', sauce);
+router.use('/shawarmas', shawarma);
+router.use('/categories', category);
+router.use('/users', user);
+router.use('/baskets', basket);
+router.use('/ingredients', ingredient);
+router.use('/sauces', sauce);
 
 export default router;

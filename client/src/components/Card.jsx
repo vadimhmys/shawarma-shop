@@ -3,7 +3,6 @@ import WeightSwitcher from './WeightSwitcher';
 import Variant from './Variant';
 
 export default function Card({ shawarma }) {
-  console.log(shawarma.components);
   return (
     <div className="card">
       <div className="card__top">
@@ -11,7 +10,7 @@ export default function Card({ shawarma }) {
         <div className="card__top-info">
           <div className="title">
             <div className="title__text">{shawarma.title}</div>
-            <img className="title__icon" src="./images/chicken-icon.svg" alt="chiken icon" />
+            <img className="title__icon" src={`http://localhost:7000/${shawarma.icon}`} alt={shawarma.title} />
           </div>
           <div className="variants">
             {shawarma.props.map((p) => (

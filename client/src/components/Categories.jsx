@@ -9,7 +9,7 @@ export default function Categories() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:7000/api/category/getall')
+    fetch('http://localhost:7000/api/categories/getall')
       .then((res) => res.json())
       .then((arr) => setCategories(arr));
   }, []);

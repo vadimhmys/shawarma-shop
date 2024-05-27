@@ -7,7 +7,7 @@ export default function Main() {
   const [shawarmas, setShawarmas] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:7000/api/shawarma/getall')
+    fetch('http://localhost:7000/api/shawarmas/getall')
       .then((res) => res.json())
       .then((arr) => setShawarmas(arr));
   }, []);
