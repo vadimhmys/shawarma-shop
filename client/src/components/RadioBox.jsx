@@ -1,4 +1,4 @@
-export default function RadioBox({ id, isChecked, price, weight, handleChange }) {
+export default function RadioBox({ id, isChecked, price, weight, onSwitch }) {
   return (
     <div className="radio-box">
       <input
@@ -7,7 +7,7 @@ export default function RadioBox({ id, isChecked, price, weight, handleChange })
         value={price}
         id={id}
         checked={isChecked}
-        onChange={handleChange}
+        onChange={onSwitch}
       />
       <label htmlFor={id}>{weight} гр.</label>
     </div>

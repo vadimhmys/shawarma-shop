@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Price({ price }) {
+export default function Price({ price, currency }) {
   let formatter = new Intl.NumberFormat('ru', {
     minimumFractionDigits: 2,
   });
@@ -11,7 +11,7 @@ export default function Price({ price }) {
     <div className="price">
       <span className="rubles">{rubles}</span>
       <sup className="kopecks">{kopecks}</sup>
-      <sub className="currency">р.</sub>
+      <sub className="currency">{currency}</sub>
     </div>
   );
 }

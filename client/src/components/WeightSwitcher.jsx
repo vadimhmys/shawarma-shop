@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RadioBox from './RadioBox';
 
-export default function WeightSwitcher({ variants }) {
-  const [items, setItems] = useState([true, ...Array(variants.length - 1).fill(false)]);
-  const handleChange = (e) => {
-    const newVariants = variants.map((v) => v.id === +e.target.id);
-    setItems(newVariants);
-  };
+export default function WeightSwitcher({ properties, items, onSwitch }) {
   return (
     <div className="card__weight-switcher">
-      {variants.map((v, i) => (
+      {properties.map((property, index) => (
         <RadioBox
-          key={v.id}
-          id={v.id}
-          price={v.price}
-          weight={v.weight}
-          isChecked={items[i]}
-          handleChange={handleChange}
+          key={property.id}
+          id={property.id}
+          price={property.price}
+          weight={property.weight}
+          isChecked={items[index]}
+          onSwitch={onSwitch}
         />
       ))}
     </div>
