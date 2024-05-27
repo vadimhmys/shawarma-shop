@@ -1,0 +1,17 @@
+.novelty {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: $pink;
+  text-align: center;
+  padding-top: 4px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+
+  &__text {
+    text-transform: uppercase;
+    color: $white;
+    font-size: 12px;
+  }
+}
