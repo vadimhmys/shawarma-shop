@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import WeightSwitcher from './WeightSwitcher';
-import Variant from './Variant';
-import Price from './Price';
-import Novelty from './Novelty';
+import WeightSwitcher from '../WeightSwitcher';
+import Variant from '../Variant';
+import Price from '../Price';
+import Novelty from '../Novelty';
 
 export default function Card({ shawarma }) {
   const [items, setItems] = useState([true, ...Array(shawarma.props.length - 1).fill(false)]);
@@ -16,7 +16,7 @@ export default function Card({ shawarma }) {
     <div className="card">
       <div className="card__top">
         <img src={`http://localhost:7000/${shawarma.image}`} alt={shawarma.title} />
-        {shawarma.novelty && <Novelty/>}
+        {shawarma.novelty && <Novelty />}
         <div className="card__top-info">
           <div className="title">
             <div className="title__text">{shawarma.title}</div>
