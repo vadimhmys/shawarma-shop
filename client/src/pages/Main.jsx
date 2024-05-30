@@ -11,10 +11,8 @@ export default function Main() {
   useEffect(() => {
     fetch('http://localhost:7000/api/shawarmas/getall')
       .then((res) => res.json())
-      .then((arr) => {
-        setShawarmas(arr);
-        setIsLoading(false);
-      });
+      .then((arr) => setShawarmas(arr))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
