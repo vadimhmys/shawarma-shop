@@ -1,0 +1,86 @@
+@import '../../scss/all';
+
+.card {
+  width: 288px;
+  background-color: $white;
+  border-radius: 10px;
+  margin: 0 10px 20px;
+
+  &:hover {
+    box-shadow: 0px 5px 15px $black;
+  }
+}
+
+.top {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image {
+  display: block;
+  width: 288px;
+}
+
+.info {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.header {
+  min-height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__text {
+    align-self: flex-end;
+    font-family: "Lugrasimo", cursive;
+    color: $dark-font;
+    font-size: 26px;
+    text-align: right;
+    padding-right: 5px;
+  }
+
+  &__icon {
+    width: 30px;
+    align-self: flex-start;
+  }
+}
+
+.title {
+  text-align: center;
+  padding: 10px;
+  color: $dark-font;
+}
+
+.components {
+  padding: 0 10px 10px;
+
+  & span:not(:last-child)::after {
+    content: ', '
+  }
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.price {
+  font-size: 36px;
+  font-weight: 900;
+  display: flex;
+  align-items: flex-start;
+  line-height: 30px;
+  position: relative;
+}
+

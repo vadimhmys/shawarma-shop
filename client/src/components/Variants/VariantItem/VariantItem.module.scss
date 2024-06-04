@@ -1,0 +1,35 @@
+@import '../../../scss/all';
+
+.root {
+  background-color: red;
+  border-radius: 5px;
+  padding: 5px;
+
+  &:first-child {
+    background-color: $first-weight-price-box;
+  }
+  
+  &:nth-child(2) {
+    background-color: $second-weight-price-box;
+  }
+  
+  &:nth-child(3) {
+    background-color: $third-weight-price-box;
+  }
+  
+  &:nth-child(4) {
+    background-color: $fourth-weight-price-box;
+  }
+  
+  &:nth-child(5) {
+    background-color: $fifth-weight-price-box;
+  }
+
+  &:not(&:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.weight {
+  font-size: 14px;
+}

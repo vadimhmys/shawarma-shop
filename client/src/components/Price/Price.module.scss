@@ -1,0 +1,36 @@
+@import '../../scss/all';
+
+.rubles {
+  color: $white;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.kopecks {
+  font-size: 12px;
+}
+
+.currency {
+  margin-left: -10px;
+}
+
+.rub {
+  color: $dark-font;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.kop {
+  color: $dark-font;
+  font-size: 16px;
+  margin-left: 2px;
+}
+
+.cur {
+  font-size: 14px;
+  color: $gray-dark;
+  font-weight: bold;
+  position: absolute;
+  right: -22px;
+  bottom: -7px;
+}

@@ -1,0 +1,10 @@
+@import '../../scss/all';
+
+.root {
+  display: flex;
+  margin: 0 10px 10px;
+  padding: 2px;
+  border: 1px solid $gray-light;
+  border-radius: 12px;
+  color: $dark-font;
+}
