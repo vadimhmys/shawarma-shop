@@ -12,11 +12,14 @@ export default function Main() {
   const [shawarmas, setShawarmas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
+  const [activeShawarmaIndex, setActiveShawarmaIndex] = React.useState(0);
 
   const url = 'http://localhost:7000/api/shawarmas/getall';
 
-  const showModalWindow = () => {
+  const showModalWindow = (id) => {
     setIsModalWindowVisible(true);
+    const nextActiveShawarmaIndex = shawarmas.findIndex((shawarma) => shawarma.id === id);
+    setActiveShawarmaIndex(nextActiveShawarmaIndex);
   };
 
   const hideModalWindow = () => {
@@ -45,7 +48,9 @@ export default function Main() {
                 s.presence && <Card key={s.id} shawarma={s} showModalWindow={showModalWindow} />,
             )}
       </div>
-      {isModalWindowVisible && <ModalWindow hideModalWindow={hideModalWindow}/>}
+      {isModalWindowVisible && (
+        <ModalWindow shawarma={shawarmas[activeShawarmaIndex]} hideModalWindow={hideModalWindow} />
+      )}
     </div>
   );
 }

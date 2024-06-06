@@ -53,7 +53,7 @@ export default function Card({ shawarma, showModalWindow }) {
         <div className={styles.price}>
           <Price price={shawarma.props[activeIndex].price} currency="руб." isBottom={true} />
         </div>
-        <Button handleClick={showModalWindow}>В корзину</Button>
+        <Button handleClick={() => showModalWindow(shawarma.id)}>В корзину</Button>
       </div>
     </div>
   );

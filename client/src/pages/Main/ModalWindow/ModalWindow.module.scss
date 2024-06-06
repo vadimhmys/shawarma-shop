@@ -61,8 +61,17 @@
 .info {
   padding: 0 15px;
   color: $gray-font;
+  margin: 10px 0;
 
   span {
     color: $gray-font;
+  }
+}
+
+.components {
+  padding: 0 15px;
+
+  & span:not(:last-child)::after {
+    content: ', '
   }
 }
