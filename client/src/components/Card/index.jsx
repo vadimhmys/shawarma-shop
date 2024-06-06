@@ -8,7 +8,7 @@ import Button from '../Button';
 
 import styles from './Card.module.scss';
 
-export default function Card({ shawarma }) {
+export default function Card({ shawarma, showModalWindow }) {
   const [items, setItems] = React.useState([true, ...Array(shawarma.props.length - 1).fill(false)]);
   const handleSwitch = (e) => {
     const newItems = shawarma.props.map((prop) => prop.id === +e.target.id);
@@ -53,7 +53,7 @@ export default function Card({ shawarma }) {
         <div className={styles.price}>
           <Price price={shawarma.props[activeIndex].price} currency="руб." isBottom={true} />
         </div>
-        <Button>В корзину</Button>
+        <Button handleClick={showModalWindow}>В корзину</Button>
       </div>
     </div>
   );
