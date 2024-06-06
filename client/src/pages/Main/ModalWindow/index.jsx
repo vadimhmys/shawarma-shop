@@ -6,14 +6,14 @@ import Switcher from '../../../components/Switcher';
 export default function ModalWindow({ hideModalWindow, activeShawarma }) {
   const shawarma = structuredClone(activeShawarma);
 
-  const [items, setItems] = React.useState([true, ...Array(shawarma.props.length - 1).fill(false)]);
+  const [itemsForWeight, setItemsForWeight] = React.useState([true, ...Array(shawarma.props.length - 1).fill(false)]);
 
-  const handleSwitch = (e) => {
-    const newItems = shawarma.props.map((prop) => switcherName + prop.id === e.target.id);
-    setItems(newItems);
+  const handleSwitchForWeight = (e) => {
+    const newItems = shawarma.props.map((prop) => nameForWeightSwitcher + prop.id === e.target.id);
+    setItemsForWeight(newItems);
   };
 
-  const switcherName = 'weightForModalWindow';
+  const nameForWeightSwitcher = 'weightForModalWindow';
 
   console.log('active shawa: ', shawarma);
 
@@ -36,10 +36,10 @@ export default function ModalWindow({ hideModalWindow, activeShawarma }) {
           <form method="post" className={styles.form}>
             <p>Выберите вес</p>
             <Switcher
-              switcherName={switcherName}
+              switcherName={nameForWeightSwitcher}
               properties={shawarma.props}
-              items={items}
-              onSwitch={handleSwitch}
+              items={itemsForWeight}
+              onSwitch={handleSwitchForWeight}
             />
           </form>
         </div>
