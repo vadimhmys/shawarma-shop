@@ -8,3 +8,32 @@
   border-radius: 12px;
   color: $dark-font;
 }
+
+.radioBox {
+  width: 100%;
+
+  input[type=radio] {
+    display: none;
+  }
+
+  input[type=radio]:checked + label {
+    background: $gray-dark;
+    color: $white;
+  }
+
+  label {
+    font-size: 12px;
+    line-height: 16px;
+    color: $dark-font;
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 0;
+    cursor: pointer;
+  }
+}

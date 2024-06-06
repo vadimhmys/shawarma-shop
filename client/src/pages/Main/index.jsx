@@ -49,7 +49,7 @@ export default function Main() {
             )}
       </div>
       {isModalWindowVisible && (
-        <ModalWindow shawarma={shawarmas[activeShawarmaIndex]} hideModalWindow={hideModalWindow} />
+        <ModalWindow activeShawarma={shawarmas[activeShawarmaIndex]} hideModalWindow={hideModalWindow} />
       )}
     </div>
   );

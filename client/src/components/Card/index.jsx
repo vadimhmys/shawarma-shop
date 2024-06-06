@@ -10,11 +10,14 @@ import styles from './Card.module.scss';
 
 export default function Card({ shawarma, showModalWindow }) {
   const [items, setItems] = React.useState([true, ...Array(shawarma.props.length - 1).fill(false)]);
+
   const handleSwitch = (e) => {
-    const newItems = shawarma.props.map((prop) => prop.id === +e.target.id);
+    const newItems = shawarma.props.map((prop) => switcherName + prop.id === e.target.id);
     setItems(newItems);
   };
+
   const activeIndex = items.findIndex((item) => item);
+  const switcherName = 'weightForCards';
 
   return (
     <div className={styles.card}>
@@ -44,7 +47,7 @@ export default function Card({ shawarma, showModalWindow }) {
         ))}
       </p>
       <Switcher
-        switcherName="weight"
+        switcherName={switcherName}
         properties={shawarma.props}
         items={items}
         onSwitch={handleSwitch}
