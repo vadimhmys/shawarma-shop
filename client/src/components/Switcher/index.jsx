@@ -19,7 +19,19 @@ export default function Switcher({ switcherName, properties, items, onSwitch }) 
               <label htmlFor={switcherName + property.id}>{property.weight + ' гр.'}</label>
             </div>
           ))
-        : ''}
+        : properties.map((property, index) => (
+            <div className={styles.radioBox} key={index}>
+              <input
+                type="radio"
+                name={switcherName}
+                value={property}
+                id={switcherName + index}
+                checked={items[index]}
+                onChange={onSwitch}
+              />
+              <label htmlFor={switcherName + index}>{property + ''}</label>
+            </div>
+          ))}
     </div>
   );
 }
