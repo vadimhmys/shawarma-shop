@@ -2,36 +2,29 @@ import React from 'react';
 
 import styles from './Switcher.module.scss';
 
-export default function Switcher({ switcherName, properties, items, onSwitch }) {
+export default function Switcher({ radioBoxGroupName, dataForInputs, onParentStateChange = null }) {
+  const [checkedIndex, setCheckedIndex] = React.useState(0);
+
+  const handleChange = (index) => {
+    setCheckedIndex(index);
+    if (onParentStateChange) onParentStateChange(index);
+  };
+
   return (
     <div className={styles.root}>
-      {switcherName.startsWith('weight')
-        ? properties.map((property, index) => (
-            <div className={styles.radioBox} key={property.id}>
-              <input
-                type="radio"
-                name={switcherName + property.id}
-                value={property.price}
-                id={switcherName + property.id}
-                checked={items[index]}
-                onChange={onSwitch}
-              />
-              <label htmlFor={switcherName + property.id}>{property.weight + ' гр.'}</label>
-            </div>
-          ))
-        : properties.map((property, index) => (
-            <div className={styles.radioBox} key={index}>
-              <input
-                type="radio"
-                name={switcherName}
-                value={property}
-                id={switcherName + index}
-                checked={items[index]}
-                onChange={onSwitch}
-              />
-              <label htmlFor={switcherName + index}>{property + ''}</label>
-            </div>
-          ))}
+      {dataForInputs.map((data, i) => (
+        <div className={styles.radioBox} key={data.value}>
+          <input
+            type="radio"
+            name={radioBoxGroupName}
+            value={data.value}
+            id={radioBoxGroupName + '--' + data.id}
+            checked={checkedIndex === i}
+            onChange={() => handleChange(i)}
+          />
+          <label htmlFor={radioBoxGroupName + '--' + data.id}>{data.value}</label>
+        </div>
+      ))}
     </div>
   );
 }

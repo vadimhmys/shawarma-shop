@@ -9,15 +9,7 @@ import Button from '../Button';
 import styles from './Card.module.scss';
 
 export default function Card({ shawarma, showModalWindow }) {
-  const [items, setItems] = React.useState([true, ...Array(shawarma.props.length - 1).fill(false)]);
-
-  const handleSwitch = (e) => {
-    const newItems = shawarma.props.map((prop) => switcherName + prop.id === e.target.id);
-    setItems(newItems);
-  };
-
-  const activeIndex = items.findIndex((item) => item);
-  const switcherName = 'weightForCards';
+  const [activeCardRadioBoxIndex, setActiveCardRadioBoxIndex] = React.useState(0);
 
   return (
     <div className={styles.card}>
@@ -47,14 +39,17 @@ export default function Card({ shawarma, showModalWindow }) {
         ))}
       </p>
       <Switcher
-        switcherName={switcherName}
-        properties={shawarma.props}
-        items={items}
-        onSwitch={handleSwitch}
+        radioBoxGroupName={'weightsInCard_' + shawarma.id}
+        dataForInputs={shawarma.props.map((prop) => ({ id: prop.id, value: prop.weight + ' гр.' }))}
+        onParentStateChange={setActiveCardRadioBoxIndex}
       />
       <div className={styles.bottom}>
         <div className={styles.price}>
-          <Price price={shawarma.props[activeIndex].price} currency="руб." isBottom={true} />
+          <Price
+            price={shawarma.props[activeCardRadioBoxIndex].price}
+            currency="руб."
+            isBottom={true}
+          />
         </div>
         <Button handleClick={() => showModalWindow(shawarma.id)}>В корзину</Button>
       </div>

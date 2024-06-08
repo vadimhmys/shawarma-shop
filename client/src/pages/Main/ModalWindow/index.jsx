@@ -5,27 +5,11 @@ import Switcher from '../../../components/Switcher';
 
 export default function ModalWindow({ hideModalWindow, activeShawarma }) {
   const shawarma = structuredClone(activeShawarma);
-  const nameForWeightSwitcher = 'weightForModalWindow';
-  const nameForCakeSwitcher = 'cakeForModalWindow';
-  const cakes = ["Обычная лепешка", "Сырная лепешка"];
 
-  const [itemsForWeight, setItemsForWeight] = React.useState([true, ...Array(shawarma.props.length - 1).fill(false)]);
-  const [itemsForCakes, setItemsForCakes] = React.useState([true, false]);
-
-  const handleSwitchForWeight = (e) => {
-    const newItems = shawarma.props.map((prop) => nameForWeightSwitcher + prop.id === e.target.id);
-    setItemsForWeight(newItems);
-  };
-
-  const handleSwitchForCakes = (e) => {
-    const newItems = cakes.map((cake, index) => nameForCakeSwitcher + index === e.target.id);
-    console.log(newItems);
-    setItemsForCakes(newItems);
-  };
-
-  
-
-  console.log('active shawa: ', shawarma);
+  const cakes = [
+    { id: 0, value: 'Обычная лепешка' },
+    { id: 1, value: 'Сырная лепешка' },
+  ];
 
   return (
     <div className={styles.background__showed}>
@@ -46,18 +30,14 @@ export default function ModalWindow({ hideModalWindow, activeShawarma }) {
           <form method="post" className={styles.form}>
             <p>Выберите вес</p>
             <Switcher
-              switcherName={nameForWeightSwitcher}
-              properties={shawarma.props}
-              items={itemsForWeight}
-              onSwitch={handleSwitchForWeight}
+              radioBoxGroupName="weightsInModalWindow"
+              dataForInputs={shawarma.props.map((prop) => ({
+                id: prop.id,
+                value: prop.weight + ' гр.',
+              }))}
             />
-             <p>Выберите лепешку</p>
-            <Switcher
-              switcherName={nameForCakeSwitcher}
-              properties={cakes}
-              items={itemsForCakes}
-              onSwitch={handleSwitchForCakes}
-            />
+            <p>Выберите лепешку</p>
+            <Switcher radioBoxGroupName="cakesInModalWindow" dataForInputs={cakes} />
           </form>
         </div>
       </div>
