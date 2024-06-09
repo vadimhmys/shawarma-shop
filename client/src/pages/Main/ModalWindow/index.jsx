@@ -61,7 +61,7 @@ export default function ModalWindow({ hideModalWindow, activeShawarma }) {
                     <img src={`http://localhost:7000/${ingredient.image}`} alt={ingredient.name} />
                     <span>{ingredient.name}</span>
                   </div>
-                  <Counter/>
+                  <Counter price={ingredient.price} maxCount={4}/>
                 </li>
               ))}
             </ul>
