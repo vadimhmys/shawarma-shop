@@ -5,6 +5,17 @@ import Switcher from '../../../components/Switcher';
 
 export default function ModalWindow({ hideModalWindow, activeShawarma }) {
   const shawarma = structuredClone(activeShawarma);
+  const urlForIngredients = 'http://localhost:7000/api/ingredients/getall';
+
+  const [ingredients, setIngredients] = React.useState([]);
+
+  console.log('ingredients: ', ingredients);
+
+  React.useEffect(() => {
+    fetch(urlForIngredients)
+      .then((res) => res.json())
+      .then((arr) => setIngredients(arr));
+  }, []);
 
   const cakes = [
     { id: 0, value: 'Обычная лепешка' },
@@ -38,6 +49,19 @@ export default function ModalWindow({ hideModalWindow, activeShawarma }) {
             />
             <p>Выберите лепешку</p>
             <Switcher radioBoxGroupName="cakesInModalWindow" dataForInputs={cakes} />
+            <p>Выберите ингредиенты</p>
+            <hr />
+            <ul className={styles.ingredient__list}>
+              {ingredients.map((ingredient) => (
+                <li key={ingredient.id} className={styles.ingredient__list__item}>
+                  <div className={styles.ingredient__content}>
+                    <img src={`http://localhost:7000/${ingredient.image}`} alt={ingredient.name} />
+                    <span>{ingredient.name}</span>
+                  </div>
+                  <div>{ingredient.price  + ' руб.'}</div>
+                </li>
+              ))}
+            </ul>
           </form>
         </div>
       </div>
