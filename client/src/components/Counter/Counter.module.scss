@@ -1,0 +1,57 @@
+@import '../../scss/all';
+
+.root {
+  width: 118px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.sum {
+  margin-bottom: 5px;
+}
+
+.counter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.quantity {
+  span {
+    font-size: 14px;
+    padding: 0 2px;
+  }
+}
+
+.button {
+  width: 20px;
+  height: 20px;
+  background-color: $white;
+  border: 1px solid $gray-light;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .3s ease-out;
+
+  &:first-child:hover {
+    background-color: $gray-light;
+    border: none;
+  }
+
+  &:last-child:hover {
+    background-color: $green-light;
+    border: none;
+  }
+
+  &:first-child:active {
+    background-color: $gray-dark;
+    color: $white;
+    transition: none;
+  }
+
+  &:last-child:active {
+    background-color: $green-dark;
+    color: $white;
+    transition: none;
+  }
+}

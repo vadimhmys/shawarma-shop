@@ -1,7 +1,10 @@
 import React from 'react';
 
-import styles from './ModalWindow.module.scss';
 import Switcher from '../../../components/Switcher';
+import Counter from '../../../components/Counter';
+
+import styles from './ModalWindow.module.scss';
+
 
 export default function ModalWindow({ hideModalWindow, activeShawarma }) {
   const shawarma = structuredClone(activeShawarma);
@@ -39,7 +42,7 @@ export default function ModalWindow({ hideModalWindow, activeShawarma }) {
             ))}
           </div>
           <form method="post" className={styles.form}>
-            <p>Выберите вес</p>
+            <p className={styles.field}>Выберите вес</p>
             <Switcher
               radioBoxGroupName="weightsInModalWindow"
               dataForInputs={shawarma.props.map((prop) => ({
@@ -47,9 +50,9 @@ export default function ModalWindow({ hideModalWindow, activeShawarma }) {
                 value: prop.weight + ' гр.',
               }))}
             />
-            <p>Выберите лепешку</p>
+            <p className={styles.field}>Выберите лепешку</p>
             <Switcher radioBoxGroupName="cakesInModalWindow" dataForInputs={cakes} />
-            <p>Выберите ингредиенты</p>
+            <p className={styles.field}>Выберите ингредиенты</p>
             <hr />
             <ul className={styles.ingredient__list}>
               {ingredients.map((ingredient) => (
@@ -58,7 +61,7 @@ export default function ModalWindow({ hideModalWindow, activeShawarma }) {
                     <img src={`http://localhost:7000/${ingredient.image}`} alt={ingredient.name} />
                     <span>{ingredient.name}</span>
                   </div>
-                  <div>{ingredient.price  + ' руб.'}</div>
+                  <Counter/>
                 </li>
               ))}
             </ul>
