@@ -56,6 +56,16 @@
 .content {
   height: calc(100% - 120px);
   overflow-y: auto;
+  background-color: darken($white, 2%);
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: $pink;
+  }
 }
 
 .info {
@@ -87,5 +97,16 @@
     width: 90%;
     background-color: $gray-light;
     margin: 0 auto 10px;
+  }
+
+  .footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    padding: 15px;
+    background: $white;
+    border-radius: 0 0 15px 15px;
   }
 }
