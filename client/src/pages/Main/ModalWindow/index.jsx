@@ -24,6 +24,15 @@ export default function ModalWindow({ hideModalWindow, activeShawarma }) {
   const changePrice = (index) => {
     setActiveProp(shawarma.props[index]);
   };
+
+  React.useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
+  });
+
   return (
     <div className={styles.background__showed}>
       <div className={styles.body}>
