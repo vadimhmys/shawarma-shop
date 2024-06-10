@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Main from './pages/Main';
 import Contacts from './pages/Contacts';
 import NotFound from './pages/NotFound';
@@ -18,6 +19,7 @@ function App() {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer/>
       </div>
     </div>
   );
