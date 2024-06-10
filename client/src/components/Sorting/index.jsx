@@ -18,9 +18,9 @@ export default function Sorting() {
     <div className={styles.container}>
       <div className={styles.top}>
         {isVisible ? (
-          <MdOutlineArrowDropDown size="30" style={{ color: '#323232', marginRight: '10' }} />
+          <MdOutlineArrowDropDown size="30" style={{ color: '#323232' }} />
         ) : (
-          <MdOutlineArrowDropUp size="30" style={{ color: '#323232', marginRight: '10' }} />
+          <MdOutlineArrowDropUp size="30" style={{ color: '#323232' }} />
         )}
         <div className={styles.title}>
           <span>Сортировать по: </span>
