@@ -2,7 +2,7 @@
 
 .container {
   position: relative;
-  min-width: 200px;
+  width: 280px;
 }
 
 .top {
@@ -11,9 +11,12 @@
 }
 
 .title {
+  width: 100%;
   margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
 
-  & span {
+  & .criterion{
     color: $orange;
     font-weight: bold;
     cursor: pointer;

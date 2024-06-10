@@ -22,9 +22,11 @@ export default function Sorting() {
         ) : (
           <MdOutlineArrowDropUp size="30" style={{ color: '#323232', marginRight: '10' }} />
         )}
-
         <div className={styles.title}>
-          Сортировать по: <span onClick={() => setIsVisible(!isVisible)}>{signs[activeIndex]}</span>
+          <span>Сортировать по: </span>
+          <span className={styles.criterion} onClick={() => setIsVisible(!isVisible)}>
+            {signs[activeIndex]}
+          </span>
         </div>
       </div>
       {isVisible && (
