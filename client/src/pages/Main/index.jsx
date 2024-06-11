@@ -34,7 +34,7 @@ export default function Main() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.root}>
       <div className={styles.top}>
         <Categories />
         <Sorting />

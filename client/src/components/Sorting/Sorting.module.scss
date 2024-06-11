@@ -3,6 +3,11 @@
 .container {
   position: relative;
   flex: 1 0 300px;
+
+  @media (max-width: 1130px) {
+    flex: none;
+    align-self: flex-end;
+  }
 }
 
 .top {
