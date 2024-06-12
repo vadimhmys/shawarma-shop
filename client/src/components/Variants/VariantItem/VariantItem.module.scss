@@ -33,7 +33,11 @@
 .weight {
   font-size: 14px;
 
-  @media (max-width: 430px) {
+  @media (max-width: 468px) {
     font-size: 12px;
+  }
+
+  @media (max-width: 390px) {
+    font-size: 10px;
   }
 }

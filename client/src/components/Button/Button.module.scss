@@ -13,6 +13,11 @@
   transition: 0.2s;
   white-space: nowrap;
 
+  @media (max-width: 390px) {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
   &:hover {
     background: $pink-light;
   }

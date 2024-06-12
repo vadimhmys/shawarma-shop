@@ -46,6 +46,10 @@
   box-shadow: 0px 10px 20px $black;
   border-radius: 10px;
   overflow: hidden;
+
+  @media (max-width: 468px) {
+    margin-top: 0;
+  }
 }
 
 .list {
