@@ -20,6 +20,14 @@
   display: flex;
   justify-content: space-between;
 
+  @media (max-width: 668px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 468px) {
+    font-size: 12px;
+  }
+
   & .criterion{
     padding-left: 10px;
     color: $orange;
@@ -49,6 +57,15 @@
   padding: 10px 15px;
   color: $gray-font;
   cursor: pointer;
+
+  @media (max-width: 668px) {
+    font-size: 14px;
+    padding: 7px 10px;
+  }
+
+  @media (max-width: 468px) {
+    font-size: 12px;
+  }
 
   &.active,
   &:hover {
