@@ -7,6 +7,10 @@
   background-color: darken($color: $white, $amount: 3%) ;
   margin: 0 auto;
   border-radius: 10px;
+
+  @media (max-width: 768px) {
+    width: calc(100vw - 50px);
+  }
 }
 
 .container {
