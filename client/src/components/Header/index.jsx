@@ -24,7 +24,7 @@ export default function Header() {
           <a href="/cart.html" className={styles.cart__link}>
             <span className={styles.cart__price}>0 руб.</span>
             <BsFillCartFill
-              size="40"
+              className={styles.cart__icon}
               style={{ color: '#df9408', transition: '0.15s' }}
               onMouseOver={({ currentTarget }) => (currentTarget.style.color = '#ffa400')}
               onMouseLeave={({ currentTarget }) => (currentTarget.style.color = '#df9408')}
