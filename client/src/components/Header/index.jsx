@@ -3,6 +3,7 @@ import React from 'react';
 import { BsFillCartFill } from 'react-icons/bs';
 
 import styles from './Header.module.scss';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -21,7 +22,7 @@ export default function Header() {
           </div>
         </div>
         <div className={styles.cart}>
-          <a href="/cart.html" className={styles.cart__link}>
+          <Link to="/basket" className={styles.cart__link}>
             <span className={styles.cart__price}>0 руб.</span>
             <BsFillCartFill
               className={styles.cart__icon}
@@ -32,7 +33,7 @@ export default function Header() {
             <div className={styles.cart__circle}>
               <span>0</span>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

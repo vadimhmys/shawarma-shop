@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './pages/Main';
 import Contacts from './pages/Contacts';
+import Basket from './pages/Basket';
 import NotFound from './pages/NotFound';
 
 import styles from './App.module.scss';
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/contacts" element={<Contacts />} />
+          <Route path="/basket" element={<Basket />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer/>
