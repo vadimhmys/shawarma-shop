@@ -24,7 +24,7 @@ export default function ComponentList({title, url}) {
               <img src={`http://localhost:7000/${component.image}`} alt={component.name} />
               <span>{component.name}</span>
             </div>
-            <Counter price={component.price} maxCount={4} />
+            <Counter price={component.price} maxCount={4} isSimple={false}/>
           </li>
         ))}
       </ul>

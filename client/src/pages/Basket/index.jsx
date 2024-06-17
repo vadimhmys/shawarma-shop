@@ -36,7 +36,7 @@ export default function Basket() {
               </li>
             </ul>
           </div>
-          <Counter price="100" maxCount={10} />
+          <Counter maxCount={10} initialValue={1}/>
           <div className={styles.sum}>15.90 р.</div>
           <FaRegTrashCan className={styles.trash}/>
         </li>
@@ -76,7 +76,7 @@ export default function Basket() {
               </li>
             </ul>
           </div>
-          <Counter price="100" maxCount={10} />
+          <Counter maxCount={10} initialValue={1}/>
           <div className={styles.sum}>15.90 р.</div>
           <FaRegTrashCan className={styles.trash}/>
         </li>
