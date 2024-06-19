@@ -7,7 +7,7 @@ export default function Sorting() {
   const [isVisible, setIsVisible] = React.useState(false);
   const [activeIndex, setActiveIndex] = React.useState(0);
 
-  const signs = ['произвольно', 'цене', 'алфавиту'];
+  const signs = ['цене ↑', 'цене ↓', 'алфавиту↑', 'алфавиту↓'];
 
   const handleClick = (index) => {
     setActiveIndex(index);
