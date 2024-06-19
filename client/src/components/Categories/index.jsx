@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Categories.module.scss';
 
-export default function Categories({value, onChangeCategory}) {
+export default function Categories({ value, onChangeCategory }) {
   const [categories, setCategories] = React.useState([]);
 
   const url = 'http://localhost:7000/api/categories/getall';

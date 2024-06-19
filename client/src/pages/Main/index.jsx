@@ -14,6 +14,10 @@ export default function Main() {
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const [activeShawarmaIndex, setActiveShawarmaIndex] = React.useState(0);
   const [categoryId, setCategoryId] = React.useState(0);
+  const [sortType, setSortType] = React.useState({
+    value: 'цене ↑',
+    sortCritery: 'price',
+  });
 
   const showModalWindow = (id) => {
     setIsModalWindowVisible(true);
@@ -27,17 +31,24 @@ export default function Main() {
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(`http://localhost:7000/api/shawarmas/getall?categoryId=` + categoryId)
+    fetch(
+      `http://localhost:7000/api/shawarmas/getall?${
+        categoryId > 0 ? `categoryId=${categoryId}` : ''
+      }&sortBy=${sortType.sortCritery.replace('-', '')}&order=${
+        sortType.sortCritery.includes('-') ? 'DESC' : 'ASC'
+      }`,
+    )
       .then((res) => res.json())
       .then((arr) => setShawarmas(arr))
       .finally(() => setIsLoading(false));
-  }, [categoryId]);
-
+  }, [categoryId, sortType]);
+  /* &sortBy=${sortType.sortCritery.replace('-', '')}
+      &order=${sortType.sortCritery.includes('-') ? 'ASC' : 'DESC'} */
   return (
     <div className={styles.root}>
       <div className={styles.top}>
-        <Categories value={categoryId} onChangeCategory={(id) => setCategoryId(id)}/>
-        <Sorting />
+        <Categories value={categoryId} onChangeCategory={(id) => setCategoryId(id)} />
+        <Sorting sortType={sortType} onChangeSort={(obj) => setSortType(obj)} />
       </div>
       <h2 className={styles.title}>Все шавухи</h2>
       <div className={styles.items}>

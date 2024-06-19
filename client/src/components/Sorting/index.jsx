@@ -3,14 +3,18 @@ import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 
 import styles from './Sorting.module.scss';
 
-export default function Sorting() {
+export default function Sorting({ sortType, onChangeSort }) {
   const [isVisible, setIsVisible] = React.useState(false);
-  const [activeIndex, setActiveIndex] = React.useState(0);
 
-  const signs = ['цене ↑', 'цене ↓', 'алфавиту↑', 'алфавиту↓'];
+  const sortingTypes = [
+    { value: 'цене ↑', sortCritery: 'price' },
+    { value: 'цене ↓', sortCritery: '-price' },
+    { value: 'алфавиту↑', sortCritery: 'title' },
+    { value: 'алфавиту↓', sortCritery: '-title' },
+  ];
 
-  const handleClick = (index) => {
-    setActiveIndex(index);
+  const handleClick = (obj) => {
+    onChangeSort(obj);
     setIsVisible(false);
   };
 
@@ -25,23 +29,23 @@ export default function Sorting() {
         <div className={styles.title}>
           <span>Сортировать по: </span>
           <span className={styles.criterion} onClick={() => setIsVisible(!isVisible)}>
-            {signs[activeIndex]}
+            {sortType.value}
           </span>
         </div>
       </div>
       {isVisible && (
         <div className={styles.popup}>
           <ul className={styles.list}>
-            {signs.map((s, i) => (
+            {sortingTypes.map((obj, i) => (
               <li
-                key={s}
+                key={obj.value}
                 className={
-                  i === activeIndex
+                  obj.value === sortType.value
                     ? `${styles.list__item} ${styles.active}`
                     : `${styles.list__item}`
                 }
-                onClick={() => handleClick(i)}>
-                {s}
+                onClick={() => handleClick(obj)}>
+                {obj.value}
               </li>
             ))}
           </ul>

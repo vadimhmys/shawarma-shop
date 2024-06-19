@@ -5,20 +5,35 @@ import FileService from '../services/File.js';
 
 class Shawarma {
   async getAll(query) {
-    const { categoryId } = query;
+    const { categoryId, sortBy, order } = query;
     const where = {};
-    if (categoryId && categoryId > 0) where.categoryId = +categoryId;
+    if (categoryId) where.categoryId = +categoryId;
     if (categoryId === '1') {
       delete where.categoryId;
-      where.novelty = true; 
+      where.novelty = true;
     }
-    const shawarmas = await ShawarmaMapping.findAll({
-      where,
-      include: [
-        { model: ShawarmaPropMapping, as: 'props' },
-        { model: ShawarmaComponentMapping, as: 'components' },
-      ],
-    });
+
+    let shawarmas;
+    if (sortBy === 'title') {
+      shawarmas = await ShawarmaMapping.findAll({
+        where,
+        include: [
+          { model: ShawarmaPropMapping, as: 'props' },
+          { model: ShawarmaComponentMapping, as: 'components' },
+        ],
+        order: [[`${sortBy}`, `${order}`]],
+      });
+    } else if (sortBy === 'price') {
+      shawarmas = await ShawarmaMapping.findAll({
+        where,
+        include: [
+          { model: ShawarmaPropMapping, as: 'props' },
+          { model: ShawarmaComponentMapping, as: 'components' },
+        ],
+      });
+      shawarmas = shawarmas.sort((a, b) => a.props[0].price - b.props[0].price);
+      if (order === 'DESC') shawarmas = shawarmas.reverse();
+    }
     return shawarmas;
   }
 
