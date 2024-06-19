@@ -2,15 +2,10 @@ import React from 'react';
 
 import styles from './Categories.module.scss';
 
-export default function Categories() {
+export default function Categories({value, onChangeCategory}) {
   const [categories, setCategories] = React.useState([]);
-  const [activeIndex, setActiveIndex] = React.useState(0);
 
   const url = 'http://localhost:7000/api/categories/getall';
-
-  const handleClick = (index) => {
-    setActiveIndex(index);
-  };
 
   React.useEffect(() => {
     fetch(url)
@@ -23,8 +18,8 @@ export default function Categories() {
       {categories.map((c, i) => (
         <li
           key={c.id}
-          className={i === activeIndex ? `${styles.item} ${styles.active}` : `${styles.item}`}
-          onClick={() => handleClick(i)}>
+          className={i === value ? `${styles.item} ${styles.active}` : `${styles.item}`}
+          onClick={() => onChangeCategory(i)}>
           {c.name}
         </li>
       ))}

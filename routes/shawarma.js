@@ -3,7 +3,6 @@ import ShawarmaController from '../controllers/Shawarma.js';
 
 const router = new express.Router();
 
-router.get('/getall/categoryId/:categoryId([0-9]+)', ShawarmaController.getAll);
 router.get('/getall', ShawarmaController.getAll);
 router.get('/getone/:id([0-9]+)', ShawarmaController.getOne);
 router.post('/create', ShawarmaController.create);

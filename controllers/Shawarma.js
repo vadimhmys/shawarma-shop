@@ -4,7 +4,7 @@ import AppError from '../errors/AppError.js';
 class Shawarma {
   async getAll(req, res, next) {
     try {
-      const shawarmas = await ShawarmaModel.getAll(req.params);
+      const shawarmas = await ShawarmaModel.getAll(req.query);
       res.json(shawarmas);
     } catch (e) {
       next(AppError.badRequest(e.message));

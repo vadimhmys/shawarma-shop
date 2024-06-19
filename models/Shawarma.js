@@ -4,10 +4,14 @@ import { ShawarmaComponent as ShawarmaComponentMapping } from './mapping.js';
 import FileService from '../services/File.js';
 
 class Shawarma {
-  async getAll(params) {
-    const { categoryId } = params;
+  async getAll(query) {
+    const { categoryId } = query;
     const where = {};
-    if (categoryId) where.categoryId = categoryId;
+    if (categoryId && categoryId > 0) where.categoryId = +categoryId;
+    if (categoryId === '1') {
+      delete where.categoryId;
+      where.novelty = true; 
+    }
     const shawarmas = await ShawarmaMapping.findAll({
       where,
       include: [

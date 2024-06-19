@@ -13,8 +13,7 @@ export default function Main() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const [activeShawarmaIndex, setActiveShawarmaIndex] = React.useState(0);
-
-  const url = 'http://localhost:7000/api/shawarmas/getall';
+  const [categoryId, setCategoryId] = React.useState(0);
 
   const showModalWindow = (id) => {
     setIsModalWindowVisible(true);
@@ -27,16 +26,17 @@ export default function Main() {
   };
 
   React.useEffect(() => {
-    fetch(url)
+    setIsLoading(true);
+    fetch(`http://localhost:7000/api/shawarmas/getall?categoryId=` + categoryId)
       .then((res) => res.json())
       .then((arr) => setShawarmas(arr))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [categoryId]);
 
   return (
     <div className={styles.root}>
       <div className={styles.top}>
-        <Categories />
+        <Categories value={categoryId} onChangeCategory={(id) => setCategoryId(id)}/>
         <Sorting />
       </div>
       <h2 className={styles.title}>Все шавухи</h2>
