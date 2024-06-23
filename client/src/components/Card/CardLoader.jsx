@@ -7,8 +7,8 @@ export default function CardLoader() {
       style={{ margin: '0 10px 20px' }}
       speed={2}
       width={288}
-      height={438}
-      viewBox="0 0 288 438"
+      height={430}
+      viewBox="0 0 288 430"
       backgroundColor="#f3f3f3"
       foregroundColor="#ecebeb">
       <rect x="67" y="568" rx="0" ry="0" width="0" height="1" />
