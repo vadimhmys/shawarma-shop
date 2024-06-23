@@ -4,7 +4,8 @@ import Card from '../../components/Card';
 import Categories from '../../components/Categories';
 import Sorting from '../../components/Sorting';
 import CardLoader from '../../components/Card/CardLoader.jsx';
-import ModalWindow from './ModalWindow/index.jsx';
+import ModalWindow from './ModalWindow';
+import Pagination from '../../components/Pagination';
 
 import styles from './Main.module.scss';
 
@@ -62,6 +63,7 @@ export default function Main({ searchValue }) {
           hideModalWindow={hideModalWindow}
         />
       )}
+      <Pagination/>
     </div>
   );
 }
