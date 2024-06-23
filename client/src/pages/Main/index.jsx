@@ -36,22 +36,17 @@ export default function Main({ searchValue }) {
         categoryId > 0 ? `categoryId=${categoryId}` : ''
       }&sortBy=${sortType.sortCritery.replace('-', '')}&order=${
         sortType.sortCritery.includes('-') ? 'DESC' : 'ASC'
-      }`,
+      }&search=${searchValue}`,
     )
       .then((res) => res.json())
       .then((arr) => setShawarmas(arr))
       .finally(() => setIsLoading(false));
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue]);
 
   const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);
-  const items = shawarmas
-    .filter((item) => {
-      if (searchValue !== '') {
-        return item.title.toLowerCase().includes(searchValue.toLowerCase());
-      }
-      return true;
-    })
-    .map((s) => s.presence && <Card key={s.id} shawarma={s} showModalWindow={showModalWindow} />);
+  const items = shawarmas.map(
+    (s) => s.presence && <Card key={s.id} shawarma={s} showModalWindow={showModalWindow} />,
+  );
 
   return (
     <div className={styles.root}>

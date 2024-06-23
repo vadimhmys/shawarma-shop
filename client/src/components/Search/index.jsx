@@ -11,7 +11,7 @@ export default function Search({ searchValue, onChangeSearchValue }) {
       <input
         className={styles.input}
         value={searchValue}
-        placeholder="Поиск пиццы..."
+        placeholder="Поиск шаурмы..."
         onChange={(e) => onChangeSearchValue(e.target.value)}
       />
       <IoCloseOutline className={styles.close__icon} onClick={() => onChangeSearchValue('')} />

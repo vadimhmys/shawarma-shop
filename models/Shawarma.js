@@ -1,3 +1,5 @@
+import { Op } from 'sequelize';
+
 import { Shawarma as ShawarmaMapping } from './mapping.js';
 import { ShawarmaProp as ShawarmaPropMapping } from './mapping.js';
 import { ShawarmaComponent as ShawarmaComponentMapping } from './mapping.js';
@@ -5,8 +7,9 @@ import FileService from '../services/File.js';
 
 class Shawarma {
   async getAll(query) {
-    const { categoryId, sortBy, order } = query;
+    const { categoryId, sortBy, order, search } = query;
     const where = {};
+    if (search) where.title = { [Op.substring]: `${search.toLowerCase()}` };
     if (categoryId) where.categoryId = +categoryId;
     if (categoryId === '1') {
       delete where.categoryId;
