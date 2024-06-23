@@ -19,6 +19,10 @@ export default function Main({ searchValue }) {
     value: 'цене ↑',
     sortCritery: 'price',
   });
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [numberOfItems, setNumberOfItems] = React.useState(0);
+  
+  const limit = 4;
 
   const showModalWindow = (id) => {
     setIsModalWindowVisible(true);
@@ -30,6 +34,11 @@ export default function Main({ searchValue }) {
     setIsModalWindowVisible(false);
   };
 
+  const onChangeCategory = (id) => {
+    setCategoryId(id);
+    setCurrentPage(1);
+  };
+
   React.useEffect(() => {
     setIsLoading(true);
     fetch(
@@ -37,12 +46,15 @@ export default function Main({ searchValue }) {
         categoryId > 0 ? `categoryId=${categoryId}` : ''
       }&sortBy=${sortType.sortCritery.replace('-', '')}&order=${
         sortType.sortCritery.includes('-') ? 'DESC' : 'ASC'
-      }&search=${searchValue}`,
+      }&search=${searchValue}&limit=${limit}&page=${currentPage}`,
     )
       .then((res) => res.json())
-      .then((arr) => setShawarmas(arr))
+      .then((obj) => {
+        setShawarmas(obj.rows);
+        setNumberOfItems(obj.count);
+      })
       .finally(() => setIsLoading(false));
-  }, [categoryId, sortType, searchValue]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);
   const items = shawarmas.map(
@@ -52,7 +64,7 @@ export default function Main({ searchValue }) {
   return (
     <div className={styles.root}>
       <div className={styles.top}>
-        <Categories value={categoryId} onChangeCategory={(id) => setCategoryId(id)} />
+        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sorting sortType={sortType} onChangeSort={(obj) => setSortType(obj)} />
       </div>
       <h2 className={styles.title}>Все шавухи</h2>
@@ -63,7 +75,7 @@ export default function Main({ searchValue }) {
           hideModalWindow={hideModalWindow}
         />
       )}
-      <Pagination/>
+      <Pagination numberOfItems={numberOfItems} limit={limit} onPageChange={(number) => setCurrentPage(number)} currentPage={currentPage}/>
     </div>
   );
 }

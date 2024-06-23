@@ -7,7 +7,7 @@ import FileService from '../services/File.js';
 
 class Shawarma {
   async getAll(query) {
-    const { categoryId, sortBy, order, search } = query;
+    let { categoryId, sortBy, order, search, limit, page } = query;
     const where = {};
     if (search) where.title = { [Op.substring]: `${search.toLowerCase()}` };
     if (categoryId) where.categoryId = +categoryId;
@@ -15,27 +15,35 @@ class Shawarma {
       delete where.categoryId;
       where.novelty = true;
     }
-
+    limit = limit && /[0-9]+/.test(limit) && parseInt(limit) ? parseInt(limit) : 8;
+    page = page && /[0-9]+/.test(page) && parseInt(page) ? parseInt(page) : 1;
+    const offset = (page - 1) * limit;
     let shawarmas;
     if (sortBy === 'title') {
-      shawarmas = await ShawarmaMapping.findAll({
+      shawarmas = await ShawarmaMapping.findAndCountAll({
         where,
+        limit,
+        offset,
         include: [
           { model: ShawarmaPropMapping, as: 'props' },
           { model: ShawarmaComponentMapping, as: 'components' },
         ],
         order: [[`${sortBy}`, `${order}`]],
+        distinct: true,
       });
     } else if (sortBy === 'price') {
-      shawarmas = await ShawarmaMapping.findAll({
+      shawarmas = await ShawarmaMapping.findAndCountAll({
         where,
+        limit,
+        offset,
         include: [
           { model: ShawarmaPropMapping, as: 'props' },
           { model: ShawarmaComponentMapping, as: 'components' },
         ],
+        distinct: true,
       });
-      shawarmas = shawarmas.sort((a, b) => a.props[0].price - b.props[0].price);
-      if (order === 'DESC') shawarmas = shawarmas.reverse();
+      shawarmas.rows = shawarmas.rows.sort((a, b) => a.props[0].price - b.props[0].price);
+      if (order === 'DESC') shawarmas.rows = shawarmas.rows.reverse();
     }
     return shawarmas;
   }
