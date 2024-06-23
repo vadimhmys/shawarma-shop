@@ -8,10 +8,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .logo {
   display: flex;
+
+  @media(max-width: 968px) {
+    order: -2;
+    flex: 1 0 35%;
+    margin-bottom: 15px;
+  }
 
   &__img {
     margin-right: 15px;
@@ -61,6 +68,13 @@
 }
 
 .cart {
+  @media(max-width: 968px) {
+    order: -1;
+    flex: 1 0 35%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   &__link {
     display: inline-block;
     min-width: 100px;

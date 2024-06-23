@@ -1,9 +1,9 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { BsFillCartFill } from 'react-icons/bs';
+import Search from '../Search';
 
 import styles from './Header.module.scss';
-import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -21,6 +21,7 @@ export default function Header() {
             <p className={styles.logo__subtitle}>лучшая шаурма в мире</p>
           </div>
         </div>
+        <Search />
         <div className={styles.cart}>
           <Link to="/basket" className={styles.cart__link}>
             <span className={styles.cart__price}>0 руб.</span>
