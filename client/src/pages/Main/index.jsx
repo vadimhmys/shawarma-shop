@@ -22,7 +22,7 @@ export default function Main({ searchValue }) {
   const [currentPage, setCurrentPage] = React.useState(1);
   const [numberOfItems, setNumberOfItems] = React.useState(0);
   
-  const limit = 4;
+  const limit = window.innerWidth > 769 ? 8 : 4;
 
   const showModalWindow = (id) => {
     setIsModalWindowVisible(true);
@@ -54,7 +54,7 @@ export default function Main({ searchValue }) {
         setNumberOfItems(obj.count);
       })
       .finally(() => setIsLoading(false));
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, sortType, searchValue, currentPage, limit]);
 
   const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);
   const items = shawarmas.map(
