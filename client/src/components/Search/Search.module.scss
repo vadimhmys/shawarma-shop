@@ -47,4 +47,8 @@
 .close__icon {
   right: 10px;
   cursor: pointer;
+
+  &:hover {
+    color: $black;
+  }
 }

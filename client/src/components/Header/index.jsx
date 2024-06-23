@@ -5,7 +5,7 @@ import Search from '../Search';
 
 import styles from './Header.module.scss';
 
-export default function Header() {
+export default function Header({ searchValue, onChangeSearchValue }) {
   return (
     <div className={styles.root}>
       <div className={styles.container}>
@@ -21,7 +21,7 @@ export default function Header() {
             <p className={styles.logo__subtitle}>лучшая шаурма в мире</p>
           </div>
         </div>
-        <Search />
+        <Search searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} />
         <div className={styles.cart}>
           <Link to="/basket" className={styles.cart__link}>
             <span className={styles.cart__price}>0 руб.</span>

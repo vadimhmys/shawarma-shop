@@ -4,12 +4,17 @@ import { IoCloseOutline } from 'react-icons/io5';
 
 import styles from './Search.module.scss';
 
-export default function Search() {
+export default function Search({ searchValue, onChangeSearchValue }) {
   return (
     <div className={styles.root}>
       <CiSearch className={styles.search__icon} />
-      <input className={styles.input} placeholder="Поиск пиццы..." />
-      <IoCloseOutline className={styles.close__icon} />
+      <input
+        className={styles.input}
+        value={searchValue}
+        placeholder="Поиск пиццы..."
+        onChange={(e) => onChangeSearchValue(e.target.value)}
+      />
+      <IoCloseOutline className={styles.close__icon} onClick={() => onChangeSearchValue('')} />
     </div>
   );
 }

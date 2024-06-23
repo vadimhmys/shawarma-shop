@@ -8,7 +8,7 @@ import ModalWindow from './ModalWindow/index.jsx';
 
 import styles from './Main.module.scss';
 
-export default function Main() {
+export default function Main({ searchValue }) {
   const [shawarmas, setShawarmas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
@@ -42,8 +42,17 @@ export default function Main() {
       .then((arr) => setShawarmas(arr))
       .finally(() => setIsLoading(false));
   }, [categoryId, sortType]);
-  /* &sortBy=${sortType.sortCritery.replace('-', '')}
-      &order=${sortType.sortCritery.includes('-') ? 'ASC' : 'DESC'} */
+
+  const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);
+  const items = shawarmas
+    .filter((item) => {
+      if (searchValue !== '') {
+        return item.title.toLowerCase().includes(searchValue.toLowerCase());
+      }
+      return true;
+    })
+    .map((s) => s.presence && <Card key={s.id} shawarma={s} showModalWindow={showModalWindow} />);
+
   return (
     <div className={styles.root}>
       <div className={styles.top}>
@@ -51,14 +60,7 @@ export default function Main() {
         <Sorting sortType={sortType} onChangeSort={(obj) => setSortType(obj)} />
       </div>
       <h2 className={styles.title}>Все шавухи</h2>
-      <div className={styles.items}>
-        {isLoading
-          ? [...new Array(6)].map((_, i) => <CardLoader key={i} />)
-          : shawarmas.map(
-              (s) =>
-                s.presence && <Card key={s.id} shawarma={s} showModalWindow={showModalWindow} />,
-            )}
-      </div>
+      <div className={styles.items}>{isLoading ? skeletons : items}</div>
       {isModalWindowVisible && (
         <ModalWindow
           activeShawarma={shawarmas[activeShawarmaIndex]}
