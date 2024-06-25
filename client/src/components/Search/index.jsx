@@ -14,7 +14,7 @@ export default function Search({ searchValue, onChangeSearchValue }) {
         placeholder="Поиск шаурмы..."
         onChange={(e) => onChangeSearchValue(e.target.value)}
       />
-      <IoCloseOutline className={styles.close__icon} onClick={() => onChangeSearchValue('')} />
+      {searchValue && <IoCloseOutline className={styles.close__icon} onClick={() => onChangeSearchValue('')} />}
     </div>
   );
 }
