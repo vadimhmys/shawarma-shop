@@ -6,10 +6,12 @@ import Sorting from '../../components/Sorting';
 import CardLoader from '../../components/Card/CardLoader.jsx';
 import ModalWindow from './ModalWindow';
 import Pagination from '../../components/Pagination';
+import { SearchContext } from '../../App.js';
 
 import styles from './Main.module.scss';
 
-export default function Main({ searchValue }) {
+export default function Main() {
+  const { searchValue } = React.useContext(SearchContext);
   const [shawarmas, setShawarmas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
