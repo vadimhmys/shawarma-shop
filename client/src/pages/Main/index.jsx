@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId } from '../../redux/slices/filterSlice.js';
 
 import Card from '../../components/Card';
 import Categories from '../../components/Categories';
@@ -11,12 +13,13 @@ import { SearchContext } from '../../App.js';
 import styles from './Main.module.scss';
 
 export default function Main() {
+  const dispatch = useDispatch();
+  const categoryId = useSelector(state => state.filter.categoryId);
   const { searchValue } = React.useContext(SearchContext);
   const [shawarmas, setShawarmas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const [activeShawarmaIndex, setActiveShawarmaIndex] = React.useState(0);
-  const [categoryId, setCategoryId] = React.useState(0);
   const [sortType, setSortType] = React.useState({
     value: 'цене ↑',
     sortCritery: 'price',
@@ -37,7 +40,7 @@ export default function Main() {
   };
 
   const onChangeCategory = (id) => {
-    setCategoryId(id);
+    dispatch(setCategoryId(id));
     setCurrentPage(1);
   };
 
