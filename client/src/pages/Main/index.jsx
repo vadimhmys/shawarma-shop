@@ -14,19 +14,16 @@ import styles from './Main.module.scss';
 
 export default function Main() {
   const dispatch = useDispatch();
-  const categoryId = useSelector(state => state.filter.categoryId);
+  const { categoryId, sort } = useSelector((state) => state.filter);
+  const sortType = sort.sortCritery;
   const { searchValue } = React.useContext(SearchContext);
   const [shawarmas, setShawarmas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const [activeShawarmaIndex, setActiveShawarmaIndex] = React.useState(0);
-  const [sortType, setSortType] = React.useState({
-    value: 'цене ↑',
-    sortCritery: 'price',
-  });
   const [currentPage, setCurrentPage] = React.useState(1);
   const [numberOfItems, setNumberOfItems] = React.useState(0);
-  
+
   const limit = window.innerWidth > 769 ? 8 : 4;
 
   const showModalWindow = (id) => {
@@ -49,8 +46,8 @@ export default function Main() {
     fetch(
       `http://localhost:7000/api/shawarmas/getall?${
         categoryId > 0 ? `categoryId=${categoryId}` : ''
-      }&sortBy=${sortType.sortCritery.replace('-', '')}&order=${
-        sortType.sortCritery.includes('-') ? 'DESC' : 'ASC'
+      }&sortBy=${sortType.replace('-', '')}&order=${
+        sortType.includes('-') ? 'DESC' : 'ASC'
       }&search=${searchValue}&limit=${limit}&page=${currentPage}`,
     )
       .then((res) => res.json())
@@ -70,7 +67,7 @@ export default function Main() {
     <div className={styles.root}>
       <div className={styles.top}>
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sorting sortType={sortType} onChangeSort={(obj) => setSortType(obj)} />
+        <Sorting />
       </div>
       <h2 className={styles.title}>Все шавухи</h2>
       <div className={styles.items}>{isLoading ? skeletons : items}</div>
@@ -80,7 +77,12 @@ export default function Main() {
           hideModalWindow={hideModalWindow}
         />
       )}
-      <Pagination numberOfItems={numberOfItems} limit={limit} onPageChange={(number) => setCurrentPage(number)} currentPage={currentPage}/>
+      <Pagination
+        numberOfItems={numberOfItems}
+        limit={limit}
+        onPageChange={(number) => setCurrentPage(number)}
+        currentPage={currentPage}
+      />
     </div>
   );
 }

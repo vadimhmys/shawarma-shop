@@ -14,10 +14,13 @@ export const counterSlice = createSlice({
   reducers: {
     setCategoryId(state, action) {
       state.categoryId = action.payload;
-    }
+    },
+    setSort(state, action) {
+      state.sort = action.payload;
+    },
   },
 });
 
-export const { setCategoryId } = counterSlice.actions;
+export const { setCategoryId, setSort } = counterSlice.actions;
 
 export default counterSlice.reducer;

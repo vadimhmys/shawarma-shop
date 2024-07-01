@@ -1,20 +1,24 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort } from '../../redux/slices/filterSlice';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 
 import styles from './Sorting.module.scss';
 
-export default function Sorting({ sortType, onChangeSort }) {
+const sortingTypes = [
+  { value: 'цене ↑', sortCritery: 'price' },
+  { value: 'цене ↓', sortCritery: '-price' },
+  { value: 'алфавиту↑', sortCritery: 'title' },
+  { value: 'алфавиту↓', sortCritery: '-title' },
+];
+
+export default function Sorting() {
+  const dispatch = useDispatch();
+  const sortTitle = useSelector((state) => state.filter.sort.value);
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const sortingTypes = [
-    { value: 'цене ↑', sortCritery: 'price' },
-    { value: 'цене ↓', sortCritery: '-price' },
-    { value: 'алфавиту↑', sortCritery: 'title' },
-    { value: 'алфавиту↓', sortCritery: '-title' },
-  ];
-
   const handleClick = (obj) => {
-    onChangeSort(obj);
+    dispatch(setSort(obj));
     setIsVisible(false);
   };
 
@@ -29,7 +33,7 @@ export default function Sorting({ sortType, onChangeSort }) {
         <div className={styles.title}>
           <span>Сортировать по: </span>
           <span className={styles.criterion} onClick={() => setIsVisible(!isVisible)}>
-            {sortType.value}
+            {sortTitle}
           </span>
         </div>
       </div>
@@ -40,7 +44,7 @@ export default function Sorting({ sortType, onChangeSort }) {
               <li
                 key={obj.value}
                 className={
-                  obj.value === sortType.value
+                  obj.value === sortTitle
                     ? `${styles.list__item} ${styles.active}`
                     : `${styles.list__item}`
                 }
