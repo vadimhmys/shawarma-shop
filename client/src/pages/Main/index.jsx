@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from '../../redux/slices/filterSlice.js';
 
@@ -43,17 +44,17 @@ export default function Main() {
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `http://localhost:7000/api/shawarmas/getall?${
-        categoryId > 0 ? `categoryId=${categoryId}` : ''
-      }&sortBy=${sortType.replace('-', '')}&order=${
-        sortType.includes('-') ? 'DESC' : 'ASC'
-      }&search=${searchValue}&limit=${limit}&page=${currentPage}`,
-    )
-      .then((res) => res.json())
-      .then((obj) => {
-        setShawarmas(obj.rows);
-        setNumberOfItems(obj.count);
+    axios
+      .get(
+        `http://localhost:7000/api/shawarmas/getall?${
+          categoryId > 0 ? `categoryId=${categoryId}` : ''
+        }&sortBy=${sortType.replace('-', '')}&order=${
+          sortType.includes('-') ? 'DESC' : 'ASC'
+        }&search=${searchValue}&limit=${limit}&page=${currentPage}`,
+      )
+      .then((res) => {
+        setShawarmas(res.data.rows);
+        setNumberOfItems(res.data.count);
       })
       .finally(() => setIsLoading(false));
   }, [categoryId, sortType, searchValue, currentPage, limit]);
