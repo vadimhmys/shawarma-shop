@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId } from '../../redux/slices/filterSlice.js';
+import { setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice.js';
 
 import Card from '../../components/Card';
 import Categories from '../../components/Categories';
@@ -15,17 +15,17 @@ import styles from './Main.module.scss';
 
 export default function Main() {
   const dispatch = useDispatch();
-  const { categoryId, sort } = useSelector((state) => state.filter);
+  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
   const sortType = sort.sortCritery;
   const { searchValue } = React.useContext(SearchContext);
   const [shawarmas, setShawarmas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const [activeShawarmaIndex, setActiveShawarmaIndex] = React.useState(0);
-  const [currentPage, setCurrentPage] = React.useState(1);
   const [numberOfItems, setNumberOfItems] = React.useState(0);
 
   const limit = window.innerWidth > 769 ? 8 : 4;
+  const pageCount = Math.ceil(numberOfItems / limit);
 
   const showModalWindow = (id) => {
     setIsModalWindowVisible(true);
@@ -39,7 +39,11 @@ export default function Main() {
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
-    setCurrentPage(1);
+    dispatch(setCurrentPage(1));
+  };
+
+  const onPageChange = (number) => {
+    dispatch(setCurrentPage(number));
   };
 
   React.useEffect(() => {
@@ -79,9 +83,8 @@ export default function Main() {
         />
       )}
       <Pagination
-        numberOfItems={numberOfItems}
-        limit={limit}
-        onPageChange={(number) => setCurrentPage(number)}
+        pageCount={pageCount}
+        onPageChange={onPageChange}
         currentPage={currentPage}
       />
     </div>
