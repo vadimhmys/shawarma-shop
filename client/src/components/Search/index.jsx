@@ -3,15 +3,26 @@ import { CiSearch } from 'react-icons/ci';
 import { IoCloseOutline } from 'react-icons/io5';
 import { SearchContext } from '../../App';
 
+import { debounce } from '../../utils/debounce';
+
 import styles from './Search.module.scss';
 
 export default function Search() {
   const inputRef = React.useRef(null);
-  const { searchValue, setSearchValue } = React.useContext(SearchContext);
+  const [value, setValue] = React.useState('');
+  const { setSearchValue } = React.useContext(SearchContext);
 
   const handleClearInput = () => {
     setSearchValue('');
+    setValue('');
     inputRef.current.focus();
+  };
+
+  const handleChangeSearchValue = React.useRef(debounce((str) => setSearchValue(str), 500)).current;
+
+  const handleChangeInput = (e) => {
+    handleChangeSearchValue(e.target.value);
+    setValue(e.target.value);
   };
 
   return (
@@ -20,13 +31,11 @@ export default function Search() {
       <input
         ref={inputRef}
         className={styles.input}
-        value={searchValue}
+        value={value}
         placeholder="Поиск шаурмы..."
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={handleChangeInput}
       />
-      {searchValue && (
-        <IoCloseOutline className={styles.close__icon} onClick={handleClearInput} />
-      )}
+      {value && <IoCloseOutline className={styles.close__icon} onClick={handleClearInput} />}
     </div>
   );
 }
