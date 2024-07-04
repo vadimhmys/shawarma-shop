@@ -5,7 +5,7 @@ import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 
 import styles from './Sorting.module.scss';
 
-const sortingTypes = [
+export const sortingTypes = [
   { value: 'цене ↑', sortCritery: 'price' },
   { value: 'цене ↓', sortCritery: '-price' },
   { value: 'алфавиту↑', sortCritery: 'title' },

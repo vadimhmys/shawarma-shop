@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice.js';
+import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/slices/filterSlice.js';
 
 import Card from '../../components/Card';
 import Categories from '../../components/Categories';
-import Sorting from '../../components/Sorting';
+import Sorting, { sortingTypes } from '../../components/Sorting';
 import CardLoader from '../../components/Card/CardLoader.jsx';
 import ModalWindow from './ModalWindow';
 import Pagination from '../../components/Pagination';
@@ -14,6 +16,7 @@ import { SearchContext } from '../../App.js';
 import styles from './Main.module.scss';
 
 export default function Main() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
   const { searchValue } = React.useContext(SearchContext);
@@ -46,14 +49,13 @@ export default function Main() {
   };
 
   const fetchShawarmas = React.useCallback(() => {
-    const category = categoryId > 0 ? `categoryId=${categoryId}` : '';
     const sortBy = sort.sortCritery.replace('-', '');
     const order = sort.sortCritery.includes('-') ? 'DESC' : 'ASC';
 
     setIsLoading(true);
     axios
       .get(
-        `http://localhost:7000/api/shawarmas/getall?${category}&sortBy=${sortBy}&order=${order}&search=${searchValue}&limit=${limit}&page=${currentPage}`,
+        `http://localhost:7000/api/shawarmas/getall?categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&searchValue=${searchValue}&limit=${limit}&currentPage=${currentPage}`,
       )
       .then((res) => {
         setShawarmas(res.data.rows);
@@ -63,9 +65,32 @@ export default function Main() {
   }, [categoryId, sort.sortCritery, searchValue, currentPage, limit]);
 
   React.useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = sortingTypes.find(obj => obj.sortCritery === params.sortBy);
+      dispatch(
+        setFilterParams({
+          ...params,
+          sort
+        })
+      );
+    }
+    
+  }, [dispatch]);
+
+  React.useEffect(() => {
     window.scrollTo(0, 0);
     fetchShawarmas();
   }, [categoryId, sort.sortCritery, searchValue, currentPage, limit, fetchShawarmas]);
+
+  React.useEffect(() => {
+    const queryString = qs.stringify({
+      categoryId,
+      sortBy: sort.sortCritery,
+      currentPage,
+    });
+    navigate(`?${queryString}`);
+  }, [categoryId, sort.sortCritery, currentPage, navigate]);
 
   const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);
   const items = shawarmas.map(

@@ -7,17 +7,17 @@ import FileService from '../services/File.js';
 
 class Shawarma {
   async getAll(query) {
-    let { categoryId, sortBy, order, search, limit, page } = query;
+    let { categoryId, sortBy, order, searchValue, limit, currentPage } = query;
     const where = {};
-    if (search) where.title = { [Op.substring]: `${search.toLowerCase()}` };
-    if (categoryId) where.categoryId = +categoryId;
+    if (searchValue) where.title = { [Op.substring]: `${searchValue.toLowerCase()}` };
+    if (categoryId && categoryId > 0) where.categoryId = +categoryId;
     if (categoryId === '1') {
       delete where.categoryId;
       where.novelty = true;
     }
     limit = limit && /[0-9]+/.test(limit) && parseInt(limit) ? parseInt(limit) : 8;
-    page = page && /[0-9]+/.test(page) && parseInt(page) ? parseInt(page) : 1;
-    const offset = (page - 1) * limit;
+    currentPage = currentPage && /[0-9]+/.test(currentPage) && parseInt(currentPage) ? parseInt(currentPage) : 1;
+    const offset = (currentPage - 1) * limit;
     let shawarmas;
     if (sortBy === 'title') {
       shawarmas = await ShawarmaMapping.findAndCountAll({

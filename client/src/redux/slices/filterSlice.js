@@ -22,9 +22,14 @@ export const counterSlice = createSlice({
     setCurrentPage(state, action) {
       state.currentPage = action.payload;
     },
+    setFilterParams(state, action) {
+      state.categoryId = Number(action.payload.categoryId);
+      state.currentPage = Number(action.payload.currentPage);
+      state.sort = action.payload.sort;
+    }
   },
 });
 
-export const { setCategoryId, setSort, setCurrentPage } = counterSlice.actions;
+export const { setCategoryId, setSort, setCurrentPage, setFilterParams } = counterSlice.actions;
 
 export default counterSlice.reducer;
