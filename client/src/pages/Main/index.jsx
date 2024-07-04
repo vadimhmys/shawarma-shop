@@ -25,6 +25,7 @@ export default function Main() {
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const [activeShawarmaIndex, setActiveShawarmaIndex] = React.useState(0);
   const [numberOfItems, setNumberOfItems] = React.useState(0);
+  const isMounted = React.useRef(false);
 
   const limit = window.innerWidth > 769 ? 8 : 4;
   const pageCount = Math.ceil(numberOfItems / limit);
@@ -39,10 +40,13 @@ export default function Main() {
     setIsModalWindowVisible(false);
   };
 
-  const onChangeCategory = (id) => {
-    dispatch(setCategoryId(id));
-    dispatch(setCurrentPage(1));
-  };
+  const onChangeCategory = React.useCallback(
+    (id) => {
+      dispatch(setCategoryId(id));
+      dispatch(setCurrentPage(1));
+    },
+    [dispatch],
+  );
 
   const onPageChange = (number) => {
     dispatch(setCurrentPage(number));
@@ -65,17 +69,19 @@ export default function Main() {
   }, [categoryId, sort.sortCritery, searchValue, currentPage, limit]);
 
   React.useEffect(() => {
-    if (window.location.search) {
+    if (
+      window.location.search &&
+      window.location.search !== '?categoryId=0&sortBy=price&currentPage=1'
+    ) {
       const params = qs.parse(window.location.search.substring(1));
-      const sort = sortingTypes.find(obj => obj.sortCritery === params.sortBy);
+      const sort = sortingTypes.find((obj) => obj.sortCritery === params.sortBy);
       dispatch(
         setFilterParams({
           ...params,
-          sort
-        })
+          sort,
+        }),
       );
     }
-    
   }, [dispatch]);
 
   React.useEffect(() => {
@@ -84,12 +90,15 @@ export default function Main() {
   }, [categoryId, sort.sortCritery, searchValue, currentPage, limit, fetchShawarmas]);
 
   React.useEffect(() => {
-    const queryString = qs.stringify({
-      categoryId,
-      sortBy: sort.sortCritery,
-      currentPage,
-    });
-    navigate(`?${queryString}`);
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        categoryId,
+        sortBy: sort.sortCritery,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
   }, [categoryId, sort.sortCritery, currentPage, navigate]);
 
   const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);

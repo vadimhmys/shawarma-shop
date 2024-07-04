@@ -16,7 +16,10 @@ class Shawarma {
       where.novelty = true;
     }
     limit = limit && /[0-9]+/.test(limit) && parseInt(limit) ? parseInt(limit) : 8;
-    currentPage = currentPage && /[0-9]+/.test(currentPage) && parseInt(currentPage) ? parseInt(currentPage) : 1;
+    currentPage =
+      currentPage && /[0-9]+/.test(currentPage) && parseInt(currentPage)
+        ? parseInt(currentPage)
+        : 1;
     const offset = (currentPage - 1) * limit;
     let shawarmas;
     if (sortBy === 'title') {
