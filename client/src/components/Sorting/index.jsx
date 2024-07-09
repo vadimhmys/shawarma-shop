@@ -16,14 +16,28 @@ export default function Sorting() {
   const dispatch = useDispatch();
   const sortTitle = useSelector((state) => state.filter.sort.value);
   const [isVisible, setIsVisible] = React.useState(false);
+  const sortRef = React.useRef(null);
 
   const handleClick = (obj) => {
     dispatch(setSort(obj));
     setIsVisible(false);
   };
 
+  React.useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.composedPath().includes(sortRef.current)) {
+        setIsVisible(false);
+        console.log('hide');
+      }
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside);
+  }, []);
+
   return (
-    <div className={styles.container}>
+    <div ref={sortRef} className={styles.container}>
       <div className={styles.top}>
         {isVisible ? (
           <MdOutlineArrowDropDown size="30" style={{ color: '#323232' }} />
