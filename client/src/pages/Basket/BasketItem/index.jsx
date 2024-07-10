@@ -4,7 +4,7 @@ import Counter from '../../../components/Counter';
 
 import styles from './BasketItem.module.scss';
 
-export default function BasketItem({ image, title, weight, cake, addedComponentsList }) {
+export default function BasketItem({ image, title, weight, cake, price, addedComponentsList }) {
   return (
     <>
       <li className={styles.list__item}>
@@ -33,7 +33,7 @@ export default function BasketItem({ image, title, weight, cake, addedComponents
           </ul>
         </div>
         <Counter maxCount={10} initialValue={1} />
-        <div className={styles.sum}>15.90 р.</div>
+        <div className={styles.sum}>{price} р.</div>
         <FaRegTrashCan className={styles.trash} />
       </li>
       <hr />

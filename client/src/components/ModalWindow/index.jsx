@@ -17,10 +17,10 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
 
   const shawarma = structuredClone(activeShawarma);
   const activeProp = shawarma.props[activeRadioBoxIndex];
-  const totalPrice = activeProp.price + addedIngredients.reduce((sum, ing) => sum + ing.count * ing.price, 0);
   let formatter = new Intl.NumberFormat('ru', {
     minimumFractionDigits: 2,
   });
+  const totalPrice = formatter.format(activeProp.price + addedIngredients.reduce((sum, ing) => sum + ing.count * ing.price, 0));
   const urlForIngredients = 'http://localhost:7000/api/ingredients/getall';
   const urlForSauces = 'http://localhost:7000/api/sauces/getall';
   const titleForIngredients = 'Выберите ингредиенты';
@@ -46,7 +46,7 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
       title,
       image,
       weight: activeProp.weight,
-      price: activeProp.price,
+      price: totalPrice,
       cake: cakes[activeCakeIndex].value,
       addedComponentsList: [...addedIngredients],
     };
@@ -106,7 +106,7 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
             <ComponentList title={titleForSauces} url={urlForSauces} />
             <div className={styles.footer}>
               <Button handleClick={onClickAdd}>
-                Добавить в корзину за {formatter.format(totalPrice)} руб.
+                Добавить в корзину за {totalPrice} руб.
               </Button>
             </div>
           </form>

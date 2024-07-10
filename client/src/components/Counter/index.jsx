@@ -21,7 +21,6 @@ export default function Counter({ maxCount, isSimple = true, initialValue = 0, c
           price: component.price
         }),
       )
-      console.log(component);
     } else {
     }
   };
