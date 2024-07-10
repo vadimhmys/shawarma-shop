@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Counter from '../../components/Counter';
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -6,6 +7,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import styles from './Basket.module.scss';
 
 export default function Basket() {
+  const {items} = useSelector(state => state.basket);
   return (
     <div className={styles.root}>
       <h2 className={styles.title}>Корзина</h2>

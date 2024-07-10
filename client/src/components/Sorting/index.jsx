@@ -27,7 +27,6 @@ export default function Sorting() {
     const handleClickOutside = (e) => {
       if (!e.composedPath().includes(sortRef.current)) {
         setIsVisible(false);
-        console.log('hide');
       }
     };
 

@@ -1,20 +1,42 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addIngredient, removeIngredient } from '../../redux/slices/ingredientSlice';
 
 import styles from './Counter.module.scss';
 
-export default function Counter({ price, maxCount, isSimple = true, initialValue = 0 }) {
+export default function Counter({
+  maxCount,
+  isSimple = true,
+  initialValue = 0,
+  component
+}) {
+  const dispatch = useDispatch();
   const [multiplier, setMultiplier] = React.useState(initialValue);
 
   const incrementCounter = (e) => {
     e.preventDefault();
     if (multiplier === maxCount) return;
     setMultiplier(multiplier + 1);
+    dispatch(
+      addIngredient({
+        id: component.id,
+        name: component.name,
+        count: multiplier + 1,
+      }),
+    );
   };
 
   const decrementCounter = (e) => {
     e.preventDefault();
     if (multiplier === 0) return;
     setMultiplier(multiplier - 1);
+    dispatch(
+      removeIngredient({
+        id: component.id,
+        name: component.name,
+        count: multiplier - 1,
+      })
+    );
   };
 
   let formatter = new Intl.NumberFormat('ru', {
@@ -25,7 +47,7 @@ export default function Counter({ price, maxCount, isSimple = true, initialValue
     <div className={styles.root}>
       {!isSimple && (
         <p className={multiplier === 0 ? styles.sum : styles.sum + ' ' + styles.dedicated}>
-          {multiplier === 0 ? 0 : formatter.format(multiplier * price)} р.
+          {multiplier === 0 ? 0 : formatter.format(multiplier * component.price)} р.
         </p>
       )}
 
@@ -36,7 +58,7 @@ export default function Counter({ price, maxCount, isSimple = true, initialValue
         <div className={styles.quantity}>
           <span>{multiplier}</span>
           {!isSimple && <span>x</span>}
-          {!isSimple && <span>{formatter.format(price)} р</span>}
+          {!isSimple && <span>{formatter.format(component.price)} р</span>}
         </div>
         <button className={styles.button} onClick={incrementCounter}>
           &#43;
