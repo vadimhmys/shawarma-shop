@@ -12,10 +12,12 @@ import styles from './ModalWindow.module.scss';
 export default function ModalWindow({ hideModalWindow, activeShawarma, initialRadioBoxIndex }) {
   const dispatch = useDispatch();
   const { addedIngredients } = useSelector((state) => state.shawarma);
-  const shawarma = structuredClone(activeShawarma);
   const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
-  const [activeProp] = React.useState(shawarma.props[0]);
+
+  const shawarma = structuredClone(activeShawarma);
+  const activeProp = shawarma.props[activeRadioBoxIndex];
+  const totalPrice = activeProp.price + addedIngredients.reduce((sum, ing) => sum + ing.count * ing.price, 0);
   let formatter = new Intl.NumberFormat('ru', {
     minimumFractionDigits: 2,
   });
@@ -104,7 +106,7 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
             <ComponentList title={titleForSauces} url={urlForSauces} />
             <div className={styles.footer}>
               <Button handleClick={onClickAdd}>
-                Добавить в корзину за {formatter.format(activeProp.price)} руб.
+                Добавить в корзину за {formatter.format(totalPrice)} руб.
               </Button>
             </div>
           </form>

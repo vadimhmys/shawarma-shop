@@ -18,8 +18,10 @@ export default function Counter({ maxCount, isSimple = true, initialValue = 0, c
           id: component.id,
           name: component.name,
           count: multiplier + 1,
+          price: component.price
         }),
-      );
+      )
+      console.log(component);
     } else {
     }
   };
