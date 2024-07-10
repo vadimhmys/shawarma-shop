@@ -1,0 +1,87 @@
+@import '../../../scss/all';
+
+.list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.image {
+  width: 120px;
+  min-width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-right: 20px;
+
+  img {
+    object-fit: cover;
+    max-width: 220px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 40%;
+
+  h3 {
+    margin-bottom: 8px;
+    text-transform: capitalize;
+  }
+
+  .info {
+    margin-bottom: 8px;
+
+    span {
+      margin-right: 10px;
+      color: $gray-font;
+    }
+  }
+
+  .added__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .added__item {
+    margin-right: 10px;
+
+    &::before {
+      content: '+';
+    }
+  }
+
+  .removed__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .removed__item {
+    margin-right: 10px;
+  }
+}
+
+.sum {
+  flex: 1 0 100px;
+  text-align: center;
+  padding: 0 15px;
+  font-weight: bold;
+}
+
+.trash {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+hr {
+  background-color: $gray-font;
+  margin: 5px 0;
+  opacity: 0.5;
+}

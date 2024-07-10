@@ -17,26 +17,36 @@ export default function Counter({
     e.preventDefault();
     if (multiplier === maxCount) return;
     setMultiplier(multiplier + 1);
-    dispatch(
-      addIngredient({
-        id: component.id,
-        name: component.name,
-        count: multiplier + 1,
-      }),
-    );
+    if (!isSimple) {
+      dispatch(
+        addIngredient({
+          id: component.id,
+          name: component.name,
+          count: multiplier + 1,
+        }),
+      );
+    } else {
+      
+    }
+    
   };
 
   const decrementCounter = (e) => {
     e.preventDefault();
     if (multiplier === 0) return;
     setMultiplier(multiplier - 1);
-    dispatch(
-      removeIngredient({
-        id: component.id,
-        name: component.name,
-        count: multiplier - 1,
-      })
-    );
+    if (!isSimple) {
+      dispatch(
+        removeIngredient({
+          id: component.id,
+          name: component.name,
+          count: multiplier - 1,
+        })
+      );
+    } else {
+
+    }
+    
   };
 
   let formatter = new Intl.NumberFormat('ru', {

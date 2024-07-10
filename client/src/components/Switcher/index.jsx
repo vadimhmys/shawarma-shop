@@ -2,8 +2,8 @@ import React from 'react';
 
 import styles from './Switcher.module.scss';
 
-export default function Switcher({ radioBoxGroupName, dataForInputs, onParentStateChange = null }) {
-  const [checkedIndex, setCheckedIndex] = React.useState(0);
+export default function Switcher({ radioBoxGroupName, dataForInputs, onParentStateChange = null, activeWeightPriceCoupleIndex = 0 }) {
+  const [checkedIndex, setCheckedIndex] = React.useState(activeWeightPriceCoupleIndex ? activeWeightPriceCoupleIndex : 0);
 
   const handleChange = (index) => {
     setCheckedIndex(index);

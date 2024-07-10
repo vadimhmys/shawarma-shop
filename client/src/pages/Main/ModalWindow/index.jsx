@@ -9,7 +9,7 @@ import Button from '../../../components/Button';
 import styles from './ModalWindow.module.scss';
 import { clearIngredients } from '../../../redux/slices/ingredientSlice';
 
-export default function ModalWindow({ hideModalWindow, activeShawarma }) {
+export default function ModalWindow({ hideModalWindow, activeShawarma, activeWeightPriceCoupleIndex }) {
   const dispatch = useDispatch();
   const {addedIngredients} = useSelector(state => state.ingredient);
   const shawarma = structuredClone(activeShawarma);
@@ -84,6 +84,7 @@ export default function ModalWindow({ hideModalWindow, activeShawarma }) {
                 value: prop.weight + ' гр.',
               }))}
               onParentStateChange={changeWeightPriceCouple}
+              activeWeightPriceCoupleIndex={activeWeightPriceCoupleIndex}
             />
             <p className={styles.field}>Выберите лепешку</p>
             <Switcher radioBoxGroupName="cakesInModalWindow" dataForInputs={cakes} onParentStateChange={changeCake}/>

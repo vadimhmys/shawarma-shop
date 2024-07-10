@@ -51,7 +51,7 @@ export default function Card({ shawarma, showModalWindow }) {
             isBottom={true}
           />
         </div>
-        <Button handleClick={() => showModalWindow(shawarma.id)}>В корзину</Button>
+        <Button handleClick={() => showModalWindow(shawarma.id, activeCardRadioBoxIndex)}>В корзину</Button>
       </div>
     </div>
   );

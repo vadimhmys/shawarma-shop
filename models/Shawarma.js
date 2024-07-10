@@ -48,6 +48,10 @@ class Shawarma {
       shawarmas.rows = shawarmas.rows.sort((a, b) => a.props[0].price - b.props[0].price);
       if (order === 'DESC') shawarmas.rows = shawarmas.rows.reverse();
     }
+    shawarmas.rows = shawarmas.rows.map((s) => {
+      s.props.sort((a, b) => a.weight - b.weight);
+      return s;
+    })
     return shawarmas;
   }
 

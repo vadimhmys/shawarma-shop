@@ -24,16 +24,18 @@ export default function Main() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const [activeShawarmaIndex, setActiveShawarmaIndex] = React.useState(0);
+  const [activeWeightPriceCoupleIndex, setActiveWeightPriceCoupleIndex] = React.useState(0);
   const [numberOfItems, setNumberOfItems] = React.useState(0);
   const isMounted = React.useRef(false);
 
   const limit = window.innerWidth > 769 ? 8 : 4;
   const pageCount = Math.ceil(numberOfItems / limit);
 
-  const showModalWindow = (id) => {
+  const showModalWindow = (id, activeCardRadioBoxIndex) => {
     setIsModalWindowVisible(true);
     const nextActiveShawarmaIndex = shawarmas.findIndex((shawarma) => shawarma.id === id);
     setActiveShawarmaIndex(nextActiveShawarmaIndex);
+    setActiveWeightPriceCoupleIndex(activeCardRadioBoxIndex);
   };
 
   const hideModalWindow = () => {
@@ -118,6 +120,7 @@ export default function Main() {
         <ModalWindow
           activeShawarma={shawarmas[activeShawarmaIndex]}
           hideModalWindow={hideModalWindow}
+          activeWeightPriceCoupleIndex={activeWeightPriceCoupleIndex}
         />
       )}
       <Pagination pageCount={pageCount} onPageChange={onPageChange} currentPage={currentPage} />
