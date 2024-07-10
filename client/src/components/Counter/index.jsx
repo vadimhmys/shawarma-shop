@@ -1,15 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addIngredient, removeIngredient } from '../../redux/slices/ingredientSlice';
+import { addIngredient, removeIngredient } from '../../redux/slices/shawarmaSlice';
 
 import styles from './Counter.module.scss';
 
-export default function Counter({
-  maxCount,
-  isSimple = true,
-  initialValue = 0,
-  component
-}) {
+export default function Counter({ maxCount, isSimple = true, initialValue = 0, component }) {
   const dispatch = useDispatch();
   const [multiplier, setMultiplier] = React.useState(initialValue);
 
@@ -26,9 +21,7 @@ export default function Counter({
         }),
       );
     } else {
-      
     }
-    
   };
 
   const decrementCounter = (e) => {
@@ -41,12 +34,10 @@ export default function Counter({
           id: component.id,
           name: component.name,
           count: multiplier - 1,
-        })
+        }),
       );
     } else {
-
     }
-    
   };
 
   let formatter = new Intl.NumberFormat('ru', {

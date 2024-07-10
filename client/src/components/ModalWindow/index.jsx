@@ -1,20 +1,21 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../../redux/slices/basketSlice';
+import { addItem } from '../../redux/slices/basketSlice';
+import { clearIngredients } from '../../redux/slices/shawarmaSlice';
 
-import Switcher from '../../../components/Switcher';
-import ComponentList from './ComponentList';
-import Button from '../../../components/Button';
+import Switcher from '../Switcher';
+import ComponentList from '../ComponentList';
+import Button from '../Button';
 
 import styles from './ModalWindow.module.scss';
-import { clearIngredients } from '../../../redux/slices/ingredientSlice';
 
-export default function ModalWindow({ hideModalWindow, activeShawarma, activeWeightPriceCoupleIndex }) {
+export default function ModalWindow({ hideModalWindow, activeShawarma, initialRadioBoxIndex }) {
   const dispatch = useDispatch();
-  const {addedIngredients} = useSelector(state => state.ingredient);
+  const { addedIngredients } = useSelector((state) => state.shawarma);
   const shawarma = structuredClone(activeShawarma);
+  const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
-  const [activeProp, setActiveProp] = React.useState(shawarma.props[0]);
+  const [activeProp] = React.useState(shawarma.props[0]);
   let formatter = new Intl.NumberFormat('ru', {
     minimumFractionDigits: 2,
   });
@@ -26,26 +27,18 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, activeWei
     { id: 0, value: 'Обычная лепешка' },
     { id: 1, value: 'Сырная лепешка' },
   ];
-  
-  const changeWeightPriceCouple = (index) => {
-    setActiveProp(shawarma.props[index]);
+
+  const changeActiveRadioBoxIndex = (index) => {
+    setActiveRadioBoxIndex(index);
   };
 
   const changeCake = (index) => {
     setActiveCakeIndex(index);
   };
 
-  React.useEffect(() => {
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.body.style.overflow = 'visible';
-    };
-  });
-
   const onClickAdd = (e) => {
     e.preventDefault();
-    const {id, title, image} = shawarma;
+    const { id, title, image } = shawarma;
     const item = {
       id,
       title,
@@ -56,13 +49,27 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, activeWei
       addedComponentsList: [...addedIngredients],
     };
     dispatch(addItem(item));
-    dispatch(clearIngredients())
-  }
+    dispatch(clearIngredients());
+    hideModalWindow();
+  };
+
+  const onClickClose = () => {
+    dispatch(clearIngredients());
+    hideModalWindow();
+  };
+
+  React.useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
+  });
 
   return (
     <div className={styles.background__showed}>
       <div className={styles.body}>
-        <div className={styles.close} onClick={hideModalWindow}></div>
+        <div className={styles.close} onClick={onClickClose}></div>
         <h2 className={styles.title}>{shawarma.name}</h2>
         <div className={styles.content}>
           <div className={styles.info}>
@@ -83,15 +90,22 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, activeWei
                 id: prop.id,
                 value: prop.weight + ' гр.',
               }))}
-              onParentStateChange={changeWeightPriceCouple}
-              activeWeightPriceCoupleIndex={activeWeightPriceCoupleIndex}
+              onParentStateChange={changeActiveRadioBoxIndex}
+              activeIndex={activeRadioBoxIndex}
             />
             <p className={styles.field}>Выберите лепешку</p>
-            <Switcher radioBoxGroupName="cakesInModalWindow" dataForInputs={cakes} onParentStateChange={changeCake}/>
+            <Switcher
+              radioBoxGroupName="cakesInModalWindow"
+              dataForInputs={cakes}
+              onParentStateChange={changeCake}
+              activeIndex={activeCakeIndex}
+            />
             <ComponentList title={titleForIngredients} url={urlForIngredients} />
             <ComponentList title={titleForSauces} url={urlForSauces} />
             <div className={styles.footer}>
-              <Button handleClick={onClickAdd}>Добавить в корзину за {formatter.format(activeProp.price)} руб.</Button>
+              <Button handleClick={onClickAdd}>
+                Добавить в корзину за {formatter.format(activeProp.price)} руб.
+              </Button>
             </div>
           </form>
         </div>

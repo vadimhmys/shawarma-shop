@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import Counter from '../../../../components/Counter';
+import Counter from '../Counter';
 
 import styles from './ComponentList.module.scss';
 

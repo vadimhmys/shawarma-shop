@@ -9,7 +9,6 @@ import Card from '../../components/Card';
 import Categories from '../../components/Categories';
 import Sorting, { sortingTypes } from '../../components/Sorting';
 import CardLoader from '../../components/Card/CardLoader.jsx';
-import ModalWindow from './ModalWindow';
 import Pagination from '../../components/Pagination';
 import { SearchContext } from '../../App.js';
 
@@ -22,25 +21,11 @@ export default function Main() {
   const { searchValue } = React.useContext(SearchContext);
   const [shawarmas, setShawarmas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
-  const [activeShawarmaIndex, setActiveShawarmaIndex] = React.useState(0);
-  const [activeWeightPriceCoupleIndex, setActiveWeightPriceCoupleIndex] = React.useState(0);
   const [numberOfItems, setNumberOfItems] = React.useState(0);
   const isMounted = React.useRef(false);
 
   const limit = window.innerWidth > 769 ? 8 : 4;
   const pageCount = Math.ceil(numberOfItems / limit);
-
-  const showModalWindow = (id, activeCardRadioBoxIndex) => {
-    setIsModalWindowVisible(true);
-    const nextActiveShawarmaIndex = shawarmas.findIndex((shawarma) => shawarma.id === id);
-    setActiveShawarmaIndex(nextActiveShawarmaIndex);
-    setActiveWeightPriceCoupleIndex(activeCardRadioBoxIndex);
-  };
-
-  const hideModalWindow = () => {
-    setIsModalWindowVisible(false);
-  };
 
   const onChangeCategory = React.useCallback(
     (id) => {
@@ -105,7 +90,7 @@ export default function Main() {
 
   const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);
   const items = shawarmas.map(
-    (s) => s.presence && <Card key={s.id} shawarma={s} showModalWindow={showModalWindow} />,
+    (s) => s.presence && <Card key={s.id} shawarma={s} />,
   );
 
   return (
@@ -116,13 +101,6 @@ export default function Main() {
       </div>
       <h2 className={styles.title}>Все шавухи</h2>
       <div className={styles.items}>{isLoading ? skeletons : items}</div>
-      {isModalWindowVisible && (
-        <ModalWindow
-          activeShawarma={shawarmas[activeShawarmaIndex]}
-          hideModalWindow={hideModalWindow}
-          activeWeightPriceCoupleIndex={activeWeightPriceCoupleIndex}
-        />
-      )}
       <Pagination pageCount={pageCount} onPageChange={onPageChange} currentPage={currentPage} />
     </div>
   );

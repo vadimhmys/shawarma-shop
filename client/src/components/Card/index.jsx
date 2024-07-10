@@ -5,11 +5,21 @@ import Price from '../Price';
 import Novelty from '../Novelty';
 import VariantList from '../Variants/VariantList';
 import Button from '../Button';
+import ModalWindow from '../ModalWindow';
 
 import styles from './Card.module.scss';
 
-export default function Card({ shawarma, showModalWindow }) {
+export default function Card({ shawarma }) {
   const [activeCardRadioBoxIndex, setActiveCardRadioBoxIndex] = React.useState(0);
+  const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
+
+  const hideModalWindow = () => {
+    setIsModalWindowVisible(false);
+  };
+
+  const showModalWindow = () => {
+    setIsModalWindowVisible(true);
+  };
 
   return (
     <div className={styles.card}>
@@ -42,6 +52,7 @@ export default function Card({ shawarma, showModalWindow }) {
         radioBoxGroupName={'weightsInCard_' + shawarma.id}
         dataForInputs={shawarma.props.map((prop) => ({ id: prop.id, value: prop.weight + ' гр.' }))}
         onParentStateChange={setActiveCardRadioBoxIndex}
+        activeIndex={activeCardRadioBoxIndex}
       />
       <div className={styles.bottom}>
         <div className={styles.price}>
@@ -51,8 +62,15 @@ export default function Card({ shawarma, showModalWindow }) {
             isBottom={true}
           />
         </div>
-        <Button handleClick={() => showModalWindow(shawarma.id, activeCardRadioBoxIndex)}>В корзину</Button>
+        <Button handleClick={showModalWindow}>В корзину</Button>
       </div>
+      {isModalWindowVisible && (
+        <ModalWindow
+          activeShawarma={shawarma}
+          hideModalWindow={hideModalWindow}
+          initialRadioBoxIndex={activeCardRadioBoxIndex}
+        />
+      )}
     </div>
   );
 }

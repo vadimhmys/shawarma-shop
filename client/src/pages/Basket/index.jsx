@@ -11,7 +11,7 @@ export default function Basket() {
       <h2 className={styles.title}>Корзина</h2>
       <ul className={styles.list}>
         {
-          items.map(item => <BasketItem key={item.id} {...item}/>)
+          items.map(item => <BasketItem key={item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList)} {...item}/>)
         }
       </ul>
     </div>

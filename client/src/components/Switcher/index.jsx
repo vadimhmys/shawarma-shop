@@ -2,12 +2,14 @@ import React from 'react';
 
 import styles from './Switcher.module.scss';
 
-export default function Switcher({ radioBoxGroupName, dataForInputs, onParentStateChange = null, activeWeightPriceCoupleIndex = 0 }) {
-  const [checkedIndex, setCheckedIndex] = React.useState(activeWeightPriceCoupleIndex ? activeWeightPriceCoupleIndex : 0);
-
+export default function Switcher({
+  radioBoxGroupName,
+  dataForInputs,
+  onParentStateChange,
+  activeIndex,
+}) {
   const handleChange = (index) => {
-    setCheckedIndex(index);
-    if (onParentStateChange) onParentStateChange(index);
+    onParentStateChange(index);
   };
 
   return (
@@ -19,7 +21,7 @@ export default function Switcher({ radioBoxGroupName, dataForInputs, onParentSta
             name={radioBoxGroupName}
             value={data.value}
             id={radioBoxGroupName + '--' + data.id}
-            checked={checkedIndex === i}
+            checked={activeIndex === i}
             onChange={() => handleChange(i)}
           />
           <label htmlFor={radioBoxGroupName + '--' + data.id}>{data.value}</label>
