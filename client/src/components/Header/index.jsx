@@ -8,24 +8,28 @@ import { formatPrice } from '../../utils/formatPrice';
 import styles from './Header.module.scss';
 
 export default function Header() {
-  const {items} = useSelector(state => state.basket);
+  const { items } = useSelector((state) => state.basket);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
-  const totalPrice = formatPrice(items.reduce((sum, item) => sum + item.count * parseFloat(item.price.replace(',','.')), 0));
+  const totalPrice = formatPrice(
+    items.reduce((sum, item) => sum + item.count * parseFloat(item.price.replace(',', '.')), 0),
+  );
   return (
     <div className={styles.root}>
       <div className={styles.container}>
-        <div className={styles.logo}>
-          <img
-            className={styles.logo__img}
-            width="90"
-            src="../../images/logo.svg"
-            alt="Шаурма логотип"
-          />
-          <div>
-            <h1 className={styles.logo__title}>Шаверма</h1>
-            <p className={styles.logo__subtitle}>лучшая шаурма в мире</p>
+        <Link to="/">
+          <div className={styles.logo}>
+            <img
+              className={styles.logo__img}
+              width="90"
+              src="../../images/logo.svg"
+              alt="Шаурма логотип"
+            />
+            <div>
+              <h1 className={styles.logo__title}>Шаверма</h1>
+              <p className={styles.logo__subtitle}>лучшая шаурма в мире</p>
+            </div>
           </div>
-        </div>
+        </Link>
         <Search />
         <div className={styles.cart}>
           <Link to="/basket" className={styles.cart__link}>
