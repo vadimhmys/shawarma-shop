@@ -15,6 +15,12 @@
 
 .header {
   color: $white;
+  padding: 0 20px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 22px;
+  }
 }
 
 .btnBlock {
@@ -31,6 +37,12 @@
   border: 3px solid transparent;
   border-radius: 3px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 80px;
+    padding: 7px 0;
+    font-size: 14px;
+  }
 
   &:hover {
     border: 3px solid $pink;
