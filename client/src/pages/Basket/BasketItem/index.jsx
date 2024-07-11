@@ -34,39 +34,43 @@ export default function BasketItem({
   return (
     <>
       <li className={styles.list__item}>
-        <div className={styles.image}>
-          <img src={`http://localhost:7000/${image}`} alt={title} />
-        </div>
-        <div className={styles.content}>
-          <h3>{title}</h3>
-          <div className={styles.info}>
-            <span>{weight} г.</span>
-            <span>{cake}</span>
+        <div className={styles.wrapper}>
+          <div className={styles.image}>
+            <img src={`http://localhost:7000/${image}`} alt={title} />
           </div>
-          {addedComponentsList.length !== 0 && (
-            <ul className={styles.added__list}>
-              <b>Добавлено: </b>&nbsp;
-              {addedComponentsList.map((component) => (
-                <li key={component.id} className={styles.added__item}>
-                  {component.name}({component.count})
-                </li>
-              ))}
-            </ul>
-          )}
-          {removedComponentsList.length !== 0 && (
-            <ul className={styles.removed__list}>
-              <b>Удалено: </b>&nbsp;
-              {removedComponentsList.map((component) => (
-                <li key={component} className={styles.removed__item}>
-                  {component}
-                </li>
-              ))}
-            </ul>
-          )}
+          <div className={styles.content}>
+            <h3>{title}</h3>
+            <div className={styles.info}>
+              <span>{weight} г.</span>
+              <span>{cake}</span>
+            </div>
+            {addedComponentsList.length !== 0 && (
+              <ul className={styles.added__list}>
+                <b>Добавлено: </b>&nbsp;
+                {addedComponentsList.map((component) => (
+                  <li key={component.id} className={styles.added__item}>
+                    {component.name}({component.count})
+                  </li>
+                ))}
+              </ul>
+            )}
+            {removedComponentsList.length !== 0 && (
+              <ul className={styles.removed__list}>
+                <b>Удалено: </b>&nbsp;
+                {removedComponentsList.map((component) => (
+                  <li key={component} className={styles.removed__item}>
+                    -{component}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-        <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} />
-        <div className={styles.sum}>{totalPrice} р.</div>
-        <FaRegTrashCan onClick={() => onClickRemove(uniqueId)} className={styles.trash} />
+        <div className={styles.wrapper}>
+          <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} />
+          <div className={styles.sum}>{totalPrice} р.</div>
+          <FaRegTrashCan onClick={() => onClickRemove(uniqueId)} className={styles.trash} />
+        </div>
       </li>
       <hr />
     </>
