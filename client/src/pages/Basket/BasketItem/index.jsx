@@ -14,7 +14,11 @@ export default function BasketItem({
   count,
   addedComponentsList,
 }) {
+  let formatter = new Intl.NumberFormat('ru', {
+    minimumFractionDigits: 2,
+  });
   const uniqueId = id + cake + weight + JSON.stringify(addedComponentsList);
+  const totalPrice = formatter.format(parseFloat(price.replace(',','.')) * count);
   return (
     <>
       <li className={styles.list__item}>
@@ -43,7 +47,7 @@ export default function BasketItem({
           </ul>
         </div>
         <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} />
-        <div className={styles.sum}>{price} р.</div>
+        <div className={styles.sum}>{totalPrice} р.</div>
         <FaRegTrashCan className={styles.trash} />
       </li>
       <hr />
