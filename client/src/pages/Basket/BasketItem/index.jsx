@@ -1,9 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { removeItem } from '../../../redux/slices/basketSlice';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import Counter from '../../../components/Counter';
 import { formatPrice } from '../../../utils/formatPrice';
 
 import styles from './BasketItem.module.scss';
+
 
 export default function BasketItem({
   id,
@@ -15,8 +18,16 @@ export default function BasketItem({
   count,
   addedComponentsList,
 }) {
+  const dispatch = useDispatch();
   const uniqueId = id + cake + weight + JSON.stringify(addedComponentsList);
   const totalPrice = formatPrice(parseFloat(price.replace(',','.')) * count);
+  
+  const onClickRemove = (uniqueId) => {
+    dispatch(
+      removeItem(uniqueId)
+    );
+  };
+
   return (
     <>
       <li className={styles.list__item}>
@@ -46,7 +57,7 @@ export default function BasketItem({
         </div>
         <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} />
         <div className={styles.sum}>{totalPrice} р.</div>
-        <FaRegTrashCan className={styles.trash} />
+        <FaRegTrashCan onClick={() => onClickRemove(uniqueId)} className={styles.trash} />
       </li>
       <hr />
     </>

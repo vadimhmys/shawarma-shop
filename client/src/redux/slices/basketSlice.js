@@ -28,8 +28,6 @@ export const basketSlice = createSlice({
           action.payload.cake +
           action.payload.weight +
           JSON.stringify(action.payload.addedComponentsList);
-        console.log('findItemUniqueId: ', findItemUniqueId);
-        console.log('actionPayloadUniqueId: ', actionPayloadUniqueId);
         if (findItemUniqueId === actionPayloadUniqueId) {
           findItem.count++;
         } else {
@@ -55,9 +53,16 @@ export const basketSlice = createSlice({
       );
       findItem.count--;
     },
+    removeItem(state, action) {
+      state.items = state.items.filter(
+        (item) =>
+          item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList) !==
+          action.payload,
+      );
+    },
   },
 });
 
-export const { addItem, incrementItem, decrementItem } = basketSlice.actions;
+export const { addItem, incrementItem, decrementItem, removeItem } = basketSlice.actions;
 
 export default basketSlice.reducer;
