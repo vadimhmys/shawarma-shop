@@ -9,8 +9,36 @@ export const basketSlice = createSlice({
   initialState,
   reducers: {
     addItem(state, action) {
-      state.items.push(action.payload);
-    }
+      const findItem = state.items.find(
+        (item) =>
+          item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList) ===
+          action.payload.id +
+          action.payload.cake +
+          action.payload.weight +
+          JSON.stringify(action.payload.addedComponentsList),
+      );
+      if (findItem) {
+        const findItemUniqueId =
+          findItem.id +
+          findItem.cake +
+          findItem.weight +
+          JSON.stringify(findItem.addedComponentsList);
+        const actionPayloadUniqueId =
+          action.payload.id +
+          action.payload.cake +
+          action.payload.weight +
+          JSON.stringify(action.payload.addedComponentsList);
+        console.log('findItemUniqueId: ', findItemUniqueId);
+        console.log('actionPayloadUniqueId: ', actionPayloadUniqueId);
+        if (findItemUniqueId === actionPayloadUniqueId) {
+          findItem.count++;
+        } else {
+          state.items.push(action.payload);
+        }
+      } else {
+        state.items.push(action.payload);
+      }
+    },
   },
 });
 

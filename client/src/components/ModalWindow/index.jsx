@@ -49,6 +49,7 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
       price: totalPrice,
       cake: cakes[activeCakeIndex].value,
       addedComponentsList: [...addedIngredients],
+      count: 1
     };
     dispatch(addItem(item));
     dispatch(clearIngredients());
