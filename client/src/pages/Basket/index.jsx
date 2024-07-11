@@ -4,6 +4,7 @@ import { formatPrice } from '../../utils/formatPrice';
 import BasketItem from './BasketItem';
 import Button from '../../components/Button';
 import BasketModalWindow from './BasketModalWindow';
+import EmptyBasket from './EmptyBasket';
 
 import styles from './Basket.module.scss';
 
@@ -12,6 +13,7 @@ export default function Basket() {
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const totalPrice = formatPrice(items.reduce((sum, item) => sum + item.count * parseFloat(item.price.replace(',','.')), 0));
+  const isEmpty = items.length === 0;
 
   const showModalWindow = () => {
     setIsModalWindowVisible(true);
@@ -20,6 +22,8 @@ export default function Basket() {
   const hideModalWindow = () => {
     setIsModalWindowVisible(false);
   };
+
+  if (isEmpty) return <EmptyBasket/>;
 
   return (
     <div className={styles.root}>
