@@ -7,7 +7,6 @@ import { formatPrice } from '../../../utils/formatPrice';
 
 import styles from './BasketItem.module.scss';
 
-
 export default function BasketItem({
   id,
   image,
@@ -17,15 +16,19 @@ export default function BasketItem({
   price,
   count,
   addedComponentsList,
+  removedComponentsList,
 }) {
   const dispatch = useDispatch();
-  const uniqueId = id + cake + weight + JSON.stringify(addedComponentsList);
-  const totalPrice = formatPrice(parseFloat(price.replace(',','.')) * count);
-  
+  const uniqueId =
+    id +
+    cake +
+    weight +
+    JSON.stringify(addedComponentsList) +
+    JSON.stringify(removedComponentsList);
+  const totalPrice = formatPrice(parseFloat(price.replace(',', '.')) * count);
+
   const onClickRemove = (uniqueId) => {
-    dispatch(
-      removeItem(uniqueId)
-    );
+    dispatch(removeItem(uniqueId));
   };
 
   return (
@@ -42,7 +45,7 @@ export default function BasketItem({
           </div>
           {addedComponentsList.length !== 0 && (
             <ul className={styles.added__list}>
-              Добавлено: &nbsp;
+              <b>Добавлено: </b>&nbsp;
               {addedComponentsList.map((component) => (
                 <li key={component.id} className={styles.added__item}>
                   {component.name}({component.count})
@@ -50,10 +53,16 @@ export default function BasketItem({
               ))}
             </ul>
           )}
-          <ul className={styles.removed__list}>
-            Удалено: &nbsp;
-            <li className={styles.removed__item}>Помидор</li>
-          </ul>
+          {removedComponentsList.length !== 0 && (
+            <ul className={styles.removed__list}>
+              <b>Удалено: </b>&nbsp;
+              {removedComponentsList.map((component) => (
+                <li key={component} className={styles.removed__item}>
+                  {component}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} />
         <div className={styles.sum}>{totalPrice} р.</div>

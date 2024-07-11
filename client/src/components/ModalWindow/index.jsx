@@ -1,24 +1,27 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/basketSlice';
-import { clearIngredients } from '../../redux/slices/shawarmaSlice';
+import { clearIngredients, clearRemovedComponents } from '../../redux/slices/shawarmaSlice';
 import { formatPrice } from '../../utils/formatPrice';
 import Switcher from '../Switcher';
 import ComponentList from '../ComponentList';
 import Button from '../Button';
+import ComponentToRemove from '../ComponentToRemove';
 
 import styles from './ModalWindow.module.scss';
 
 export default function ModalWindow({ hideModalWindow, activeShawarma, initialRadioBoxIndex }) {
   const dispatch = useDispatch();
-  const { addedIngredients } = useSelector((state) => state.shawarma);
+  const { addedIngredients, removedComponents } = useSelector((state) => state.shawarma);
   const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
 
   const shawarma = structuredClone(activeShawarma);
   const activeProp = shawarma.props[activeRadioBoxIndex];
-  
-  const totalPrice = formatPrice(activeProp.price + addedIngredients.reduce((sum, ing) => sum + ing.count * ing.price, 0));
+
+  const totalPrice = formatPrice(
+    activeProp.price + addedIngredients.reduce((sum, ing) => sum + ing.count * ing.price, 0),
+  );
   const urlForIngredients = 'http://localhost:7000/api/ingredients/getall';
   const urlForSauces = 'http://localhost:7000/api/sauces/getall';
   const titleForIngredients = 'Выберите ингредиенты';
@@ -47,10 +50,12 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
       price: totalPrice,
       cake: cakes[activeCakeIndex].value,
       addedComponentsList: [...addedIngredients],
-      count: 1
+      removedComponentsList: [...removedComponents],
+      count: 1,
     };
     dispatch(addItem(item));
     dispatch(clearIngredients());
+    dispatch(clearRemovedComponents());
     hideModalWindow();
   };
 
@@ -103,10 +108,17 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
             />
             <ComponentList title={titleForIngredients} url={urlForIngredients} />
             <ComponentList title={titleForSauces} url={urlForSauces} />
+            <p className={styles.subtitle}>Убрать ингредиенты</p>
+            <hr className={styles.line} />
+            <ul>
+              {shawarma.components
+                .filter((component) => !component.necessity)
+                .map((item) => (
+                  <ComponentToRemove key={item.id}>{item.name}</ComponentToRemove>
+                ))}
+            </ul>
             <div className={styles.footer}>
-              <Button handleClick={onClickAdd}>
-                Добавить в корзину за {totalPrice} руб.
-              </Button>
+              <Button handleClick={onClickAdd}>Добавить в корзину за {totalPrice} руб.</Button>
             </div>
           </form>
         </div>

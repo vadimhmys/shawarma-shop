@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   addedIngredients: [],
+  removedComponents: [],
 };
 
 export const shawarmaSlice = createSlice({
@@ -29,9 +30,27 @@ export const shawarmaSlice = createSlice({
     clearIngredients(state) {
       state.addedIngredients = [];
     },
+    addComponent(state, action) {
+      state.removedComponents.push(action.payload);
+    },
+    removeComponent(state, action) {
+      state.removedComponents = state.removedComponents.filter(
+        (component) => component !== action.payload,
+      );
+    },
+    clearRemovedComponents(state) {
+      state.removedComponents = [];
+    },
   },
 });
 
-export const { addIngredient, removeIngredient, clearIngredients } = shawarmaSlice.actions;
+export const {
+  addIngredient,
+  removeIngredient,
+  clearIngredients,
+  addComponent,
+  removeComponent,
+  clearRemovedComponents,
+} = shawarmaSlice.actions;
 
 export default shawarmaSlice.reducer;

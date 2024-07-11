@@ -1,0 +1,17 @@
+@import '../../scss/all';
+
+.root {
+  margin: 10px 0;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  float: right;
+  cursor: pointer;
+}
+
+.removed {
+  text-decoration: line-through;
+  color: $gray-font;
+}

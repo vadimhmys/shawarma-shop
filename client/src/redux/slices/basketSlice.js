@@ -11,23 +11,30 @@ export const basketSlice = createSlice({
     addItem(state, action) {
       const findItem = state.items.find(
         (item) =>
-          item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList) ===
+          item.id +
+            item.cake +
+            item.weight +
+            JSON.stringify(item.addedComponentsList) +
+            JSON.stringify(item.removedComponentsList) ===
           action.payload.id +
             action.payload.cake +
             action.payload.weight +
-            JSON.stringify(action.payload.addedComponentsList),
+            JSON.stringify(action.payload.addedComponentsList) +
+            JSON.stringify(action.payload.removedComponentsList),
       );
       if (findItem) {
         const findItemUniqueId =
           findItem.id +
           findItem.cake +
           findItem.weight +
-          JSON.stringify(findItem.addedComponentsList);
+          JSON.stringify(findItem.addedComponentsList) +
+          JSON.stringify(findItem.removedComponentsList);
         const actionPayloadUniqueId =
           action.payload.id +
           action.payload.cake +
           action.payload.weight +
-          JSON.stringify(action.payload.addedComponentsList);
+          JSON.stringify(action.payload.addedComponentsList) +
+          JSON.stringify(action.payload.removedComponentsList);
         if (findItemUniqueId === actionPayloadUniqueId) {
           findItem.count++;
         } else {
@@ -40,7 +47,11 @@ export const basketSlice = createSlice({
     incrementItem(state, action) {
       const findItem = state.items.find(
         (item) =>
-          item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList) ===
+          item.id +
+            item.cake +
+            item.weight +
+            JSON.stringify(item.addedComponentsList) +
+            JSON.stringify(item.removedComponentsList) ===
           action.payload,
       );
       findItem.count++;
@@ -48,7 +59,11 @@ export const basketSlice = createSlice({
     decrementItem(state, action) {
       const findItem = state.items.find(
         (item) =>
-          item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList) ===
+          item.id +
+            item.cake +
+            item.weight +
+            JSON.stringify(item.addedComponentsList) +
+            JSON.stringify(item.removedComponentsList) ===
           action.payload,
       );
       findItem.count--;
@@ -56,7 +71,11 @@ export const basketSlice = createSlice({
     removeItem(state, action) {
       state.items = state.items.filter(
         (item) =>
-          item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList) !==
+          item.id +
+            item.cake +
+            item.weight +
+            JSON.stringify(item.addedComponentsList) +
+            JSON.stringify(item.removedComponentsList) !==
           action.payload,
       );
     },
