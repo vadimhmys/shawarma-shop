@@ -60,9 +60,13 @@ export const basketSlice = createSlice({
           action.payload,
       );
     },
+    clearBasket(state) {
+      state.items = [];
+    },
   },
 });
 
-export const { addItem, incrementItem, decrementItem, removeItem } = basketSlice.actions;
+export const { addItem, incrementItem, decrementItem, removeItem, clearBasket } =
+  basketSlice.actions;
 
 export default basketSlice.reducer;
