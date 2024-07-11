@@ -3,16 +3,14 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { BsFillCartFill } from 'react-icons/bs';
 import Search from '../Search';
+import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Header.module.scss';
 
 export default function Header() {
-  let formatter = new Intl.NumberFormat('ru', {
-    minimumFractionDigits: 2,
-  });
   const {items} = useSelector(state => state.basket);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
-  const totalPrice = formatter.format(items.reduce((sum, item) => sum + item.count * parseFloat(item.price.replace(',','.')), 0));
+  const totalPrice = formatPrice(items.reduce((sum, item) => sum + item.count * parseFloat(item.price.replace(',','.')), 0));
   return (
     <div className={styles.root}>
       <div className={styles.container}>

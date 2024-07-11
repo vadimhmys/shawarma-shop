@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import Counter from '../../../components/Counter';
+import { formatPrice } from '../../../utils/formatPrice';
 
 import styles from './BasketItem.module.scss';
 
@@ -14,11 +15,8 @@ export default function BasketItem({
   count,
   addedComponentsList,
 }) {
-  let formatter = new Intl.NumberFormat('ru', {
-    minimumFractionDigits: 2,
-  });
   const uniqueId = id + cake + weight + JSON.stringify(addedComponentsList);
-  const totalPrice = formatter.format(parseFloat(price.replace(',','.')) * count);
+  const totalPrice = formatPrice(parseFloat(price.replace(',','.')) * count);
   return (
     <>
       <li className={styles.list__item}>

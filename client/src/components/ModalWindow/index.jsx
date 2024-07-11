@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/basketSlice';
 import { clearIngredients } from '../../redux/slices/shawarmaSlice';
-
+import { formatPrice } from '../../utils/formatPrice';
 import Switcher from '../Switcher';
 import ComponentList from '../ComponentList';
 import Button from '../Button';
@@ -17,10 +17,8 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
 
   const shawarma = structuredClone(activeShawarma);
   const activeProp = shawarma.props[activeRadioBoxIndex];
-  let formatter = new Intl.NumberFormat('ru', {
-    minimumFractionDigits: 2,
-  });
-  const totalPrice = formatter.format(activeProp.price + addedIngredients.reduce((sum, ing) => sum + ing.count * ing.price, 0));
+  
+  const totalPrice = formatPrice(activeProp.price + addedIngredients.reduce((sum, ing) => sum + ing.count * ing.price, 0));
   const urlForIngredients = 'http://localhost:7000/api/ingredients/getall';
   const urlForSauces = 'http://localhost:7000/api/sauces/getall';
   const titleForIngredients = 'Выберите ингредиенты';

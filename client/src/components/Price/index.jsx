@@ -1,12 +1,11 @@
 import React from 'react';
+import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Price.module.scss';
 
 export default function Price({ price, currency, isBottom = false }) {
-  let formatter = new Intl.NumberFormat('ru', {
-    minimumFractionDigits: 2,
-  });
-  const priceView = formatter.format(price);
+  
+  const priceView = formatPrice(price);
   const [rubles, kopecks] = priceView.split(',');
 
   const rubStyle = isBottom ? styles.rub : styles.rubles;

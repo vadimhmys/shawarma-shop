@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addIngredient, removeIngredient } from '../../redux/slices/shawarmaSlice';
 import { decrementItem, incrementItem } from '../../redux/slices/basketSlice';
+import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Counter.module.scss';
 
@@ -56,15 +57,11 @@ export default function Counter({
     }
   };
 
-  let formatter = new Intl.NumberFormat('ru', {
-    minimumFractionDigits: 2,
-  });
-
   return (
     <div className={styles.root}>
       {!isSimple && (
         <p className={multiplier === 0 ? styles.sum : styles.sum + ' ' + styles.dedicated}>
-          {multiplier === 0 ? 0 : formatter.format(multiplier * component.price)} р.
+          {multiplier === 0 ? 0 : formatPrice(multiplier * component.price)} р.
         </p>
       )}
 
@@ -75,7 +72,7 @@ export default function Counter({
         <div className={styles.quantity}>
           <span>{multiplier}</span>
           {!isSimple && <span>x</span>}
-          {!isSimple && <span>{formatter.format(component.price)} р</span>}
+          {!isSimple && <span>{formatPrice(component.price)} р</span>}
         </div>
         <button className={styles.button} onClick={incrementCounter}>
           &#43;
