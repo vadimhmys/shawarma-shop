@@ -74,9 +74,9 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
         <h2 className={styles.title}>{shawarma.name}</h2>
         <div className={styles.content}>
           <div className={styles.info}>
-            <span>{shawarma.props[0].weight} г.</span>
+            <span>{shawarma.props[activeRadioBoxIndex].weight} г.</span>
             {', '}
-            <span>Лепешка</span>
+            <span>{cakes[activeCakeIndex].value}</span>
           </div>
           <div className={styles.components}>
             {shawarma.components.map((c) => (
