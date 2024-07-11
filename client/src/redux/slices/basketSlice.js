@@ -13,9 +13,9 @@ export const basketSlice = createSlice({
         (item) =>
           item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList) ===
           action.payload.id +
-          action.payload.cake +
-          action.payload.weight +
-          JSON.stringify(action.payload.addedComponentsList),
+            action.payload.cake +
+            action.payload.weight +
+            JSON.stringify(action.payload.addedComponentsList),
       );
       if (findItem) {
         const findItemUniqueId =
@@ -39,9 +39,25 @@ export const basketSlice = createSlice({
         state.items.push(action.payload);
       }
     },
+    incrementItem(state, action) {
+      const findItem = state.items.find(
+        (item) =>
+          item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList) ===
+          action.payload,
+      );
+      findItem.count++;
+    },
+    decrementItem(state, action) {
+      const findItem = state.items.find(
+        (item) =>
+          item.id + item.cake + item.weight + JSON.stringify(item.addedComponentsList) ===
+          action.payload,
+      );
+      findItem.count--;
+    },
   },
 });
 
-export const { addItem } = basketSlice.actions;
+export const { addItem, incrementItem, decrementItem } = basketSlice.actions;
 
 export default basketSlice.reducer;

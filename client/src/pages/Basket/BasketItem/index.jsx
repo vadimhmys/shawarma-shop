@@ -4,7 +4,17 @@ import Counter from '../../../components/Counter';
 
 import styles from './BasketItem.module.scss';
 
-export default function BasketItem({ image, title, weight, cake, price, addedComponentsList }) {
+export default function BasketItem({
+  id,
+  image,
+  title,
+  weight,
+  cake,
+  price,
+  count,
+  addedComponentsList,
+}) {
+  const uniqueId = id + cake + weight + JSON.stringify(addedComponentsList);
   return (
     <>
       <li className={styles.list__item}>
@@ -32,7 +42,7 @@ export default function BasketItem({ image, title, weight, cake, price, addedCom
             <li className={styles.removed__item}>Помидор</li>
           </ul>
         </div>
-        <Counter maxCount={10} initialValue={1} />
+        <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} />
         <div className={styles.sum}>{price} р.</div>
         <FaRegTrashCan className={styles.trash} />
       </li>

@@ -1,10 +1,17 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addIngredient, removeIngredient } from '../../redux/slices/shawarmaSlice';
+import { decrementItem, incrementItem } from '../../redux/slices/basketSlice';
 
 import styles from './Counter.module.scss';
 
-export default function Counter({ maxCount, isSimple = true, initialValue = 0, component }) {
+export default function Counter({
+  maxCount,
+  isSimple = true,
+  initialValue = 0,
+  component,
+  uniqueId,
+}) {
   const dispatch = useDispatch();
   const [multiplier, setMultiplier] = React.useState(initialValue);
 
@@ -18,10 +25,13 @@ export default function Counter({ maxCount, isSimple = true, initialValue = 0, c
           id: component.id,
           name: component.name,
           count: multiplier + 1,
-          price: component.price
+          price: component.price,
         }),
-      )
+      );
     } else {
+      if (multiplier <= 10) {
+        dispatch(incrementItem(uniqueId));
+      }
     }
   };
 
@@ -38,6 +48,11 @@ export default function Counter({ maxCount, isSimple = true, initialValue = 0, c
         }),
       );
     } else {
+      if (multiplier < 2) {
+        setMultiplier(1);
+        return;
+      }
+      dispatch(decrementItem(uniqueId));
     }
   };
 
