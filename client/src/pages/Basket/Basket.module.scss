@@ -21,3 +21,33 @@
 .list {
   margin-top: 20px;
 }
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 18px;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.clearBtn {
+  padding: 5px 10px;
+  border: 1px solid $gray-light;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: darken($color: $white, $amount: 3%);
+  float: right;
+  transition: all ease-in .1s;
+
+  &:hover {
+    border: 1px solid $gray-dark;
+  }
+
+  &:active {
+    transform: translate(2px, 2px);
+  }
+}
