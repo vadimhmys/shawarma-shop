@@ -94,7 +94,7 @@ export default function Main() {
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sorting />
       </div>
-      <h2 className={styles.title}>Все шавухи</h2>
+      <h2 className={styles.title}>Шаурма</h2>
       {status === 'error' ? (
         <div className={styles.errorInfo}>
           <h2 className={styles.errorInfo__title}>Ошибка получения шавух</h2>
