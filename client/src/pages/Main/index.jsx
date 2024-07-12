@@ -18,7 +18,7 @@ export default function Main() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
-  const { shawarmas, count, status} = useSelector(state => state.shawarmas);
+  const { shawarmas, count, status } = useSelector((state) => state.shawarmas);
   const { searchValue } = React.useContext(SearchContext);
   const isMounted = React.useRef(false);
 
@@ -95,7 +95,14 @@ export default function Main() {
         <Sorting />
       </div>
       <h2 className={styles.title}>Все шавухи</h2>
-      <div className={styles.items}>{status === 'loading' ? skeletons : items}</div>
+      {status === 'error' ? (
+        <div className={styles.errorInfo}>
+          <h2 className={styles.errorInfo__title}>Ошибка получения шавух</h2>
+          <p className={styles.errorInfo__text}>К сожалению не удалось получить шавухи, повторите запрос позже</p>
+        </div>
+      ) : (
+        <div className={styles.items}>{status === 'loading' ? skeletons : items}</div>
+      )}
       <Pagination pageCount={pageCount} onPageChange={onPageChange} currentPage={currentPage} />
     </div>
   );

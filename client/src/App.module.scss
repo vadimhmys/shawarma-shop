@@ -3,10 +3,11 @@
 .root {
   width: calc(100vw - 100px);
   max-width: 1400px;
-  height: 100%;
+  min-height: 100vh;
   background-color: darken($color: $white, $amount: 3%);
   margin: 0 auto;
   border-radius: 10px;
+  position: relative;
 
   @media (max-width: 768px) {
     width: calc(100vw - 50px);

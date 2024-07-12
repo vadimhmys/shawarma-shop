@@ -16,20 +16,20 @@ export default function Header() {
   return (
     <div className={styles.root}>
       <div className={styles.container}>
-        <Link to="/">
-          <div className={styles.logo}>
+        <div className={styles.logo}>
+          <Link to="/">
             <img
               className={styles.logo__img}
               width="90"
               src="../../images/logo.svg"
               alt="Шаурма логотип"
             />
-            <div>
-              <h1 className={styles.logo__title}>Шаверма</h1>
-              <p className={styles.logo__subtitle}>лучшая шаурма в мире</p>
-            </div>
+          </Link>
+          <div>
+            <h1 className={styles.logo__title}>Шаверма</h1>
+            <p className={styles.logo__subtitle}>лучшая шаурма в мире</p>
           </div>
-        </Link>
+        </div>
         <Search />
         <div className={styles.cart}>
           <Link to="/basket" className={styles.cart__link}>
