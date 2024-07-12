@@ -1,9 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/slices/filterSlice.js';
+import { fetchShawarmas } from '../../redux/slices/shawarmasSlice.js';
 
 import Card from '../../components/Card';
 import Categories from '../../components/Categories';
@@ -18,14 +18,14 @@ export default function Main() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
+  const { shawarmas, count, status} = useSelector(state => state.shawarmas);
   const { searchValue } = React.useContext(SearchContext);
-  const [shawarmas, setShawarmas] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [numberOfItems, setNumberOfItems] = React.useState(0);
   const isMounted = React.useRef(false);
 
+  const sortBy = sort.sortCritery.replace('-', '');
+  const order = sort.sortCritery.includes('-') ? 'DESC' : 'ASC';
   const limit = window.innerWidth > 769 ? 8 : 4;
-  const pageCount = Math.ceil(numberOfItems / limit);
+  const pageCount = Math.ceil(count / limit);
 
   const onChangeCategory = React.useCallback(
     (id) => {
@@ -39,24 +39,18 @@ export default function Main() {
     dispatch(setCurrentPage(number));
   };
 
-  const fetchShawarmas = React.useCallback(async () => {
-    const sortBy = sort.sortCritery.replace('-', '');
-    const order = sort.sortCritery.includes('-') ? 'DESC' : 'ASC';
-
-    setIsLoading(true);
-    
-    try {
-      const res = await axios.get(
-        `http://localhost:7000/api/shawarmas/getall?categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&searchValue=${searchValue}&limit=${limit}&currentPage=${currentPage}`,
-      );
-      setShawarmas(res.data.rows);
-      setNumberOfItems(res.data.count);
-    } catch (error) {
-      console.log('ERROR: ', error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [categoryId, sort.sortCritery, searchValue, currentPage, limit]);
+  const getShawarmas = React.useCallback(async () => {
+    dispatch(
+      fetchShawarmas({
+        categoryId,
+        sortBy,
+        order,
+        searchValue,
+        limit,
+        currentPage,
+      }),
+    );
+  }, [categoryId, sortBy, order, searchValue, limit, currentPage, dispatch]);
 
   React.useEffect(() => {
     if (
@@ -76,8 +70,8 @@ export default function Main() {
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
-    fetchShawarmas();
-  }, [categoryId, sort.sortCritery, searchValue, currentPage, limit, fetchShawarmas]);
+    getShawarmas();
+  }, [categoryId, sort.sortCritery, searchValue, currentPage, limit, getShawarmas]);
 
   React.useEffect(() => {
     if (isMounted.current) {
@@ -101,7 +95,7 @@ export default function Main() {
         <Sorting />
       </div>
       <h2 className={styles.title}>Все шавухи</h2>
-      <div className={styles.items}>{isLoading ? skeletons : items}</div>
+      <div className={styles.items}>{status === 'loading' ? skeletons : items}</div>
       <Pagination pageCount={pageCount} onPageChange={onPageChange} currentPage={currentPage} />
     </div>
   );
