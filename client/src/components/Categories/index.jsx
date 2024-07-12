@@ -9,9 +9,16 @@ export default function Categories({ value, onChangeCategory }) {
   const url = 'http://localhost:7000/api/categories/getall';
 
   React.useEffect(() => {
-    axios.get(url).then((res) => {
-      setCategories(res.data);
-    });
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(url);
+        setCategories(res.data);
+      } catch (error) {
+        console.log('ERROR: ', error.message);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (

@@ -9,9 +9,16 @@ export default function ComponentList({ title, url }) {
   const [components, setComponents] = React.useState([]);
 
   React.useEffect(() => {
-    axios.get(url).then((res) => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(url);
       setComponents(res.data);
-    });
+      } catch (error) {
+        console.log('ERROR: ', error.message);
+      }
+    };
+
+    fetchData();
   }, [title, url]);
 
   return (

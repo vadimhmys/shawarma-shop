@@ -39,20 +39,23 @@ export default function Main() {
     dispatch(setCurrentPage(number));
   };
 
-  const fetchShawarmas = React.useCallback(() => {
+  const fetchShawarmas = React.useCallback(async () => {
     const sortBy = sort.sortCritery.replace('-', '');
     const order = sort.sortCritery.includes('-') ? 'DESC' : 'ASC';
 
     setIsLoading(true);
-    axios
-      .get(
+    
+    try {
+      const res = await axios.get(
         `http://localhost:7000/api/shawarmas/getall?categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&searchValue=${searchValue}&limit=${limit}&currentPage=${currentPage}`,
-      )
-      .then((res) => {
-        setShawarmas(res.data.rows);
-        setNumberOfItems(res.data.count);
-      })
-      .finally(() => setIsLoading(false));
+      );
+      setShawarmas(res.data.rows);
+      setNumberOfItems(res.data.count);
+    } catch (error) {
+      console.log('ERROR: ', error.message);
+    } finally {
+      setIsLoading(false);
+    }
   }, [categoryId, sort.sortCritery, searchValue, currentPage, limit]);
 
   React.useEffect(() => {
@@ -89,9 +92,7 @@ export default function Main() {
   }, [categoryId, sort.sortCritery, currentPage, navigate]);
 
   const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);
-  const items = shawarmas.map(
-    (s) => s.presence && <Card key={s.id} shawarma={s} />,
-  );
+  const items = shawarmas.map((s) => s.presence && <Card key={s.id} shawarma={s} />);
 
   return (
     <div className={styles.root}>
