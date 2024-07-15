@@ -10,23 +10,17 @@ import NotFound from './pages/NotFound';
 
 import styles from './App.module.scss';
 
-export const SearchContext = React.createContext(null);
-
 function App() {
-  const [searchValue, setSearchValue] = React.useState('');
-
   return (
     <div className={styles.root}>
       <div className={styles.container}>
-        <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/basket" element={<Basket />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </SearchContext.Provider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/basket" element={<Basket />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
         <Footer />
       </div>
     </div>

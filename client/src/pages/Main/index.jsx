@@ -10,16 +10,14 @@ import Categories from '../../components/Categories';
 import Sorting, { sortingTypes } from '../../components/Sorting';
 import CardLoader from '../../components/Card/CardLoader.jsx';
 import Pagination from '../../components/Pagination';
-import { SearchContext } from '../../App.js';
 
 import styles from './Main.module.scss';
 
 export default function Main() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
+  const { categoryId, sort, currentPage, searchValue } = useSelector((state) => state.filter);
   const { shawarmas, count, status } = useSelector((state) => state.shawarmas);
-  const { searchValue } = React.useContext(SearchContext);
   const isMounted = React.useRef(false);
 
   const sortBy = sort.sortCritery.replace('-', '');
