@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { selectBasketItems } from '../../redux/slices/basketSlice';
 import { BsFillCartFill } from 'react-icons/bs';
 import Search from '../Search';
 import { formatPrice } from '../../utils/formatPrice';
@@ -8,7 +9,7 @@ import { formatPrice } from '../../utils/formatPrice';
 import styles from './Header.module.scss';
 
 export default function Header() {
-  const { items } = useSelector((state) => state.basket);
+  const items = useSelector(selectBasketItems);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const totalPrice = formatPrice(
     items.reduce((sum, item) => sum + item.count * parseFloat(item.price.replace(',', '.')), 0),

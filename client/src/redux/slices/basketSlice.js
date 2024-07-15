@@ -85,6 +85,7 @@ export const basketSlice = createSlice({
   },
 });
 
+export const selectBasketItems = state => state.basket.items;
 export const { addItem, incrementItem, decrementItem, removeItem, clearBasket } =
   basketSlice.actions;
 

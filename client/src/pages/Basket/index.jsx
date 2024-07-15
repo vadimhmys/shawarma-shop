@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectBasketItems } from '../../redux/slices/basketSlice';
 import { formatPrice } from '../../utils/formatPrice';
 import BasketItem from './BasketItem';
 import Button from '../../components/Button';
@@ -9,7 +10,7 @@ import EmptyBasket from './EmptyBasket';
 import styles from './Basket.module.scss';
 
 export default function Basket() {
-  const items = useSelector((state) => state.basket.items);
+  const items = useSelector(selectBasketItems);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const totalPrice = formatPrice(
