@@ -1,6 +1,4 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-
 import Main from './pages/Main';
 import Contacts from './pages/Contacts';
 import Basket from './pages/Basket';
