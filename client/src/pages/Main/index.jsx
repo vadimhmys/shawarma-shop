@@ -8,7 +8,7 @@ import { fetchShawarmas } from '../../redux/slices/shawarmasSlice.js';
 import Card from '../../components/Card';
 import Categories from '../../components/Categories';
 import Sorting, { sortingTypes } from '../../components/Sorting';
-import CardLoader from '../../components/Card/CardLoader.jsx';
+import CardLoader from '../../components/Card/CardLoader';
 import Pagination from '../../components/Pagination';
 
 import styles from './Main.module.scss';
