@@ -7,7 +7,26 @@ import { formatPrice } from '../../../utils/formatPrice';
 
 import styles from './BasketItem.module.scss';
 
-export default function BasketItem({
+type AddedComponent = {
+  id: number;
+  name: string;
+  count: number;
+  price: number;
+};
+
+type BasketItemProps = {
+  id: number;
+  image: string;
+  title: string;
+  weight: number;
+  cake: string;
+  price: string;
+  count: number;
+  addedComponentsList: AddedComponent[];
+  removedComponentsList: string[];
+};
+
+const BasketItem: React.FC<BasketItemProps> = ({
   id,
   image,
   title,
@@ -17,7 +36,7 @@ export default function BasketItem({
   count,
   addedComponentsList,
   removedComponentsList,
-}) {
+}) => {
   const dispatch = useDispatch();
   const uniqueId =
     id +
@@ -27,7 +46,7 @@ export default function BasketItem({
     JSON.stringify(removedComponentsList);
   const totalPrice = formatPrice(parseFloat(price.replace(',', '.')) * count);
 
-  const onClickRemove = (uniqueId) => {
+  const onClickRemove = (uniqueId: string) => {
     dispatch(removeItem(uniqueId));
   };
 
@@ -75,4 +94,6 @@ export default function BasketItem({
       <hr />
     </>
   );
-}
+};
+
+export default BasketItem;

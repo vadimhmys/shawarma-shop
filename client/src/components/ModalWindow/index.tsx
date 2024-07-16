@@ -10,17 +10,28 @@ import ComponentToRemove from '../ComponentToRemove';
 
 import styles from './ModalWindow.module.scss';
 
-export default function ModalWindow({ hideModalWindow, activeShawarma, initialRadioBoxIndex }) {
+import type { Shawarma } from '../Card';
+
+type ModalWindowProps = {
+  hideModalWindow: any;
+  activeShawarma: Shawarma;
+  initialRadioBoxIndex: number;
+};
+
+const ModalWindow: React.FC<ModalWindowProps> = ({
+  hideModalWindow,
+  activeShawarma,
+  initialRadioBoxIndex,
+}) => {
   const dispatch = useDispatch();
-  const { addedIngredients, removedComponents } = useSelector((state) => state.shawarma);
+  const { addedIngredients, removedComponents } = useSelector((state: any) => state.shawarma);
   const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
-
   const shawarma = structuredClone(activeShawarma);
   const activeProp = shawarma.props[activeRadioBoxIndex];
-
   const totalPrice = formatPrice(
-    activeProp.price + addedIngredients.reduce((sum, ing) => sum + ing.count * ing.price, 0),
+    activeProp.price +
+      addedIngredients.reduce((sum: number, ing: any) => sum + ing.count * ing.price, 0),
   );
   const urlForIngredients = 'http://localhost:7000/api/ingredients/getall';
   const urlForSauces = 'http://localhost:7000/api/sauces/getall';
@@ -31,15 +42,15 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
     { id: 1, value: 'Сырная лепешка' },
   ];
 
-  const changeActiveRadioBoxIndex = (index) => {
+  const changeActiveRadioBoxIndex = (index: number) => {
     setActiveRadioBoxIndex(index);
   };
 
-  const changeCake = (index) => {
+  const changeCake = (index: number) => {
     setActiveCakeIndex(index);
   };
 
-  const onClickAdd = (e) => {
+  const onClickAdd = (e: any) => {
     e.preventDefault();
     const { id, title, image } = shawarma;
     const item = {
@@ -125,4 +136,6 @@ export default function ModalWindow({ hideModalWindow, activeShawarma, initialRa
       </div>
     </div>
   );
-}
+};
+
+export default ModalWindow;

@@ -6,21 +6,31 @@ import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Counter.module.scss';
 
-export default function Counter({
+import type { Component } from '../ComponentList';
+
+type CounterProps = {
+  maxCount: number;
+  isSimple?: boolean;
+  component?: Component;
+  initialValue?: number;
+  uniqueId?: string;
+};
+
+const Counter: React.FC<CounterProps> = ({
   maxCount,
   isSimple = true,
   initialValue = 0,
   component,
   uniqueId,
-}) {
+}) => {
   const dispatch = useDispatch();
   const [multiplier, setMultiplier] = React.useState(initialValue);
 
-  const incrementCounter = (e) => {
+  const incrementCounter = (e: any) => {
     e.preventDefault();
     if (multiplier === maxCount) return;
     setMultiplier(multiplier + 1);
-    if (!isSimple) {
+    if (!isSimple && component) {
       dispatch(
         addIngredient({
           id: component.id,
@@ -36,11 +46,11 @@ export default function Counter({
     }
   };
 
-  const decrementCounter = (e) => {
+  const decrementCounter = (e: any) => {
     e.preventDefault();
     if (multiplier === 0) return;
     setMultiplier(multiplier - 1);
-    if (!isSimple) {
+    if (!isSimple && component) {
       dispatch(
         removeIngredient({
           id: component.id,
@@ -59,7 +69,7 @@ export default function Counter({
 
   return (
     <div className={styles.root}>
-      {!isSimple && (
+      {!isSimple && component && (
         <p className={multiplier === 0 ? styles.sum : styles.sum + ' ' + styles.dedicated}>
           {multiplier === 0 ? 0 : formatPrice(multiplier * component.price)} р.
         </p>
@@ -72,7 +82,7 @@ export default function Counter({
         <div className={styles.quantity}>
           <span>{multiplier}</span>
           {!isSimple && <span>x</span>}
-          {!isSimple && <span>{formatPrice(component.price)} р</span>}
+          {!isSimple && component && <span>{formatPrice(component.price)} р</span>}
         </div>
         <button className={styles.button} onClick={incrementCounter}>
           &#43;
@@ -80,4 +90,6 @@ export default function Counter({
       </div>
     </div>
   );
-}
+};
+
+export default Counter;

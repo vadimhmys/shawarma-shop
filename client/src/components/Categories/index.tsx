@@ -1,20 +1,31 @@
 import React from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import styles from './Categories.module.scss';
 
-export default function Categories({ value, onChangeCategory }) {
-  const [categories, setCategories] = React.useState([]);
+type CategoriesProps = {
+  value: number;
+  onChangeCategory: any;
+};
 
+type Category = {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {
+  const [categories, setCategories] = React.useState<Category[]>([]);
   const url = 'http://localhost:7000/api/categories/getall';
 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(url);
+        const res: AxiosResponse = await axios.get(url);
         setCategories(res.data);
-      } catch (error) {
-        console.log('ERROR: ', error.message);
+      } catch (err: any) {
+        console.log('ERROR: ', err.message);
       }
     };
 
@@ -33,4 +44,6 @@ export default function Categories({ value, onChangeCategory }) {
       ))}
     </ul>
   );
-}
+};
+
+export default Categories;

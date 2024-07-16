@@ -2,10 +2,12 @@ import React from 'react';
 
 import styles from './Novelty.module.scss';
 
-export default function Novelty() {
+const Novelty: React.FC = () => {
   return (
     <div className={styles.root}>
       <span className={styles.root__text}>New</span>
     </div>
   );
-}
+};
+
+export default Novelty;

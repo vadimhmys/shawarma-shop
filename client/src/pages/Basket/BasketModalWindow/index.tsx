@@ -4,7 +4,11 @@ import { clearBasket } from '../../../redux/slices/basketSlice';
 
 import styles from './BasketModalWindow.module.scss';
 
-export default function BasketModalWindow({hideModalWindow}) {
+type BasketModalWindowProps = {
+  hideModalWindow: any;
+};
+
+const BasketModalWindow: React.FC<BasketModalWindowProps> = ({ hideModalWindow }) => {
   const dispatch = useDispatch();
 
   const onClickClear = () => {
@@ -17,10 +21,16 @@ export default function BasketModalWindow({hideModalWindow}) {
       <div>
         <h2 className={styles.header}>Вы уверены, что хотите удалить всё из корзины?</h2>
         <div className={styles.btnBlock}>
-          <button className={styles.btn} onClick={onClickClear}>Да</button>
-          <button className={styles.btn} onClick={hideModalWindow}>Нет</button>
+          <button className={styles.btn} onClick={onClickClear}>
+            Да
+          </button>
+          <button className={styles.btn} onClick={hideModalWindow}>
+            Нет
+          </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default BasketModalWindow;

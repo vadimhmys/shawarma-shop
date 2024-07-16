@@ -7,22 +7,22 @@ import { debounce } from '../../utils/debounce';
 
 import styles from './Search.module.scss';
 
-export default function Search() {
+const Search: React.FC = () => {
   const dispatch = useDispatch();
-  const inputRef = React.useRef(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const [value, setValue] = React.useState('');
 
   const handleClearInput = () => {
     dispatch(setSearchValue(''));
     setValue('');
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   const handleChangeSearchValue = React.useRef(
-    debounce((str) => dispatch(setSearchValue(str)), 500),
+    debounce((str: any) => dispatch(setSearchValue(str)), 500),
   ).current;
 
-  const handleChangeInput = (e) => {
+  const handleChangeInput = (e: any) => {
     handleChangeSearchValue(e.target.value);
     setValue(e.target.value);
   };
@@ -40,4 +40,6 @@ export default function Search() {
       {value && <IoCloseOutline className={styles.close__icon} onClick={handleClearInput} />}
     </div>
   );
-}
+};
+
+export default Search;

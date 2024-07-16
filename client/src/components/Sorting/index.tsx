@@ -5,26 +5,31 @@ import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 
 import styles from './Sorting.module.scss';
 
-export const sortingTypes = [
+type SortingType = {
+  value: string;
+  sortCritery: string;
+};
+
+export const sortingTypes: SortingType[] = [
   { value: 'цене ↑', sortCritery: 'price' },
   { value: 'цене ↓', sortCritery: '-price' },
   { value: 'алфавиту↑', sortCritery: 'title' },
   { value: 'алфавиту↓', sortCritery: '-title' },
 ];
 
-export default function Sorting() {
+const Sorting: React.FC = () => {
   const dispatch = useDispatch();
-  const sortTitle = useSelector((state) => state.filter.sort.value);
+  const sortTitle = useSelector((state: any) => state.filter.sort.value);
   const [isVisible, setIsVisible] = React.useState(false);
-  const sortRef = React.useRef(null);
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
-  const handleClick = (obj) => {
+  const handleClick = (obj: SortingType) => {
     dispatch(setSort(obj));
     setIsVisible(false);
   };
 
   React.useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutside = (e: any) => {
       if (!e.composedPath().includes(sortRef.current)) {
         setIsVisible(false);
       }
@@ -70,4 +75,6 @@ export default function Sorting() {
       )}
     </div>
   );
-}
+};
+
+export default Sorting;

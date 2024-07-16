@@ -8,11 +8,14 @@ import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Header.module.scss';
 
-export default function Header() {
+const Header: React.FC = () => {
   const items = useSelector(selectBasketItems);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
   const totalPrice = formatPrice(
-    items.reduce((sum, item) => sum + item.count * parseFloat(item.price.replace(',', '.')), 0),
+    items.reduce(
+      (sum: number, item: any) => sum + item.count * parseFloat(item.price.replace(',', '.')),
+      0,
+    ),
   );
   return (
     <div className={styles.root}>
@@ -49,4 +52,6 @@ export default function Header() {
       </div>
     </div>
   );
-}
+};
+
+export default Header;

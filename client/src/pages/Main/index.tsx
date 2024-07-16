@@ -13,32 +13,35 @@ import Pagination from '../../components/Pagination';
 
 import styles from './Main.module.scss';
 
-export default function Main() {
+import type { Shawarma } from '../../components/Card';
+
+const Main: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { categoryId, sort, currentPage, searchValue } = useSelector((state) => state.filter);
-  const { shawarmas, count, status } = useSelector((state) => state.shawarmas);
+  const { categoryId, sort, currentPage, searchValue } = useSelector((state: any) => state.filter);
+  const { shawarmas, count, status } = useSelector((state: any) => state.shawarmas);
   const isMounted = React.useRef(false);
 
-  const sortBy = sort.sortCritery.replace('-', '');
+  const sortBy: string = sort.sortCritery.replace('-', '');
   const order = sort.sortCritery.includes('-') ? 'DESC' : 'ASC';
   const limit = window.innerWidth > 769 ? 8 : 4;
   const pageCount = Math.ceil(count / limit);
 
   const onChangeCategory = React.useCallback(
-    (id) => {
+    (id: number) => {
       dispatch(setCategoryId(id));
       dispatch(setCurrentPage(1));
     },
     [dispatch],
   );
 
-  const onPageChange = (number) => {
-    dispatch(setCurrentPage(number));
+  const onPageChange = (num: number) => {
+    dispatch(setCurrentPage(num));
   };
 
   const getShawarmas = React.useCallback(async () => {
     dispatch(
+      // @ts-ignore
       fetchShawarmas({
         categoryId,
         sortBy,
@@ -84,7 +87,7 @@ export default function Main() {
   }, [categoryId, sort.sortCritery, currentPage, navigate]);
 
   const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);
-  const items = shawarmas.map((s) => s.presence && <Card key={s.id} shawarma={s} />);
+  const items = shawarmas.map((s: Shawarma) => s.presence && <Card key={s.id} shawarma={s} />);
 
   return (
     <div className={styles.root}>
@@ -96,7 +99,9 @@ export default function Main() {
       {status === 'error' ? (
         <div className={styles.errorInfo}>
           <h2 className={styles.errorInfo__title}>Ошибка получения шавух</h2>
-          <p className={styles.errorInfo__text}>К сожалению не удалось получить шавухи, повторите запрос позже</p>
+          <p className={styles.errorInfo__text}>
+            К сожалению не удалось получить шавухи, повторите запрос позже
+          </p>
         </div>
       ) : (
         <div className={styles.items}>{status === 'loading' ? skeletons : items}</div>
@@ -104,4 +109,6 @@ export default function Main() {
       <Pagination pageCount={pageCount} onPageChange={onPageChange} currentPage={currentPage} />
     </div>
   );
-}
+};
+
+export default Main;

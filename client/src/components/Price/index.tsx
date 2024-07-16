@@ -3,14 +3,19 @@ import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Price.module.scss';
 
-export default function Price({ price, currency, isBottom = false }) {
-  
+type PriceProps = {
+  price: number;
+  currency: string;
+  isBottom?: boolean;
+};
+
+const Price: React.FC<PriceProps> = ({ price, currency, isBottom = false }) => {
   const priceView = formatPrice(price);
   const [rubles, kopecks] = priceView.split(',');
 
-  const rubStyle = isBottom ? styles.rub : styles.rubles;
-  const kopStyle = isBottom ? styles.kop : styles.kopecks;
-  const curStyle = isBottom ? styles.cur : styles.currency;
+  const rubStyle: string = isBottom ? styles.rub : styles.rubles;
+  const kopStyle: string = isBottom ? styles.kop : styles.kopecks;
+  const curStyle: string = isBottom ? styles.cur : styles.currency;
 
   return (
     <div>
@@ -19,4 +24,6 @@ export default function Price({ price, currency, isBottom = false }) {
       <sub className={curStyle}>{currency}</sub>
     </div>
   );
-}
+};
+
+export default Price;

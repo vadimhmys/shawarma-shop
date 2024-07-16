@@ -1,11 +1,15 @@
 import React from 'react';
-
 import VariantItem from './VariantItem';
 
 import styles from './VariantList.module.scss';
 
+import type { CardProperty } from '../Card';
 
-export default function VariantList({ propertyList }) {
+type VariantListProps = {
+  propertyList: CardProperty[];
+};
+
+const VariantList: React.FC<VariantListProps> = ({ propertyList }) => {
   return (
     <div className={styles.root}>
       {propertyList.map((p) => (
@@ -13,4 +17,6 @@ export default function VariantList({ propertyList }) {
       ))}
     </div>
   );
-}
+};
+
+export default VariantList;

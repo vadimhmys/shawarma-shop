@@ -1,20 +1,34 @@
 import React from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import Counter from '../Counter';
 
 import styles from './ComponentList.module.scss';
 
-export default function ComponentList({ title, url }) {
-  const [components, setComponents] = React.useState([]);
+export type Component = {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type ComponentListProps = {
+  title: string;
+  url: string;
+};
+
+const ComponentList: React.FC<ComponentListProps> = ({ title, url }) => {
+  const [components, setComponents] = React.useState<Component[]>([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(url);
+        const res: AxiosResponse = await axios.get(url);
         setComponents(res.data);
-      } catch (error) {
-        console.log('ERROR: ', error.message);
+      } catch (err: any) {
+        console.log('ERROR: ', err.message);
       }
     };
 
@@ -42,4 +56,6 @@ export default function ComponentList({ title, url }) {
       )}
     </>
   );
-}
+};
+
+export default ComponentList;

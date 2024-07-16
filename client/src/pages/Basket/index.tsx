@@ -9,12 +9,15 @@ import EmptyBasket from './EmptyBasket';
 
 import styles from './Basket.module.scss';
 
-export default function Basket() {
+const Basket: React.FC = () => {
   const items = useSelector(selectBasketItems);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
   const totalPrice = formatPrice(
-    items.reduce((sum, item) => sum + item.count * parseFloat(item.price.replace(',', '.')), 0),
+    items.reduce(
+      (sum: number, item: any) => sum + item.count * parseFloat(item.price.replace(',', '.')),
+      0,
+    ),
   );
   const isEmpty = items.length === 0;
 
@@ -35,7 +38,7 @@ export default function Basket() {
         Очистить корзину
       </button>
       <ul className={styles.list}>
-        {items.map((item) => (
+        {items.map((item: any) => (
           <BasketItem
             key={
               item.id +
@@ -57,4 +60,6 @@ export default function Basket() {
       {isModalWindowVisible && <BasketModalWindow hideModalWindow={hideModalWindow} />}
     </div>
   );
-}
+};
+
+export default Basket;

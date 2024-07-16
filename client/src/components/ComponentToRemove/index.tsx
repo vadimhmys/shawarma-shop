@@ -6,7 +6,11 @@ import { TfiClose } from 'react-icons/tfi';
 
 import styles from './ComponentToRemove.module.scss';
 
-export default function ComponentToRemove({ children }) {
+type ComponentToRemoveProps = {
+  children: string;
+};
+
+const ComponentToRemove: React.FC<ComponentToRemoveProps> = ({ children }) => {
   const dispatch = useDispatch();
   const [isRemoved, setIsRemoved] = React.useState(false);
 
@@ -30,4 +34,6 @@ export default function ComponentToRemove({ children }) {
       )}
     </li>
   );
-}
+};
+
+export default ComponentToRemove;

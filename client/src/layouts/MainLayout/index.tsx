@@ -5,14 +5,16 @@ import Footer from '../../components/Footer';
 
 import styles from './MainLayout.module.scss';
 
-export default function MainLayout() {
+const MainLayout: React.FC = () => {
   return (
     <div className={styles.root}>
       <div className={styles.container}>
         <Header />
-          <Outlet/>
+        <Outlet />
         <Footer />
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default MainLayout;

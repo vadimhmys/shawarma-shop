@@ -2,13 +2,25 @@ import React from 'react';
 
 import styles from './Switcher.module.scss';
 
-export default function Switcher({
+type SwitcherData = {
+  id: number;
+  value: string;
+};
+
+type SwitcherProps = {
+  radioBoxGroupName: string;
+  dataForInputs: SwitcherData[];
+  onParentStateChange: any;
+  activeIndex: number;
+};
+
+const Switcher: React.FC<SwitcherProps> = ({
   radioBoxGroupName,
   dataForInputs,
   onParentStateChange,
   activeIndex,
-}) {
-  const handleChange = (index) => {
+}) => {
+  const handleChange = (index: number) => {
     onParentStateChange(index);
   };
 
@@ -29,4 +41,6 @@ export default function Switcher({
       ))}
     </div>
   );
-}
+};
+
+export default Switcher;

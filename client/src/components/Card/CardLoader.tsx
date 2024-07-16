@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
- const CardLoader: React.FC = () => {
+const CardLoader: React.FC = () => {
   return (
     <ContentLoader
       style={{ margin: '0 10px 20px' }}
@@ -22,6 +22,6 @@ import ContentLoader from 'react-content-loader';
       <rect x="172" y="385" rx="16" ry="16" width="105" height="40" />
     </ContentLoader>
   );
-}
+};
 
 export default CardLoader;
