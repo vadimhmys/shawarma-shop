@@ -1,3 +1,5 @@
+
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Main from './pages/Main';
 import Contacts from './pages/Contacts';
@@ -5,7 +7,7 @@ import Basket from './pages/Basket';
 import NotFound from './pages/NotFound';
 import MainLayout from './layouts/MainLayout';
 
-function App() {
+const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
