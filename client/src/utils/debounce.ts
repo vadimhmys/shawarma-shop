@@ -1,4 +1,4 @@
-export function debounce(fn: Function, ms: number) {
+export function debounce(fn: (str: string) => void, ms: number) {
   let timerId: ReturnType<typeof setTimeout>;
 
   return function func(str: string) {

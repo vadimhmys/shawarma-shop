@@ -18,9 +18,10 @@ const Search: React.FC = () => {
     inputRef.current?.focus();
   };
 
-  const handleChangeSearchValue = React.useRef(
-    debounce((str: any) => dispatch(setSearchValue(str)), 500),
-  ).current;
+  const handleChangeSearchValue = React.useMemo(
+    () => debounce((str: string) => dispatch(setSearchValue(str)), 500),
+    [dispatch]
+  );
 
   const handleChangeInput = (e: any) => {
     handleChangeSearchValue(e.target.value);
