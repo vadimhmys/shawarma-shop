@@ -24,9 +24,9 @@ const Counter: React.FC<CounterProps> = ({
   uniqueId,
 }) => {
   const dispatch = useDispatch();
-  const [multiplier, setMultiplier] = React.useState(initialValue);
+  const [multiplier, setMultiplier] = React.useState<number>(initialValue);
 
-  const incrementCounter = (e: any) => {
+  const incrementCounter = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (multiplier === maxCount) return;
     setMultiplier(multiplier + 1);
@@ -46,7 +46,7 @@ const Counter: React.FC<CounterProps> = ({
     }
   };
 
-  const decrementCounter = (e: any) => {
+  const decrementCounter = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (multiplier === 0) return;
     setMultiplier(multiplier - 1);

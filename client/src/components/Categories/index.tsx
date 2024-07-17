@@ -5,7 +5,7 @@ import styles from './Categories.module.scss';
 
 type CategoriesProps = {
   value: number;
-  onChangeCategory: any;
+  onChangeCategory: (id: number) => void;
 };
 
 type Category = {

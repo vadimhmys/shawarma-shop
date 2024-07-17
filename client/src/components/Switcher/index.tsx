@@ -10,7 +10,7 @@ type SwitcherData = {
 type SwitcherProps = {
   radioBoxGroupName: string;
   dataForInputs: SwitcherData[];
-  onParentStateChange: any;
+  onParentStateChange: (idx: number) => void;
   activeIndex: number;
 };
 

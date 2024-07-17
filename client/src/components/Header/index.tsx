@@ -17,6 +17,7 @@ const Header: React.FC = () => {
       0,
     ),
   );
+  
   return (
     <div className={styles.root}>
       <div className={styles.container}>

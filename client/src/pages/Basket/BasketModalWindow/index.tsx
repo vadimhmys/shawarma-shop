@@ -5,7 +5,7 @@ import { clearBasket } from '../../../redux/slices/basketSlice';
 import styles from './BasketModalWindow.module.scss';
 
 type BasketModalWindowProps = {
-  hideModalWindow: any;
+  hideModalWindow: () => void;
 };
 
 const BasketModalWindow: React.FC<BasketModalWindowProps> = ({ hideModalWindow }) => {

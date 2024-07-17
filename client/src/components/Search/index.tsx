@@ -23,7 +23,7 @@ const Search: React.FC = () => {
     [dispatch]
   );
 
-  const handleChangeInput = (e: any) => {
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChangeSearchValue(e.target.value);
     setValue(e.target.value);
   };

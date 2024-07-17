@@ -27,7 +27,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({
   const { addedIngredients, removedComponents } = useSelector((state: any) => state.shawarma);
   const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
-  const shawarma = structuredClone(activeShawarma);
+  const shawarma: Shawarma = structuredClone(activeShawarma);
   const activeProp = shawarma.props[activeRadioBoxIndex];
   const totalPrice = formatPrice(
     activeProp.price +
@@ -50,7 +50,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({
     setActiveCakeIndex(index);
   };
 
-  const onClickAdd = (e: any) => {
+  const onClickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
     const { id, title, image } = shawarma;
     const item = {

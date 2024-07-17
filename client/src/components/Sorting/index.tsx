@@ -5,6 +5,10 @@ import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 
 import styles from './Sorting.module.scss';
 
+type PopupClick = MouseEvent & {
+  composedPath: () => Node[];
+};
+
 type SortingType = {
   value: string;
   sortCritery: string;
@@ -30,7 +34,8 @@ const Sorting: React.FC = () => {
 
   React.useEffect(() => {
     const handleClickOutside = (e: any) => {
-      if (!e.composedPath().includes(sortRef.current)) {
+      const _e = e as PopupClick;
+      if (sortRef.current && !_e.composedPath().includes(sortRef.current)) {
         setIsVisible(false);
       }
     };
