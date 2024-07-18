@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { BasketItemType, selectBasketItems } from '../../redux/slices/basketSlice';
 import { BsFillCartFill } from 'react-icons/bs';
@@ -17,6 +17,8 @@ const Header: React.FC = () => {
       0,
     ),
   );
+
+  const { pathname } = useLocation();
   
   return (
     <div className={styles.root}>
@@ -35,7 +37,7 @@ const Header: React.FC = () => {
             <p className={styles.logo__subtitle}>лучшая шаурма в мире</p>
           </div>
         </div>
-        <Search />
+        {pathname !== '/basket' && <Search />}
         <div className={styles.cart}>
           <Link to="/basket" className={styles.cart__link}>
             <span className={styles.cart__price}>{totalPrice} руб.</span>
