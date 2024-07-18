@@ -6,11 +6,11 @@ import { TfiClose } from 'react-icons/tfi';
 
 import styles from './ComponentToRemove.module.scss';
 
-type ComponentToRemoveProps = {
+type ComponentToRemovePropsType = {
   children: string;
 };
 
-const ComponentToRemove: React.FC<ComponentToRemoveProps> = ({ children }) => {
+const ComponentToRemove: React.FC<ComponentToRemovePropsType> = ({ children }) => {
   const dispatch = useDispatch();
   const [isRemoved, setIsRemoved] = React.useState(false);
 

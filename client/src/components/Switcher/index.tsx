@@ -2,19 +2,19 @@ import React from 'react';
 
 import styles from './Switcher.module.scss';
 
-type SwitcherData = {
+type SwitcherDataType = {
   id: number;
   value: string;
 };
 
-type SwitcherProps = {
+type SwitcherPropsType = {
   radioBoxGroupName: string;
-  dataForInputs: SwitcherData[];
+  dataForInputs: SwitcherDataType[];
   onParentStateChange: (idx: number) => void;
   activeIndex: number;
 };
 
-const Switcher: React.FC<SwitcherProps> = ({
+const Switcher: React.FC<SwitcherPropsType> = ({
   radioBoxGroupName,
   dataForInputs,
   onParentStateChange,

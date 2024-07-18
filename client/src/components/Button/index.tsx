@@ -2,12 +2,12 @@ import React from 'react';
 
 import styles from './Button.module.scss';
 
-type ButtonProps = {
+type ButtonPropsType = {
   children: string | string[];
   handleClick?: (event: React.MouseEvent) => void;
 };
 
-const Button: React.FC<ButtonProps> = ({ children, handleClick }) => {
+const Button: React.FC<ButtonPropsType> = ({ children, handleClick }) => {
   return (
     <button className={styles.root} onClick={handleClick}>
       {children}

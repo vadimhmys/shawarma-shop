@@ -1,12 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+export enum SortCriteryEnum {
+  PRICE_DESC = 'price',
+  PRICE_ASC = '-price',
+  TITLE_DESC = 'title',
+  TITLE_ASC = '-title',
+};
+
+export type SortType = {
+  value: string;
+  sortCritery: SortCriteryEnum
+};
+
+interface FilterState {
+  searchValue: string;
+  categoryId: number;
+  currentPage: number;
+  sort: SortType;
+}
+
+const initialState: FilterState = {
   searchValue: '',
   categoryId: 0,
   currentPage: 1,
   sort: {
     value: 'цене ↑',
-    sortCritery: 'price',
+    sortCritery: SortCriteryEnum.PRICE_DESC,
   },
 };
 

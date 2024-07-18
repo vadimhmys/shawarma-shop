@@ -6,17 +6,17 @@ import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Counter.module.scss';
 
-import type { Component } from '../ComponentList';
+import type { ComponentType } from '../ComponentList';
 
-type CounterProps = {
+type CounterPropsType = {
   maxCount: number;
   isSimple?: boolean;
-  component?: Component;
+  component?: ComponentType;
   initialValue?: number;
   uniqueId?: string;
 };
 
-const Counter: React.FC<CounterProps> = ({
+const Counter: React.FC<CounterPropsType> = ({
   maxCount,
   isSimple = true,
   initialValue = 0,

@@ -3,13 +3,13 @@ import VariantItem from './VariantItem';
 
 import styles from './VariantList.module.scss';
 
-import type { CardProperty } from '../Card';
+import type { CardPropertyType } from '../../redux/slices/shawarmasSlice';
 
-type VariantListProps = {
-  propertyList: CardProperty[];
+type VariantListPropsType = {
+  propertyList: CardPropertyType[];
 };
 
-const VariantList: React.FC<VariantListProps> = ({ propertyList }) => {
+const VariantList: React.FC<VariantListPropsType> = ({ propertyList }) => {
   return (
     <div className={styles.root}>
       {propertyList.map((p) => (

@@ -4,7 +4,7 @@ import Counter from '../Counter';
 
 import styles from './ComponentList.module.scss';
 
-export type Component = {
+export type ComponentType = {
   id: number;
   name: string;
   image: string;
@@ -13,13 +13,13 @@ export type Component = {
   updatedAt: string;
 };
 
-type ComponentListProps = {
+type ComponentListPropsType = {
   title: string;
   url: string;
 };
 
-const ComponentList: React.FC<ComponentListProps> = ({ title, url }) => {
-  const [components, setComponents] = React.useState<Component[]>([]);
+const ComponentList: React.FC<ComponentListPropsType> = ({ title, url }) => {
+  const [components, setComponents] = React.useState<ComponentType[]>([]);
 
   React.useEffect(() => {
     const fetchData = async () => {

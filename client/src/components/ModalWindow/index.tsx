@@ -10,15 +10,15 @@ import ComponentToRemove from '../ComponentToRemove';
 
 import styles from './ModalWindow.module.scss';
 
-import type { Shawarma } from '../Card';
+import type { ShawarmaType } from '../../redux/slices/shawarmasSlice';
 
-type ModalWindowProps = {
+type ModalWindowPropsType = {
   hideModalWindow: any;
-  activeShawarma: Shawarma;
+  activeShawarma: ShawarmaType;
   initialRadioBoxIndex: number;
 };
 
-const ModalWindow: React.FC<ModalWindowProps> = ({
+const ModalWindow: React.FC<ModalWindowPropsType> = ({
   hideModalWindow,
   activeShawarma,
   initialRadioBoxIndex,
@@ -27,7 +27,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({
   const { addedIngredients, removedComponents } = useSelector((state: any) => state.shawarma);
   const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
-  const shawarma: Shawarma = structuredClone(activeShawarma);
+  const shawarma: ShawarmaType = structuredClone(activeShawarma);
   const activeProp = shawarma.props[activeRadioBoxIndex];
   const totalPrice = formatPrice(
     activeProp.price +

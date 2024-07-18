@@ -1,6 +1,30 @@
+import { RootState } from './../store';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+export type BasketAddedComponentType = {
+  id: number;
+  name: string;
+  count: number;
+  price: number;
+};
+
+type BasketItemType = {
+  id: number;
+  title: string;
+  image: string;
+  weight: number;
+  price: string;
+  cake: string;
+  count: number;
+  addedComponentsList: BasketAddedComponentType[];
+  removedComponentsList: string[];
+};
+
+interface BasketState {
+  items: BasketItemType[]
+}
+
+const initialState: BasketState = {
   items: [],
 };
 
@@ -54,7 +78,7 @@ export const basketSlice = createSlice({
             JSON.stringify(item.removedComponentsList) ===
           action.payload,
       );
-      findItem.count++;
+      if (findItem) findItem.count++;
     },
     decrementItem(state, action) {
       const findItem = state.items.find(
@@ -66,7 +90,7 @@ export const basketSlice = createSlice({
             JSON.stringify(item.removedComponentsList) ===
           action.payload,
       );
-      findItem.count--;
+      if (findItem) findItem.count--;
     },
     removeItem(state, action) {
       state.items = state.items.filter(
@@ -85,7 +109,7 @@ export const basketSlice = createSlice({
   },
 });
 
-export const selectBasketItems = state => state.basket.items;
+export const selectBasketItems = (state: RootState) => state.basket.items;
 export const { addItem, incrementItem, decrementItem, removeItem, clearBasket } =
   basketSlice.actions;
 

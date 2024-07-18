@@ -1,24 +1,19 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from '../../redux/slices/filterSlice';
+import { setSort, SortCriteryEnum, SortType } from '../../redux/slices/filterSlice';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 
 import styles from './Sorting.module.scss';
 
-type PopupClick = MouseEvent & {
+type PopupClickType = MouseEvent & {
   composedPath: () => Node[];
 };
 
-type SortingType = {
-  value: string;
-  sortCritery: string;
-};
-
-export const sortingTypes: SortingType[] = [
-  { value: 'цене ↑', sortCritery: 'price' },
-  { value: 'цене ↓', sortCritery: '-price' },
-  { value: 'алфавиту↑', sortCritery: 'title' },
-  { value: 'алфавиту↓', sortCritery: '-title' },
+export const sortingTypes: SortType[] = [
+  { value: 'цене ↑', sortCritery: SortCriteryEnum.PRICE_DESC },
+  { value: 'цене ↓', sortCritery: SortCriteryEnum.PRICE_ASC },
+  { value: 'алфавиту↑', sortCritery: SortCriteryEnum.TITLE_DESC },
+  { value: 'алфавиту↓', sortCritery: SortCriteryEnum.TITLE_ASC },
 ];
 
 const Sorting: React.FC = () => {
@@ -27,14 +22,14 @@ const Sorting: React.FC = () => {
   const [isVisible, setIsVisible] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
-  const handleClick = (obj: SortingType) => {
+  const handleClick = (obj: SortType) => {
     dispatch(setSort(obj));
     setIsVisible(false);
   };
 
   React.useEffect(() => {
     const handleClickOutside = (e: any) => {
-      const _e = e as PopupClick;
+      const _e = e as PopupClickType;
       if (sortRef.current && !_e.composedPath().includes(sortRef.current)) {
         setIsVisible(false);
       }

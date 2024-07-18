@@ -9,44 +9,13 @@ import ModalWindow from '../ModalWindow';
 
 import styles from './Card.module.scss';
 
-export type Shawarma = {
-  id: number;
-  name: string;
-  title: string;
-  categoryId: number;
-  icon: string;
-  image: string;
-  novelty: boolean;
-  presence: boolean;
-  props: CardProperty[];
-  components: CardComponent[];
-  createdAt: string;
-  updatedAt: string;
+import { ShawarmaType } from '../../redux/slices/shawarmasSlice';
+
+type CardPropsType = {
+  shawarma: ShawarmaType;
 };
 
-export type CardProperty = {
-  id: number;
-  shawarmaId: number;
-  price: number;
-  weight: number;
-  createdAt: string;
-  updatedAt: string;
-};
-
-type CardComponent = {
-  id: number;
-  name: string;
-  necessity: boolean;
-  shawarmaId: number;
-  createdAt: string;
-  updatedAt: string;
-};
-
-type CardProps = {
-  shawarma: Shawarma;
-};
-
-const Card: React.FC<CardProps> = ({ shawarma }) => {
+const Card: React.FC<CardPropsType> = ({ shawarma }) => {
   const [activeCardRadioBoxIndex, setActiveCardRadioBoxIndex] = React.useState(0);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
 

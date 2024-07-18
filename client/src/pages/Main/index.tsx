@@ -2,8 +2,8 @@ import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/slices/filterSlice.js';
-import { fetchShawarmas } from '../../redux/slices/shawarmasSlice.js';
+import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/slices/filterSlice';
+import { fetchShawarmas } from '../../redux/slices/shawarmasSlice';
 
 import Card from '../../components/Card';
 import Categories from '../../components/Categories';
@@ -13,7 +13,7 @@ import Pagination from '../../components/Pagination';
 
 import styles from './Main.module.scss';
 
-import type { Shawarma } from '../../components/Card';
+import type { ShawarmaType } from '../../redux/slices/shawarmasSlice';
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const Main: React.FC = () => {
         sortBy,
         order,
         searchValue,
-        limit,
+        limit: String(limit),
         currentPage,
       }),
     );
@@ -87,7 +87,7 @@ const Main: React.FC = () => {
   }, [categoryId, sort.sortCritery, currentPage, navigate]);
 
   const skeletons = [...new Array(6)].map((_, i) => <CardLoader key={i} />);
-  const items = shawarmas.map((s: Shawarma) => s.presence && <Card key={s.id} shawarma={s} />);
+  const items = shawarmas.map((s: ShawarmaType) => s.presence && <Card key={s.id} shawarma={s} />);
 
   return (
     <div className={styles.root}>

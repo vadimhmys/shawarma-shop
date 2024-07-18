@@ -3,20 +3,20 @@ import axios, { AxiosResponse } from 'axios';
 
 import styles from './Categories.module.scss';
 
-type CategoriesProps = {
+type CategoriesPropsType = {
   value: number;
   onChangeCategory: (id: number) => void;
 };
 
-type Category = {
+type CategoryType = {
   id: number;
   name: string;
   createdAt: string;
   updatedAt: string;
 };
 
-const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {
-  const [categories, setCategories] = React.useState<Category[]>([]);
+const Categories: React.FC<CategoriesPropsType> = ({ value, onChangeCategory }) => {
+  const [categories, setCategories] = React.useState<CategoryType[]>([]);
   const url = 'http://localhost:7000/api/categories/getall';
 
   React.useEffect(() => {

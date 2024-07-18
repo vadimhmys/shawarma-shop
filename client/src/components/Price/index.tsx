@@ -3,13 +3,13 @@ import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Price.module.scss';
 
-type PriceProps = {
+type PricePropsType = {
   price: number;
   currency: string;
   isBottom?: boolean;
 };
 
-const Price: React.FC<PriceProps> = ({ price, currency, isBottom = false }) => {
+const Price: React.FC<PricePropsType> = ({ price, currency, isBottom = false }) => {
   const priceView = formatPrice(price);
   const [rubles, kopecks] = priceView.split(',');
 

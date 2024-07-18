@@ -4,11 +4,11 @@ import { clearBasket } from '../../../redux/slices/basketSlice';
 
 import styles from './BasketModalWindow.module.scss';
 
-type BasketModalWindowProps = {
+type BasketModalWindowPropsType = {
   hideModalWindow: () => void;
 };
 
-const BasketModalWindow: React.FC<BasketModalWindowProps> = ({ hideModalWindow }) => {
+const BasketModalWindow: React.FC<BasketModalWindowPropsType> = ({ hideModalWindow }) => {
   const dispatch = useDispatch();
 
   const onClickClear = () => {

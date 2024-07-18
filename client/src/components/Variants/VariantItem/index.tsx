@@ -3,12 +3,12 @@ import Price from '../../Price';
 
 import styles from './VariantItem.module.scss';
 
-type VariantItemProps = {
+type VariantItemPropsType = {
   weight: number;
   price: number;
 };
 
-const VariantItem: React.FC<VariantItemProps> = ({ weight, price }) => {
+const VariantItem: React.FC<VariantItemPropsType> = ({ weight, price }) => {
   return (
     <div className={styles.root}>
       <div className={styles.weight}>{weight} г.</div>

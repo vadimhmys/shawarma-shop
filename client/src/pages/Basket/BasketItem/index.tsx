@@ -7,14 +7,14 @@ import { formatPrice } from '../../../utils/formatPrice';
 
 import styles from './BasketItem.module.scss';
 
-type AddedComponent = {
+type AddedComponentType = {
   id: number;
   name: string;
   count: number;
   price: number;
 };
 
-type BasketItemProps = {
+type BasketItemPropsType = {
   id: number;
   image: string;
   title: string;
@@ -22,11 +22,11 @@ type BasketItemProps = {
   cake: string;
   price: string;
   count: number;
-  addedComponentsList: AddedComponent[];
+  addedComponentsList: AddedComponentType[];
   removedComponentsList: string[];
 };
 
-const BasketItem: React.FC<BasketItemProps> = ({
+const BasketItem: React.FC<BasketItemPropsType> = ({
   id,
   image,
   title,

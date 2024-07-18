@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { BasketAddedComponentType } from './basketSlice';
 
-const initialState = {
+interface ShawarmaState {
+  addedIngredients: BasketAddedComponentType[];
+  removedComponents: string[];
+}
+
+const initialState: ShawarmaState = {
   addedIngredients: [],
   removedComponents: [],
 };
