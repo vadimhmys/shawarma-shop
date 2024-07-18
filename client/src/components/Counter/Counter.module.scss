@@ -32,30 +32,56 @@
   width: 20px;
   height: 20px;
   background-color: $white;
-  border: 1px solid $gray-light;
+  border: 1px solid $gray-dark;
   border-radius: 5px;
   cursor: pointer;
   transition: .3s ease-out;
 
+  &:disabled {
+    border: 1px solid $gray-light;
+    cursor: default;
+    
+
+  }
+
   &:first-child:hover {
     background-color: $gray-light;
     border: none;
+
+    &:disabled {
+      background-color: $white;
+      border: 1px solid $gray-light;
+      transition: none;
+    }
   }
 
   &:last-child:hover {
     background-color: $green-light;
     border: none;
+
+    &:disabled {
+      background-color: $white;
+      border: 1px solid $gray-light;
+      transition: none;
+    }
   }
 
   &:first-child:active {
     background-color: $gray-dark;
     color: $white;
-    transition: none;
+    
+    &:disabled {
+      color: rgba(16, 16, 16, 0.3);
+    }
   }
 
   &:last-child:active {
     background-color: $green-dark;
     color: $white;
     transition: none;
+
+    &:disabled {
+      color: rgba(16, 16, 16, 0.3);
+    }
   }
 }

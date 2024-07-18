@@ -76,7 +76,10 @@ const Counter: React.FC<CounterPropsType> = ({
       )}
 
       <div className={styles.counter}>
-        <button className={styles.button} onClick={decrementCounter}>
+        <button
+          className={styles.button}
+          onClick={decrementCounter}
+          disabled={(isSimple && multiplier === 1) || (!isSimple && multiplier === 0) }>
           &#8722;
         </button>
         <div className={styles.quantity}>
@@ -84,7 +87,10 @@ const Counter: React.FC<CounterPropsType> = ({
           {!isSimple && <span>x</span>}
           {!isSimple && component && <span>{formatPrice(component.price)} р</span>}
         </div>
-        <button className={styles.button} onClick={incrementCounter}>
+        <button
+          className={styles.button}
+          onClick={incrementCounter}
+          disabled={multiplier === maxCount}>
           &#43;
         </button>
       </div>
