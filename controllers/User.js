@@ -1,13 +1,48 @@
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import UserModel from '../models/User.js';
 import AppError from '../errors/AppError.js';
 
+const makeJwt = (id, email, role) => {
+  return jwt.sign(
+      {id, email, role},
+      process.env.SECRET_KEY,
+      {expiresIn: '24h'}
+  )
+}
+
 class User {
   async signup(req, res, next) {
-    res.status(200).send('User registration');
+    const { email, password, role = 'USER' } = req.body;
+    try {
+      if (!email || !password) {
+        throw new Error('Blank email or password');
+      }
+      if (role !== 'USER') {
+        throw new Error('Only USER role is possible');
+      }
+      const hash = await bcrypt.hash(password, 5);
+      const user = await UserModel.create({ email, password: hash, role });
+      const token = makeJwt(user.id, user.email, user.role);
+      return res.json({ token });
+    } catch (e) {
+      next(AppError.badRequest(e.message));
+    }
   }
 
   async login(req, res, next) {
-    res.status(200).send('Login to personal account');
+    try {
+      const { email, password } = req.body;
+      const user = await UserModel.getByEmail(email);
+      let compare = bcrypt.compareSync(password, user.password);
+      if (!compare) {
+        throw new Error('Incorrect password specified');
+      }
+      const token = makeJwt(user.id, user.email, user.role);
+      return res.json({ token });
+    } catch (e) {
+      next(AppError.badRequest(e.message));
+    }
   }
 
   async check(req, res, next) {
@@ -36,25 +71,43 @@ class User {
   }
 
   async create(req, res, next) {
+    const {email, password, role = 'USER'} = req.body
     try {
-      const user = await UserModel.create(req.body);
-      res.json(user);
-    } catch (e) {
-      next(AppError.badRequest(e.message));
+        if (!email || !password) {
+            throw new Error('Blank email or password')
+        }
+        if ( ! ['USER', 'ADMIN'].includes(role)) {
+            throw new Error('Invalid role value')
+        }
+        const hash = await bcrypt.hash(password, 5)
+        const user = await UserModel.create({email, password: hash, role})
+        return res.json(user)
+    } catch(e) {
+        next(AppError.badRequest(e.message))
     }
-  }
+}
 
-  async update(req, res, next) {
-    try {
+async update(req, res, next) {
+  try {
       if (!req.params.id) {
-        throw new Error('User id not specified');
+          throw new Error('User ID not specified')
       }
-      const user = await UserModel.update(req.params.id, req.body);
-      res.json(user);
-    } catch (e) {
-      next(AppError.badRequest(e.message));
-    }
+      if (Object.keys(req.body).length === 0) {
+          throw new Error('No data to update')
+      }
+      let {email, password, role} = req.body
+      if (role && !['USER', 'ADMIN'].includes(role)) {
+          throw new Error('Invalid role value')
+      }
+      if (password) {
+          password = await bcrypt.hash(password, 5)
+      }
+      const user = await UserModel.update(req.params.id, {email, password, role})
+      res.json(user)
+  } catch(e) {
+      next(AppError.badRequest(e.message))
   }
+}
 
   async delete(req, res, next) {
     try {
