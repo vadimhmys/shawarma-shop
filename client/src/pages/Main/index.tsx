@@ -2,9 +2,9 @@ import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
 import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/slices/filterSlice';
-import { fetchShawarmas } from '../../redux/slices/shawarmasSlice';
+import { fetchShawarmas, StatusEnum } from '../../redux/slices/shawarmasSlice';
 
 import Card from '../../components/Card';
 import Categories from '../../components/Categories';
@@ -19,8 +19,8 @@ import type { SearchShawarmaParamsType, ShawarmaType } from '../../redux/slices/
 const Main: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { categoryId, sort, currentPage, searchValue } = useSelector((state: any) => state.filter);
-  const { shawarmas, count, status } = useSelector((state: any) => state.shawarmas);
+  const { categoryId, sort, currentPage, searchValue } = useSelector((state: RootState) => state.filter);
+  const { shawarmas, count, status } = useSelector((state: RootState) => state.shawarmas);
   const isMounted = React.useRef(false);
 
   const sortBy: string = sort.sortCritery.replace('-', '');
@@ -43,12 +43,12 @@ const Main: React.FC = () => {
   const getShawarmas = React.useCallback(async () => {
     dispatch(
       fetchShawarmas({
-        categoryId,
+        categoryId: String(categoryId),
         sortBy,
         order,
         searchValue,
         limit: String(limit),
-        currentPage,
+        currentPage: String(currentPage),
       }),
     );
   }, [categoryId, sortBy, order, searchValue, limit, currentPage, dispatch]);
@@ -98,7 +98,7 @@ const Main: React.FC = () => {
         <Sorting />
       </div>
       <h2 className={styles.title}>Шаурма</h2>
-      {status === 'error' ? (
+      {status === StatusEnum.ERROR ? (
         <div className={styles.errorInfo}>
           <h2 className={styles.errorInfo__title}>Ошибка получения шавух</h2>
           <p className={styles.errorInfo__text}>
@@ -106,7 +106,7 @@ const Main: React.FC = () => {
           </p>
         </div>
       ) : (
-        <div className={styles.items}>{status === 'loading' ? skeletons : items}</div>
+        <div className={styles.items}>{status === StatusEnum.LOADING ? skeletons : items}</div>
       )}
       <Pagination pageCount={pageCount} onPageChange={onPageChange} currentPage={currentPage} />
     </div>

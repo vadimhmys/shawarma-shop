@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectBasketItems } from '../../redux/slices/basketSlice';
+import { BasketItemType, selectBasketItems } from '../../redux/slices/basketSlice';
 import { formatPrice } from '../../utils/formatPrice';
 import BasketItem from './BasketItem';
 import Button from '../../components/Button';
@@ -12,10 +12,10 @@ import styles from './Basket.module.scss';
 const Basket: React.FC = () => {
   const items = useSelector(selectBasketItems);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
-  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: BasketItemType) => sum + item.count, 0);
   const totalPrice = formatPrice(
     items.reduce(
-      (sum: number, item: any) => sum + item.count * parseFloat(item.price.replace(',', '.')),
+      (sum: number, item: BasketItemType) => sum + item.count * parseFloat(item.price.replace(',', '.')),
       0,
     ),
   );
@@ -38,7 +38,7 @@ const Basket: React.FC = () => {
         Очистить корзину
       </button>
       <ul className={styles.list}>
-        {items.map((item: any) => (
+        {items.map((item: BasketItemType) => (
           <BasketItem
             key={
               item.id +

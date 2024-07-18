@@ -7,7 +7,7 @@ type RemoverIngredientType = {
   count: number;
 };
 
-interface ShawarmaState {
+export interface ShawarmaState {
   addedIngredients: BasketAddedComponentType[];
   removedComponents: string[];
 }

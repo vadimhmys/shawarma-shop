@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/store';
 import { setSort, SortCriteryEnum, SortType } from '../../redux/slices/filterSlice';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 
@@ -18,7 +19,7 @@ export const sortingTypes: SortType[] = [
 
 const Sorting: React.FC = () => {
   const dispatch = useDispatch();
-  const sortTitle = useSelector((state: any) => state.filter.sort.value);
+  const sortTitle = useSelector((state: RootState) => state.filter.sort.value);
   const [isVisible, setIsVisible] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
@@ -28,7 +29,7 @@ const Sorting: React.FC = () => {
   };
 
   React.useEffect(() => {
-    const handleClickOutside = (e: any) => {
+    const handleClickOutside = (e: MouseEvent) => {
       const _e = e as PopupClickType;
       if (sortRef.current && !_e.composedPath().includes(sortRef.current)) {
         setIsVisible(false);

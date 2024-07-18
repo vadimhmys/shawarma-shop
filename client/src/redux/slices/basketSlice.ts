@@ -8,7 +8,7 @@ export type BasketAddedComponentType = {
   price: number;
 };
 
-type BasketItemType = {
+export type BasketItemType = {
   id: number;
   title: string;
   image: string;

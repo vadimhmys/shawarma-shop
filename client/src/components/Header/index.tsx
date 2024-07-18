@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectBasketItems } from '../../redux/slices/basketSlice';
+import { BasketItemType, selectBasketItems } from '../../redux/slices/basketSlice';
 import { BsFillCartFill } from 'react-icons/bs';
 import Search from '../Search';
 import { formatPrice } from '../../utils/formatPrice';
@@ -10,10 +10,10 @@ import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
   const items = useSelector(selectBasketItems);
-  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: BasketItemType) => sum + item.count, 0);
   const totalPrice = formatPrice(
     items.reduce(
-      (sum: number, item: any) => sum + item.count * parseFloat(item.price.replace(',', '.')),
+      (sum: number, item: BasketItemType) => sum + item.count * parseFloat(item.price.replace(',', '.')),
       0,
     ),
   );

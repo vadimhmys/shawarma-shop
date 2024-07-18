@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../redux/slices/basketSlice';
+import { RootState } from '../../redux/store';
+import { addItem, BasketAddedComponentType } from '../../redux/slices/basketSlice';
 import { clearIngredients, clearRemovedComponents } from '../../redux/slices/shawarmaSlice';
 import { formatPrice } from '../../utils/formatPrice';
 import Switcher from '../Switcher';
@@ -13,9 +14,14 @@ import styles from './ModalWindow.module.scss';
 import type { ShawarmaType } from '../../redux/slices/shawarmasSlice';
 
 type ModalWindowPropsType = {
-  hideModalWindow: any;
+  hideModalWindow: () => void;
   activeShawarma: ShawarmaType;
   initialRadioBoxIndex: number;
+};
+
+type CakeType = {
+  id: number;
+  value: string;
 };
 
 const ModalWindow: React.FC<ModalWindowPropsType> = ({
@@ -24,20 +30,20 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
   initialRadioBoxIndex,
 }) => {
   const dispatch = useDispatch();
-  const { addedIngredients, removedComponents } = useSelector((state: any) => state.shawarma);
+  const { addedIngredients, removedComponents } = useSelector((state: RootState) => state.shawarma);
   const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
   const shawarma: ShawarmaType = structuredClone(activeShawarma);
   const activeProp = shawarma.props[activeRadioBoxIndex];
   const totalPrice = formatPrice(
     activeProp.price +
-      addedIngredients.reduce((sum: number, ing: any) => sum + ing.count * ing.price, 0),
+      addedIngredients.reduce((sum: number, ing: BasketAddedComponentType) => sum + ing.count * ing.price, 0),
   );
-  const urlForIngredients = 'http://localhost:7000/api/ingredients/getall';
-  const urlForSauces = 'http://localhost:7000/api/sauces/getall';
-  const titleForIngredients = 'Выберите ингредиенты';
-  const titleForSauces = 'Выберите соусы';
-  const cakes = [
+  const urlForIngredients: string = 'http://localhost:7000/api/ingredients/getall';
+  const urlForSauces: string = 'http://localhost:7000/api/sauces/getall';
+  const titleForIngredients: string = 'Выберите ингредиенты';
+  const titleForSauces: string = 'Выберите соусы';
+  const cakes: CakeType[] = [
     { id: 0, value: 'Обычная лепешка' },
     { id: 1, value: 'Сырная лепешка' },
   ];

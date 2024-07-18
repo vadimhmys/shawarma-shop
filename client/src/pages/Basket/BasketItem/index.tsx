@@ -38,13 +38,13 @@ const BasketItem: React.FC<BasketItemPropsType> = ({
   removedComponentsList,
 }) => {
   const dispatch = useDispatch();
-  const uniqueId =
+  const uniqueId: string =
     id +
     cake +
     weight +
     JSON.stringify(addedComponentsList) +
     JSON.stringify(removedComponentsList);
-  const totalPrice = formatPrice(parseFloat(price.replace(',', '.')) * count);
+  const totalPrice: string = formatPrice(parseFloat(price.replace(',', '.')) * count);
 
   const onClickRemove = (uniqueId: string) => {
     dispatch(removeItem(uniqueId));

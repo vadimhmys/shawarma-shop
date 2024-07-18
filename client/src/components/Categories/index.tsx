@@ -1,5 +1,5 @@
 import React from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import styles from './Categories.module.scss';
 
@@ -22,10 +22,12 @@ const Categories: React.FC<CategoriesPropsType> = ({ value, onChangeCategory }) 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const res: AxiosResponse = await axios.get(url);
-        setCategories(res.data);
-      } catch (err: any) {
-        console.log('ERROR: ', err.message);
+        const { data } = await axios.get<CategoryType[]>(url);
+        setCategories(data);
+      } catch (err) {
+        if (err instanceof Error) {
+          console.log('ERROR: ', err.message);
+        }
       }
     };
 

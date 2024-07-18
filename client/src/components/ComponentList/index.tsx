@@ -26,8 +26,10 @@ const ComponentList: React.FC<ComponentListPropsType> = ({ title, url }) => {
       try {
         const res: AxiosResponse = await axios.get(url);
         setComponents(res.data);
-      } catch (err: any) {
-        console.log('ERROR: ', err.message);
+      } catch (err) {
+        if (err instanceof Error) {
+          console.log('ERROR: ', err.message);
+        }
       }
     };
 
