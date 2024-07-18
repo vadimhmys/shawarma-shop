@@ -15,7 +15,7 @@ type CategoryType = {
   updatedAt: string;
 };
 
-const Categories: React.FC<CategoriesPropsType> = ({ value, onChangeCategory }) => {
+const Categories: React.FC<CategoriesPropsType> = React.memo(({ value, onChangeCategory }) => {
   const [categories, setCategories] = React.useState<CategoryType[]>([]);
   const url = 'http://localhost:7000/api/categories/getall';
 
@@ -46,6 +46,6 @@ const Categories: React.FC<CategoriesPropsType> = ({ value, onChangeCategory }) 
       ))}
     </ul>
   );
-};
+});
 
 export default Categories;

@@ -1,6 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useDispatch } from 'react-redux';
 import { setSort, SortCriteryEnum, SortType } from '../../redux/slices/filterSlice';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 
@@ -10,6 +9,10 @@ type PopupClickType = MouseEvent & {
   composedPath: () => Node[];
 };
 
+type SortingPropsType = {
+  sortTitle: string;
+};
+
 export const sortingTypes: SortType[] = [
   { value: 'цене ↑', sortCritery: SortCriteryEnum.PRICE_DESC },
   { value: 'цене ↓', sortCritery: SortCriteryEnum.PRICE_ASC },
@@ -17,9 +20,8 @@ export const sortingTypes: SortType[] = [
   { value: 'алфавиту↓', sortCritery: SortCriteryEnum.TITLE_ASC },
 ];
 
-const Sorting: React.FC = () => {
+const Sorting: React.FC<SortingPropsType> = React.memo(({ sortTitle }) => {
   const dispatch = useDispatch();
-  const sortTitle = useSelector((state: RootState) => state.filter.sort.value);
   const [isVisible, setIsVisible] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
@@ -76,6 +78,6 @@ const Sorting: React.FC = () => {
       )}
     </div>
   );
-};
+});
 
 export default Sorting;

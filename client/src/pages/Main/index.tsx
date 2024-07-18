@@ -95,7 +95,7 @@ const Main: React.FC = () => {
     <div className={styles.root}>
       <div className={styles.top}>
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sorting />
+        <Sorting sortTitle={sort.value}/>
       </div>
       <h2 className={styles.title}>Шаурма</h2>
       {status === StatusEnum.ERROR ? (

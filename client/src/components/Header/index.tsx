@@ -17,7 +17,6 @@ const Header: React.FC = () => {
       0,
     ),
   );
-
   const { pathname } = useLocation();
   
   return (
