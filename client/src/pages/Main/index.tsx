@@ -1,7 +1,8 @@
 import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../redux/store';
 import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/slices/filterSlice';
 import { fetchShawarmas } from '../../redux/slices/shawarmasSlice';
 
@@ -17,7 +18,7 @@ import type { SearchShawarmaParamsType, ShawarmaType } from '../../redux/slices/
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { categoryId, sort, currentPage, searchValue } = useSelector((state: any) => state.filter);
   const { shawarmas, count, status } = useSelector((state: any) => state.shawarmas);
   const isMounted = React.useRef(false);
@@ -41,7 +42,6 @@ const Main: React.FC = () => {
 
   const getShawarmas = React.useCallback(async () => {
     dispatch(
-      // @ts-ignore
       fetchShawarmas({
         categoryId,
         sortBy,
