@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 enum StatusEnum {
@@ -45,13 +45,22 @@ type DataType = {
   rows: ShawarmaType[];
 };
 
+export type SearchShawarmaParamsType = {
+  categoryId: string;
+  sortBy: string;
+  order: string;
+  searchValue: string;
+  limit: string;
+  currentPage: string;
+}
+
 interface ShawarmasState {
   shawarmas: ShawarmaType[],
   count: number;
   status: StatusEnum;
 }
 
-export const fetchShawarmas = createAsyncThunk<DataType, Record<string, string>>('users/fetchShawarmas', async (params) => {
+export const fetchShawarmas = createAsyncThunk<DataType, SearchShawarmaParamsType>('users/fetchShawarmas', async (params) => {
   const { categoryId, sortBy, order, searchValue, limit, currentPage } = params;
   const { data } = await axios.get<DataType>(
     `http://localhost:7000/api/shawarmas/getall?categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&searchValue=${searchValue}&limit=${limit}&currentPage=${currentPage}`,
@@ -76,7 +85,7 @@ export const shawarmasSlice = createSlice({
         state.count = 0;
         state.status = StatusEnum.LOADING;
       })
-      .addCase(fetchShawarmas.fulfilled, (state, action) => {
+      .addCase(fetchShawarmas.fulfilled, (state, action: PayloadAction<DataType>) => {
         state.shawarmas = action.payload.rows;
         state.count = action.payload.count;
         state.status = StatusEnum.SUCCESS;

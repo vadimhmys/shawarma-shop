@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export enum SortCriteryEnum {
   PRICE_DESC = 'price',
@@ -33,21 +33,21 @@ export const counterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setCategoryId(state, action) {
+    setCategoryId(state, action: PayloadAction<number>) {
       state.categoryId = action.payload;
     },
-    setSort(state, action) {
+    setSort(state, action: PayloadAction<SortType>) {
       state.sort = action.payload;
     },
-    setCurrentPage(state, action) {
+    setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
-    setFilterParams(state, action) {
+    setFilterParams(state, action: PayloadAction<FilterState>) {
       state.categoryId = Number(action.payload.categoryId);
       state.currentPage = Number(action.payload.currentPage);
       state.sort = action.payload.sort;
     },
-    setSearchValue(state, action) {
+    setSearchValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload;
     },
   },

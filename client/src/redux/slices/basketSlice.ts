@@ -1,5 +1,5 @@
 import { RootState } from './../store';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type BasketAddedComponentType = {
   id: number;
@@ -32,7 +32,7 @@ export const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
-    addItem(state, action) {
+    addItem(state, action: PayloadAction<BasketItemType>) {
       const findItem = state.items.find(
         (item) =>
           item.id +
@@ -68,7 +68,7 @@ export const basketSlice = createSlice({
         state.items.push(action.payload);
       }
     },
-    incrementItem(state, action) {
+    incrementItem(state, action: PayloadAction<string | undefined>) {
       const findItem = state.items.find(
         (item) =>
           item.id +
@@ -80,7 +80,7 @@ export const basketSlice = createSlice({
       );
       if (findItem) findItem.count++;
     },
-    decrementItem(state, action) {
+    decrementItem(state, action: PayloadAction<string | undefined>) {
       const findItem = state.items.find(
         (item) =>
           item.id +
@@ -92,7 +92,7 @@ export const basketSlice = createSlice({
       );
       if (findItem) findItem.count--;
     },
-    removeItem(state, action) {
+    removeItem(state, action: PayloadAction<string>) {
       state.items = state.items.filter(
         (item) =>
           item.id +

@@ -1,5 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BasketAddedComponentType } from './basketSlice';
+
+type RemoverIngredientType = {
+  id: number;
+  name: string;
+  count: number;
+};
 
 interface ShawarmaState {
   addedIngredients: BasketAddedComponentType[];
@@ -15,7 +21,7 @@ export const shawarmaSlice = createSlice({
   name: 'shawarma',
   initialState,
   reducers: {
-    addIngredient(state, action) {
+    addIngredient(state, action: PayloadAction<BasketAddedComponentType>) {
       const findIngredient = state.addedIngredients.find((ing) => ing.id === action.payload.id);
       if (findIngredient) {
         findIngredient.count++;
@@ -23,7 +29,7 @@ export const shawarmaSlice = createSlice({
         state.addedIngredients.push(action.payload);
       }
     },
-    removeIngredient(state, action) {
+    removeIngredient(state, action: PayloadAction<RemoverIngredientType>) {
       const findIngredient = state.addedIngredients.find((ing) => ing.id === action.payload.id);
       if (findIngredient && findIngredient.count > 1) {
         findIngredient.count--;
@@ -36,10 +42,10 @@ export const shawarmaSlice = createSlice({
     clearIngredients(state) {
       state.addedIngredients = [];
     },
-    addComponent(state, action) {
+    addComponent(state, action: PayloadAction<string>) {
       state.removedComponents.push(action.payload);
     },
-    removeComponent(state, action) {
+    removeComponent(state, action: PayloadAction<string>) {
       state.removedComponents = state.removedComponents.filter(
         (component) => component !== action.payload,
       );

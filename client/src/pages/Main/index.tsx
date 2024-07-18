@@ -13,7 +13,7 @@ import Pagination from '../../components/Pagination';
 
 import styles from './Main.module.scss';
 
-import type { ShawarmaType } from '../../redux/slices/shawarmasSlice';
+import type { SearchShawarmaParamsType, ShawarmaType } from '../../redux/slices/shawarmasSlice';
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
@@ -58,12 +58,14 @@ const Main: React.FC = () => {
       window.location.search &&
       window.location.search !== '?categoryId=0&sortBy=price&currentPage=1'
     ) {
-      const params = qs.parse(window.location.search.substring(1));
+      const params = qs.parse(window.location.search.substring(1)) as unknown as SearchShawarmaParamsType;
       const sort = sortingTypes.find((obj) => obj.sortCritery === params.sortBy);
       dispatch(
         setFilterParams({
-          ...params,
-          sort,
+          searchValue: params.sortBy,
+          categoryId: Number(params.categoryId),
+          currentPage: Number(params.currentPage),
+          sort: sort || sortingTypes[0],
         }),
       );
     }
