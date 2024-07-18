@@ -63,6 +63,16 @@
       background-color: $pink;
     }
 
+    .disabled.previous,
+    .disabled.next {
+      border-color: $gray-light;
+      cursor:default;
+      
+      a {
+        color: $gray-light;
+      }
+    }
+
     .disabled.previous:active,
     .disabled.next:active {
       background-color: transparent;
