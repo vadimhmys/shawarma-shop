@@ -30,8 +30,8 @@ const Signup: React.FC = () => {
       <div className={styles.card}>
         <h2 className={styles.title}>Регистрация</h2>
         <form className={styles.form}>
-          <input className={styles.input} placeholder="Введите ваш email..." value={email} onChange={onChangeEmail} />
-          <input className={styles.input} placeholder="Введите ваш пароль..." value={password} onChange={onChangePassword} />
+          <input className={styles.input} type='text' placeholder="Введите ваш email..." value={email} onChange={onChangeEmail} />
+          <input className={styles.input} type='password' placeholder="Введите ваш пароль..." value={password} onChange={onChangePassword} />
           <div className={styles.bottom}>
             <Button type="submit">Регистрация</Button>
             <p className={styles.question}>
