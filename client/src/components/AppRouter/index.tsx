@@ -2,7 +2,6 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from '../../pages/Login';
 import Signup from '../../pages/Signup';
-import Contacts from '../../pages/Contacts';
 import NotFound from '../../pages/NotFound';
 import Main from '../../pages/Main';
 import User from '../../pages/User';
@@ -14,7 +13,6 @@ const publicRoutes = [
   { path: '', Component: Main },
   { path: 'login', Component: Login },
   { path: 'signup', Component: Signup },
-  { path: 'contacts', Component: Contacts },
   { path: '*', Component: NotFound },
 ];
 

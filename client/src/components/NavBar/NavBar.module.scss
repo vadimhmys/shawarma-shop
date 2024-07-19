@@ -1,0 +1,23 @@
+@import '../../scss/all';
+
+.root {
+  padding-bottom: 10px;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+
+  &__link {
+    color: $gray-font;
+    display: inline-block;
+    margin-left: 15px;
+    transition: .3s ease;
+
+    &:hover {
+      color: $dark-font;
+      text-decoration: underline;
+    }
+  }
+}
+

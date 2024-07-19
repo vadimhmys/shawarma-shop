@@ -5,6 +5,7 @@ import { BasketItemType, selectBasketItems } from '../../redux/slices/basketSlic
 import { BsFillCartFill } from 'react-icons/bs';
 import Search from '../Search';
 import { formatPrice } from '../../utils/formatPrice';
+import NavBar from '../NavBar';
 
 import styles from './Header.module.scss';
 
@@ -21,6 +22,7 @@ const Header: React.FC = () => {
   
   return (
     <div className={styles.root}>
+      <NavBar/>
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link to="/">
