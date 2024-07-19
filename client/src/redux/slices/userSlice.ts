@@ -8,8 +8,8 @@ export interface UserState {
 
 const initialState: UserState = {
   email: 'vadim@mail.ru',
-  isAuth: true,
-  isAdmin: true,
+  isAuth: false,
+  isAdmin: false,
 };
 
 export const userSlice = createSlice({

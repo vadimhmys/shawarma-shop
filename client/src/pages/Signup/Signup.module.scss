@@ -1,0 +1,56 @@
+@import '../../scss/all';
+
+.root {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 50%;
+  padding: 10px 5px;
+  margin-top: 5px;
+  background-color: $bg-form;
+  border: 1px solid $gray-dark;
+  border-radius: 5px;
+}
+
+.title {
+  margin: 10px 0;
+  text-align: center;
+  font-family: "Lugrasimo", cursive;
+  color: $dark-font;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  height: 30px;
+  margin-top: 10px;
+  border: 1px solid $gray-dark;
+  border-radius: 5px;
+  padding: 0 7px;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 3px;
+  align-items: center;
+}
+
+.question {
+  color: $dark-font;
+}
+
+.link {
+  color: $pink-light;
+
+  &:hover {
+    color: $pink;
+    text-decoration: underline;
+  }
+}

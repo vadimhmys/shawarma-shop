@@ -5,6 +5,7 @@ import styles from './Button.module.scss';
 type ButtonPropsType = {
   children: string | string[];
   handleClick?: (event: React.MouseEvent) => void;
+  type?: string;
 };
 
 const Button: React.FC<ButtonPropsType> = ({ children, handleClick }) => {
