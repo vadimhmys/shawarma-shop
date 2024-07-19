@@ -31,7 +31,10 @@ export const userSlice = createSlice({
   reducers: {
     login(state, action: PayloadAction<UserType>) {
       const { id, email, role } = action.payload;
-      state = { id, email, isAuth: true, isAdmin: role === 'ADMIN' };
+      state.id = id;
+      state.email = email;
+      state.isAuth = true;
+      state.isAdmin = role === 'ADMIN';
     },
     logout(state) {
       state.id = null;

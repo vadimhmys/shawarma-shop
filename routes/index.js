@@ -10,7 +10,7 @@ const router = new express.Router();
 
 router.use('/shawarmas', shawarma);
 router.use('/categories', category);
-router.use('/users', user);
+router.use('/user', user);
 router.use('/ingredients', ingredient);
 router.use('/sauces', sauce);
 router.use('/basketshawarmas', shawarmaFromBasket);

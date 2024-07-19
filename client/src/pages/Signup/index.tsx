@@ -1,37 +1,54 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
+import { signup } from '../../http/userAPI';
+import { login, UserType } from '../../redux/slices/userSlice';
 
 import styles from './Signup.module.scss';
 
 const Signup: React.FC = () => {
-  const { isAdmin, isAuth } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [emailCurrent, setEmailCurrent] = React.useState('');
+  const [passwordCurrent, setPasswordCurrent] = React.useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const email = emailCurrent.trim();
+    const password = passwordCurrent.trim();
+    const res = await signup(email, password) as UserType;
+   
+    if (res) {
+        const data = {id: res.id, email: res.email, role: res.role};
+        dispatch(login(data));
+        if (user.isAdmin) navigate('/admin');
+        if (user.isAuth) navigate('/user');
+    }
+}
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    setEmailCurrent(e.target.value);
   };
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    setPasswordCurrent(e.target.value);
   };
 
   React.useEffect(() => {
-    if (isAdmin) navigate('/admin', { replace: true });
-    if (isAuth) navigate('/user', { replace: true });
-  }, [isAdmin, isAuth, navigate]);
+    if (user.isAdmin) navigate('/admin', { replace: true });
+    if (user.isAuth) navigate('/user', { replace: true });
+  }, [user.isAdmin, user.isAuth, navigate]);
 
   return (
     <div className={styles.root}>
       <div className={styles.card}>
         <h2 className={styles.title}>Регистрация</h2>
-        <form className={styles.form}>
-          <input className={styles.input} type='text' placeholder="Введите ваш email..." value={email} onChange={onChangeEmail} />
-          <input className={styles.input} type='password' placeholder="Введите ваш пароль..." value={password} onChange={onChangePassword} />
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input className={styles.input} type='text' placeholder="Введите ваш email..." value={emailCurrent} onChange={onChangeEmail} />
+          <input className={styles.input} type='password' placeholder="Введите ваш пароль..." value={passwordCurrent} onChange={onChangePassword} />
           <div className={styles.bottom}>
             <Button type="submit">Регистрация</Button>
             <p className={styles.question}>
