@@ -21,3 +21,10 @@
   }
 }
 
+:global {
+  .active {
+    color: $orange;
+    text-decoration: underline;
+  }
+}
+
