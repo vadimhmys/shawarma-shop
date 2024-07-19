@@ -1,21 +1,47 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+enum RolesEnum {
+  ADMIN = 'ADMIN',
+  USER = 'USER'
+}
+
+export type UserType = {
+  id: number;
+  email: string;
+  role: RolesEnum;
+};
 
 export interface UserState {
-  email: string,
+  id: null | number,
+  email: null | string,
   isAuth: boolean,
   isAdmin: boolean,
 }
 
 const initialState: UserState = {
-  email: 'vadim@mail.ru',
-  isAuth: true,
-  isAdmin: true,
+  id: null,
+  email: null,
+  isAuth: false,
+  isAdmin: false,
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    login(state, action: PayloadAction<UserType>) {
+      const { id, email, role } = action.payload;
+      state = { id, email, isAuth: true, isAdmin: role === 'ADMIN' };
+    },
+    logout(state) {
+      state.id = null;
+      state.email = null;
+      state.isAuth = false;
+      state.isAdmin = false;
+    }
+  },
 });
+
+export const { login } = userSlice.actions;
 
 export default userSlice.reducer;
