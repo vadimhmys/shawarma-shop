@@ -1,5 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 import Login from '../../pages/Login';
 import Signup from '../../pages/Signup';
 import NotFound from '../../pages/NotFound';
@@ -21,8 +23,8 @@ const authRoutes = [{ path: 'user', Component: User }, { path: 'basket', Compone
 const adminRoutes = [{ path: 'admin', Component: Admin }];
 
 const AppRouter: React.FC = () => {
-  const isAuth = true;
-  const isAdmin = true;
+  const { isAuth, isAdmin } = useSelector((state: RootState) => state.user);
+
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

@@ -4,13 +4,15 @@ import filter from './slices/filterSlice';
 import basket from './slices/basketSlice';
 import shawarma from './slices/shawarmaSlice';
 import shawarmas from './slices/shawarmasSlice';
+import user from './slices/userSlice';
 
 export const store = configureStore({
   reducer: {
     filter,
     basket,
     shawarma,
-    shawarmas
+    shawarmas,
+    user,
   },
 });
 
