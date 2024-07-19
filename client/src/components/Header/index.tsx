@@ -5,7 +5,6 @@ import { BasketItemType, selectBasketItems } from '../../redux/slices/basketSlic
 import { BsFillCartFill } from 'react-icons/bs';
 import Search from '../Search';
 import { formatPrice } from '../../utils/formatPrice';
-import NavBar from '../NavBar';
 
 import styles from './Header.module.scss';
 
@@ -14,15 +13,17 @@ const Header: React.FC = () => {
   const totalCount = items.reduce((sum: number, item: BasketItemType) => sum + item.count, 0);
   const totalPrice = formatPrice(
     items.reduce(
-      (sum: number, item: BasketItemType) => sum + item.count * parseFloat(item.price.replace(',', '.')),
+      (sum: number, item: BasketItemType) =>
+        sum + item.count * parseFloat(item.price.replace(',', '.')),
       0,
     ),
   );
   const { pathname } = useLocation();
-  
+  const forbiddenPaths = ['/basket', '/login', '/signup', '/user', '/admin'];
+  const isShowSearch = !forbiddenPaths.includes(pathname);
+
   return (
     <div className={styles.root}>
-      <NavBar/>
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link to="/">
@@ -38,21 +39,23 @@ const Header: React.FC = () => {
             <p className={styles.logo__subtitle}>лучшая шаурма в мире</p>
           </div>
         </div>
-        {pathname !== '/basket' && <Search />}
-        <div className={styles.cart}>
-          <Link to="/basket" className={styles.cart__link}>
-            <span className={styles.cart__price}>{totalPrice} руб.</span>
-            <BsFillCartFill
-              className={styles.cart__icon}
-              style={{ color: '#df9408', transition: '0.15s' }}
-              onMouseOver={({ currentTarget }) => (currentTarget.style.color = '#ffa400')}
-              onMouseLeave={({ currentTarget }) => (currentTarget.style.color = '#df9408')}
-            />
-            <div className={styles.cart__circle}>
-              <span>{totalCount}</span>
-            </div>
-          </Link>
-        </div>
+        {isShowSearch && <Search />}
+        {isShowSearch && (
+          <div className={styles.cart}>
+            <Link to="/basket" className={styles.cart__link}>
+              <span className={styles.cart__price}>{totalPrice} руб.</span>
+              <BsFillCartFill
+                className={styles.cart__icon}
+                style={{ color: '#df9408', transition: '0.15s' }}
+                onMouseOver={({ currentTarget }) => (currentTarget.style.color = '#ffa400')}
+                onMouseLeave={({ currentTarget }) => (currentTarget.style.color = '#df9408')}
+              />
+              <div className={styles.cart__circle}>
+                <span>{totalCount}</span>
+              </div>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
