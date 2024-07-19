@@ -4,7 +4,7 @@ import { RootState } from '../../redux/store';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import { signup } from '../../http/userAPI';
-import { login, UserType } from '../../redux/slices/userSlice';
+import { loginUser, UserType } from '../../redux/slices/userSlice';
 
 import styles from './Signup.module.scss';
 
@@ -23,7 +23,7 @@ const Signup: React.FC = () => {
    
     if (res) {
         const data = {id: res.id, email: res.email, role: res.role};
-        dispatch(login(data));
+        dispatch(loginUser(data));
         if (user.isAdmin) navigate('/admin');
         if (user.isAuth) navigate('/user');
     }
