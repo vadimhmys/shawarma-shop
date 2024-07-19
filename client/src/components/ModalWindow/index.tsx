@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { addItem, BasketAddedComponentType } from '../../redux/slices/basketSlice';
@@ -37,7 +38,10 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
   const activeProp = shawarma.props[activeRadioBoxIndex];
   const totalPrice = formatPrice(
     activeProp.price +
-      addedIngredients.reduce((sum: number, ing: BasketAddedComponentType) => sum + ing.count * ing.price, 0),
+      addedIngredients.reduce(
+        (sum: number, ing: BasketAddedComponentType) => sum + ing.count * ing.price,
+        0,
+      ),
   );
   const urlForIngredients: string = 'http://localhost:7000/api/ingredients/getall';
   const urlForSauces: string = 'http://localhost:7000/api/sauces/getall';
@@ -74,6 +78,39 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
     dispatch(clearIngredients());
     dispatch(clearRemovedComponents());
     hideModalWindow();
+  };
+
+  const sendToBasket = async (item: any) => {
+    try {
+      const res = await axios.post('http://localhost:7000/api/basketshawarmas/create', item);
+      console.log('res: ', res);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
+  const onClickAddToDB = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const { id, title, image } = shawarma;
+    const cake = cakes[activeCakeIndex].value;
+    const weight = activeProp.weight;
+    const addedComponentsList = JSON.stringify([...addedIngredients]);
+    const removedComponentsList = JSON.stringify([...removedComponents]);
+    const uniqueShawaKey = id + cake + weight + addedComponentsList + removedComponentsList;
+    const item = {
+      uniqueShawaKey,
+      shawarmaId: id,
+      title,
+      image,
+      weight,
+      price: totalPrice,
+      cake,
+      addedComponentsList,
+      removedComponentsList,
+      count: 1,
+      basketId: 100 ////
+    };
+    sendToBasket(item);
   };
 
   const onClickClose = () => {
@@ -135,7 +172,13 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
                 ))}
             </ul>
             <div className={styles.footer}>
-              <Button handleClick={onClickAdd}>Добавить в корзину за {totalPrice} руб.</Button>
+              <Button
+                handleClick={(e) => {
+                  onClickAdd(e);
+                  onClickAddToDB(e);
+                }}>
+                Добавить в корзину за {totalPrice} руб.
+              </Button>
             </div>
           </form>
         </div>

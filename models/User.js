@@ -14,9 +14,17 @@ class User {
     return user;
   }
 
+  async getByEmail(email) {
+    const user = await UserMapping.findOne({ where: { email } });
+    if (!user) {
+      throw new Error('User not found in DB');
+    }
+    return user;
+  }
+
   async create(data) {
-    const { name, email, password, role } = data;
-    const user = await UserMapping.create({ name, email, password, role });
+    const { email, password, role } = data;
+    const user = await UserMapping.create({ email, password, role });
     return user;
   }
 

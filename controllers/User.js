@@ -1,7 +1,11 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import UserModel from '../models/User.js';
+import BasketModel from '../models/Basket.js';
 import AppError from '../errors/AppError.js';
+
+const maxAge = 60 * 60 * 1000 * 24 * 365;
+const signed = true;
 
 const makeJwt = (id, email, role) => {
   return jwt.sign({ id, email, role }, process.env.SECRET_KEY, { expiresIn: '24h' });
@@ -19,7 +23,15 @@ class User {
       }
       const hash = await bcrypt.hash(password, 5);
       const user = await UserModel.create({ email, password: hash, role });
+      if (!user?.id) {
+        throw new Error('User was not created');
+      }
+      const basket = await BasketModel.create(user.id);
+      if (!basket) {
+        throw new Error('Basket was not created');
+      }
       const token = makeJwt(user.id, user.email, user.role);
+      res.cookie('basketId', basket.id, { maxAge, signed });
       return res.json({ token });
     } catch (e) {
       next(AppError.badRequest(e.message));
@@ -29,12 +41,23 @@ class User {
   async login(req, res, next) {
     try {
       const { email, password } = req.body;
+      if (!email) {
+        throw new Error('Email not specified');
+      }
       const user = await UserModel.getByEmail(email);
+      if (!user) {
+        throw new Error('User not found in DB');
+      }
       let compare = bcrypt.compareSync(password, user.password);
       if (!compare) {
         throw new Error('Incorrect password specified');
       }
+      const basket = await BasketModel.getOne(user.id);
+      if (!basket) {
+        throw new Error('Basket was not created');
+      }
       const token = makeJwt(user.id, user.email, user.role);
+      res.cookie('basketId', basket.id, { maxAge, signed });
       return res.json({ token });
     } catch (e) {
       next(AppError.badRequest(e.message));
@@ -78,6 +101,14 @@ class User {
       }
       const hash = await bcrypt.hash(password, 5);
       const user = await UserModel.create({ email, password: hash, role });
+      if (!user?.id) {
+        throw new Error('User was not created');
+      }
+      const basket = await BasketModel.create(user.id);
+      if (!basket) {
+        throw new Error('Basket was not created');
+      }
+      res.cookie('basketId', basket.id, { maxAge, signed });
       return res.json(user);
     } catch (e) {
       next(AppError.badRequest(e.message));

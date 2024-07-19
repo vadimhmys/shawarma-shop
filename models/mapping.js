@@ -5,9 +5,8 @@ const { DataTypes } = database;
 
 const User = sequelize.define('user', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, unique: true, allowNull: false },
-  password: { type: DataTypes.STRING },
+  password: { type: DataTypes.STRING, allowNull: false },
   role: { type: DataTypes.STRING, defaultValue: 'USER' },
 });
 
@@ -39,8 +38,18 @@ const Sauce = sequelize.define('sauce', {
   price: { type: DataTypes.FLOAT, allowNull: false },
 });
 
-const BasketShawarma = sequelize.define('basket_shawarma', {
-  quantity: { type: DataTypes.INTEGER, defaultValue: 1 },
+const ShawarmaFromBasket = sequelize.define('shawarma_from_basket', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  uniqueShawaKey: { type: DataTypes.STRING, allowNull: false },
+  shawarmaId: { type: DataTypes.INTEGER, allowNull: false },
+  title: { type: DataTypes.STRING, allowNull: false },
+  image: { type: DataTypes.STRING, allowNull: false },
+  weight: { type: DataTypes.INTEGER, allowNull: false },
+  price: { type: DataTypes.STRING, allowNull: false },
+  cake: { type: DataTypes.STRING, allowNull: false },
+  count: { type: DataTypes.INTEGER, defaultValue: 1 },
+  addedComponentsList: { type: DataTypes.STRING, allowNull: false },
+  removedComponentsList: { type: DataTypes.STRING, allowNull: false },
 });
 
 const ShawarmaProp = sequelize.define('shawarma_prop', {
@@ -108,12 +117,8 @@ const Category = sequelize.define('category', {
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
 });
 
-Basket.belongsToMany(Shawarma, { through: BasketShawarma, onDelete: 'CASCADE' });
-Shawarma.belongsToMany(Basket, { through: BasketShawarma, onDelete: 'CASCADE' });
-Basket.hasMany(BasketShawarma);
-BasketShawarma.belongsTo(Basket);
-Shawarma.hasMany(BasketShawarma);
-BasketShawarma.belongsTo(Shawarma);
+Basket.hasMany(ShawarmaFromBasket, { onDelete: 'CASCADE' });
+ShawarmaFromBasket.belongsTo(Basket);
 
 Category.hasMany(Shawarma, { onDelete: 'RESTRICT' });
 Shawarma.belongsTo(Category);
@@ -130,13 +135,16 @@ OrderItem.belongsTo(Order);
 User.hasMany(Order, { as: 'orders', onDelete: 'SET NULL' });
 Order.belongsTo(User);
 
+User.hasOne(Basket, { onDelete: 'CASCADE' });
+Basket.belongsTo(User);
+
 export {
   User,
   Basket,
   Shawarma,
   Ingredient,
   Sauce,
-  BasketShawarma,
+  ShawarmaFromBasket,
   ShawarmaProp,
   ShawarmaComponent,
   Category,
