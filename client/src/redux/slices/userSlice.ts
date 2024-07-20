@@ -36,7 +36,7 @@ export const userSlice = createSlice({
       state.isAuth = true;
       state.isAdmin = role === 'ADMIN';
     },
-    logout(state) {
+    logoutUser(state) {
       state.id = null;
       state.email = null;
       state.isAuth = false;
@@ -45,6 +45,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { loginUser } = userSlice.actions;
+export const { loginUser, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;
