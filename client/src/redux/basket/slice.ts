@@ -1,30 +1,7 @@
-import { RootState } from './../store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { BasketItemType, IBasketState } from './types';
 
-export type BasketAddedComponentType = {
-  id: number;
-  name: string;
-  count: number;
-  price: number;
-};
-
-export type BasketItemType = {
-  id: number;
-  title: string;
-  image: string;
-  weight: number;
-  price: string;
-  cake: string;
-  count: number;
-  addedComponentsList: BasketAddedComponentType[];
-  removedComponentsList: string[];
-};
-
-interface BasketState {
-  items: BasketItemType[]
-}
-
-const initialState: BasketState = {
+const initialState: IBasketState = {
   items: [],
 };
 
@@ -109,7 +86,7 @@ export const basketSlice = createSlice({
   },
 });
 
-export const selectBasketItems = (state: RootState) => state.basket.items;
+
 export const { addItem, incrementItem, decrementItem, removeItem, clearBasket } =
   basketSlice.actions;
 

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../http/userAPI';
 import Button from '../../components/Button';
-import { logoutUser } from '../../redux/slices/userSlice';
+import { logoutUser } from '../../redux/user/slice';
 
 const User: React.FC = () => {
   const dispatch = useDispatch();

@@ -1,18 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BasketAddedComponentType } from './basketSlice';
+import { BasketAddedComponentType } from '../basket/types';
+import { IShawarmaState, RemoverIngredientType } from './types';
 
-type RemoverIngredientType = {
-  id: number;
-  name: string;
-  count: number;
-};
-
-export interface ShawarmaState {
-  addedIngredients: BasketAddedComponentType[];
-  removedComponents: string[];
-}
-
-const initialState: ShawarmaState = {
+const initialState: IShawarmaState = {
   addedIngredients: [],
   removedComponents: [],
 };

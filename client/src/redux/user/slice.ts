@@ -1,24 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IUserState, UserType } from './types';
 
-enum RolesEnum {
-  ADMIN = 'ADMIN',
-  USER = 'USER'
-}
-
-export type UserType = {
-  id: number;
-  email: string;
-  role: RolesEnum;
-};
-
-export interface UserState {
-  id: null | number,
-  email: null | string,
-  isAuth: boolean,
-  isAdmin: boolean,
-}
-
-const initialState: UserState = {
+const initialState: IUserState = {
   id: null,
   email: null,
   isAuth: false,

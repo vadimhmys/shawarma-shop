@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import filter from './slices/filterSlice';
-import basket from './slices/basketSlice';
-import shawarma from './slices/shawarmaSlice';
-import shawarmas from './slices/shawarmasSlice';
-import user from './slices/userSlice';
+import filter from './filter/slice';
+import basket from './basket/slice';
+import shawarma from './shawarma/slice';
+import shawarmas from './shawarmas/slice';
+import user from './user/slice';
 
 export const store = configureStore({
   reducer: {

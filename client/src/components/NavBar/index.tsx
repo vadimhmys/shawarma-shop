@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { selectUser } from '../../redux/user/selectors';
 import CheckAuth from '../CheckAuth/CheckAuth';
 
 import styles from './NavBar.module.scss';
 
 const NavBar: React.FC = () => {
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector(selectUser);
 
   return (
     <div className={styles.root}>

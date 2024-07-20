@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { clearBasket } from '../../../redux/slices/basketSlice';
+import { clearBasket } from '../../../redux/basket/slice';
 
 import styles from './BasketModalWindow.module.scss';
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setSort, SortCriteryEnum, SortType } from '../../redux/slices/filterSlice';
+import { SortCriteryEnum, SortType } from '../../redux/filter/types';
+import { setSort } from '../../redux/filter/slice';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 
 import styles from './Sorting.module.scss';

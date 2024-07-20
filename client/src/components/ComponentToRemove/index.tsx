@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addComponent, removeComponent } from '../../redux/slices/shawarmaSlice';
+import { addComponent, removeComponent } from '../../redux/shawarma/slice';
 import { HiArrowPath } from 'react-icons/hi2';
 import { TfiClose } from 'react-icons/tfi';
 

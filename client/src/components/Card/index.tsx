@@ -9,7 +9,7 @@ import ModalWindow from '../ModalWindow';
 
 import styles from './Card.module.scss';
 
-import { ShawarmaType } from '../../redux/slices/shawarmasSlice';
+import { ShawarmaType } from '../../redux/shawarmas/types';
 
 type CardPropsType = {
   shawarma: ShawarmaType;

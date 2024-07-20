@@ -1,25 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IFilterState, SortCriteryEnum, SortType } from './types';
 
-export enum SortCriteryEnum {
-  PRICE_DESC = 'price',
-  PRICE_ASC = '-price',
-  TITLE_DESC = 'title',
-  TITLE_ASC = '-title',
-};
-
-export type SortType = {
-  value: string;
-  sortCritery: SortCriteryEnum
-};
-
-interface FilterState {
-  searchValue: string;
-  categoryId: number;
-  currentPage: number;
-  sort: SortType;
-}
-
-const initialState: FilterState = {
+const initialState: IFilterState = {
   searchValue: '',
   categoryId: 0,
   currentPage: 1,
@@ -42,7 +24,7 @@ export const counterSlice = createSlice({
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
-    setFilterParams(state, action: PayloadAction<FilterState>) {
+    setFilterParams(state, action: PayloadAction<IFilterState>) {
       state.categoryId = Number(action.payload.categoryId);
       state.currentPage = Number(action.payload.currentPage);
       state.sort = action.payload.sort;

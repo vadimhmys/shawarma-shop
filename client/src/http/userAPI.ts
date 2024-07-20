@@ -1,4 +1,4 @@
-import { UserType } from '../redux/slices/userSlice';
+import { UserType } from '../redux/user/types';
 import { guestInstance, authInstance } from './index';
 import { jwtDecode } from 'jwt-decode';
 

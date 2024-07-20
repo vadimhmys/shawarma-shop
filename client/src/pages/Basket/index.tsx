@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { BasketItemType, selectBasketItems } from '../../redux/slices/basketSlice';
+import { BasketItemType } from '../../redux/basket/types';
+import { selectBasketItems } from '../../redux/basket/selectors';
 import { formatPrice } from '../../utils/formatPrice';
 import BasketItem from './BasketItem';
 import Button from '../../components/Button';

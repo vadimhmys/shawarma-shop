@@ -1,16 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import { signup } from '../../http/userAPI';
-import { loginUser, UserType } from '../../redux/slices/userSlice';
+import { loginUser } from '../../redux/user/slice';
+import { UserType } from '../../redux/user/types';
+import { selectUser } from '../../redux/user/selectors';
 
 import styles from './Signup.module.scss';
 
 const Signup: React.FC = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
   const [emailCurrent, setEmailCurrent] = React.useState('');
   const [passwordCurrent, setPasswordCurrent] = React.useState('');

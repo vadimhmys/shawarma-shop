@@ -3,7 +3,7 @@ import VariantItem from './VariantItem';
 
 import styles from './VariantList.module.scss';
 
-import type { CardPropertyType } from '../../redux/slices/shawarmasSlice';
+import type { CardPropertyType } from '../../redux/shawarmas/types';
 
 type VariantListPropsType = {
   propertyList: CardPropertyType[];

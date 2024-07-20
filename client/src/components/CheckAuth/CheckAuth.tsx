@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import { check } from '../../http/userAPI';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { loginUser } from '../../redux/slices/userSlice';
+import { loginUser } from '../../redux/user/slice';
+import { selectUser } from '../../redux/user/selectors';
 import { FaSpinner } from "react-icons/fa";
 
 type CheckAuthPropsType = {
@@ -11,7 +11,7 @@ type CheckAuthPropsType = {
 
 const CheckAuth: React.FC<CheckAuthPropsType> = ({children}) => {
   const dispath = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector(selectUser);
   const [checking, setChecking] = React.useState(true);
 
   React.useEffect(() => {

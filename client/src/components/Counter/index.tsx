@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addIngredient, removeIngredient } from '../../redux/slices/shawarmaSlice';
-import { decrementItem, incrementItem } from '../../redux/slices/basketSlice';
+import { addIngredient, removeIngredient } from '../../redux/shawarma/slice';
+import { decrementItem, incrementItem } from '../../redux/basket/slice';
 import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Counter.module.scss';

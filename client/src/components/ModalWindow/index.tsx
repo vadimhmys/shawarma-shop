@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { addItem, BasketAddedComponentType } from '../../redux/slices/basketSlice';
-import { clearIngredients, clearRemovedComponents } from '../../redux/slices/shawarmaSlice';
+import { BasketAddedComponentType } from '../../redux/basket/types';
+import { addItem } from '../../redux/basket/slice';
+import { clearIngredients, clearRemovedComponents } from '../../redux/shawarma/slice';
 import { formatPrice } from '../../utils/formatPrice';
 import Switcher from '../Switcher';
 import ComponentList from '../ComponentList';
@@ -12,7 +13,7 @@ import ComponentToRemove from '../ComponentToRemove';
 
 import styles from './ModalWindow.module.scss';
 
-import type { ShawarmaType } from '../../redux/slices/shawarmasSlice';
+import type { ShawarmaType } from '../../redux/shawarmas/types';
 
 type ModalWindowPropsType = {
   hideModalWindow: () => void;

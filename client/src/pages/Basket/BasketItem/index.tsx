@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeItem } from '../../../redux/slices/basketSlice';
+import { removeItem } from '../../../redux/basket/slice';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import Counter from '../../../components/Counter';
 import { formatPrice } from '../../../utils/formatPrice';

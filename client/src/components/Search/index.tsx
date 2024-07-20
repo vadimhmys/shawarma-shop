@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setSearchValue } from '../../redux/slices/filterSlice';
+import { setSearchValue } from '../../redux/filter/slice';
 import { CiSearch } from 'react-icons/ci';
 import { IoCloseOutline } from 'react-icons/io5';
 import { debounce } from '../../utils/debounce';

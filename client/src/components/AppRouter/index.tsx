@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { selectUser } from '../../redux/user/selectors';
 import Login from '../../pages/Login';
 import Signup from '../../pages/Signup';
 import NotFound from '../../pages/NotFound';
@@ -23,7 +23,7 @@ const authRoutes = [{ path: 'user', Component: User }, { path: 'basket', Compone
 const adminRoutes = [{ path: 'admin', Component: Admin }];
 
 const AppRouter: React.FC = () => {
-  const { isAuth, isAdmin } = useSelector((state: RootState) => state.user);
+  const { isAuth, isAdmin } = useSelector(selectUser);
 
   return (
     <Routes>

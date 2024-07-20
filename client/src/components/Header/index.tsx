@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { BasketItemType, selectBasketItems } from '../../redux/slices/basketSlice';
+import { BasketItemType } from '../../redux/basket/types';
+import { selectBasketItems } from '../../redux/basket/selectors';
 import { BsFillCartFill } from 'react-icons/bs';
 import Search from '../Search';
 import { formatPrice } from '../../utils/formatPrice';

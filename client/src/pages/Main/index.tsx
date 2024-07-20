@@ -3,8 +3,9 @@ import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../redux/store';
-import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/slices/filterSlice';
-import { fetchShawarmas, StatusEnum } from '../../redux/slices/shawarmasSlice';
+import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/filter/slice';
+import { fetchShawarmas } from '../../redux/shawarmas/asynsAction';
+import { StatusEnum } from '../../redux/shawarmas/types';
 
 import Card from '../../components/Card';
 import Categories from '../../components/Categories';
@@ -14,7 +15,7 @@ import Pagination from '../../components/Pagination';
 
 import styles from './Main.module.scss';
 
-import type { SearchShawarmaParamsType, ShawarmaType } from '../../redux/slices/shawarmasSlice';
+import type { SearchShawarmaParamsType, ShawarmaType } from '../../redux/shawarmas/types';
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
