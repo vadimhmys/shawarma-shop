@@ -1,3 +1,4 @@
+import { UserType } from '../redux/slices/userSlice';
 import { guestInstance, authInstance } from './index';
 import { jwtDecode } from 'jwt-decode';
 
@@ -40,9 +41,10 @@ export const check = async () => {
     }
     const response = await authInstance.get('user/check');
     userToken = response.data.token;
-    userData = jwtDecode(userToken);
+    userData = jwtDecode(userToken) as UserType;
     localStorage.setItem('token', userToken);
-    return userData;
+    const structuredData = {id: userData.id, email: userData.email, role: userData.role}
+    return structuredData;
   } catch (e) {
     localStorage.removeItem('token');
     return false;
