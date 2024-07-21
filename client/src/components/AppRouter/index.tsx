@@ -15,10 +15,11 @@ const publicRoutes = [
   { path: '', Component: Main },
   { path: 'login', Component: Login },
   { path: 'signup', Component: Signup },
+  { path: 'basket', Component: Basket },
   { path: '*', Component: NotFound },
 ];
 
-const authRoutes = [{ path: 'user', Component: User }, { path: 'basket', Component: Basket }];
+const authRoutes = [{ path: 'user', Component: User }];
 
 const adminRoutes = [{ path: 'admin', Component: Admin }];
 

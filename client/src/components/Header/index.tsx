@@ -20,8 +20,10 @@ const Header: React.FC = () => {
     ),
   );
   const { pathname } = useLocation();
-  const forbiddenPaths = ['/basket', '/login', '/signup', '/user', '/admin'];
-  const isShowSearch = !forbiddenPaths.includes(pathname);
+  const forbiddenPathsForSearch = ['/basket', '/login', '/signup', '/user', '/admin'];
+  const forbiddenPathsForBasket = ['/login', '/signup', '/user', '/admin'];
+  const isShowSearch = !forbiddenPathsForSearch.includes(pathname);
+  const isShowBasket = !forbiddenPathsForBasket.includes(pathname);
 
   return (
     <div className={styles.root}>
@@ -41,7 +43,7 @@ const Header: React.FC = () => {
           </div>
         </div>
         {isShowSearch && <Search />}
-        {isShowSearch && (
+        {isShowBasket && (
           <div className={styles.cart}>
             <Link to="/basket" className={styles.cart__link}>
               <span className={styles.cart__price}>{totalPrice} руб.</span>

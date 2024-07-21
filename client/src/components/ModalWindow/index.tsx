@@ -1,10 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { UserType } from '../../redux/user/types';
+import { selectUserIsAuth } from '../../redux/user/selectors';
+import { clearIngredients, clearRemovedComponents } from '../../redux/shawarma/slice';
+import { ShawarmaType } from '../../redux/shawarmas/types';
+import { selectShawarma } from '../../redux/shawarma/selectors';
 import { BasketAddedComponentType } from '../../redux/basket/types';
 import { addItem } from '../../redux/basket/slice';
-import { clearIngredients, clearRemovedComponents } from '../../redux/shawarma/slice';
 import { formatPrice } from '../../utils/formatPrice';
 import Switcher from '../Switcher';
 import ComponentList from '../ComponentList';
@@ -12,8 +17,6 @@ import Button from '../Button';
 import ComponentToRemove from '../ComponentToRemove';
 
 import styles from './ModalWindow.module.scss';
-
-import type { ShawarmaType } from '../../redux/shawarmas/types';
 
 type ModalWindowPropsType = {
   hideModalWindow: () => void;
@@ -32,7 +35,9 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
   initialRadioBoxIndex,
 }) => {
   const dispatch = useDispatch();
-  const { addedIngredients, removedComponents } = useSelector((state: RootState) => state.shawarma);
+  const navigate = useNavigate();
+  const { addedIngredients, removedComponents } = useSelector(selectShawarma);
+  const isAuth = useSelector(selectUserIsAuth);
   const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
   const shawarma: ShawarmaType = structuredClone(activeShawarma);
@@ -61,8 +66,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
     setActiveCakeIndex(index);
   };
 
-  const onClickAdd = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const onClickAddToState = () => {
     const { id, title, image } = shawarma;
     const item = {
       id,
@@ -78,40 +82,54 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
     dispatch(addItem(item));
     dispatch(clearIngredients());
     dispatch(clearRemovedComponents());
-    hideModalWindow();
   };
 
   const sendToBasket = async (item: any) => {
     try {
-      const res = await axios.post('http://localhost:7000/api/basketshawarmas/create', item);
-      console.log('res: ', res);
+      await axios.post('http://localhost:7000/api/basketshawarmas/create', item);
     } catch (error: any) {
       console.log(error.message);
     }
   };
 
-  const onClickAddToDB = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const onClickAddToDB = () => {
     const { id, title, image } = shawarma;
     const cake = cakes[activeCakeIndex].value;
     const weight = activeProp.weight;
     const addedComponentsList = JSON.stringify([...addedIngredients]);
     const removedComponentsList = JSON.stringify([...removedComponents]);
     const uniqueShawaKey = id + cake + weight + addedComponentsList + removedComponentsList;
-    const item = {
-      uniqueShawaKey,
-      shawarmaId: id,
-      title,
-      image,
-      weight,
-      price: totalPrice,
-      cake,
-      addedComponentsList,
-      removedComponentsList,
-      count: 1,
-      basketId: 100 ////
-    };
-    sendToBasket(item);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/signup');
+    } else {
+      const decodedToken = jwtDecode(token) as UserType;
+      const userId = decodedToken.id;
+      const item = {
+        uniqueShawaKey,
+        shawarmaId: id,
+        title,
+        image,
+        weight,
+        price: totalPrice,
+        cake,
+        addedComponentsList,
+        removedComponentsList,
+        count: 1,
+        userId,
+      };
+      sendToBasket(item);
+    }
+  };
+
+  const onClickAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isAuth) {
+      onClickAddToDB();
+    } else {
+      onClickAddToState();
+    }
+    hideModalWindow();
   };
 
   const onClickClose = () => {
@@ -174,10 +192,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
             </ul>
             <div className={styles.footer}>
               <Button
-                handleClick={(e) => {
-                  onClickAdd(e);
-                  onClickAddToDB(e);
-                }}>
+                handleClick={onClickAdd}>
                 Добавить в корзину за {totalPrice} руб.
               </Button>
             </div>

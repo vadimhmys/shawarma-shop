@@ -1,4 +1,5 @@
 import { ShawarmaFromBasket as ShawarmaFromBasketMapping } from './mapping.js';
+import Basket from '../models/Basket.js';
 
 class ShawarmaFromBasket {
   async create(data) {
@@ -13,6 +14,7 @@ class ShawarmaFromBasket {
       count,
       addedComponentsList,
       removedComponentsList,
+      userId,
     } = data;
     if (!uniqueShawaKey) {
       throw new Error('uniqueShawaKey missing');
@@ -44,6 +46,12 @@ class ShawarmaFromBasket {
     if (!removedComponentsList) {
       throw new Error('removedComponentsList missing');
     }
+    if (!userId) {
+      throw new Error('User id missing');
+    }
+
+    const basket = await Basket.getOne(userId);
+    const basketId = basket.id;
 
     const shawarma = await ShawarmaFromBasketMapping.create({
       uniqueShawaKey,
@@ -56,6 +64,7 @@ class ShawarmaFromBasket {
       count,
       addedComponentsList,
       removedComponentsList,
+      basketId,
     });
     
     return shawarma;
