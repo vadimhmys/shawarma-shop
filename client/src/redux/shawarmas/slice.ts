@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DataType, IShawarmasState, StatusEnum } from './types';
-import { fetchShawarmas } from './asynsAction';
+import { fetchShawarmas } from './asyncAction';
 
 const initialState: IShawarmasState = {
   shawarmas: [],

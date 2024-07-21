@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/filter/slice';
-import { fetchShawarmas } from '../../redux/shawarmas/asynsAction';
+import { fetchShawarmas } from '../../redux/shawarmas/asyncAction';
 import { StatusEnum } from '../../redux/shawarmas/types';
 
 import Card from '../../components/Card';
@@ -20,7 +20,9 @@ import type { SearchShawarmaParamsType, ShawarmaType } from '../../redux/shawarm
 const Main: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { categoryId, sort, currentPage, searchValue } = useSelector((state: RootState) => state.filter);
+  const { categoryId, sort, currentPage, searchValue } = useSelector(
+    (state: RootState) => state.filter,
+  );
   const { shawarmas, count, status } = useSelector((state: RootState) => state.shawarmas);
   const isMounted = React.useRef(false);
 
@@ -59,7 +61,9 @@ const Main: React.FC = () => {
       window.location.search &&
       window.location.search !== '?categoryId=0&sortBy=price&currentPage=1'
     ) {
-      const params = qs.parse(window.location.search.substring(1)) as unknown as SearchShawarmaParamsType;
+      const params = qs.parse(
+        window.location.search.substring(1),
+      ) as unknown as SearchShawarmaParamsType;
       const sort = sortingTypes.find((obj) => obj.sortCritery === params.sortBy);
       dispatch(
         setFilterParams({
@@ -96,7 +100,7 @@ const Main: React.FC = () => {
     <div className={styles.root}>
       <div className={styles.top}>
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sorting sortTitle={sort.value}/>
+        <Sorting sortTitle={sort.value} />
       </div>
       <h2 className={styles.title}>Шаурма</h2>
       {status === StatusEnum.ERROR ? (

@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +16,7 @@ import Button from '../Button';
 import ComponentToRemove from '../ComponentToRemove';
 
 import styles from './ModalWindow.module.scss';
+import { authInstance } from '../../http';
 
 type ModalWindowPropsType = {
   hideModalWindow: () => void;
@@ -86,7 +86,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
 
   const sendToBasket = async (item: any) => {
     try {
-      await axios.post('http://localhost:7000/api/basketshawarmas/create', item);
+      await authInstance.post('basketshawarmas/create', item);
     } catch (error: any) {
       console.log(error.message);
     }

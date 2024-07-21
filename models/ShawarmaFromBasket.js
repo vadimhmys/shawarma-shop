@@ -1,7 +1,25 @@
 import { ShawarmaFromBasket as ShawarmaFromBasketMapping } from './mapping.js';
-import Basket from '../models/Basket.js';
+import { Basket as BasketMapping } from './mapping.js';
 
 class ShawarmaFromBasket {
+  async getByUserId(id) {
+    if (!id) {
+      throw new Error('User id missing');
+    }
+
+    const basket = await BasketMapping.findOne({where: {userId: id}});
+
+    if (!basket) {
+      throw new Error('Basket id missing');
+    }
+
+    const basketId = basket.id;
+    const where = {};
+    where.basketId = basketId;
+    const shawarmas = await ShawarmaFromBasketMapping.findAll({where});
+    return shawarmas;
+  }
+
   async create(data) {
     const {
       uniqueShawaKey,

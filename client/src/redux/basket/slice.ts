@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BasketItemType, IBasketState } from './types';
+import { fetchShawarmasFromBasket } from './asyncAction';
+import { StatusEnum } from '../shawarmas/types';
 
 const initialState: IBasketState = {
   items: [],
+  status: StatusEnum.LOADING,
 };
 
 export const basketSlice = createSlice({
@@ -83,6 +86,21 @@ export const basketSlice = createSlice({
     clearBasket(state) {
       state.items = [];
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchShawarmasFromBasket.pending, (state) => {
+        state.items = [];
+        state.status = StatusEnum.LOADING;
+      })
+      .addCase(fetchShawarmasFromBasket.fulfilled, (state, action: PayloadAction<BasketItemType[]>) => {
+        state.items = action.payload;
+        state.status = StatusEnum.SUCCESS;
+      })
+      .addCase(fetchShawarmasFromBasket.rejected, (state) => {
+        state.items = [];
+        state.status = StatusEnum.ERROR;
+      });
   },
 });
 

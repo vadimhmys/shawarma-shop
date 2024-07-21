@@ -3,6 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { BasketItemType } from '../../redux/basket/types';
 import { selectBasketItems } from '../../redux/basket/selectors';
+import { fetchShawarmasFromBasket } from '../../redux/basket/asyncAction';
+import { selectUser } from '../../redux/user/selectors';
+import { useAppDispatch } from '../../redux/store';
 import { BsFillCartFill } from 'react-icons/bs';
 import Search from '../Search';
 import { formatPrice } from '../../utils/formatPrice';
@@ -10,6 +13,9 @@ import { formatPrice } from '../../utils/formatPrice';
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { id } = useSelector(selectUser);
+
   const items = useSelector(selectBasketItems);
   const totalCount = items.reduce((sum: number, item: BasketItemType) => sum + item.count, 0);
   const totalPrice = formatPrice(
@@ -24,6 +30,18 @@ const Header: React.FC = () => {
   const forbiddenPathsForBasket = ['/login', '/signup', '/user', '/admin'];
   const isShowSearch = !forbiddenPathsForSearch.includes(pathname);
   const isShowBasket = !forbiddenPathsForBasket.includes(pathname);
+
+  const getBasketItemsFromDB = React.useCallback(async () => {
+      dispatch(
+        fetchShawarmasFromBasket({id: String(id)})
+      );
+  }, [dispatch, id]);
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+    if (!id) return;
+    getBasketItemsFromDB();
+  }, [getBasketItemsFromDB, id]);
 
   return (
     <div className={styles.root}>
