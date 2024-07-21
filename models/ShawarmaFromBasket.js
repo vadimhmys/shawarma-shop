@@ -1,3 +1,4 @@
+import { where } from 'sequelize';
 import { ShawarmaFromBasket as ShawarmaFromBasketMapping } from './mapping.js';
 import { Basket as BasketMapping } from './mapping.js';
 
@@ -34,6 +35,7 @@ class ShawarmaFromBasket {
       removedComponentsList,
       userId,
     } = data;
+
     if (!uniqueShawaKey) {
       throw new Error('uniqueShawaKey missing');
     }
@@ -68,7 +70,7 @@ class ShawarmaFromBasket {
       throw new Error('User id missing');
     }
 
-    const basket = await Basket.getOne(userId);
+    const basket = await BasketMapping.findOne({where: {userId}});
     const basketId = basket.id;
 
     const shawarma = await ShawarmaFromBasketMapping.create({
@@ -84,7 +86,6 @@ class ShawarmaFromBasket {
       removedComponentsList,
       basketId,
     });
-    
     return shawarma;
   }
 }

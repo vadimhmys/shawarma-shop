@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { UserType } from '../../redux/user/types';
-import { selectUserIsAuth } from '../../redux/user/selectors';
+import { selectUser } from '../../redux/user/selectors';
 import { clearIngredients, clearRemovedComponents } from '../../redux/shawarma/slice';
 import { ShawarmaType } from '../../redux/shawarmas/types';
 import { selectShawarma } from '../../redux/shawarma/selectors';
@@ -17,6 +17,8 @@ import ComponentToRemove from '../ComponentToRemove';
 
 import styles from './ModalWindow.module.scss';
 import { authInstance } from '../../http';
+import { useAppDispatch } from '../../redux/store';
+import { fetchShawarmasFromBasket } from '../../redux/basket/asyncAction';
 
 type ModalWindowPropsType = {
   hideModalWindow: () => void;
@@ -34,10 +36,10 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
   activeShawarma,
   initialRadioBoxIndex,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { addedIngredients, removedComponents } = useSelector(selectShawarma);
-  const isAuth = useSelector(selectUserIsAuth);
+  const { id, isAuth } = useSelector(selectUser);
   const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
   const shawarma: ShawarmaType = structuredClone(activeShawarma);
@@ -87,6 +89,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
   const sendToBasket = async (item: any) => {
     try {
       await authInstance.post('basketshawarmas/create', item);
+      dispatch(fetchShawarmasFromBasket({id: String(id)}))
     } catch (error: any) {
       console.log(error.message);
     }

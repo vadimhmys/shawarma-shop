@@ -20,7 +20,7 @@ export type BasketItemType = {
 };
 
 export type UserIdParamsType = {
-  id: string;
+  id: string | null;
 };
 
 export type BasketItemsFromDBType = {
