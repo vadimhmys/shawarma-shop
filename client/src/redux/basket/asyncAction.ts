@@ -23,5 +23,12 @@ export const fetchShawarmasFromBasket = createAsyncThunk<BasketItemType[], UserI
   } else {
     return [];
   }
-  
+});
+
+export const fetchIncrementShawarma = createAsyncThunk<BasketItemsFromDBType, number>('basket/fetchIncrementShawarma', async (id) => {
+  const { data } = await authInstance.put<BasketItemsFromDBType>(
+    `http://localhost:7000/api/basketshawarmas/increment`,
+    {id}
+  );
+  return data;
 });

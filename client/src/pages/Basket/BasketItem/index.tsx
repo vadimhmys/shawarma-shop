@@ -86,7 +86,7 @@ const BasketItem: React.FC<BasketItemPropsType> = ({
           </div>
         </div>
         <div className={styles.wrapper}>
-          <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} />
+          <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} basketItemId={id}/>
           <div className={styles.sum}>{totalPrice} р.</div>
           <FaRegTrashCan onClick={() => onClickRemove(uniqueId)} className={styles.trash} />
         </div>

@@ -1,4 +1,3 @@
-import { where } from 'sequelize';
 import { ShawarmaFromBasket as ShawarmaFromBasketMapping } from './mapping.js';
 import { Basket as BasketMapping } from './mapping.js';
 
@@ -86,6 +85,19 @@ class ShawarmaFromBasket {
       removedComponentsList,
       basketId,
     });
+    return shawarma;
+  }
+
+  async increment(id) {
+    const shawarma = await ShawarmaFromBasketMapping.findByPk(id);
+
+    if (!shawarma) {
+      throw new Error('Shawarma with unique key is missing');
+    }
+
+    const newCount = shawarma.count + 1;
+    await shawarma.update({count: newCount});
+    await shawarma.reload();
     return shawarma;
   }
 }

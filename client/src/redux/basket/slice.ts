@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BasketItemType, IBasketState } from './types';
-import { fetchShawarmasFromBasket } from './asyncAction';
+import { BasketItemsFromDBType, BasketItemType, IBasketState } from './types';
+import { fetchIncrementShawarma, fetchShawarmasFromBasket } from './asyncAction';
 import { StatusEnum } from '../shawarmas/types';
 
 const initialState: IBasketState = {
@@ -100,7 +100,25 @@ export const basketSlice = createSlice({
       .addCase(fetchShawarmasFromBasket.rejected, (state) => {
         state.items = [];
         state.status = StatusEnum.ERROR;
-      });
+      })
+      .addCase(fetchIncrementShawarma.fulfilled, (state, action: PayloadAction<BasketItemsFromDBType>) => {
+        const {id, cake, weight, addedComponentsList, removedComponentsList } = action.payload;
+        const keyForSearch = id + cake + weight + addedComponentsList + removedComponentsList;
+        const findItem = state.items.find(
+          (item) =>
+            item.id +
+              item.cake +
+              item.weight +
+              JSON.stringify(item.addedComponentsList) +
+              JSON.stringify(item.removedComponentsList) ===
+            keyForSearch,
+        );
+        if (findItem) findItem.count++;
+      })
+      .addCase(fetchIncrementShawarma.rejected, (state) => {
+        state.items = [];
+        state.status = StatusEnum.ERROR;
+      })
   },
 });
 

@@ -1,12 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../redux/store';
 import { addIngredient, removeIngredient } from '../../redux/shawarma/slice';
 import { decrementItem, incrementItem } from '../../redux/basket/slice';
+import type { ComponentType } from '../ComponentList';
+import { useSelector } from 'react-redux';
+import { selectUserIsAuth } from '../../redux/user/selectors';
 import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Counter.module.scss';
-
-import type { ComponentType } from '../ComponentList';
+import { fetchIncrementShawarma } from '../../redux/basket/asyncAction';
 
 type CounterPropsType = {
   maxCount: number;
@@ -14,6 +16,7 @@ type CounterPropsType = {
   component?: ComponentType;
   initialValue?: number;
   uniqueId?: string;
+  basketItemId?: number;
 };
 
 const Counter: React.FC<CounterPropsType> = ({
@@ -22,8 +25,10 @@ const Counter: React.FC<CounterPropsType> = ({
   initialValue = 0,
   component,
   uniqueId,
+  basketItemId,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const isAuth = useSelector(selectUserIsAuth);
   const [multiplier, setMultiplier] = React.useState<number>(initialValue);
 
   const incrementCounter = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,9 +44,13 @@ const Counter: React.FC<CounterPropsType> = ({
           price: component.price,
         }),
       );
-    } else {
+    } else { //current case
       if (multiplier <= 10) {
-        dispatch(incrementItem(uniqueId));
+        if (isAuth && basketItemId) {
+          dispatch(fetchIncrementShawarma(basketItemId));
+        } else {
+          dispatch(incrementItem(uniqueId));
+        }
       }
     }
   };
@@ -58,7 +67,7 @@ const Counter: React.FC<CounterPropsType> = ({
           count: multiplier - 1,
         }),
       );
-    } else {
+    } else { //current case
       if (multiplier < 2) {
         setMultiplier(1);
         return;
