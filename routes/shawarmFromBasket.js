@@ -9,5 +9,6 @@ router.get('/getByUserId',authMiddleware, ShawarmaFromBasketController.getByUser
 router.post('/create',authMiddleware, ShawarmaFromBasketController.create);
 router.put('/increment',authMiddleware, ShawarmaFromBasketController.increment);
 router.put('/decrement',authMiddleware, ShawarmaFromBasketController.decrement);
+router.delete('/delete',authMiddleware, ShawarmaFromBasketController.delete);
 
 export default router;

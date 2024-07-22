@@ -63,6 +63,19 @@ class ShawarmaFromBasket {
       next(AppError.badRequest(e.message));
     }
   }
+
+  async delete(req, res, next) {
+    try {
+      const id = req.query?.id;
+      if (!id) {
+        throw new Error('Shawarma id is missing');
+      }
+      const shawarma = await ShawarmaFromBasketModel.delete(id);
+      res.json(shawarma);
+    } catch (e) {
+      next(AppError.badRequest(e.message));
+    }
+  }
 }
 
 export default new ShawarmaFromBasket();

@@ -113,6 +113,17 @@ class ShawarmaFromBasket {
     await shawarma.reload();
     return shawarma;
   }
+
+  async delete(id) {
+    const shawarma = await ShawarmaFromBasketMapping.findByPk(id);
+
+    if (!shawarma) {
+      throw new Error('Shawarma with unique key is missing');
+    }
+
+    await shawarma.destroy();
+    return shawarma;
+  }
 }
 
 export default new ShawarmaFromBasket();

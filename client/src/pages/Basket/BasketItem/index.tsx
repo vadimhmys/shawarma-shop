@@ -1,5 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../../redux/store';
+import { selectUserIsAuth } from '../../../redux/user/selectors';
+import { fetchDeleteShawarma } from '../../../redux/basket/asyncAction';
 import { removeItem } from '../../../redux/basket/slice';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import Counter from '../../../components/Counter';
@@ -37,7 +40,8 @@ const BasketItem: React.FC<BasketItemPropsType> = ({
   addedComponentsList,
   removedComponentsList,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const isAuth = useSelector(selectUserIsAuth);
   const uniqueId: string =
     id +
     cake +
@@ -47,7 +51,11 @@ const BasketItem: React.FC<BasketItemPropsType> = ({
   const totalPrice: string = formatPrice(parseFloat(price.replace(',', '.')) * count);
 
   const onClickRemove = (uniqueId: string) => {
-    dispatch(removeItem(uniqueId));
+    if (isAuth) {
+      dispatch(fetchDeleteShawarma(id))
+    } else {
+      dispatch(removeItem(uniqueId));
+    }
   };
 
   return (
