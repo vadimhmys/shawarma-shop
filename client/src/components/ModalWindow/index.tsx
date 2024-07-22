@@ -4,9 +4,12 @@ import { jwtDecode } from 'jwt-decode';
 import { useSelector } from 'react-redux';
 import { UserType } from '../../redux/user/types';
 import { selectUser } from '../../redux/user/selectors';
-import { clearIngredients, clearRemovedComponents } from '../../redux/shawarma/slice';
+import { clearAllData, clearIngredients, clearRemovedComponents } from '../../redux/shawarma/slice';
 import { ShawarmaType } from '../../redux/shawarmas/types';
 import { selectShawarma } from '../../redux/shawarma/selectors';
+import { authInstance } from '../../http';
+import { useAppDispatch } from '../../redux/store';
+import { fetchShawarmasFromBasket } from '../../redux/basket/asyncAction';
 import { BasketAddedComponentType } from '../../redux/basket/types';
 import { addItem } from '../../redux/basket/slice';
 import { formatPrice } from '../../utils/formatPrice';
@@ -16,9 +19,6 @@ import Button from '../Button';
 import ComponentToRemove from '../ComponentToRemove';
 
 import styles from './ModalWindow.module.scss';
-import { authInstance } from '../../http';
-import { useAppDispatch } from '../../redux/store';
-import { fetchShawarmasFromBasket } from '../../redux/basket/asyncAction';
 
 type ModalWindowPropsType = {
   hideModalWindow: () => void;
@@ -89,7 +89,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
   const sendToBasket = async (item: any) => {
     try {
       await authInstance.post('basketshawarmas/create', item);
-      dispatch(fetchShawarmasFromBasket({id: String(id)}))
+      dispatch(fetchShawarmasFromBasket({id: String(id)}));
+      dispatch(clearAllData());
     } catch (error: any) {
       console.log(error.message);
     }

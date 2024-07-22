@@ -43,6 +43,10 @@ export const shawarmaSlice = createSlice({
     clearRemovedComponents(state) {
       state.removedComponents = [];
     },
+    clearAllData(state) {
+      state.addedIngredients = [];
+      state.removedComponents = [];
+    },
   },
 });
 
@@ -53,6 +57,7 @@ export const {
   addComponent,
   removeComponent,
   clearRemovedComponents,
+  clearAllData,
 } = shawarmaSlice.actions;
 
 export default shawarmaSlice.reducer;

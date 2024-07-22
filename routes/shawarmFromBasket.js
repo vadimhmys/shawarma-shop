@@ -6,6 +6,6 @@ import adminMiddleware from '../middleware/adminMiddleware.js';
 const router = new express.Router();
 
 router.get('/getByUserId',authMiddleware, ShawarmaFromBasketController.getByUserId);
-router.post('/create',authMiddleware, /* adminMiddleware, */ ShawarmaFromBasketController.create);
+router.post('/create',authMiddleware, ShawarmaFromBasketController.create);
 
 export default router;

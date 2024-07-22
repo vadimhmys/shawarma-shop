@@ -17,7 +17,7 @@ class ShawarmaFromBasket {
     const basketId = basket.id;
     const where = {};
     where.basketId = basketId;
-    const shawarmas = await ShawarmaFromBasketMapping.findAll({where});
+    const shawarmas = await ShawarmaFromBasketMapping.findAll({where, order: ['createdAt']});
     return shawarmas;
   }
 
