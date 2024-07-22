@@ -100,6 +100,19 @@ class ShawarmaFromBasket {
     await shawarma.reload();
     return shawarma;
   }
+
+  async decrement(id) {
+    const shawarma = await ShawarmaFromBasketMapping.findByPk(id);
+
+    if (!shawarma) {
+      throw new Error('Shawarma with unique key is missing');
+    }
+
+    const newCount = shawarma.count - 1;
+    await shawarma.update({count: newCount});
+    await shawarma.reload();
+    return shawarma;
+  }
 }
 
 export default new ShawarmaFromBasket();

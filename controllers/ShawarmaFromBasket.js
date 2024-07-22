@@ -50,6 +50,19 @@ class ShawarmaFromBasket {
       next(AppError.badRequest(e.message));
     }
   }
+
+  async decrement(req, res, next) {
+    try {
+      const id = req.body?.id;
+      if (!id) {
+        throw new Error('Shawarma id is missing');
+      }
+      const shawarma = await ShawarmaFromBasketModel.decrement(id);
+      res.json(shawarma);
+    } catch (e) {
+      next(AppError.badRequest(e.message));
+    }
+  }
 }
 
 export default new ShawarmaFromBasket();

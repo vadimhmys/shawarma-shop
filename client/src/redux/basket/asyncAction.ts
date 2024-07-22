@@ -32,3 +32,11 @@ export const fetchIncrementShawarma = createAsyncThunk<BasketItemsFromDBType, nu
   );
   return data;
 });
+
+export const fetchDecrementShawarma = createAsyncThunk<BasketItemsFromDBType, number>('basket/fetchDecrementShawarma', async (id) => {
+  const { data } = await authInstance.put<BasketItemsFromDBType>(
+    `http://localhost:7000/api/basketshawarmas/decrement`,
+    {id}
+  );
+  return data;
+});

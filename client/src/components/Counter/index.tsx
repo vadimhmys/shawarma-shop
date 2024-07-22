@@ -2,13 +2,13 @@ import React from 'react';
 import { useAppDispatch } from '../../redux/store';
 import { addIngredient, removeIngredient } from '../../redux/shawarma/slice';
 import { decrementItem, incrementItem } from '../../redux/basket/slice';
+import { fetchDecrementShawarma, fetchIncrementShawarma } from '../../redux/basket/asyncAction';
 import type { ComponentType } from '../ComponentList';
 import { useSelector } from 'react-redux';
 import { selectUserIsAuth } from '../../redux/user/selectors';
 import { formatPrice } from '../../utils/formatPrice';
 
 import styles from './Counter.module.scss';
-import { fetchIncrementShawarma } from '../../redux/basket/asyncAction';
 
 type CounterPropsType = {
   maxCount: number;
@@ -44,7 +44,7 @@ const Counter: React.FC<CounterPropsType> = ({
           price: component.price,
         }),
       );
-    } else { //current case
+    } else {
       if (multiplier <= 10) {
         if (isAuth && basketItemId) {
           dispatch(fetchIncrementShawarma(basketItemId));
@@ -67,12 +67,16 @@ const Counter: React.FC<CounterPropsType> = ({
           count: multiplier - 1,
         }),
       );
-    } else { //current case
+    } else {
       if (multiplier < 2) {
         setMultiplier(1);
         return;
       }
-      dispatch(decrementItem(uniqueId));
+      if (isAuth && basketItemId) {
+        dispatch(fetchDecrementShawarma(basketItemId));
+      } else {
+        dispatch(decrementItem(uniqueId));
+      }
     }
   };
 
