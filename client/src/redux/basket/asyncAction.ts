@@ -47,3 +47,11 @@ export const fetchDeleteShawarma = createAsyncThunk<BasketItemsFromDBType, numbe
   );
   return data;
 });
+
+export const fetchClearBasket = createAsyncThunk<[], number>('basket/fetchClearBasket', async (id) => {
+  await authInstance.put<[]>(
+    `http://localhost:7000/api/basketshawarmas/clear`,
+    {id}
+  );
+  return [];
+});

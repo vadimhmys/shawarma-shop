@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BasketItemsFromDBType, BasketItemType, IBasketState } from './types';
-import { fetchDecrementShawarma, fetchDeleteShawarma, fetchIncrementShawarma, fetchShawarmasFromBasket } from './asyncAction';
+import { fetchClearBasket, fetchDecrementShawarma, fetchDeleteShawarma, fetchIncrementShawarma, fetchShawarmasFromBasket } from './asyncAction';
 import { StatusEnum } from '../shawarmas/types';
 
 const initialState: IBasketState = {
@@ -152,6 +152,16 @@ export const basketSlice = createSlice({
       })
       .addCase(fetchDeleteShawarma.rejected, (state) => {
         state.items = [];
+        state.status = StatusEnum.ERROR;
+      })
+      .addCase(fetchClearBasket.pending, (state) => {
+        state.status = StatusEnum.LOADING;
+      })
+      .addCase(fetchClearBasket.fulfilled, (state, action: PayloadAction<[]>) => {
+        state.items = action.payload;
+        state.status = StatusEnum.SUCCESS;
+      })
+      .addCase(fetchClearBasket.rejected, (state) => {
         state.status = StatusEnum.ERROR;
       })
   },

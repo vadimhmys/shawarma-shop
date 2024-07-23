@@ -1,6 +1,6 @@
 import ShawarmaFromBasketModel from '../models/ShawarmaFromBasket.js';
 import { ShawarmaFromBasket as ShawarmaFromBasketMapping } from '../models/mapping.js';
-import  Basket from '../models/Basket.js';
+import Basket from '../models/Basket.js';
 import AppError from '../errors/AppError.js';
 
 class ShawarmaFromBasket {
@@ -26,16 +26,18 @@ class ShawarmaFromBasket {
       }
 
       const basket = await Basket.getOne(userId);
-      const basketItem = await ShawarmaFromBasketMapping.findOne({where: {uniqueShawaKey, basketId: basket.id}});
+      const basketItem = await ShawarmaFromBasketMapping.findOne({
+        where: { uniqueShawaKey, basketId: basket.id },
+      });
       if (!basketItem) {
         shawarma = await ShawarmaFromBasketModel.create(req.body);
       } else {
         const newCount = basketItem.count + 1;
-        await basketItem.update({count: newCount});
+        await basketItem.update({ count: newCount });
         await basketItem.reload();
         shawarma = basketItem;
       }
-      
+
       res.json(shawarma);
     } catch (e) {
       next(AppError.badRequest(e.message));
@@ -76,6 +78,19 @@ class ShawarmaFromBasket {
       }
       const shawarma = await ShawarmaFromBasketModel.delete(id);
       res.json(shawarma);
+    } catch (e) {
+      next(AppError.badRequest(e.message));
+    }
+  }
+
+  async clear(req, res, next) {
+    try {
+      const userId = req.body.id;
+      if (!userId) {
+        throw new Error('User id is missing');
+      }
+      const result = ShawarmaFromBasketModel.clear(userId);
+      res.json(result);
     } catch (e) {
       next(AppError.badRequest(e.message));
     }

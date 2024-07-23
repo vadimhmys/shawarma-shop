@@ -124,6 +124,19 @@ class ShawarmaFromBasket {
     await shawarma.destroy();
     return shawarma;
   }
+
+  async clear(userId) {
+    let basket = await BasketMapping.findOne({
+      where: { userId },
+      attributes: ['id'],
+    });
+    if (!basket) {
+      throw new Error('Basket not found in database');
+    }
+
+    await ShawarmaFromBasketMapping.destroy({where: {basketId: basket.id}});
+    return [];
+  }
 }
 
 export default new ShawarmaFromBasket();
