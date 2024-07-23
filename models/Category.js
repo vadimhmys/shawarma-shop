@@ -2,7 +2,7 @@ import { Category as CategoryMapping } from './mapping.js';
 
 class Category {
   async getAll() {
-    const categories = await CategoryMapping.findAll({order: [['id', 'ASC']]});
+    const categories = await CategoryMapping.findAll({ order: [['id', 'ASC']] });
     return categories;
   }
 

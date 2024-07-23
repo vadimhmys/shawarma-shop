@@ -24,7 +24,7 @@ const ComponentList: React.FC<ComponentListPropsType> = ({ title, url }) => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const res: AxiosResponse = await axios.get(url);
+        const res: AxiosResponse = await axios.get(process.env.REACT_APP_API_URL + url);
         setComponents(res.data);
       } catch (err) {
         if (err instanceof Error) {

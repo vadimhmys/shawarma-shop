@@ -1,8 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
 import { useSelector } from 'react-redux';
-import { UserType } from '../../redux/user/types';
 import { selectUser } from '../../redux/user/selectors';
 import { clearAllData, clearIngredients, clearRemovedComponents } from '../../redux/shawarma/slice';
 import { ShawarmaType } from '../../redux/shawarmas/types';
@@ -37,9 +34,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
   initialRadioBoxIndex,
 }) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const { addedIngredients, removedComponents } = useSelector(selectShawarma);
-  const { id, isAuth } = useSelector(selectUser);
+  const { id: userId, isAuth } = useSelector(selectUser);
   const [activeRadioBoxIndex, setActiveRadioBoxIndex] = React.useState(initialRadioBoxIndex);
   const [activeCakeIndex, setActiveCakeIndex] = React.useState(0);
   const shawarma: ShawarmaType = structuredClone(activeShawarma);
@@ -51,8 +47,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
         0,
       ),
   );
-  const urlForIngredients: string = 'http://localhost:7000/api/ingredients/getall';
-  const urlForSauces: string = 'http://localhost:7000/api/sauces/getall';
+  const urlForIngredients: string = `ingredients/getall`;
+  const urlForSauces: string = 'sauces/getall';
   const titleForIngredients: string = 'Выберите ингредиенты';
   const titleForSauces: string = 'Выберите соусы';
   const cakes: CakeType[] = [
@@ -89,7 +85,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
   const sendToBasket = async (item: any) => {
     try {
       await authInstance.post('basketshawarmas/create', item);
-      dispatch(fetchShawarmasFromBasket({id: String(id)}));
+      dispatch(fetchShawarmasFromBasket({ id: String(userId) }));
       dispatch(clearAllData());
     } catch (error: any) {
       console.log(error.message);
@@ -103,27 +99,20 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
     const addedComponentsList = JSON.stringify([...addedIngredients]);
     const removedComponentsList = JSON.stringify([...removedComponents]);
     const uniqueShawaKey = id + cake + weight + addedComponentsList + removedComponentsList;
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/signup');
-    } else {
-      const decodedToken = jwtDecode(token) as UserType;
-      const userId = decodedToken.id;
-      const item = {
-        uniqueShawaKey,
-        shawarmaId: id,
-        title,
-        image,
-        weight,
-        price: totalPrice,
-        cake,
-        addedComponentsList,
-        removedComponentsList,
-        count: 1,
-        userId,
-      };
-      sendToBasket(item);
-    }
+    const item = {
+      uniqueShawaKey,
+      shawarmaId: id,
+      title,
+      image,
+      weight,
+      price: totalPrice,
+      cake,
+      addedComponentsList,
+      removedComponentsList,
+      count: 1,
+      userId,
+    };
+    sendToBasket(item);
   };
 
   const onClickAdd = (e: React.MouseEvent) => {
@@ -195,10 +184,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
                 ))}
             </ul>
             <div className={styles.footer}>
-              <Button
-                handleClick={onClickAdd}>
-                Добавить в корзину за {totalPrice} руб.
-              </Button>
+              <Button handleClick={onClickAdd}>Добавить в корзину за {totalPrice} руб.</Button>
             </div>
           </form>
         </div>

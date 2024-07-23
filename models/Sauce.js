@@ -45,11 +45,7 @@ class Sauce {
       FileService.delete(sauce.image);
     }
 
-    const {
-      name = sauce.name,
-      price = sauce.price,
-      image = file ? file : sauce.image,
-    } = data;
+    const { name = sauce.name, price = sauce.price, image = file ? file : sauce.image } = data;
     await sauce.update({ name, price, image });
     await sauce.reload();
     return sauce;

@@ -2,11 +2,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { BasketItemsFromDBType, BasketItemType, UserIdParamsType } from "./types";
 import { authInstance } from "../../http";
 
-export const fetchShawarmasFromBasket = createAsyncThunk<BasketItemType[], UserIdParamsType>('users/fetchShawarmasFromBasket', async (params) => {
+export const fetchShawarmasFromBasket = createAsyncThunk<BasketItemType[], UserIdParamsType>('basket/fetchShawarmasFromBasket', async (params) => {
   const { id } = params;
   if (id) {
     const { data } = await authInstance.get<BasketItemsFromDBType[]>(
-      `http://localhost:7000/api/basketshawarmas/getByUserId?id=${id}`,
+      `basketshawarmas/getByUserId?id=${id}`,
     );
     const result: BasketItemType[] = data.map(i => ({
       id: i.id,
@@ -25,15 +25,15 @@ export const fetchShawarmasFromBasket = createAsyncThunk<BasketItemType[], UserI
   }
 });
 
-export const fetchIncrementShawarma = createAsyncThunk<BasketItemsFromDBType, number>('basket/fetchIncrementShawarma', async (id) => {
+export const fetchIncrementShawarma = createAsyncThunk<BasketItemsFromDBType, number>('basket/fetchIncrementShawarmaFromBasket', async (id) => {
   const { data } = await authInstance.put<BasketItemsFromDBType>(
-    `http://localhost:7000/api/basketshawarmas/increment`,
+    `basketshawarmas/increment`,
     {id}
   );
   return data;
 });
 
-export const fetchDecrementShawarma = createAsyncThunk<BasketItemsFromDBType, number>('basket/fetchDecrementShawarma', async (id) => {
+export const fetchDecrementShawarma = createAsyncThunk<BasketItemsFromDBType, number>('basket/fetchDecrementShawarmaFromBasket', async (id) => {
   const { data } = await authInstance.put<BasketItemsFromDBType>(
     `http://localhost:7000/api/basketshawarmas/decrement`,
     {id}
@@ -41,16 +41,16 @@ export const fetchDecrementShawarma = createAsyncThunk<BasketItemsFromDBType, nu
   return data;
 });
 
-export const fetchDeleteShawarma = createAsyncThunk<BasketItemsFromDBType, number>('basket/fetchDeleteShawarma', async (id) => {
+export const fetchDeleteShawarma = createAsyncThunk<BasketItemsFromDBType, number>('basket/fetchDeleteShawarmaFromBasket', async (id) => {
   const { data } = await authInstance.delete<BasketItemsFromDBType>(
-    `http://localhost:7000/api/basketshawarmas/delete?id=${id}`
+    `basketshawarmas/delete?id=${id}`
   );
   return data;
 });
 
 export const fetchClearBasket = createAsyncThunk<[], number>('basket/fetchClearBasket', async (id) => {
   await authInstance.put<[]>(
-    `http://localhost:7000/api/basketshawarmas/clear`,
+    `basketshawarmas/clear`,
     {id}
   );
   return [];

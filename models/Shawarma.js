@@ -31,7 +31,10 @@ class Shawarma {
           { model: ShawarmaPropMapping, as: 'props' },
           { model: ShawarmaComponentMapping, as: 'components' },
         ],
-        order: [[`${sortBy}`, `${order}`], ['props', 'price', 'ASC']],
+        order: [
+          [`${sortBy}`, `${order}`],
+          ['props', 'price', 'ASC'],
+        ],
         distinct: true,
       });
     } else if (sortBy === 'price') {
@@ -49,7 +52,7 @@ class Shawarma {
       shawarmas.rows.sort((a, b) => a.props[0].price - b.props[0].price);
       if (order === 'DESC') shawarmas.rows.reverse();
     }
-  
+
     return shawarmas;
   }
 

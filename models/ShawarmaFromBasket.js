@@ -7,7 +7,7 @@ class ShawarmaFromBasket {
       throw new Error('User id missing');
     }
 
-    const basket = await BasketMapping.findOne({where: {userId: id}});
+    const basket = await BasketMapping.findOne({ where: { userId: id } });
 
     if (!basket) {
       throw new Error('Basket id missing');
@@ -16,7 +16,7 @@ class ShawarmaFromBasket {
     const basketId = basket.id;
     const where = {};
     where.basketId = basketId;
-    const shawarmas = await ShawarmaFromBasketMapping.findAll({where, order: ['createdAt']});
+    const shawarmas = await ShawarmaFromBasketMapping.findAll({ where, order: ['createdAt'] });
     return shawarmas;
   }
 
@@ -69,7 +69,7 @@ class ShawarmaFromBasket {
       throw new Error('User id missing');
     }
 
-    const basket = await BasketMapping.findOne({where: {userId}});
+    const basket = await BasketMapping.findOne({ where: { userId } });
     const basketId = basket.id;
 
     const shawarma = await ShawarmaFromBasketMapping.create({
@@ -96,7 +96,7 @@ class ShawarmaFromBasket {
     }
 
     const newCount = shawarma.count + 1;
-    await shawarma.update({count: newCount});
+    await shawarma.update({ count: newCount });
     await shawarma.reload();
     return shawarma;
   }
@@ -109,7 +109,7 @@ class ShawarmaFromBasket {
     }
 
     const newCount = shawarma.count - 1;
-    await shawarma.update({count: newCount});
+    await shawarma.update({ count: newCount });
     await shawarma.reload();
     return shawarma;
   }
@@ -134,7 +134,7 @@ class ShawarmaFromBasket {
       throw new Error('Basket not found in database');
     }
 
-    await ShawarmaFromBasketMapping.destroy({where: {basketId: basket.id}});
+    await ShawarmaFromBasketMapping.destroy({ where: { basketId: basket.id } });
     return [];
   }
 }
