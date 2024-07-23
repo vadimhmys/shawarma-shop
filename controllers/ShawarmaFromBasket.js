@@ -1,5 +1,6 @@
 import ShawarmaFromBasketModel from '../models/ShawarmaFromBasket.js';
 import { ShawarmaFromBasket as ShawarmaFromBasketMapping } from '../models/mapping.js';
+import  Basket from '../models/Basket.js';
 import AppError from '../errors/AppError.js';
 
 class ShawarmaFromBasket {
@@ -19,10 +20,13 @@ class ShawarmaFromBasket {
     try {
       let shawarma;
       const uniqueShawaKey = req.body?.uniqueShawaKey;
-      if (!uniqueShawaKey) {
-        throw new Error('Unique shawarma key is missing');
+      const userId = req.body?.userId;
+      if (!uniqueShawaKey || !userId) {
+        throw new Error('Unique shawarma key or user id are missing');
       }
-      const basketItem = await ShawarmaFromBasketMapping.findOne({where: {uniqueShawaKey}});
+
+      const basket = await Basket.getOne(userId);
+      const basketItem = await ShawarmaFromBasketMapping.findOne({where: {uniqueShawaKey, basketId: basket.id}});
       if (!basketItem) {
         shawarma = await ShawarmaFromBasketModel.create(req.body);
       } else {
