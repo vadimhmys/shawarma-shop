@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../../http/userAPI';
 import Button from '../../components/Button';
 import { logoutUser } from '../../redux/user/slice';
+import { clearBasket } from '../../redux/basket/slice';
 
 const User: React.FC = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const User: React.FC = () => {
   const handleLogout = (e: React.MouseEvent) => {
     logout();
     dispatch(logoutUser());
+    dispatch(clearBasket());
     navigate('/login', { replace: true });
   };
   return (

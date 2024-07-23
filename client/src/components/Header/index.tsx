@@ -27,7 +27,7 @@ const Header: React.FC = () => {
   );
   const { pathname } = useLocation();
   const forbiddenPathsForSearch = ['/basket', '/login', '/signup', '/user', '/admin'];
-  const forbiddenPathsForBasket = ['/login', '/signup', '/user', '/admin'];
+  const forbiddenPathsForBasket = ['/login', '/signup', '/admin'];
   const isShowSearch = !forbiddenPathsForSearch.includes(pathname);
   const isShowBasket = !forbiddenPathsForBasket.includes(pathname);
 
