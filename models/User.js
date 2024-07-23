@@ -24,6 +24,10 @@ class User {
 
   async create(data) {
     const { email, password, role } = data;
+    const check = await UserMapping.findOne({ where: { email } });
+    if (check) {
+      throw new Error('User already exists');
+    }
     const user = await UserMapping.create({ email, password, role });
     return user;
   }
