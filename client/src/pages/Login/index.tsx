@@ -1,8 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../redux/store';
 import { selectUser } from '../../redux/user/selectors';
 import { loginUser } from '../../redux/user/slice';
 import { UserType } from '../../redux/user/types';
+import { fetchShawarmasFromLS } from '../../redux/basket/asyncAction';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../http/userAPI';
 import Button from '../../components/Button';
@@ -10,11 +12,19 @@ import Button from '../../components/Button';
 import styles from './Login.module.scss';
 
 const Login: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
   const navigate = useNavigate();
   const [emailCurrent, setEmailCurrent] = React.useState('');
   const [passwordCurrent, setPasswordCurrent] = React.useState('');
+
+  const sendShawarmasFromLSToDB = async (id: number) => {
+    const json = localStorage.getItem('shawarmaBasket');
+    const items = json ? JSON.parse(json) : [];
+      if (items.length !== 0) {
+        dispatch(fetchShawarmasFromLS({items, userId: id}));
+      } 
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,6 +35,13 @@ const Login: React.FC = () => {
     if (res) {
       const data = {id: res.id, email: res.email, role: res.role};
       dispatch(loginUser(data));
+
+      try {
+        await sendShawarmasFromLSToDB(res.id);
+      } catch (error: any) {
+        console.log(error.message);
+      }
+
       if (user.isAdmin) navigate('/admin');
       if (user.isAuth) navigate('/user');
     }

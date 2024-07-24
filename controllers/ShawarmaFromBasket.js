@@ -95,6 +95,28 @@ class ShawarmaFromBasket {
       next(AppError.badRequest(e.message));
     }
   }
+
+  async recordAll(req, res, next) {
+    try {
+      const items = req.body.items;
+      const userId = req.body.userId;
+      if (!userId) {
+        throw new Error('User id is missing');
+      }
+      if (!items) {
+        throw new Error('No data to record');
+      }
+
+      if (!Array.isArray(items) || items.length === 0) {
+        throw new Error('The recording data is incorrect');
+      }
+      
+      const shawarmas = await ShawarmaFromBasketModel.recordAll(items, userId);
+      res.json(shawarmas);
+    } catch (e) {
+      next(AppError.badRequest(e.message));
+    }
+  }
 }
 
 export default new ShawarmaFromBasket();

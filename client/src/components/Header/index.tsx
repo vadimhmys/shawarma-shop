@@ -15,8 +15,8 @@ import styles from './Header.module.scss';
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useSelector(selectUser);
-
   const items = useSelector(selectBasketItems);
+  const isMounted = React.useRef(false);
   const totalCount = items.reduce((sum: number, item: BasketItemType) => sum + item.count, 0);
   const totalPrice = formatPrice(
     items.reduce(
@@ -42,6 +42,14 @@ const Header: React.FC = () => {
     if (!id) return;
     getBasketItemsFromDB();
   }, [getBasketItemsFromDB, id]);
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('shawarmaBasket', json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <div className={styles.root}>

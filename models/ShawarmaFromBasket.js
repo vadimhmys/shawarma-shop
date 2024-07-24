@@ -137,6 +137,46 @@ class ShawarmaFromBasket {
     await ShawarmaFromBasketMapping.destroy({ where: { basketId: basket.id } });
     return [];
   }
+
+  async recordAll(items, userId) {
+    let basket = await BasketMapping.findOne({
+      where: { userId },
+      attributes: ['id'],
+    });
+    if (!basket) {
+      throw new Error('Basket not found in database');
+    }
+
+    const records = items.map(async (item) => {
+      const { id, title, image, weight, price, cake, count } = item;
+      const addedComponentsList = JSON.stringify([...item.addedComponentsList]);
+      const removedComponentsList = JSON.stringify([...item.removedComponentsList]);
+      const uniqueShawaKey = id + cake + weight + addedComponentsList + removedComponentsList;
+      const shawarma = {
+        uniqueShawaKey,
+        shawarmaId: id,
+        title,
+        image,
+        weight,
+        price,
+        cake,
+        count,
+        addedComponentsList,
+        removedComponentsList,
+        basketId: basket.id,
+      };
+      return await ShawarmaFromBasketMapping.create(shawarma);
+    });
+
+    try {
+      await Promise.all(records);
+      await basket.reload();
+      const result = await ShawarmaFromBasketMapping.findAll({ where: { basketId: basket.id } });
+      return result;
+    } catch {
+      throw new Error('Failed to write data to cart');
+    }
+  }
 }
 
 export default new ShawarmaFromBasket();

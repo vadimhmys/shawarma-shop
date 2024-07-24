@@ -40,7 +40,7 @@ const Sauce = sequelize.define('sauce', {
 
 const ShawarmaFromBasket = sequelize.define('shawarma_from_basket', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  uniqueShawaKey: { type: DataTypes.STRING, allowNull: false },
+  uniqueShawaKey: { type: DataTypes.TEXT, allowNull: false },
   shawarmaId: { type: DataTypes.INTEGER, allowNull: false },
   title: { type: DataTypes.STRING, allowNull: false },
   image: { type: DataTypes.STRING, allowNull: false },
@@ -48,8 +48,8 @@ const ShawarmaFromBasket = sequelize.define('shawarma_from_basket', {
   price: { type: DataTypes.STRING, allowNull: false },
   cake: { type: DataTypes.STRING, allowNull: false },
   count: { type: DataTypes.INTEGER, defaultValue: 1 },
-  addedComponentsList: { type: DataTypes.STRING, allowNull: false },
-  removedComponentsList: { type: DataTypes.STRING, allowNull: false },
+  addedComponentsList: { type: DataTypes.TEXT, allowNull: false },
+  removedComponentsList: { type: DataTypes.TEXT, allowNull: false },
 });
 
 const ShawarmaProp = sequelize.define('shawarma_prop', {

@@ -10,5 +10,6 @@ router.put('/increment', authMiddleware, ShawarmaFromBasketController.increment)
 router.put('/decrement', authMiddleware, ShawarmaFromBasketController.decrement);
 router.delete('/delete', authMiddleware, ShawarmaFromBasketController.delete);
 router.put('/clear', authMiddleware, ShawarmaFromBasketController.clear);
+router.post('/recordAll', authMiddleware, ShawarmaFromBasketController.recordAll);
 
 export default router;

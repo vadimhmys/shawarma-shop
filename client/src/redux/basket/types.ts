@@ -40,6 +40,11 @@ export type BasketItemsFromDBType = {
   basketId: number;
 };
 
+export type ShawarmasFromLSParamsType = {
+  items: BasketItemType[];
+  userId: number;
+};
+
 export interface IBasketState {
   items: BasketItemType[],
   status: StatusEnum,
