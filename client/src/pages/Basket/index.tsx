@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { BasketItemType } from '../../redux/basket/types';
 import { selectBasketItems } from '../../redux/basket/selectors';
+import { selectUserIsAuth } from '../../redux/user/selectors';
 import { formatPrice } from '../../utils/formatPrice';
 import BasketItem from './BasketItem';
 import Button from '../../components/Button';
@@ -11,6 +13,8 @@ import EmptyBasket from './EmptyBasket';
 import styles from './Basket.module.scss';
 
 const Basket: React.FC = () => {
+  const navigate = useNavigate();
+  const isAuth = useSelector(selectUserIsAuth);
   const items = useSelector(selectBasketItems);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const totalCount = items.reduce((sum: number, item: BasketItemType) => sum + item.count, 0);
@@ -29,6 +33,12 @@ const Basket: React.FC = () => {
   const hideModalWindow = () => {
     setIsModalWindowVisible(false);
   };
+
+  const handleClick = () => {
+    if (!isAuth) {
+      navigate('/login');
+    }
+  }
 
   if (isEmpty) return <EmptyBasket />;
 
@@ -56,7 +66,7 @@ const Basket: React.FC = () => {
         <p className={styles.text}>
           Общее количество шавух: <span>{totalCount}</span> на сумму <span>{totalPrice}</span> руб.
         </p>
-        <Button>Оформить заказ</Button>
+        <Button handleClick={handleClick}>Оформить заказ</Button>
       </div>
       {isModalWindowVisible && <BasketModalWindow hideModalWindow={hideModalWindow} />}
     </div>
