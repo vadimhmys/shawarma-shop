@@ -66,14 +66,13 @@ const ShawarmaComponent = sequelize.define('shawarma_component', {
 
 const Order = sequelize.define('order', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  email: { type: DataTypes.STRING, allowNull: false },
+  userName: { type: DataTypes.STRING, allowNull: false },
   phone: { type: DataTypes.STRING, allowNull: false },
-  amount: { type: DataTypes.INTEGER, allowNull: false },
-  time: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 15 },
-  status: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-  comment: { type: DataTypes.STRING },
+  waitingTime: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 15 },
+  comment: { type: DataTypes.TEXT },
   payment: { type: DataTypes.STRING, allowNull: false, defaultValue: 'CASH' },
+  amount: { type: DataTypes.STRING, allowNull: false },
+  status: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
   prettyCreatedAt: {
     type: DataTypes.VIRTUAL,
     get() {
@@ -102,14 +101,13 @@ const Order = sequelize.define('order', {
 
 const OrderItem = sequelize.define('order_item', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  image: { type: DataTypes.STRING, allowNull: false },
+  title: { type: DataTypes.STRING, allowNull: false },
   weight: { type: DataTypes.INTEGER, allowNull: false },
-  price: { type: DataTypes.DECIMAL(5, 2), allowNull: false },
-  quantity: { type: DataTypes.INTEGER, allowNull: false },
+  price: { type: DataTypes.STRING, allowNull: false },
+  count: { type: DataTypes.INTEGER, allowNull: false },
   cake: { type: DataTypes.STRING, allowNull: false, defaultValue: 'USUAL' },
-  added: { type: DataTypes.STRING, defaultValue: '' },
-  deleted: { type: DataTypes.STRING, defaultValue: '' },
+  addedComponentsList: { type: DataTypes.TEXT, allowNull: false },
+  removedComponentsList: { type: DataTypes.TEXT, allowNull: false },
 });
 
 const Category = sequelize.define('category', {
