@@ -136,7 +136,7 @@ class Order {
   async userGetOne(req, res, next) {
     try {
       if (!req.params.id) {
-        throw new Error('Не указан id заказа');
+        throw new Error('Order id not specified');
       }
       const order = await OrderModel.getOne(req.params.id, req.auth.id);
       res.json(order);
