@@ -22,18 +22,18 @@ class Order {
       order = await OrderMapping.findOne({
         where: { id, userId },
         include: [
-          { model: OrderItemMapping, as: 'items', attributes: ['name', 'price', 'quantity'] },
+          { model: OrderItemMapping, as: 'items', attributes: ['title', 'weight', 'price', 'count', 'cake', 'addedComponentsList', 'removedComponentsList'] },
         ],
       });
     } else {
       order = await OrderMapping.findByPk(id, {
         include: [
-          { model: OrderItemMapping, as: 'items', attributes: ['name', 'price', 'quantity'] },
+          { model: OrderItemMapping, as: 'items', attributes: ['title', 'weight', 'price', 'count', 'cake', 'addedComponentsList', 'removedComponentsList'] },
         ],
       });
     }
     if (!order) {
-      throw new Error('Заказ не найден в БД');
+      throw new Error('Order not found in database');
     }
     return order;
   }

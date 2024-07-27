@@ -91,7 +91,7 @@ class Order {
   async adminGetUser(req, res, next) {
     try {
       if (!req.params.id) {
-        throw new Error('Не указан id пользователя');
+        throw new Error('User id not specified');
       }
       const order = await OrderModel.getAll(req.params.id);
       res.json(order);
@@ -103,7 +103,7 @@ class Order {
   async adminGetOne(req, res, next) {
     try {
       if (!req.params.id) {
-        throw new Error('Не указан id заказа');
+        throw new Error('Order id not specified');
       }
       const order = await OrderModel.getOne(req.params.id);
       res.json(order);
