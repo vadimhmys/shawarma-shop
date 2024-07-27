@@ -80,10 +80,10 @@ class Order {
 
   async delete(id) {
     let order = await OrderMapping.findByPk(id, {
-      include: [{ model: OrderItemMapping, attributes: ['name', 'price', 'quantity'] }],
+      include: [{ model: OrderItemMapping, as: 'items', attributes: ['title', 'weight', 'price', 'count', 'cake', 'addedComponentsList', 'removedComponentsList'] }],
     });
     if (!order) {
-      throw new Error('Заказ не найден в БД');
+      throw new Error('Order not found in database');
     }
     await order.destroy();
     return order;

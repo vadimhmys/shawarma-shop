@@ -115,7 +115,7 @@ class Order {
   async adminDelete(req, res, next) {
     try {
       if (!req.params.id) {
-        throw new Error('Не указан id заказа');
+        throw new Error('Order id not specified');
       }
       const order = await OrderModel.delete(req.params.id);
       res.json(order);
