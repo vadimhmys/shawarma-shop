@@ -20,18 +20,25 @@ class Order {
       if (!phone) throw new Error('User phone not provided');
       if (!waitingTime) throw new Error('Waiting time not provided');
 
-      let items, userId = null;
+      let items,
+        userId = null;
 
       if (type === 'admin') {
-        if (!req.body.items) { 
-          throw new Error('The contents of the order are not specified');
-        }
-
-        if (req.body.items.length === 0) {
-          throw new Error('The contents of the order are not specified');
-        }
-
         items = req.body.items;
+        if (!items) {
+          throw new Error('The contents of the order are not specified');
+        }
+
+        if (items.length === 0) {
+          throw new Error('The contents of the order are not specified');
+        }
+
+        items = items.map((item) => ({
+          ...item,
+          addedComponentsList: JSON.stringify(item.addedComponentsList),
+          removedComponentsList: JSON.stringify(item.removedComponentsList),
+        }));
+
         userId = req.body.userId ?? null;
 
         if (userId) {
@@ -61,8 +68,11 @@ class Order {
         items,
         userId,
       });
-      
-      await ShawarmaFromBasketModel.clear(userId);
+
+      if (userId) {
+        await ShawarmaFromBasketModel.clear(userId);
+      }
+
       res.json(order);
     } catch (e) {
       next(AppError.badRequest(e.message));
