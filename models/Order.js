@@ -22,13 +22,37 @@ class Order {
       order = await OrderMapping.findOne({
         where: { id, userId },
         include: [
-          { model: OrderItemMapping, as: 'items', attributes: ['title', 'weight', 'price', 'count', 'cake', 'addedComponentsList', 'removedComponentsList'] },
+          {
+            model: OrderItemMapping,
+            as: 'items',
+            attributes: [
+              'title',
+              'weight',
+              'price',
+              'count',
+              'cake',
+              'addedComponentsList',
+              'removedComponentsList',
+            ],
+          },
         ],
       });
     } else {
       order = await OrderMapping.findByPk(id, {
         include: [
-          { model: OrderItemMapping, as: 'items', attributes: ['title', 'weight', 'price', 'count', 'cake', 'addedComponentsList', 'removedComponentsList'] },
+          {
+            model: OrderItemMapping,
+            as: 'items',
+            attributes: [
+              'title',
+              'weight',
+              'price',
+              'count',
+              'cake',
+              'addedComponentsList',
+              'removedComponentsList',
+            ],
+          },
         ],
       });
     }
@@ -41,10 +65,7 @@ class Order {
   async create(data) {
     const items = data.items;
     const amount = formatter.format(
-      items.reduce(
-        (sum, item) => sum + item.count * parseFloat(item.price.replace(',', '.')),
-        0,
-      ),
+      items.reduce((sum, item) => sum + item.count * parseFloat(item.price.replace(',', '.')), 0),
     );
     const { userName, phone, waitingTime, comment = null, payment, userId = null } = data;
     const order = await OrderMapping.create({
@@ -56,7 +77,7 @@ class Order {
       amount,
       userId,
     });
-    
+
     for (let item of items) {
       await OrderItemMapping.create({
         title: item.title,
@@ -69,10 +90,22 @@ class Order {
         orderId: order.id,
       });
     }
-    
+
     const created = await OrderMapping.findByPk(order.id, {
       include: [
-        { model: OrderItemMapping, as: 'items', attributes: ['title', 'weight', 'price', 'count', 'cake', 'addedComponentsList', 'removedComponentsList'] },
+        {
+          model: OrderItemMapping,
+          as: 'items',
+          attributes: [
+            'title',
+            'weight',
+            'price',
+            'count',
+            'cake',
+            'addedComponentsList',
+            'removedComponentsList',
+          ],
+        },
       ],
     });
     return created;
@@ -80,7 +113,21 @@ class Order {
 
   async delete(id) {
     let order = await OrderMapping.findByPk(id, {
-      include: [{ model: OrderItemMapping, as: 'items', attributes: ['title', 'weight', 'price', 'count', 'cake', 'addedComponentsList', 'removedComponentsList'] }],
+      include: [
+        {
+          model: OrderItemMapping,
+          as: 'items',
+          attributes: [
+            'title',
+            'weight',
+            'price',
+            'count',
+            'cake',
+            'addedComponentsList',
+            'removedComponentsList',
+          ],
+        },
+      ],
     });
     if (!order) {
       throw new Error('Order not found in database');

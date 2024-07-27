@@ -45,11 +45,11 @@ class Order {
           await UserModel.getOne(userId);
         }
       } else {
-        if (!req.body.id) {
+        userId = req.auth?.id ?? null;
+        if (!userId) {
           throw new Error('User id is not specified');
         }
 
-        userId = req.body.id;
         const basket = await BasketModel.getOne(userId);
 
         if (!basket) {
