@@ -4,12 +4,14 @@ import PageTitle from '../../components/PageTitle';
 import styles from './Order.module.scss';
 
 const intervals = [15, 20, 25, 30, 35, 40, 45];
+const paymentMethods = ["Наличными в заведении", "Картой в заведении"];
 
 const Order: React.FC = () => {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [comment, setComment] = React.useState('');
   const [time, setTime] = React.useState(15);
+  const [paymentMethod, setPaymentMethod] = React.useState('Выберите способ оплаты');
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -25,6 +27,10 @@ const Order: React.FC = () => {
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
+  };
+
+  const handlePaymentChange = (paymentMethod: string) => {
+    setPaymentMethod(paymentMethod);
   };
 
   return (
@@ -67,7 +73,7 @@ const Order: React.FC = () => {
             type="text"
             name="time"
             value={`${time} минут`}
-            onChange={() => {}}
+            readOnly
           />
           <div className={styles.select}>
             {intervals.map((i) => (
@@ -93,6 +99,32 @@ const Order: React.FC = () => {
             name="comment"
             value={comment}
             onChange={handleCommentChange}></textarea>
+        </div>
+        <div className={styles.info}>
+          <h3>Оплата</h3>
+          <p>Выберите способ оплаты</p>
+          <input
+            className={styles.input}
+            type="text"
+            name="payment"
+            value={paymentMethod}
+            readOnly
+          />
+          <div className={styles.select}>
+            {paymentMethods.map((pm, idx) => (
+              <div className={styles.radioBox} key={pm}>
+                <input
+                  type="radio"
+                  name="radio-payment"
+                  id={`payment-${idx}`}
+                  value={pm}
+                  onChange={() => handlePaymentChange(pm)}
+                  checked={pm === paymentMethod}
+                />
+                <label htmlFor={`payment-${idx}`}>{pm}</label>
+              </div>
+            ))}
+          </div>
         </div>
       </form>
     </div>
