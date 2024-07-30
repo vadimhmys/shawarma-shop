@@ -12,6 +12,7 @@ import Categories from '../../components/Categories';
 import Sorting, { sortingTypes } from '../../components/Sorting';
 import CardLoader from '../../components/Card/CardLoader';
 import Pagination from '../../components/Pagination';
+import PageTitle from '../../components/PageTitle';
 
 import styles from './Main.module.scss';
 
@@ -102,7 +103,8 @@ const Main: React.FC = () => {
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sorting sortTitle={sort.value} />
       </div>
-      <h2 className={styles.title}>Шаурма</h2>
+      {/* <h2 className={styles.title}>Шаурма</h2> */}
+      <PageTitle>Шаурма</PageTitle>
       {status === StatusEnum.ERROR ? (
         <div className={styles.errorInfo}>
           <h2 className={styles.errorInfo__title}>Ошибка получения шавух</h2>

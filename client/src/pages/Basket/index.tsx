@@ -9,6 +9,7 @@ import BasketItem from './BasketItem';
 import Button from '../../components/Button';
 import BasketModalWindow from './BasketModalWindow';
 import EmptyBasket from './EmptyBasket';
+import PageTitle from '../../components/PageTitle';
 
 import styles from './Basket.module.scss';
 
@@ -46,7 +47,7 @@ const Basket: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <h2 className={styles.title}>Корзина</h2>
+      <PageTitle>Корзина</PageTitle>
       <button className={styles.clearBtn} onClick={showModalWindow}>
         Очистить корзину
       </button>
