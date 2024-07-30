@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { BasketItemType } from '../../redux/basket/types';
 import { selectBasketItems } from '../../redux/basket/selectors';
 import { selectUserIsAuth } from '../../redux/user/selectors';
-import { formatPrice } from '../../utils/formatPrice';
+import { getTotalPrice } from '../../utils/getTotalPrice';
 import BasketItem from './BasketItem';
 import Button from '../../components/Button';
 import BasketModalWindow from './BasketModalWindow';
@@ -19,12 +19,7 @@ const Basket: React.FC = () => {
   const items = useSelector(selectBasketItems);
   const [isModalWindowVisible, setIsModalWindowVisible] = React.useState(false);
   const totalCount = items.reduce((sum: number, item: BasketItemType) => sum + item.count, 0);
-  const totalPrice = formatPrice(
-    items.reduce(
-      (sum: number, item: BasketItemType) => sum + item.count * parseFloat(item.price.replace(',', '.')),
-      0,
-    ),
-  );
+  const totalPrice = getTotalPrice(items);
   const isEmpty = items.length === 0;
 
   const showModalWindow = () => {

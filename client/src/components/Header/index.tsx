@@ -8,7 +8,7 @@ import { selectUser } from '../../redux/user/selectors';
 import { useAppDispatch } from '../../redux/store';
 import { BsFillCartFill } from 'react-icons/bs';
 import Search from '../Search';
-import { formatPrice } from '../../utils/formatPrice';
+import { getTotalPrice } from '../../utils/getTotalPrice';
 
 import styles from './Header.module.scss';
 
@@ -18,13 +18,7 @@ const Header: React.FC = () => {
   const items = useSelector(selectBasketItems);
   const isMounted = React.useRef(false);
   const totalCount = items.reduce((sum: number, item: BasketItemType) => sum + item.count, 0);
-  const totalPrice = formatPrice(
-    items.reduce(
-      (sum: number, item: BasketItemType) =>
-        sum + item.count * parseFloat(item.price.replace(',', '.')),
-      0,
-    ),
-  );
+  const totalPrice = getTotalPrice(items);
   const { pathname } = useLocation();
   const forbiddenPathsForSearch = ['/basket', '/login', '/signup', '/user', '/admin'];
   const forbiddenPathsForBasket = ['/login', '/signup', '/admin'];
