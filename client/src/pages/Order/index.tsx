@@ -2,6 +2,7 @@ import React from 'react';
 import PageTitle from '../../components/PageTitle';
 
 import styles from './Order.module.scss';
+import Button from '../../components/Button';
 
 const intervals = [15, 20, 25, 30, 35, 40, 45];
 const paymentMethods = ["Наличными в заведении", "Картой в заведении"];
@@ -125,6 +126,10 @@ const Order: React.FC = () => {
               </div>
             ))}
           </div>
+        </div>
+        <div className={styles.bottom}>
+          <p>Заказ на сумму: <span>10</span> руб.</p>
+          <Button>Оформить заказ</Button>
         </div>
       </form>
     </div>
