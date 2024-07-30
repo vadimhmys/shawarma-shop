@@ -52,6 +52,7 @@
   border-radius: 4px;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
   z-index: 100;
+  display: none;
 
   &::-webkit-scrollbar {
     width: 2px;
@@ -121,5 +122,33 @@
     input[type="radio"]:checked + label:after {
       opacity: 1;
     }
+  }
+}
+
+.comment {
+  resize: vertical;
+  min-height: 35px;
+  height: 32px;
+  max-height: 100px;
+  overflow: auto;
+  border: none;
+  border-bottom: 1px solid $gray-light;
+  padding: 5px 15px 5px 0;
+  width: 100%;
+  color: $dark-font;
+  border-radius: 0;
+  background-color: $bg-form;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: $pink;
+  }
+
+  &:focus {
+    border-color: $gray-dark;
   }
 }

@@ -8,6 +8,7 @@ const intervals = [15, 20, 25, 30, 35, 40, 45];
 const Order: React.FC = () => {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
+  const [comment, setComment] = React.useState('');
   const [time, setTime] = React.useState(15);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +21,10 @@ const Order: React.FC = () => {
 
   const handleTimeChange = (interval: number) => {
     setTime(interval);
+  };
+
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
   };
 
   return (
@@ -67,11 +72,27 @@ const Order: React.FC = () => {
           <div className={styles.select}>
             {intervals.map((i) => (
               <div className={styles.radioBox} key={i}>
-                <input type="radio" name="radio-time" id={`time-${i}`} value={`${i} минут`} onChange={() => handleTimeChange(i)} checked={i === time} />
+                <input
+                  type="radio"
+                  name="radio-time"
+                  id={`time-${i}`}
+                  value={`${i} минут`}
+                  onChange={() => handleTimeChange(i)}
+                  checked={i === time}
+                />
                 <label htmlFor={`time-${i}`}>{i} минут</label>
               </div>
             ))}
           </div>
+        </div>
+        <div className={styles.info}>
+          <h3>Комментарий</h3>
+          <p>Здесь вы можете оставить комментарий к заказу</p>
+          <textarea
+            className={styles.comment}
+            name="comment"
+            value={comment}
+            onChange={handleCommentChange}></textarea>
         </div>
       </form>
     </div>
