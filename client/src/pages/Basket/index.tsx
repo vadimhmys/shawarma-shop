@@ -37,6 +37,8 @@ const Basket: React.FC = () => {
   const handleClick = () => {
     if (!isAuth) {
       navigate('/login');
+    } else {
+      navigate('/order');
     }
   }
 
@@ -66,7 +68,7 @@ const Basket: React.FC = () => {
         <p className={styles.text}>
           Общее количество шавух: <span>{totalCount}</span> на сумму <span>{totalPrice}</span> руб.
         </p>
-        <Button handleClick={handleClick}>Оформить заказ</Button>
+        <Button handleClick={handleClick}>К оформлению заказа</Button>
       </div>
       {isModalWindowVisible && <BasketModalWindow hideModalWindow={hideModalWindow} />}
     </div>

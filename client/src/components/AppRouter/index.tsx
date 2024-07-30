@@ -10,6 +10,7 @@ import User from '../../pages/User';
 import Admin from '../../pages/Admin';
 import MainLayout from '../../layouts/MainLayout';
 import Basket from '../../pages/Basket';
+import Order from '../../pages/Order';
 
 const publicRoutes = [
   { path: '', Component: Main },
@@ -19,7 +20,7 @@ const publicRoutes = [
   { path: '*', Component: NotFound },
 ];
 
-const authRoutes = [{ path: 'user', Component: User }];
+const authRoutes = [{ path: 'user', Component: User }, { path: 'order', Component: Order }];
 
 const adminRoutes = [{ path: 'admin', Component: Admin }];
 
