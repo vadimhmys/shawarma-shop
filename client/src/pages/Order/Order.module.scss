@@ -5,23 +5,23 @@
   padding-bottom: 110px;
 }
 
-.info {
+.field {
   width: 50%;
   margin-bottom: 15px;
   position: relative;
 
-  h3 {
+  &__title {
     font-family: "Lugrasimo", cursive;
     color: $dark-font;
   }
 
-  p {
+  &__subtitle {
     font-size: 14px;
     font-family: "Lugrasimo", cursive;
     color: $gray-font;
   }
 
-  .input {
+  &__input {
     border: none;
     border-bottom: 1px solid $gray-light;
     padding: 5px 15px 5px 0;
@@ -36,7 +36,12 @@
   }
 
   .required {
-    display: none;
+    font-size: 14px;
+    font-family: "Lugrasimo", cursive;
+    color: $pink;
+    position: absolute;
+    left: 10px;
+    bottom: -20px;
   }
 }
 
