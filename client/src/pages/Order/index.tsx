@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { IOrderFields } from '../../@types/app.interface';
 
 import styles from './Order.module.scss';
+import InputName from './InputName';
 
 /* const intervals = [15, 20, 25, 30, 35, 40, 45];
 const paymentMethods = ["Наличными в заведении", "Картой в заведении"]; */
@@ -130,26 +131,7 @@ const Order: React.FC = () => {
     <div>
       <PageTitle>Оформление заказа</PageTitle>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} name="order-form">
-        <div className={styles.field}>
-          <h3 className={styles.field__title}>Имя</h3>
-          <p className={styles.field__subtitle}>Укажите ваше имя</p>
-          <input
-            className={styles.field__input}
-            {...register('name', {
-              required: 'Это поле обязательно!',
-              minLength: {
-                value: 2,
-                message: 'Слишком короткое имя',
-              },
-              maxLength: {
-                value: 15,
-                message: 'Слишком длинное имя',
-              },
-            })}
-            maxLength={16}
-          />
-          {errors?.name && <p className={styles.required}>{errors.name.message}</p>}
-        </div>
+        <InputName errors={errors} register={register}/>
         <div className={styles.bottom}>
           <p>
             Заказ на сумму: <span>{getTotalPrice(items)}</span> руб.
