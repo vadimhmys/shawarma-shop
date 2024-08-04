@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../redux/store';
 import { addIngredient, removeIngredient } from '../../redux/shawarma/slice';
 import { decrementItem, incrementItem } from '../../redux/basket/slice';
 import { fetchDecrementShawarma, fetchIncrementShawarma } from '../../redux/basket/asyncAction';
-import type { ComponentType } from '../ComponentList';
+import type { ComponentType } from '../../components/ComponentList';
 import { useSelector } from 'react-redux';
 import { selectUserIsAuth } from '../../redux/user/selectors';
 import { formatPrice } from '../../utils/formatPrice';

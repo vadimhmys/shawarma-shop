@@ -7,7 +7,7 @@ import { UserType } from '../../redux/user/types';
 import { fetchShawarmasFromLS } from '../../redux/basket/asyncAction';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../http/userAPI';
-import Button from '../../components/Button';
+import Button from '../../ui-kit/Button';
 
 import styles from './Login.module.scss';
 
@@ -21,19 +21,19 @@ const Login: React.FC = () => {
   const sendShawarmasFromLSToDB = async (id: number) => {
     const json = localStorage.getItem('shawarmaBasket');
     const items = json ? JSON.parse(json) : [];
-      if (items.length !== 0) {
-        dispatch(fetchShawarmasFromLS({items, userId: id}));
-      } 
+    if (items.length !== 0) {
+      dispatch(fetchShawarmasFromLS({ items, userId: id }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const email = emailCurrent.trim();
     const password = passwordCurrent.trim();
-    const res = await login(email, password) as UserType;
+    const res = (await login(email, password)) as UserType;
 
     if (res) {
-      const data = {id: res.id, email: res.email, role: res.role};
+      const data = { id: res.id, email: res.email, role: res.role };
       dispatch(loginUser(data));
 
       try {

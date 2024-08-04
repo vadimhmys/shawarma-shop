@@ -10,9 +10,9 @@ import { fetchShawarmasFromBasket } from '../../redux/basket/asyncAction';
 import { BasketAddedComponentType } from '../../redux/basket/types';
 import { addItem } from '../../redux/basket/slice';
 import { formatPrice } from '../../utils/formatPrice';
-import Switcher from '../Switcher';
+import Switcher from '../../ui-kit/Switcher';
 import ComponentList from '../ComponentList';
-import Button from '../Button';
+import Button from '../../ui-kit/Button';
 import ComponentToRemove from '../ComponentToRemove';
 
 import styles from './ModalWindow.module.scss';

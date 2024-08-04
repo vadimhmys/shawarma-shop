@@ -1,14 +1,15 @@
 import React from 'react';
 import PageTitle from '../../components/PageTitle';
-import Button from '../../components/Button';
+import Button from '../../ui-kit/Button';
 import { useSelector } from 'react-redux';
 import { selectBasketItems } from '../../redux/basket/selectors';
 import { getTotalPrice } from '../../utils/getTotalPrice';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IOrderFields } from '../../@types/app.interface';
+import InputName from './InputName';
+import InputPhone from './InputPhone';
 
 import styles from './Order.module.scss';
-import InputName from './InputName';
 
 /* const intervals = [15, 20, 25, 30, 35, 40, 45];
 const paymentMethods = ["Наличными в заведении", "Картой в заведении"]; */
@@ -131,7 +132,8 @@ const Order: React.FC = () => {
     <div>
       <PageTitle>Оформление заказа</PageTitle>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} name="order-form">
-        <InputName errors={errors} register={register}/>
+        <InputName errors={errors} register={register} />
+        <InputPhone errors={errors} register={register} />
         <div className={styles.bottom}>
           <p>
             Заказ на сумму: <span>{getTotalPrice(items)}</span> руб.

@@ -5,7 +5,7 @@ import { selectUserIsAuth } from '../../../redux/user/selectors';
 import { fetchDeleteShawarma } from '../../../redux/basket/asyncAction';
 import { removeItem } from '../../../redux/basket/slice';
 import { FaRegTrashCan } from 'react-icons/fa6';
-import Counter from '../../../components/Counter';
+import Counter from '../../../ui-kit/Counter';
 import { formatPrice } from '../../../utils/formatPrice';
 
 import styles from './BasketItem.module.scss';

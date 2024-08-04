@@ -6,7 +6,7 @@ import { selectBasketItems } from '../../redux/basket/selectors';
 import { selectUserIsAuth } from '../../redux/user/selectors';
 import { getTotalPrice } from '../../utils/getTotalPrice';
 import BasketItem from './BasketItem';
-import Button from '../../components/Button';
+import Button from '../../ui-kit/Button';
 import BasketModalWindow from './BasketModalWindow';
 import EmptyBasket from './EmptyBasket';
 import PageTitle from '../../components/PageTitle';
@@ -36,7 +36,7 @@ const Basket: React.FC = () => {
     } else {
       navigate('/order');
     }
-  }
+  };
 
   if (isEmpty) return <EmptyBasket />;
 

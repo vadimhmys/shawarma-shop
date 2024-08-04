@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Switcher from '../Switcher';
+import Switcher from '../../ui-kit/Switcher';
 import Price from '../Price';
 import Novelty from '../Novelty';
 import VariantList from '../Variants/VariantList';
-import Button from '../Button';
+import Button from '../../ui-kit/Button';
 import ModalWindow from '../ModalWindow';
 
 import styles from './Card.module.scss';
