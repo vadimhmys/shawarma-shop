@@ -14,7 +14,7 @@ type SwitcherPropsType = {
   activeIndex: number;
 };
 
-const Switcher: React.FC<SwitcherPropsType> = ({
+export const Switcher: React.FC<SwitcherPropsType> = ({
   radioBoxGroupName,
   dataForInputs,
   onParentStateChange,
@@ -43,4 +43,3 @@ const Switcher: React.FC<SwitcherPropsType> = ({
   );
 };
 
-export default Switcher;

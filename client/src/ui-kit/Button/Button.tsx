@@ -8,12 +8,10 @@ type ButtonPropsType = {
   type?: string;
 };
 
-const Button: React.FC<ButtonPropsType> = ({ children, handleClick }) => {
+export const Button: React.FC<ButtonPropsType> = ({ children, handleClick }) => {
   return (
     <button className={styles.root} onClick={handleClick}>
       {children}
     </button>
   );
 };
-
-export default Button;

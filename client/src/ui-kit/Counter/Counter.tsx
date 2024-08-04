@@ -19,7 +19,7 @@ type CounterPropsType = {
   basketItemId?: number;
 };
 
-const Counter: React.FC<CounterPropsType> = ({
+export const Counter: React.FC<CounterPropsType> = ({
   maxCount,
   isSimple = true,
   initialValue = 0,
@@ -92,7 +92,7 @@ const Counter: React.FC<CounterPropsType> = ({
         <button
           className={styles.button}
           onClick={decrementCounter}
-          disabled={(isSimple && multiplier === 1) || (!isSimple && multiplier === 0) }>
+          disabled={(isSimple && multiplier === 1) || (!isSimple && multiplier === 0)}>
           &#8722;
         </button>
         <div className={styles.quantity}>
@@ -110,5 +110,3 @@ const Counter: React.FC<CounterPropsType> = ({
     </div>
   );
 };
-
-export default Counter;

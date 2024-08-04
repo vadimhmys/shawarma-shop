@@ -1,6 +1,6 @@
 import React from 'react';
 import axios, { AxiosResponse } from 'axios';
-import Counter from '../../ui-kit/Counter/';
+import Counter from '../../ui-kit/Counter';
 
 import styles from './ComponentList.module.scss';
 
