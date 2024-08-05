@@ -1,0 +1,72 @@
+@import '../../scss/_all';
+
+.FormField {
+  $this: &;
+  position: relative;
+  margin-bottom: 30px;
+  height: 56px;
+  width: 100px;
+  border-radius: 4px;
+  word-wrap: break-word;
+
+  &_Label {
+    font-size: 14px;
+    line-height: 1.25;
+    position: absolute;
+    top: 20px;
+    left: 12px;z-index: 1;
+    color: $dark-font;
+    pointer-events: none;
+    transition: all 0.2s;
+
+    .Input__error {
+      background-color: $pink-light;
+    }
+
+    &Required {
+      color: $pink;
+    }
+  }
+
+  &_ErrorMessage {
+    font-size: 12px;
+    display: block;
+    padding-top: 5px;
+    color: $pink;
+    transition: all 0.3s;
+  }
+
+  &__active {
+    width: 100%;
+    background-color: $white;
+    #{$this}_Label {
+      font-size: 12px;
+      top: -7px;
+      padding: 0 5px;
+      background-color: $white;
+    }
+
+    .Input__active {
+      width: 100%;
+      border: 1px solid $black;
+      color: $dark-font;
+      background-color: $white;
+
+      input:hover,
+      input {
+        background-color: $white;
+      }
+    }
+
+    .Input__active.Input__error {
+      border: 1px solid $pink;
+      background-color: $white;
+    }
+
+    &:hover {
+      .Input__active, .Input.Input__error {
+        background-color: $white;
+      }
+    }
+  }
+}
