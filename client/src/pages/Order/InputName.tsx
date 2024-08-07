@@ -26,6 +26,10 @@ const InputName: React.FC<InputNamePropsType> = ({errors, register}) => {
             value: 15,
             message: 'Слишком длинное имя',
           },
+          pattern: {
+            value: /^[a-zA-Zа-яА-Я]+$/,
+            message: 'Имя должно состоять из букв',
+          }
         })}
         maxLength={16}
       />
