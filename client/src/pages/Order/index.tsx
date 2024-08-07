@@ -1,11 +1,12 @@
 import React from 'react';
+import IMask from 'imask';
 import PageTitle from '../../components/PageTitle';
 import Button from '../../ui-kit/Button';
 import { useSelector } from 'react-redux';
 import { selectBasketItems } from '../../redux/basket/selectors';
 import { getTotalPrice } from '../../utils/getTotalPrice';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { IOrderFields } from '../../@types/app.interface';
+import { InputRefType, IOrderFields, PrevMaskType } from '../../@types/app.forms';
 import InputName from './InputName';
 import InputPhone from './InputPhone';
 
@@ -14,15 +15,60 @@ import styles from './Order.module.scss';
 /* const intervals = [15, 20, 25, 30, 35, 40, 45];
 const paymentMethods = ["Наличными в заведении", "Картой в заведении"]; */
 
+const maskOptions = {
+  mask: '+375(00) 000-00-00',
+  lazy: false,
+};
+
 const Order: React.FC = () => {
+  const prevMask: PrevMaskType = React.useRef(null);
+  const inputRef: InputRefType = React.useRef(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    reset,
   } = useForm<IOrderFields>({
     mode: 'onChange',
+    defaultValues: {
+      name: '',
+      phone: '',
+    },
   });
-  const onSubmit: SubmitHandler<IOrderFields> = (data) => console.log(data);
+
+  const createMask = (IMask: any) => {
+    const element = inputRef.current;
+    if (element) {
+      const mask = new IMask(element, maskOptions);
+      return mask;
+    }
+    return null;
+  };
+
+  React.useEffect(() => {
+    const mask = createMask(IMask);
+    prevMask.current = mask;
+    if (mask) {
+      mask.on('accept', () => {
+        setValue('phone', `${mask.value}`);
+      });
+    }
+  }, [setValue]);
+
+  const onSubmit: SubmitHandler<IOrderFields> = (data) => {
+    console.log('data: ', data);
+    reset();
+    prevMask.current?.destroy();
+    const mask = createMask(IMask);
+    prevMask.current = mask;
+    if (mask) {
+      mask.on('accept', () => {
+        setValue('phone', `${mask.value}`);
+      });
+    }
+  };
+
   const items = useSelector(selectBasketItems);
   /* const [name, setName] = React.useState(''); */
   /* const [phone, setPhone] = React.useState('');
@@ -35,20 +81,6 @@ const Order: React.FC = () => {
   }; */
 
   /*
-  <div className={styles.info}>
-          <h3>Телефон</h3>
-          <p>Оставьте ваш номер телефона</p>
-          <input
-            className={styles.input}
-            type="tel"
-            name="phone"
-            placeholder="+375 (__) ___-__-__"
-            value={phone}
-            onChange={handlePhoneChange}
-            required
-          />
-          <p className={styles.required}>Это поле обязательно</p>
-        </div>
         <div className={styles.info}>
           <h3>Время</h3>
           <p>Через сколько минут заберете</p>
@@ -133,7 +165,7 @@ const Order: React.FC = () => {
       <PageTitle>Оформление заказа</PageTitle>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} name="order-form">
         <InputName errors={errors} register={register} />
-        <InputPhone errors={errors} register={register} />
+        <InputPhone errors={errors} register={register} ref={inputRef} />
         <div className={styles.bottom}>
           <p>
             Заказ на сумму: <span>{getTotalPrice(items)}</span> руб.

@@ -1,15 +1,15 @@
 import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { IOrderFields } from '../../@types/app.interface';
+import { IOrderFields } from '../../@types/app.forms';
 
 import styles from './Order.module.scss';
 
 type InputNamePropsType = {
-  errors: FieldErrors<IOrderFields>,
-  register: UseFormRegister<IOrderFields>
+  errors: FieldErrors<IOrderFields>;
+  register: UseFormRegister<IOrderFields>;
 };
 
-const InputName: React.FC<InputNamePropsType> = ({errors, register}) => {
+const InputName: React.FC<InputNamePropsType> = ({ errors, register }) => {
   return (
     <div className={styles.field}>
       <h3 className={styles.field__title}>Имя</h3>
@@ -29,11 +29,11 @@ const InputName: React.FC<InputNamePropsType> = ({errors, register}) => {
           pattern: {
             value: /^[a-zA-Zа-яА-Я]+$/,
             message: 'Имя должно состоять из букв',
-          }
+          },
         })}
         maxLength={16}
       />
-      {errors?.name && <p className={styles.required}>{errors.name.message}</p>}
+      {errors?.name && <p className={styles.errorBlock}>{errors.name.message}</p>}
     </div>
   );
 };
