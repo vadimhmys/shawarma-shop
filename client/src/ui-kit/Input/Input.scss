@@ -1,9 +1,4 @@
-@import '../../scss/all';
-
-.form {
-  width: 100%;
-  padding-bottom: 110px;
-}
+@import '../../scss/_all';
 
 .field {
   width: 50%;
@@ -43,18 +38,4 @@
     left: 10px;
     bottom: -20px;
   }
-}
-
-.bottom {
-  font-size: 18px;
-  font-weight: bold;
-  text-align: right;
-
-  p {
-    margin-bottom: 10px;
-  }
-}
-
-.selectTime__control {
-  background-color: red !important;
 }

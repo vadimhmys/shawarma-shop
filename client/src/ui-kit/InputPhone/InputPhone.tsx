@@ -20,6 +20,7 @@ export const InputPhone: React.FC<InputPhonePropsType> = React.forwardRef<
         })}
         placeholder="+375 (__) ___-__-__"
         ref={ref}
+        type="tel"
       />
       {errors?.phone && <p className={styles.errorBlock}>{errors.phone.message}</p>}
     </div>

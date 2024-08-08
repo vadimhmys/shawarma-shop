@@ -3,15 +3,20 @@ import IMask from 'imask';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { selectBasketItems } from '../../../redux/basket/selectors';
-import { Button } from '../../../ui-kit';
+import { Button, Input } from '../../../ui-kit';
 import Select from '../../../ui-kit/Select';
 import { getTotalPrice } from '../../../utils/getTotalPrice';
-import { InputRefType, IOption, IOrderFields, PrevMaskType } from '../../../@types/app.forms';
-import InputName from '../InputName';
+import {
+  InputRefType,
+  IOption,
+  IOrderFields,
+  maskOptionsType,
+  PrevMaskType,
+} from '../../../@types/app.forms';
 import InputPhone from '../../../ui-kit/InputPhone';
 import styles from './OrderForm.module.scss';
 
-const maskOptions = {
+const maskOptions: maskOptionsType = {
   mask: '+375(00) 000-00-00',
   lazy: false,
 };
@@ -49,11 +54,11 @@ const timeSelectOptions: IOption[] = [
 
 const paymentSelectOptions: IOption[] = [
   {
-    value: "CASH",
+    value: 'CASH',
     label: 'Наличными в заведении',
   },
   {
-    value: "CARD",
+    value: 'CARD',
     label: 'Картой в заведении',
   },
 ];
@@ -111,7 +116,34 @@ export const OrderForm: React.FC = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} name="order-form">
-      <InputName errors={errors} register={register} />
+      <Input
+        errors={errors}
+        register={register}
+        wrapperClassName="field"
+        titleClassName="field__title"
+        subtitleClassName="field__subtitle"
+        titleContent="Имя"
+        subtitleContent="Укажите ваше имя"
+        inputClassName="field__input"
+        isRequired={true}
+        requiredMessage="Это поле обязательно!"
+        name="userName"
+        minLength={{
+          value: 2,
+          message: 'Слишком короткое имя',
+        }}
+        maxLength={{
+          value: 15,
+          message: 'Слишком длинное имя',
+        }}
+        pattern={{
+          value: /^[a-zA-Zа-яА-Я]+$/,
+          message: 'Имя должно состоять из букв',
+        }}
+        maxCharCount={16}
+        type="text"
+        errorClassName="errorBlock"
+      />
       <InputPhone errors={errors} register={register} ref={inputRef} />
       <Select
         wrapperClassName="selectWrapper"

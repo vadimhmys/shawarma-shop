@@ -1,31 +1,42 @@
-import React, { forwardRef, DetailedHTMLProps, ForwardedRef, HTMLAttributes } from 'react';
-import classNames from 'classnames';
+import React from 'react';
+import { InputPropsType } from '../../@types/app.forms';
+import './Input.scss';
 
-import styles from './Input.module.scss';
-
-export interface IInputProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  className?: string;
-  name?: string;
-  type?: string;
-  error?: string;
-}
-
-export const Input = forwardRef(
-  (
-    { className, name, type, error, ...rest }: IInputProps,
-    ref: ForwardedRef<HTMLInputElement>,
-  ): JSX.Element => {
-    return (
+export const Input: React.FC<InputPropsType> = ({
+  wrapperClassName,
+  titleClassName,
+  subtitleClassName,
+  titleContent,
+  subtitleContent,
+  inputClassName,
+  isRequired,
+  requiredMessage,
+  name,
+  minLength,
+  maxLength,
+  pattern,
+  maxCharCount,
+  type,
+  errorClassName,
+  errors,
+  register,
+}) => {
+  return (
+    <div className={wrapperClassName}>
+      {titleContent && <h3 className={titleClassName}>{titleContent}</h3>}
+      {subtitleContent && <p className={subtitleClassName}>{subtitleContent}</p>}
       <input
-        className={classNames(className, styles.Input, {
-          Input__error: error,
+        className={inputClassName}
+        {...register(`${name}`, {
+          required: isRequired && requiredMessage,
+          minLength: minLength,
+          maxLength: maxLength,
+          pattern: pattern,
         })}
-        name={name}
+        maxLength={maxCharCount}
         type={type}
-        ref={ref}
-        {...rest}
       />
-    );
-  },
-);
+      {errors?.[`${name}`] && <p className={errorClassName}>{errors?.[`${name}`]?.message}</p>}
+    </div>
+  );
+};
