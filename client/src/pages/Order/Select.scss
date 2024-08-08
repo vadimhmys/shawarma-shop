@@ -1,0 +1,75 @@
+@import '../../scss/all';
+
+.selectWrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.selectTitle {
+  font-family: "Lugrasimo", cursive;
+  color: $dark-font;
+}
+
+.customSelect{
+  &__control {
+    background-color: transparent !important;
+    cursor: pointer !important;
+    border: none !important;
+    border-bottom: 1px solid $gray-light !important;
+
+    &--is-focused {
+      border-color: $gray-dark !important;
+      border-radius: 0px !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &__value-container {
+    padding-left: 0 !important;
+  }
+
+  &__indicator-separator {
+    display: none !important;
+  }
+
+  &__menu-list {
+    max-height: 200px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      background: $pink;
+    }
+  }
+
+  &__option {
+    background-color: transparent !important;
+    cursor: pointer !important;
+
+    &--is-focused {
+      background-color: $gray-light !important;
+    }
+
+    &--is-selected {
+      color: $orange !important;
+    }
+  }
+}
+
+.errorBlock {
+  font-size: 14px;
+  font-family: "Lugrasimo", cursive;
+  color: $pink;
+  position: absolute;
+  left: 10px;
+  bottom: -25px;
+}
+

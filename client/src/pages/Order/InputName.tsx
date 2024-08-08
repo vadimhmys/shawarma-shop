@@ -1,13 +1,7 @@
 import React from 'react';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { IOrderFields } from '../../@types/app.forms';
+import { InputNamePropsType} from '../../@types/app.forms';
 
 import styles from './Order.module.scss';
-
-type InputNamePropsType = {
-  errors: FieldErrors<IOrderFields>;
-  register: UseFormRegister<IOrderFields>;
-};
 
 const InputName: React.FC<InputNamePropsType> = ({ errors, register }) => {
   return (
@@ -16,7 +10,7 @@ const InputName: React.FC<InputNamePropsType> = ({ errors, register }) => {
       <p className={styles.field__subtitle}>Укажите ваше имя</p>
       <input
         className={styles.field__input}
-        {...register('name', {
+        {...register('userName', {
           required: 'Это поле обязательно!',
           minLength: {
             value: 2,
@@ -33,7 +27,7 @@ const InputName: React.FC<InputNamePropsType> = ({ errors, register }) => {
         })}
         maxLength={16}
       />
-      {errors?.name && <p className={styles.errorBlock}>{errors.name.message}</p>}
+      {errors?.userName && <p className={styles.errorBlock}>{errors.userName.message}</p>}
     </div>
   );
 };

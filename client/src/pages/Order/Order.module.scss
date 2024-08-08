@@ -45,93 +45,6 @@
   }
 }
 
-.select {
-  position: absolute;
-  left: 0;
-  top: 90px;
-  display: flex;
-  flex-direction: column;
-  padding: 15px 15px 0;
-  overflow-y: auto;
-  width: 100%;
-  max-height: 200px;
-  background-color: $white;
-  border-radius: 4px;
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
-  z-index: 100;
-  display: none;
-
-  &::-webkit-scrollbar {
-    width: 2px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    background: $pink;
-  }
-
-  .radioBox {
-    width: 100%;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: baseline;
-    justify-content: flex-start;
-
-    input[type="radio"]:checked, 
-    input[type="radio"]:not(:checked) {
-      position: absolute;
-      left: -9999px;
-    }
-
-    input[type="radio"]:checked + label, 
-    input[type="radio"]:not(:checked) + label {
-      width: 100%;
-      display: inline-block;
-      position: relative;
-      padding-left: 28px;
-      line-height: 20px;
-      cursor: pointer;
-    }
-
-    input[type="radio"]:checked + label:before, 
-    input[type="radio"]:not(:checked) + label:before {
-      content: "";
-      position: absolute;
-      left: 0px;
-      top: 0px;
-      width: 16px;
-      height: 16px;
-      border: 1px solid $gray-light;
-      background-color: $white;
-      border-radius: 100%;
-    }
-
-    input[type="radio"]:checked + label:after, 
-    input[type="radio"]:not(:checked) + label:after {
-      content: "";
-      position: absolute;
-      left: 4px;
-      top: 4px;
-      width: 10px;
-      height: 10px;
-      border-radius: 100%;
-      background-color: $gray-dark;
-      -webkit-transition: all 0.2s ease;
-      -moz-transition: all 0.2s ease;
-      -o-transition: all 0.2s ease;
-      transition: all 0.2s ease;
-    }
-
-    input[type="radio"]:not(:checked) + label:after {
-      opacity: 0;
-    }
-
-    input[type="radio"]:checked + label:after {
-      opacity: 1;
-    }
-  }
-}
-
 .comment {
   resize: vertical;
   min-height: 35px;
@@ -168,4 +81,8 @@
   p {
     margin-bottom: 10px;
   }
+}
+
+.selectTime__control {
+  background-color: red !important;
 }

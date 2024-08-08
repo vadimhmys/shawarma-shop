@@ -9,7 +9,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { InputRefType, IOrderFields, PrevMaskType } from '../../@types/app.forms';
 import InputName from './InputName';
 import InputPhone from './InputPhone';
-
+import SelectTime from './SelectTime';
 import styles from './Order.module.scss';
 
 /* const intervals = [15, 20, 25, 30, 35, 40, 45];
@@ -29,10 +29,11 @@ const Order: React.FC = () => {
     formState: { errors },
     setValue,
     reset,
+    control
   } = useForm<IOrderFields>({
     mode: 'onChange',
     defaultValues: {
-      name: '',
+      userName: '',
       phone: '',
     },
   });
@@ -166,6 +167,7 @@ const Order: React.FC = () => {
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} name="order-form">
         <InputName errors={errors} register={register} />
         <InputPhone errors={errors} register={register} ref={inputRef} />
+        <SelectTime control={control}/>
         <div className={styles.bottom}>
           <p>
             Заказ на сумму: <span>{getTotalPrice(items)}</span> руб.

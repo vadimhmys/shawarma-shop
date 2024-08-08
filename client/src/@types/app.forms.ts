@@ -1,9 +1,9 @@
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, Control } from 'react-hook-form';
 
 export interface IOrderFields {
-  name: string
+  userName: string
   phone: string
-  time: string
+  waitingTime: number
   comment: string
   payment: string
 }
@@ -16,8 +16,17 @@ export type PrevMaskType = {
   current: { destroy: Function } | null;
 };
 
+export type InputNamePropsType = {
+  errors: FieldErrors<IOrderFields>;
+  register: UseFormRegister<IOrderFields>;
+};
+
 export type InputPhonePropsType = {
   errors: FieldErrors<IOrderFields>;
   register: UseFormRegister<IOrderFields>;
   ref: any;
+};
+
+export type SelectTimePropsType = {
+  control: Control<IOrderFields>;
 };
