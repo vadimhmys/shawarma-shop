@@ -32,10 +32,6 @@ export type InputPhonePropsType = {
   ref: any;
 };
 
-export type SelectTimePropsType = {
-  control: Control<IOrderFields>;
-};
-
 export type SelectPropsType = {
   title: string;
   name: keyof IOrderFields;
