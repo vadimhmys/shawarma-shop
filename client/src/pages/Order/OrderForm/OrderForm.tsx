@@ -47,6 +47,17 @@ const timeSelectOptions: IOption[] = [
   },
 ];
 
+const paymentSelectOptions: IOption[] = [
+  {
+    value: "CASH",
+    label: 'Наличными в заведении',
+  },
+  {
+    value: "CARD",
+    label: 'Картой в заведении',
+  },
+];
+
 export const OrderForm: React.FC = () => {
   const prevMask: PrevMaskType = React.useRef(null);
   const inputRef: InputRefType = React.useRef(null);
@@ -114,6 +125,21 @@ export const OrderForm: React.FC = () => {
         defaultValue={15}
         errorClassName="errorBlock"
         placeholder="Через сколько минут заберете"
+        classNamePrefix="customSelect"
+        isSearchable={false}
+      />
+      <Select
+        wrapperClassName="selectWrapper"
+        titleClassName="selectTitle"
+        title="Оплата"
+        control={control}
+        name="payment"
+        isRequired={true}
+        requiredMessage="Укажите способ оплаты"
+        options={paymentSelectOptions}
+        defaultValue="CASH"
+        errorClassName="errorBlock"
+        placeholder="Способ оплаты"
         classNamePrefix="customSelect"
         isSearchable={false}
       />
