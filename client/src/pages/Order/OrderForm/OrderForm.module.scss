@@ -1,0 +1,44 @@
+@import '../../../scss/_all';
+
+.form {
+  width: 100%;
+  padding-bottom: 110px;
+}
+
+.bottom {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+.comment {
+  resize: vertical;
+  min-height: 35px;
+  height: 32px;
+  max-height: 100px;
+  overflow: auto;
+  border: none;
+  border-bottom: 1px solid $gray-light;
+  padding: 5px 15px 5px 0;
+  width: 100%;
+  color: $dark-font;
+  border-radius: 0;
+  background-color: $bg-form;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: $pink;
+  }
+
+  &:focus {
+    border-color: $gray-dark;
+  }
+}
