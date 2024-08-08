@@ -8,7 +8,7 @@ import Select from '../../../ui-kit/Select';
 import { getTotalPrice } from '../../../utils/getTotalPrice';
 import { InputRefType, IOption, IOrderFields, PrevMaskType } from '../../../@types/app.forms';
 import InputName from '../InputName';
-import InputPhone from '../InputPhone';
+import InputPhone from '../../../ui-kit/InputPhone';
 import styles from './OrderForm.module.scss';
 
 const maskOptions = {

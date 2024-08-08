@@ -1,0 +1,41 @@
+@import '../../scss/_all';
+
+.field {
+  width: 50%;
+  margin-bottom: 15px;
+  position: relative;
+
+  &__title {
+    font-family: "Lugrasimo", cursive;
+    color: $dark-font;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    font-family: "Lugrasimo", cursive;
+    color: $gray-font;
+  }
+
+  &__input {
+    border: none;
+    border-bottom: 1px solid $gray-light;
+    padding: 5px 15px 5px 0;
+    width: 100%;
+    color: $dark-font;
+    font-size: 16px;
+    background-color: $bg-form;
+
+    &:focus {
+      border-color: $gray-dark;
+    }
+  }
+
+  .errorBlock {
+    font-size: 14px;
+    font-family: "Lugrasimo", cursive;
+    color: $pink;
+    position: absolute;
+    left: 10px;
+    bottom: -20px;
+  }
+}

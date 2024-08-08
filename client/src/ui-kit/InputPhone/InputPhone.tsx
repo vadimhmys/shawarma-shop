@@ -1,8 +1,8 @@
 import React from 'react';
 import { InputPhonePropsType } from '../../@types/app.forms';
-import styles from './Order.module.scss';
+import styles from './InputPhone.module.scss';
 
-const InputPhone: React.FC<InputPhonePropsType> = React.forwardRef<
+export const InputPhone: React.FC<InputPhonePropsType> = React.forwardRef<
   HTMLInputElement,
   InputPhonePropsType
 >(({ errors, register }, ref) => {
@@ -25,5 +25,3 @@ const InputPhone: React.FC<InputPhonePropsType> = React.forwardRef<
     </div>
   );
 });
-
-export default InputPhone;
