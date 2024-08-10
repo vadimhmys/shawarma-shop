@@ -1,0 +1,59 @@
+@import '../../scss/all';
+
+.textWrapper {
+  width: 50%;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.textTitle {
+  font-family: "Lugrasimo", cursive;
+  color: $dark-font;
+}
+
+.textSubtitle {
+  font-size: 14px;
+  font-family: "Lugrasimo", cursive;
+  color: $gray-font;
+}
+
+.errorBlock {
+  font-size: 14px;
+  font-family: "Lugrasimo", cursive;
+  color: $pink;
+  position: absolute;
+  left: 10px;
+  bottom: -20px;
+}
+
+.comment {
+  resize: vertical;
+  min-height: 35px;
+  height: 50px;
+  max-height: 100px;
+  overflow: auto;
+  border: none;
+  border-bottom: 1px solid $gray-light;
+  padding: 5px 15px 5px 0;
+  width: 100%;
+  color: $dark-font;
+  border-radius: 0;
+  background-color: $bg-form;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: $pink;
+  }
+
+  &:focus {
+    border-color: $gray-dark;
+  }
+}

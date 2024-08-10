@@ -3,7 +3,7 @@ import IMask from 'imask';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { selectBasketItems } from '../../../redux/basket/selectors';
-import { Button, Input } from '../../../ui-kit';
+import { Button, Input, TextArea } from '../../../ui-kit';
 import Select from '../../../ui-kit/Select';
 import { getTotalPrice } from '../../../utils/getTotalPrice';
 import {
@@ -159,6 +159,25 @@ export const OrderForm: React.FC = () => {
         placeholder="Через сколько минут заберете"
         classNamePrefix="customSelect"
         isSearchable={false}
+      />
+      <TextArea
+        wrapperClassName="textWrapper"
+        titleClassName="textTitle"
+        subtitleClassName="textSubtitle"
+        textAreaClassName="comment"
+        title="Комментарий"
+        subtitle="Здесь вы можете оставить свой комментарий"
+        control={control}
+        name="comment"
+        isRequired={false}
+        defaultValue=""
+        errorClassName="errorBlock"
+        placeholder="Комментарий к заказу"
+        maxLength={{
+          value: 200,
+          message: 'Слишком длинный комментарий',
+        }}
+        maxCharCount={201}
       />
       <Select
         wrapperClassName="selectWrapper"

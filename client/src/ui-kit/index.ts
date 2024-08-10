@@ -4,6 +4,7 @@ import Counter from './Counter';
 import Button from './Button';
 import Select from './Select';
 import InputPhone from './InputPhone';
+import TextArea from './TextArea';
 
 
 export {
@@ -12,5 +13,6 @@ export {
   Counter,
   Button,
   Select,
-  InputPhone
+  InputPhone,
+  TextArea
 }

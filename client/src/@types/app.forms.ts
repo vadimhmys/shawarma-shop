@@ -1,4 +1,4 @@
-import { FieldErrors, UseFormRegister, Control, ValidationRule } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, Control, ValidationRule, ValidationValueMessage } from 'react-hook-form';
 
 export interface IOrderFields {
   userName: string
@@ -72,3 +72,21 @@ export type SelectPropsType = {
   requiredMessage?: string;
   placeholder?: string;
 };
+
+export type TeaxtAreaPropsType = {
+  title?: string;
+  subtitle?: string;
+  name: keyof IOrderFields;
+  isRequired: boolean;
+  control: Control<IOrderFields>;
+  wrapperClassName?: string;
+  titleClassName?: string;
+  subtitleClassName?: string;
+  textAreaClassName?: string;
+  errorClassName: string;
+  defaultValue: string;
+  requiredMessage?: string;
+  placeholder?: string;
+  maxLength?: ValidationValueMessage<number>;
+  maxCharCount?: number;
+}
