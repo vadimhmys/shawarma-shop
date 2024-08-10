@@ -1,7 +1,8 @@
 import React from 'react';
 import IMask from 'imask';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearBasket } from '../../../redux/basket/slice';
 import { selectBasketItems } from '../../../redux/basket/selectors';
 import { Button, Input, TextArea } from '../../../ui-kit';
 import Select from '../../../ui-kit/Select';
@@ -14,6 +15,7 @@ import {
   PrevMaskType,
 } from '../../../@types/app.forms';
 import InputPhone from '../../../ui-kit/InputPhone';
+import { userCreate } from '../../../http/orderAPI';
 import styles from './OrderForm.module.scss';
 
 const maskOptions: maskOptionsType = {
@@ -64,6 +66,7 @@ const paymentSelectOptions: IOption[] = [
 ];
 
 export const OrderForm: React.FC = () => {
+  const dispatch = useDispatch();
   const prevMask: PrevMaskType = React.useRef(null);
   const inputRef: InputRefType = React.useRef(null);
   const items = useSelector(selectBasketItems);
@@ -91,8 +94,7 @@ export const OrderForm: React.FC = () => {
     return null;
   };
 
-  const onSubmit: SubmitHandler<IOrderFields> = (data) => {
-    console.log('data: ', data);
+  const onSubmit: SubmitHandler<IOrderFields> = async (data) => {
     reset();
     prevMask.current?.destroy();
     const mask = createMask(IMask);
@@ -101,6 +103,13 @@ export const OrderForm: React.FC = () => {
       mask.on('accept', () => {
         setValue('phone', `${mask.value}`);
       });
+    }
+    try {
+      const result = await userCreate({...data, items});
+      dispatch(clearBasket());
+      console.log('result: ', result);
+    } catch (error: any) {
+      console.log(error.message)
     }
   };
 

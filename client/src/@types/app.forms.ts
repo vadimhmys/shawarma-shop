@@ -4,8 +4,8 @@ export interface IOrderFields {
   userName: string
   phone: string
   waitingTime: number
-  comment: string
-  payment: string
+  comment:  string
+  payment: 'CASH' | 'CARD'
 }
 
 export interface IOption {

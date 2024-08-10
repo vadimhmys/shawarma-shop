@@ -6,7 +6,7 @@ type OrderType = {
   userName: string;
   phone: string;
   waitingTime: number;
-  comment: null | string;
+  comment: string;
   payment: 'CASH' | 'CARD';
   items: BasketItemType[] | BasketItemsFromDBType[];
 };
