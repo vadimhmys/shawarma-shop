@@ -20,7 +20,7 @@ const Header: React.FC = () => {
   const totalCount = items.reduce((sum: number, item: BasketItemType) => sum + item.count, 0);
   const totalPrice = getTotalPrice(items);
   const { pathname } = useLocation();
-  const forbiddenPathsForSearch = ['/basket', '/login', '/signup', '/user', '/admin'];
+  const forbiddenPathsForSearch = ['/basket', '/login', '/signup', '/user', '/admin', '/order'];
   const forbiddenPathsForBasket = ['/login', '/signup', '/admin'];
   const isShowSearch = !forbiddenPathsForSearch.includes(pathname);
   const isShowBasket = !forbiddenPathsForBasket.includes(pathname);

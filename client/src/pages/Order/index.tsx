@@ -10,17 +10,17 @@ const Order: React.FC = () => {
   const status = useSelector(selectOrderStatus);
 
   if (status === StatusEnum.LOADING) {
-    return <div>LOADING</div>
+    return <div>LOADING</div>;
   }
 
   if (status === StatusEnum.ERROR) {
-    return <OrderError/>
+    return <OrderError />;
   }
 
   return (
     <div>
       <PageTitle>Оформление заказа</PageTitle>
-      <OrderForm/>
+      <OrderForm />
     </div>
   );
 };
