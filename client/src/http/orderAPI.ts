@@ -54,7 +54,7 @@ export const adminDelete = async (id: number) => {
  */
 
 export const userCreate = async (body: UserOrderType) => {
-  const { data } = await authInstance.post('order/user/create999', body);
+  const { data } = await authInstance.post('order/user/create', body);
   return data;
 }
 

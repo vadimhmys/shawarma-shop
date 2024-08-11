@@ -10,14 +10,10 @@ import { selectBasketItems } from '../../../redux/basket/selectors';
 import { Button, Input, TextArea } from '../../../ui-kit';
 import Select from '../../../ui-kit/Select';
 import { getTotalPrice } from '../../../utils/getTotalPrice';
-import {
-  InputRefType,
-  IOption,
-  maskOptionsType,
-  PrevMaskType,
-} from '../../../@types/app.forms';
+import { InputRefType, IOption, maskOptionsType, PrevMaskType } from '../../../@types/app.forms';
 import InputPhone from '../../../ui-kit/InputPhone';
 import styles from './OrderForm.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const maskOptions: maskOptionsType = {
   mask: '+375(00) 000-00-00',
@@ -68,6 +64,7 @@ const paymentSelectOptions: IOption[] = [
 
 export const OrderForm: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const prevMask: PrevMaskType = React.useRef(null);
   const inputRef: InputRefType = React.useRef(null);
   const items = useSelector(selectBasketItems);
@@ -106,10 +103,11 @@ export const OrderForm: React.FC = () => {
       });
     }
     try {
-      dispatch(createOrder({...data, items}));
-      await dispatch(fetchOrder({...data, items}))
+      dispatch(createOrder({ ...data, items }));
+      await dispatch(fetchOrder({ ...data, items }));
+      navigate('/user');
     } catch (error: any) {
-      console.log(error.message)
+      console.log(error.message);
     }
   };
 
