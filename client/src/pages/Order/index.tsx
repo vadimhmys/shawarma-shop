@@ -4,6 +4,7 @@ import OrderForm from './OrderForm';
 import { useSelector } from 'react-redux';
 import { selectOrderStatus } from '../../redux/order/selectors';
 import { StatusEnum } from '../../redux/order/types';
+import OrderError from './OrderError';
 
 const Order: React.FC = () => {
   const status = useSelector(selectOrderStatus);
@@ -13,7 +14,7 @@ const Order: React.FC = () => {
   }
 
   if (status === StatusEnum.ERROR) {
-    return <div>ERROR</div>
+    return <OrderError/>
   }
 
   return (

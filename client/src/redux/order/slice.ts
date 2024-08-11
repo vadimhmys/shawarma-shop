@@ -24,6 +24,15 @@ export const orderSlice = createSlice({
       state.waitingTime = action.payload.waitingTime;
       state.comment = action.payload.comment;
       state.payment = action.payload.payment;
+    },
+    clearOrder(state) {
+      state.items = [];
+      state.userName = '';
+      state.phone = '';
+      state.waitingTime = 15;
+      state.comment = '';
+      state.payment = 'CASH';
+      state.status = StatusEnum.SUCCESS;
     }
   },
   extraReducers: (builder) => {
@@ -46,5 +55,5 @@ export const orderSlice = createSlice({
   },
 });
 
-export const { createOrder } = orderSlice.actions;
+export const { createOrder, clearOrder } = orderSlice.actions;
 export default orderSlice.reducer;
