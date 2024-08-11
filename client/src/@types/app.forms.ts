@@ -1,12 +1,5 @@
 import { FieldErrors, UseFormRegister, Control, ValidationRule, ValidationValueMessage } from 'react-hook-form';
-
-export interface IOrderFields {
-  userName: string
-  phone: string
-  waitingTime: number
-  comment:  string
-  payment: 'CASH' | 'CARD'
-}
+import { IOrderFields } from '../redux/order/types';
 
 export interface IOption {
   value: number | string

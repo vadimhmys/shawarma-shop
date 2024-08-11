@@ -1,8 +1,11 @@
 import React from 'react';
 import IMask from 'imask';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearBasket } from '../../../redux/basket/slice';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../../redux/store';
+import { IOrderFields } from '../../../redux/order/types';
+import { createOrder } from '../../../redux/order/slice';
+import { fetchOrder } from '../../../redux/order/asyncAction';
 import { selectBasketItems } from '../../../redux/basket/selectors';
 import { Button, Input, TextArea } from '../../../ui-kit';
 import Select from '../../../ui-kit/Select';
@@ -10,12 +13,10 @@ import { getTotalPrice } from '../../../utils/getTotalPrice';
 import {
   InputRefType,
   IOption,
-  IOrderFields,
   maskOptionsType,
   PrevMaskType,
 } from '../../../@types/app.forms';
 import InputPhone from '../../../ui-kit/InputPhone';
-import { userCreate } from '../../../http/orderAPI';
 import styles from './OrderForm.module.scss';
 
 const maskOptions: maskOptionsType = {
@@ -66,7 +67,7 @@ const paymentSelectOptions: IOption[] = [
 ];
 
 export const OrderForm: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const prevMask: PrevMaskType = React.useRef(null);
   const inputRef: InputRefType = React.useRef(null);
   const items = useSelector(selectBasketItems);
@@ -105,9 +106,8 @@ export const OrderForm: React.FC = () => {
       });
     }
     try {
-      const result = await userCreate({...data, items});
-      dispatch(clearBasket());
-      console.log('result: ', result);
+      dispatch(createOrder({...data, items}));
+      await dispatch(fetchOrder({...data, items}))
     } catch (error: any) {
       console.log(error.message)
     }

@@ -2,20 +2,29 @@ import { BasketItemsFromDBType } from './../redux/basket/types';
 import { BasketItemType } from '../redux/basket/types';
 import { authInstance } from './index';
 
-type OrderType = {
+export type UserOrderType = {
   userName: string;
   phone: string;
   waitingTime: number;
   comment: string;
   payment: 'CASH' | 'CARD';
-  items: BasketItemType[] | BasketItemsFromDBType[];
+  items: BasketItemType[];
+};
+
+export type AdminOrderType = {
+  userName: string;
+  phone: string;
+  waitingTime: number;
+  comment: string;
+  payment: 'CASH' | 'CARD';
+  items: BasketItemsFromDBType[];
 };
 
 /*
  * only for admin
  */
 
-export const adminCreate = async (body: OrderType) => {
+export const adminCreate = async (body: AdminOrderType) => {
   const { data } = await authInstance.post('order/admin/create', body);
   return data;
 }
@@ -44,7 +53,7 @@ export const adminDelete = async (id: number) => {
  * for user
  */
 
-export const userCreate = async (body: OrderType) => {
+export const userCreate = async (body: UserOrderType) => {
   const { data } = await authInstance.post('order/user/create', body);
   return data;
 }

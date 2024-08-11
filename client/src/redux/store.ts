@@ -5,6 +5,7 @@ import basket from './basket/slice';
 import shawarma from './shawarma/slice';
 import shawarmas from './shawarmas/slice';
 import user from './user/slice';
+import order from './order/slice';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     shawarma,
     shawarmas,
     user,
+    order,
   },
 });
 

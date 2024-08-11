@@ -3,6 +3,7 @@ import { BasketItemsFromDBType, BasketItemType, IBasketState } from './types';
 import { fetchClearBasket, fetchDecrementShawarma, fetchDeleteShawarma, fetchIncrementShawarma, fetchShawarmasFromBasket, fetchShawarmasFromLS } from './asyncAction';
 import { StatusEnum } from '../shawarmas/types';
 import { getBasketFromLS } from '../../utils/getBasketFromLS';
+import { fetchOrder } from '../order/asyncAction';
 
 const initialState: IBasketState = {
   items: getBasketFromLS(),
@@ -175,6 +176,9 @@ export const basketSlice = createSlice({
       .addCase(fetchShawarmasFromLS.rejected, (state) => {
         state.items = [];
         state.status = StatusEnum.ERROR;
+      })
+      .addCase(fetchOrder.fulfilled, (state) => {
+        state.items = [];
       })
   },
 });
