@@ -25,6 +25,9 @@ const UserOrder: React.FC = () => {
           <li className={styles.mainInfo__list__item}>
             Стоимость: <span>61,70</span> руб.
           </li>
+          <li className={styles.mainInfo__list__item}>
+            Статус: <span>Приготовлен</span>
+          </li>
         </ul>
       </div>
       <Button handleClick={handleClick}>{isShowDetails ? 'Скрыть' : 'Показать'} детали</Button>
