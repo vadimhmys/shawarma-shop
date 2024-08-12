@@ -8,26 +8,46 @@
   max-height: 300px;
   border-radius: 4px;
   position: relative;
+
+  @media(max-width: 840px) {
+    width: 70%;
+  }
+
+  @media(max-width: 560px) {
+    width: 100%;
+  }
 }
 
 .textTitle {
   font-family: "Lugrasimo", cursive;
   color: $dark-font;
+
+  @media(max-width: 390px) {
+    font-size: 16px;
+  }
 }
 
 .textSubtitle {
   font-size: 14px;
   font-family: "Lugrasimo", cursive;
   color: $gray-font;
+
+  @media(max-width: 390px) {
+    font-size: 12px;
+  }
 }
 
-.errorBlock {
+.errorBlockTextArea {
   font-size: 14px;
   font-family: "Lugrasimo", cursive;
   color: $pink;
   position: absolute;
   left: 10px;
-  bottom: -20px;
+  bottom: -10px;
+
+  @media(max-width: 390px) {
+    font-size: 12px;
+  }
 }
 
 .comment {
@@ -43,6 +63,11 @@
   color: $dark-font;
   border-radius: 0;
   background-color: $bg-form;
+  font-size: 14px;
+
+  @media(max-width: 390px) {
+    font-size: 14px;
+  }
 
   &::-webkit-scrollbar {
     width: 2px;

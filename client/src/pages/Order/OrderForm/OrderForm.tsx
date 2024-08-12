@@ -12,8 +12,8 @@ import Select from '../../../ui-kit/Select';
 import { getTotalPrice } from '../../../utils/getTotalPrice';
 import { InputRefType, IOption, maskOptionsType, PrevMaskType } from '../../../@types/app.forms';
 import InputPhone from '../../../ui-kit/InputPhone';
-import styles from './OrderForm.module.scss';
 import { useNavigate } from 'react-router-dom';
+import styles from './OrderForm.module.scss';
 
 const maskOptions: maskOptionsType = {
   mask: '+375(00) 000-00-00',
@@ -162,7 +162,7 @@ export const OrderForm: React.FC = () => {
         requiredMessage="Укажите время"
         options={timeSelectOptions}
         defaultValue={15}
-        errorClassName="errorBlock"
+        errorClassName="errorBlockSelect"
         placeholder="Через сколько минут заберете"
         classNamePrefix="customSelect"
         isSearchable={false}
@@ -178,7 +178,7 @@ export const OrderForm: React.FC = () => {
         name="comment"
         isRequired={false}
         defaultValue=""
-        errorClassName="errorBlock"
+        errorClassName="errorBlockTextArea"
         placeholder="Комментарий к заказу"
         maxLength={{
           value: 200,
@@ -196,7 +196,7 @@ export const OrderForm: React.FC = () => {
         requiredMessage="Укажите способ оплаты"
         options={paymentSelectOptions}
         defaultValue="CASH"
-        errorClassName="errorBlock"
+        errorClassName="errorBlockSelect"
         placeholder="Способ оплаты"
         classNamePrefix="customSelect"
         isSearchable={false}

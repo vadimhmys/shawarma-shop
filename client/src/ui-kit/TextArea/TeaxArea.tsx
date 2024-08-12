@@ -1,7 +1,7 @@
 import React from 'react';
-import './TextArea.scss';
 import { TeaxtAreaPropsType } from '../../@types/app.forms';
 import { Controller } from 'react-hook-form';
+import './TextArea.scss';
 
 export const TextArea: React.FC<TeaxtAreaPropsType> = ({
   title,
@@ -15,7 +15,6 @@ export const TextArea: React.FC<TeaxtAreaPropsType> = ({
   textAreaClassName,
   errorClassName,
   requiredMessage,
-  defaultValue,
   placeholder,
   maxLength,
   maxCharCount
