@@ -2,7 +2,21 @@ import React from 'react';
 import { Button } from '../../ui-kit';
 import styles from './UserOrder.module.scss';
 
-const UserOrder: React.FC = () => {
+type UserOrderPropsType = {
+  prettyCreatedAt: string;
+  waitingTime: number;
+  payment: 'CASH' | 'CARD';
+  amount: string;
+  status: number;
+};
+
+const UserOrder: React.FC<UserOrderPropsType> = ({
+  prettyCreatedAt,
+  waitingTime,
+  payment,
+  amount,
+  status,
+}) => {
   const [isShowDetails, setIsShowDetails] = React.useState(false);
 
   const handleClick = (e: React.MouseEvent) => {
@@ -14,19 +28,19 @@ const UserOrder: React.FC = () => {
       <div>
         <ul>
           <li className={styles.mainInfo__list__item}>
-            Дата и время: <span>27.7.2024 23:28</span>
+            Дата и время: <span>{prettyCreatedAt}</span>
           </li>
           <li className={styles.mainInfo__list__item}>
-            Время ожидания: <span>20</span> мин.
+            Время ожидания: <span>{waitingTime}</span> мин.
           </li>
           <li className={styles.mainInfo__list__item}>
-            Способ оплаты: <span>Наличные</span>
+            Способ оплаты: <span>{payment === 'CASH' ? 'Наличными' : 'Картой'}</span>
           </li>
           <li className={styles.mainInfo__list__item}>
-            Стоимость: <span>61,70</span> руб.
+            Стоимость: <span>{amount}</span> руб.
           </li>
           <li className={styles.mainInfo__list__item}>
-            Статус: <span>Приготовлен</span>
+            Статус: <span>{status === 0 ? 'Готовится' : 'Приготовлен'}</span>
           </li>
         </ul>
       </div>

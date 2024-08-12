@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUserOrdersState, StatusEnum, UserOrder } from './types';
+import { IUserOrdersState, StatusEnum, UOType } from './types';
 import { fetchUserOrders } from './asyncAction';
 
 const initialState: IUserOrdersState = {
@@ -17,7 +17,7 @@ export const userOrdersSlice = createSlice({
         state.orders = [];
         state.status = StatusEnum.LOADING;
       })
-      .addCase(fetchUserOrders.fulfilled, (state, action: PayloadAction<UserOrder[]>) => {
+      .addCase(fetchUserOrders.fulfilled, (state, action: PayloadAction<UOType[]>) => {
         state.orders = action.payload;
         state.status = StatusEnum.SUCCESS;
       })

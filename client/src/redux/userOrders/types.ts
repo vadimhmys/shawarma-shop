@@ -4,7 +4,7 @@ export enum StatusEnum {
   ERROR = 'error',
 }
 
-export type UserOrder = {
+export type UOType = {
   prettyCreatedAt: string;
 	prettyUpdatedAt: string;
 	id: number;
@@ -12,7 +12,7 @@ export type UserOrder = {
 	phone: string;
 	waitingTime: number;
 	comment: string | null;
-	payment: "CASH" | "card";
+	payment: "CASH" | "CARD";
 	amount: string;
 	status: number;
 	createdAt: string;
@@ -21,6 +21,6 @@ export type UserOrder = {
 };
 
 export interface IUserOrdersState {
-  orders: UserOrder[],
+  orders: UOType[],
   status: StatusEnum;
 }
