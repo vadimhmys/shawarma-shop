@@ -77,11 +77,15 @@ const Order = sequelize.define('order', {
     type: DataTypes.VIRTUAL,
     get() {
       const value = this.getDataValue('createdAt');
-      const day = value.getDate();
-      const month = value.getMonth() + 1;
+      let day = value.getDate() + '';
+      if (day.length === 1) day = '0' + day;
+      let month = value.getMonth() + 1 + '';
+      if (month.length === 1) month = '0' + month;
       const year = value.getFullYear();
-      const hours = value.getHours();
-      const minutes = value.getMinutes();
+      let hours = value.getHours() + '';
+      if (hours.length === 1) hours = '0' + hours;
+      let minutes = value.getMinutes() + '';
+      if (minutes.length === 1) minutes = '0' + minutes;
       return day + '.' + month + '.' + year + ' ' + hours + ':' + minutes;
     },
   },

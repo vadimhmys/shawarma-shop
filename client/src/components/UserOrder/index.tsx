@@ -81,7 +81,7 @@ const UserOrder: React.FC<UserOrderPropsType> = ({
                 className={styles.details__elem}>
                 <ul>
                   <li className={styles.details__elemList__item}>
-                    Название: <span>{i.title}</span>
+                    Название: <span className={styles.details__elemList__itemTitle}>{i.title}</span>
                   </li>
                   <li className={styles.details__elemList__item}>
                     Вес: <span>{i.weight}</span> гр.
