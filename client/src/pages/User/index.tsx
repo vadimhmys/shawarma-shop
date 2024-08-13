@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { useAppDispatch } from '../../redux/store';
+import { fetchUserOrders } from '../../redux/userOrders/asyncAction';
+import { useSelector } from 'react-redux';
+import { selectUserOrders } from '../../redux/userOrders/selectors';
+import { StatusEnum, type UOType } from '../../redux/userOrders/types';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../http/userAPI';
 import Button from '../../ui-kit/Button';
@@ -9,10 +13,6 @@ import UserOrder from '../../components/UserOrder';
 import { logoutUser } from '../../redux/user/slice';
 import { clearBasket } from '../../redux/basket/slice';
 import styles from './User.module.scss';
-import { fetchUserOrders } from '../../redux/userOrders/asyncAction';
-import { useSelector } from 'react-redux';
-import { selectUserOrders } from '../../redux/userOrders/selectors';
-import { StatusEnum, type UOType } from '../../redux/userOrders/types';
 
 const User: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -42,6 +42,7 @@ const User: React.FC = () => {
       payment={o.payment}
       amount={o.amount}
       status={o.status}
+      items={o.items}
     />
   ));
 

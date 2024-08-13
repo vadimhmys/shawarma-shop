@@ -6,6 +6,11 @@
   border-radius: 6px;
   padding: 10px 15px;
   margin-bottom: 15px;
+
+  &.finished {
+    border: 1px solid $yellow-dark;
+    background-color: $yellow;
+  }
 }
 
 .mainInfo__list__item, 

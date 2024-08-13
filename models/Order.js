@@ -9,7 +9,24 @@ class Order {
   async getAll(userId = null) {
     let orders;
     if (userId) {
-      orders = await OrderMapping.findAll({ where: { userId } });
+      orders = await OrderMapping.findAll({
+        where: { userId },
+        include: [
+          {
+            model: OrderItemMapping,
+            as: 'items',
+            attributes: [
+              'title',
+              'weight',
+              'price',
+              'count',
+              'cake',
+              'addedComponentsList',
+              'removedComponentsList',
+            ],
+          },
+        ],
+      });
     } else {
       orders = await OrderMapping.findAll();
     }
