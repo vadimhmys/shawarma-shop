@@ -8,15 +8,23 @@ import { loginUser } from '../../redux/user/slice';
 import { UserType } from '../../redux/user/types';
 import { selectUser } from '../../redux/user/selectors';
 import { fetchShawarmasFromLS } from '../../redux/basket/asyncAction';
-
 import styles from './Signup.module.scss';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+export interface ISignupFormData {
+  email: string;
+  password: string;
+}
 
 const Signup: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ISignupFormData>({ mode: 'onChange' });
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
   const navigate = useNavigate();
-  const [emailCurrent, setEmailCurrent] = React.useState('');
-  const [passwordCurrent, setPasswordCurrent] = React.useState('');
 
   const sendShawarmasFromLSToDB = async (id: number) => {
     const json = localStorage.getItem('shawarmaBasket');
@@ -26,11 +34,10 @@ const Signup: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const email = emailCurrent.trim();
-    const password = passwordCurrent.trim();
+  const onSubmit: SubmitHandler<ISignupFormData> = async (data) => {
+    const { email, password } = data;
     const res = (await signup(email, password)) as UserType;
+
     if (res) {
       const data = { id: res.id, email: res.email, role: res.role };
       dispatch(loginUser(data));
@@ -46,14 +53,6 @@ const Signup: React.FC = () => {
     }
   };
 
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmailCurrent(e.target.value);
-  };
-
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPasswordCurrent(e.target.value);
-  };
-
   React.useEffect(() => {
     if (user.isAdmin) navigate('/admin', { replace: true });
     if (user.isAuth) navigate('/user', { replace: true });
@@ -63,21 +62,34 @@ const Signup: React.FC = () => {
     <div className={styles.root}>
       <div className={styles.card}>
         <h2 className={styles.title}>Регистрация</h2>
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <input
+            {...register('email', {
+              required: 'Поле обязательно к заполнению',
+              pattern: {
+                value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+$/,
+                message: 'Некорректный email',
+              },
+            })}
             className={styles.input}
             type="text"
             placeholder="Введите ваш email..."
-            value={emailCurrent}
-            onChange={onChangeEmail}
           />
+          {errors?.email && <p className={styles.errorBlock}>{errors.email.message}</p>}
           <input
+            {...register('password', {
+              required: 'Поле обязательно к заполнению',
+              minLength: {
+                value: 4,
+                message: 'Слишком короткий пароль',
+              },
+            })}
             className={styles.input}
             type="password"
             placeholder="Введите ваш пароль..."
-            value={passwordCurrent}
-            onChange={onChangePassword}
+            maxLength={15}
           />
+          {errors.password && <p className={styles.errorBlock}>{errors.password.message}</p>}
           <div className={styles.bottom}>
             <Button type="submit">Регистрация</Button>
             <p className={styles.question}>

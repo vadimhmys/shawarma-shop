@@ -77,10 +77,13 @@ const Login: React.FC = () => {
           />
           {errors?.email && <p className={styles.errorBlock}>{errors.email.message}</p>}
           <input
-            {...register('password', { required: 'Поле обязательно к заполнению', minLength: {
-              value: 4,
-              message: 'Слишком короткий пароль',
-            } })}
+            {...register('password', {
+              required: 'Поле обязательно к заполнению',
+              minLength: {
+                value: 4,
+                message: 'Слишком короткий пароль',
+              },
+            })}
             className={styles.input}
             type="password"
             placeholder="Введите ваш пароль..."
