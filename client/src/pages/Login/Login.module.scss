@@ -12,6 +12,14 @@
   background-color: $bg-form;
   border: 1px solid $gray-dark;
   border-radius: 5px;
+
+  @media(max-width: 948px) {
+    width: 80%;
+  }
+
+  @media(max-width: 560px) {
+    width: 100%;
+  }
 }
 
 .title {
@@ -19,6 +27,11 @@
   text-align: center;
   font-family: "Lugrasimo", cursive;
   color: $dark-font;
+
+  @media(max-width: 468px) {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
 }
 
 .form {
@@ -32,6 +45,10 @@
   border: 1px solid $gray-dark;
   border-radius: 5px;
   padding: 0 7px;
+
+  @media(max-width: 468px) {
+    font-size: 13px;
+  }
 }
 
 .bottom {
@@ -40,10 +57,18 @@
   margin-top: 20px;
   padding: 0 3px;
   align-items: center;
+
+  @media(max-width: 468px) {
+    font-size: 14px;
+  }
 }
 
 .question {
   color: $dark-font;
+
+  @media(max-width: 468px) {
+    padding-left: 20px;
+  }
 }
 
 .link {
@@ -52,5 +77,20 @@
   &:hover {
     color: $pink;
     text-decoration: underline;
+  }
+}
+
+.errorBlock {
+  font-size: 14px;
+  font-family: "Lugrasimo", cursive;
+  color: $pink;
+  margin-top: 5px;
+
+  @media(max-width: 468px) {
+    font-size: 12px;
+  }
+
+  @media(max-width: 390px) {
+    bottom: -15px;
   }
 }
