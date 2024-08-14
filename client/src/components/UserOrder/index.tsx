@@ -38,7 +38,7 @@ const UserOrder: React.FC<UserOrderPropsType> = ({
     <div className={clsx(`${styles.root}`, status !== 0 && `${styles.finished}`)}>
       <ul>
         <li className={styles.mainInfo__list__item}>
-          Дата и время: <span>{prettyCreatedAt}</span>
+          Дата: <span>{prettyCreatedAt}</span>
         </li>
         <li className={styles.mainInfo__list__item}>
           Время ожидания: <span>{waitingTime}</span> мин.

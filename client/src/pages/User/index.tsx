@@ -48,7 +48,7 @@ const User: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <PageTitle>Личный кабинет</PageTitle>
+      <PageTitle className={styles.title}>Личный кабинет</PageTitle>
       <p className={styles.historyTitle}>История заказов</p>
       {status === StatusEnum.ERROR ? (
         <div className={styles.errorInfo}>
