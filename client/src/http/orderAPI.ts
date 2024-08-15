@@ -63,7 +63,7 @@ export const userGetAll = async () => {
   return data;
 }
 
-export const userGetOne = async (id: number) => {
+export const userGetOne = async (id: number) => {  // dont use
   const { data } = await authInstance.get(`order/user/getone/${id}`);
   return data;
 }

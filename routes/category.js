@@ -7,11 +7,11 @@ const router = new express.Router();
 
 router.get('/getall', CategoryController.getAll);
 router.get('/getone/:id([0-9]+)', CategoryController.getOne);
-router.post('/create', /*authMiddleware, adminMiddleware,*/ CategoryController.create);
-router.put('/update/:id([0-9]+)', /*authMiddleware, adminMiddleware,*/ CategoryController.update);
+router.post('/create', authMiddleware, adminMiddleware, CategoryController.create);
+router.put('/update/:id([0-9]+)', authMiddleware, adminMiddleware, CategoryController.update);
 router.delete(
   '/delete/:id([0-9]+)',
-  /*authMiddleware, adminMiddleware,*/ CategoryController.delete,
+  authMiddleware, adminMiddleware, CategoryController.delete,
 );
 
 export default router;
