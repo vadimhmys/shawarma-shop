@@ -147,6 +147,8 @@ class ShawarmaFromBasket {
       throw new Error('Basket not found in database');
     }
 
+    await ShawarmaFromBasketMapping.destroy({ where: { basketId: basket.id } });
+
     const records = items.map(async (item) => {
       const { id, title, image, weight, price, cake, count } = item;
       const addedComponentsList = JSON.stringify([...item.addedComponentsList]);
