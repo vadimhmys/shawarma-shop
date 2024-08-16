@@ -16,8 +16,34 @@
 
   &__content {
     margin: 10px 0;
-    width: 50%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+  }
+
+  &__btnsBlock {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__list {
+    margin: 10px 0;
+    text-align: center;
+  }
+}
+
+.listItem {
+  &__trashIcon,
+  &__editIcon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: .3s ease;
+  }
+
+  &__trashIcon:hover,
+  &__editIcon:hover {
+    color: $pink;
   }
 }
