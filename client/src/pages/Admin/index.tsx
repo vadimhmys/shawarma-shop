@@ -6,6 +6,12 @@ import styles from './Admin.module.scss';
 import CategoryList from './CategoryList';
 
 const Admin: React.FC = () => {
+  const [isShowCategories, setIsShowCategories] = React.useState(false);
+
+  const toggleShowingCategories = () => {
+    setIsShowCategories(!isShowCategories);
+  }
+
   return (
     <div className={styles.root}>
       <PageTitle>Панель управления</PageTitle>
@@ -13,10 +19,10 @@ const Admin: React.FC = () => {
         <h3 className={styles.infoBlock__title}>Категории</h3>
         <div className={styles.infoBlock__content}>
           <div className={styles.infoBlock__btnsBlock}>
-            <Button>Список категорий</Button>
+            <Button handleClick={toggleShowingCategories}>{isShowCategories ? 'Скрыть' : 'Показать'} список</Button>
             <Button>Новая категория</Button>
           </div>
-          <CategoryList />
+          {isShowCategories && <CategoryList />}
         </div>
       </div>
     </div>
