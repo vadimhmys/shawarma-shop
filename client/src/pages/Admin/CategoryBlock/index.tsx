@@ -3,8 +3,9 @@ import clsx from 'clsx';
 import { Button } from '../../../ui-kit';
 import CategoryList from './CategoryList';
 import CategoryEdit from './CategoryEdit';
-import styles from '../Admin.module.scss';
 import CategoryDelete from './CategoryDelete';
+import CategoryCreate from './CategoryCreate';
+import styles from '../Admin.module.scss';
 
 export type CategoryType = {
   id: number;
@@ -25,6 +26,10 @@ export type CategoryInputEdit = {
   categoryEdit: string;
 };
 
+export type CategoryInputCreate = {
+  categoryCreate: string;
+};
+
 export type CategoryEditPropsType = {
   id: number;
   name: string;
@@ -38,17 +43,31 @@ export type CategoryDeletePropsType = {
   setIsShowCategoryList: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+export type CategoryCreatePropsType = {
+  setIsShowCreatedCategory: React.Dispatch<React.SetStateAction<boolean>>;
+  isShowCreatedCategory: boolean;
+};
+
 const CategoryBlock = () => {
   const [isShowCategoryList, setIsShowCategoryList] = React.useState(false);
   const [editableCategory, setEditableCategory] = React.useState<CategoryType>({ id: 0, name: '' });
   const [isShowEditableCategory, setIsShowEditableCategory] = React.useState(false);
   const [deletedCategoryIndex, setDeletedCategoryIndex] = React.useState(0);
   const [isShowDeleteQuestion, setIsShowDeleteQuestion] = React.useState(false);
+  const [isShowCreatedCategory, setIsShowCreatedCategory] = React.useState(false);
 
   const toggleShowingCategories = () => {
     if (isShowEditableCategory) return;
     setIsShowCategoryList(!isShowCategoryList);
   };
+
+  const handleCreatingCategory = () => {
+    if (isShowEditableCategory) return;
+    setIsShowCategoryList(false);
+    setIsShowEditableCategory(false);
+    setIsShowCreatedCategory(true);
+  };
+
   return (
     <div className={clsx(`${styles.infoBlock}`, `${styles.category}`)}>
       <h3 className={styles.infoBlock__title}>Категории</h3>
@@ -57,7 +76,7 @@ const CategoryBlock = () => {
           <Button handleClick={toggleShowingCategories}>
             {isShowCategoryList ? 'Скрыть' : 'Показать'} список
           </Button>
-          <Button>Новая категория</Button>
+          <Button handleClick={handleCreatingCategory}>Новая категория</Button>
         </div>
         {isShowCategoryList && (
           <CategoryList
@@ -81,6 +100,12 @@ const CategoryBlock = () => {
             id={deletedCategoryIndex}
             setIsShowDeleteQuestion={setIsShowDeleteQuestion}
             setIsShowCategoryList={setIsShowCategoryList}
+          />
+        )}
+        {isShowCreatedCategory && (
+          <CategoryCreate
+            setIsShowCreatedCategory={setIsShowCreatedCategory}
+            isShowCreatedCategory={isShowCreatedCategory}
           />
         )}
       </div>

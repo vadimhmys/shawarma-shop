@@ -19,7 +19,7 @@ const CategoryEdit: React.FC<CategoryEditPropsType> = ({
   const onSubmit: SubmitHandler<CategoryInputEdit> = (data) => {
     setFetching(true);
     updateCategory(id, data.categoryEdit)
-      .catch((error) => console.log('не удалось обновить катнгорию'))
+      .catch((error) => console.log('Не удалось обновить категорию'))
       .finally(() => {
         setFetching(false);
         setIsShowEditableCategory(false);
