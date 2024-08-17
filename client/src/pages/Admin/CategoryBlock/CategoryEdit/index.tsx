@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { CategoryEditPropsType, CategoryInput } from '..';
+import { CategoryEditPropsType, CategoryInputEdit } from '..';
 import { updateCategory } from '../../../../http/catalogAPI';
 
 const CategoryEdit: React.FC<CategoryEditPropsType> = ({
@@ -15,10 +15,10 @@ const CategoryEdit: React.FC<CategoryEditPropsType> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CategoryInput>({ mode: 'onChange' });
-  const onSubmit: SubmitHandler<CategoryInput> = (data) => {
+  } = useForm<CategoryInputEdit>({ mode: 'onChange' });
+  const onSubmit: SubmitHandler<CategoryInputEdit> = (data) => {
     setFetching(true);
-    updateCategory(id, data.category)
+    updateCategory(id, data.categoryEdit)
       .catch((error) => console.log('не удалось обновить катнгорию'))
       .finally(() => {
         setFetching(false);
@@ -34,8 +34,8 @@ const CategoryEdit: React.FC<CategoryEditPropsType> = ({
     <>
       {isShowEditableCategory && (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input defaultValue={name} {...register('category', { required: true })} />
-          {errors.category && <span>This field is required</span>}
+          <input defaultValue={name} {...register('categoryEdit', { required: true })} />
+          {errors.categoryEdit && <span>This field is required</span>}
           <input type="submit" />
         </form>
       )}

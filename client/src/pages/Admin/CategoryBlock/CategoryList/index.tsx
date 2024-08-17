@@ -8,9 +8,10 @@ import styles from '../../Admin.module.scss';
 
 const CategoryList: React.FC<CategoryListPropsType> = ({
   setIsShowCategoryList,
-  isShowCategoryList,
   setEditableCategory,
   setIsShowEditableCategory,
+  setIsShowDeleteQuestion,
+  setDeletedCategoryIndex,
 }) => {
   const [categories, setCategories] = React.useState<CategoryType[]>([]);
   const [fetching, setFetching] = React.useState(true);
@@ -19,6 +20,12 @@ const CategoryList: React.FC<CategoryListPropsType> = ({
     setIsShowCategoryList(false);
     setEditableCategory({ id, name });
     setIsShowEditableCategory(true);
+  };
+
+  const handleDeleteCategory = (id: number) => {
+    //setIsShowCategoryList(false);
+    setIsShowDeleteQuestion(true);
+    setDeletedCategoryIndex(id);
   };
 
   React.useEffect(() => {
@@ -54,7 +61,7 @@ const CategoryList: React.FC<CategoryListPropsType> = ({
                 </td>
                 <td>
                   <FaRegTrashCan
-                    onClick={() => alert('Удалить')}
+                    onClick={() => handleDeleteCategory(c.id)}
                     className={styles.listItem__trashIcon}
                   />
                 </td>

@@ -122,7 +122,7 @@ const Category = sequelize.define('category', {
 Basket.hasMany(ShawarmaFromBasket, { onDelete: 'CASCADE' });
 ShawarmaFromBasket.belongsTo(Basket);
 
-Category.hasMany(Shawarma, { onDelete: 'RESTRICT' });
+Category.hasMany(Shawarma, { onDelete: 'CASCADE' });
 Shawarma.belongsTo(Category);
 
 Shawarma.hasMany(ShawarmaProp, { as: 'props', onDelete: 'CASCADE' });

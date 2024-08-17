@@ -4,6 +4,7 @@ import { Button } from '../../../ui-kit';
 import CategoryList from './CategoryList';
 import CategoryEdit from './CategoryEdit';
 import styles from '../Admin.module.scss';
+import CategoryDelete from './CategoryDelete';
 
 export type CategoryType = {
   id: number;
@@ -14,13 +15,14 @@ export type CategoryType = {
 
 export type CategoryListPropsType = {
   setIsShowCategoryList: React.Dispatch<React.SetStateAction<boolean>>;
-  isShowCategoryList: boolean;
   setEditableCategory: React.Dispatch<React.SetStateAction<CategoryType>>;
   setIsShowEditableCategory: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsShowDeleteQuestion: React.Dispatch<React.SetStateAction<boolean>>;
+  setDeletedCategoryIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export type CategoryInput = {
-  category: string;
+export type CategoryInputEdit = {
+  categoryEdit: string;
 };
 
 export type CategoryEditPropsType = {
@@ -30,10 +32,18 @@ export type CategoryEditPropsType = {
   isShowEditableCategory: boolean;
 };
 
+export type CategoryDeletePropsType = {
+  id: number;
+  setIsShowDeleteQuestion: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsShowCategoryList: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 const CategoryBlock = () => {
   const [isShowCategoryList, setIsShowCategoryList] = React.useState(false);
   const [editableCategory, setEditableCategory] = React.useState<CategoryType>({ id: 0, name: '' });
   const [isShowEditableCategory, setIsShowEditableCategory] = React.useState(false);
+  const [deletedCategoryIndex, setDeletedCategoryIndex] = React.useState(0);
+  const [isShowDeleteQuestion, setIsShowDeleteQuestion] = React.useState(false);
 
   const toggleShowingCategories = () => {
     if (isShowEditableCategory) return;
@@ -52,9 +62,10 @@ const CategoryBlock = () => {
         {isShowCategoryList && (
           <CategoryList
             setIsShowCategoryList={setIsShowCategoryList}
-            isShowCategoryList={isShowCategoryList}
             setEditableCategory={setEditableCategory}
             setIsShowEditableCategory={setIsShowEditableCategory}
+            setIsShowDeleteQuestion={setIsShowDeleteQuestion}
+            setDeletedCategoryIndex={setDeletedCategoryIndex}
           />
         )}
         {isShowEditableCategory && (
@@ -63,6 +74,13 @@ const CategoryBlock = () => {
             name={editableCategory.name}
             setIsShowEditableCategory={setIsShowEditableCategory}
             isShowEditableCategory={isShowEditableCategory}
+          />
+        )}
+        {isShowDeleteQuestion && (
+          <CategoryDelete
+            id={deletedCategoryIndex}
+            setIsShowDeleteQuestion={setIsShowDeleteQuestion}
+            setIsShowCategoryList={setIsShowCategoryList}
           />
         )}
       </div>
