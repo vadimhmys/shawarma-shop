@@ -1,20 +1,25 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { FaRegTrashCan } from 'react-icons/fa6';
-import { CiEdit } from "react-icons/ci";
+import { CiEdit } from 'react-icons/ci';
 import { fetchCategories } from '../../../http/catalogAPI';
+import { CategoryListPropsType, CategoryType } from '..';
 import styles from '../Admin.module.scss';
 
-export type CategoryType = {
-  id: number;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-const CategoryList: React.FC = () => {
+const CategoryList: React.FC<CategoryListPropsType> = ({
+  setIsShowCategoryList,
+  isShowCategoryList,
+  setEditableCategory,
+  setIsShowEditableCategory,
+}) => {
   const [categories, setCategories] = React.useState<CategoryType[]>([]);
   const [fetching, setFetching] = React.useState(true);
+
+  const handleEditCategory = (id: number, name: string) => {
+    setIsShowCategoryList(false);
+    setEditableCategory({ id, name });
+    setIsShowEditableCategory(true);
+  };
 
   React.useEffect(() => {
     fetchCategories()
@@ -42,10 +47,16 @@ const CategoryList: React.FC = () => {
               <tr key={c.id}>
                 <td>{c.name}</td>
                 <td>
-                  <CiEdit onClick={() => alert('Редактировать')} className={styles.listItem__editIcon}/>
+                  <CiEdit
+                    onClick={() => handleEditCategory(c.id, c.name)}
+                    className={styles.listItem__editIcon}
+                  />
                 </td>
                 <td>
-                  <FaRegTrashCan onClick={() => alert('Удалить')} className={styles.listItem__trashIcon} />
+                  <FaRegTrashCan
+                    onClick={() => alert('Удалить')}
+                    className={styles.listItem__trashIcon}
+                  />
                 </td>
               </tr>
             ))}

@@ -4,13 +4,13 @@ import { authInstance, guestInstance } from ".";
  * Create, update and delete a category, get a list of all categories
  */
 
-export const createCategory = async (category: string) => {
-  const { data } = await authInstance.post('categories/create', category);
+export const createCategory = async (name: string) => {
+  const { data } = await authInstance.post('categories/create', {name});
   return data;
 }
 
-export const updateCategory = async (id: number, category: string) => {
-  const { data } = await authInstance.put(`categories/update/${id}`, category);
+export const updateCategory = async (id: number, name: string) => {
+  const { data } = await authInstance.put(`categories/update/${id}`, {name});
   return data;
 }
 

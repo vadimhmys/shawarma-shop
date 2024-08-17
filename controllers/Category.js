@@ -43,6 +43,7 @@ class Category {
       if (!req.body.name) {
         throw new Error('No category name');
       }
+      
       const category = await CategoryModel.update(req.params.id, req.body);
       res.json(category);
     } catch (e) {
