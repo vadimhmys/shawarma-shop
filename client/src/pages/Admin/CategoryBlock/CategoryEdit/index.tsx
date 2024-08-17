@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { CategoryInput } from '..';
-import { updateCategory } from '../../../http/catalogAPI';
+import { CategoryEditPropsType, CategoryInput } from '..';
+import { updateCategory } from '../../../../http/catalogAPI';
 
-export type CategoryEditPropsType = {
-  id: number;
-  name: string;
-  setIsShowEditableCategory: React.Dispatch<React.SetStateAction<boolean>>;
-  isShowEditableCategory: boolean;
-};
-
-const CategoryEdit: React.FC<CategoryEditPropsType> = ({ id, name, setIsShowEditableCategory, isShowEditableCategory}) => {
+const CategoryEdit: React.FC<CategoryEditPropsType> = ({
+  id,
+  name,
+  setIsShowEditableCategory,
+  isShowEditableCategory,
+}) => {
   const [fetching, setFetching] = React.useState(false);
   const {
     register,

@@ -2,9 +2,9 @@ import React from 'react';
 import ReactLoading from 'react-loading';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { CiEdit } from 'react-icons/ci';
-import { fetchCategories } from '../../../http/catalogAPI';
+import { fetchCategories } from '../../../../http/catalogAPI';
 import { CategoryListPropsType, CategoryType } from '..';
-import styles from '../Admin.module.scss';
+import styles from '../../Admin.module.scss';
 
 const CategoryList: React.FC<CategoryListPropsType> = ({
   setIsShowCategoryList,
