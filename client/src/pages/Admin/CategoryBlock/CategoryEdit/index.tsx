@@ -36,7 +36,8 @@ const CategoryEdit: React.FC<CategoryEditPropsType> = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <input defaultValue={name} {...register('categoryEdit', { required: true })} />
           {errors.categoryEdit && <span>This field is required</span>}
-          <input type="submit" />
+          <input type="submit" value="Сохранить"/>
+          <input type="button" value="Отмена" onClick={() => setIsShowEditableCategory(false)}/>
         </form>
       )}
     </>

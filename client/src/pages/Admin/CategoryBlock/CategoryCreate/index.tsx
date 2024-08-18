@@ -35,6 +35,7 @@ const CategoryCreate: React.FC<CategoryCreatePropsType> = ({
           <input {...register('categoryCreate', { required: true })} />
           {errors.categoryCreate && <span>This field is required</span>}
           <input type="submit" value="Создать"/>
+          <input type="button" value="Отмена" onClick={() => setIsShowCreatedCategory(false)}/>
         </form>
       )}
     </>
