@@ -1,6 +1,8 @@
 @import '../../scss/_all';
 
 .infoBlock {
+  margin-top: 20px;
+
   &::after {
     content: '';
     display: block;
