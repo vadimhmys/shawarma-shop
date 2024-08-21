@@ -2,6 +2,10 @@
 
 .root {
   padding: 10px 0 30px;
+
+  @media(max-width: 468px) {
+    padding: 10px 0;
+  }
 }
 
 .container {

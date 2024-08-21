@@ -8,6 +8,10 @@
   display: flex;
   justify-content: flex-end;
 
+  @media(max-width: 468px) {
+   font-size: 14px;
+  }
+
   &__link {
     color: $gray-font;
     display: inline-block;

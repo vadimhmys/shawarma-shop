@@ -28,7 +28,7 @@ const CategoryDelete: React.FC<CategoryDeletePropsType> = ({id, setIsShowDeleteQ
     <div className={styles.modalWin}>
       <div>
         <h2 className={styles.modalWin__header}>Вы уверены, что хотите удалить категорию?</h2>
-        <p className={styles.modalWin__warning}>Вместе с категорией удалятся все шаухи, относящиеся к ней</p>
+        <p className={styles.modalWin__warning}>Вместе с категорией удалятся все шавухи, относящиеся к ней!</p>
         <div className={styles.modalWin__btnBlock}>
           <button className={styles.modalWin__btn} onClick={handleDelete}>
             Да

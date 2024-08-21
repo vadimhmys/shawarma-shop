@@ -23,7 +23,6 @@ const CategoryList: React.FC<CategoryListPropsType> = ({
   };
 
   const handleDeleteCategory = (id: number) => {
-    //setIsShowCategoryList(false);
     setIsShowDeleteQuestion(true);
     setDeletedCategoryIndex(id);
   };

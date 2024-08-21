@@ -12,6 +12,14 @@
   @media (max-width: 768px) {
     width: calc(100vw - 50px);
   }
+
+  @media (max-width: 468px) {
+    width: calc(100vw - 24px);
+  }
+
+  @media (max-width: 390px) {
+    width: calc(100vw - 10px);
+  }
 }
 
 .container {

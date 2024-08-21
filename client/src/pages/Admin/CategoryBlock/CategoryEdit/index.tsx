@@ -3,6 +3,7 @@ import ReactLoading from 'react-loading';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CategoryEditPropsType, CategoryInputEdit } from '..';
 import { updateCategory } from '../../../../http/catalogAPI';
+import styles from '../../Admin.module.scss';
 
 const CategoryEdit: React.FC<CategoryEditPropsType> = ({
   id,
@@ -31,16 +32,16 @@ const CategoryEdit: React.FC<CategoryEditPropsType> = ({
   }
 
   return (
-    <>
+    <div className={styles.formWrapper}>
       {isShowEditableCategory && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input defaultValue={name} {...register('categoryEdit', { required: true })} />
-          {errors.categoryEdit && <span>This field is required</span>}
-          <input type="submit" value="Сохранить"/>
-          <input type="button" value="Отмена" onClick={() => setIsShowEditableCategory(false)}/>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <input className={styles.form__input} defaultValue={name} {...register('categoryEdit', { required: true })} />
+          <input className={styles.form__btn} type="submit" value="Сохранить"/>
+          <input className={styles.form__btn} type="button" value="Отмена" onClick={() => setIsShowEditableCategory(false)}/>
+          {errors.categoryEdit && <div className={styles.form__errorMessage}>This field is required</div>}
         </form>
       )}
-    </>
+    </div>
   );
 };
 

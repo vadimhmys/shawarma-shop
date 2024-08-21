@@ -58,6 +58,7 @@ const CategoryBlock = () => {
 
   const toggleShowingCategories = () => {
     if (isShowEditableCategory) return;
+    if (isShowCreatedCategory) return;
     setIsShowCategoryList(!isShowCategoryList);
   };
 

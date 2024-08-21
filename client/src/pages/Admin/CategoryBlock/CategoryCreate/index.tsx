@@ -3,6 +3,7 @@ import ReactLoading from 'react-loading';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CategoryCreatePropsType, CategoryInputCreate } from '..';
 import { createCategory } from '../../../../http/catalogAPI';
+import styles from '../../Admin.module.scss';
 
 const CategoryCreate: React.FC<CategoryCreatePropsType> = ({
   setIsShowCreatedCategory,
@@ -29,16 +30,28 @@ const CategoryCreate: React.FC<CategoryCreatePropsType> = ({
   }
 
   return (
-    <>
+    <div className={styles.formWrapper}>
       {isShowCreatedCategory && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register('categoryCreate', { required: true })} />
-          {errors.categoryCreate && <span>This field is required</span>}
-          <input type="submit" value="Создать"/>
-          <input type="button" value="Отмена" onClick={() => setIsShowCreatedCategory(false)}/>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <input
+            className={styles.form__input}
+            {...register('categoryCreate', { required: true })}
+            placeholder="Напишите название категории..."
+            maxLength={30}
+          />
+          <input className={styles.form__btn} type="submit" value="Создать" />
+          <input
+            className={styles.form__btn}
+            type="button"
+            value="Отмена"
+            onClick={() => setIsShowCreatedCategory(false)}
+          />
+          {errors.categoryCreate && (
+            <div className={styles.form__errorMessage}>Поле не должно быть пустым!</div>
+          )}
         </form>
       )}
-    </>
+    </div>
   );
 };
 
