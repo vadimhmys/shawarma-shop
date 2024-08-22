@@ -83,3 +83,15 @@ export type TeaxtAreaPropsType = {
   maxLength?: ValidationValueMessage<number>;
   maxCharCount?: number;
 }
+
+export type ShawarmaAPIType = {
+  name?: string;
+  title?: string;
+  image?: File;
+  icon?: File;
+  categoryId?: number;
+  props?: string;
+  components?: string;
+  novelty?: boolean;
+  presence?: boolean;
+};
