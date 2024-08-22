@@ -3,25 +3,24 @@ import ReactLoading from 'react-loading';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { CiEdit } from 'react-icons/ci';
 import { fetchShawarmas } from '../../../../http/catalogAPI';
-//import { ShawarmaListPropsType } from '..';
-import styles from '../../Admin.module.scss';
 import { ShawarmaType } from '../../../../redux/shawarmas/types';
+import { ShawarmaListPropsType } from '..';
+import styles from '../../Admin.module.scss';
 
-const ShawarmaList: React.FC = (/* {
+const ShawarmaList: React.FC<ShawarmaListPropsType> = ({
   setIsShowShawarmaList,
   setEditableShawarma,
   setIsShowEditableShawarma,
   setIsShowDeleteQuestion,
   setDeletedShawarmaIndex,
-} */) => {
+}) => {
   const [shawarmas, setShawarmas] = React.useState<ShawarmaType[]>([]);
   const [fetching, setFetching] = React.useState(true);
 
-  const handleEditShawarma = (id: number, name: string) => {
-    /* setIsShowShawarmaList(false);
-    setEditableShawarma({ id, name });
-    setIsShowEditableShawarma(true); */
-    console.log(`Edit shawa with id: ${id} and name ${name}`);
+  const handleEditShawarma = (shawarma: ShawarmaType) => {
+    setIsShowShawarmaList(false);
+    setEditableShawarma(shawarma);
+    setIsShowEditableShawarma(true);
   };
 
   const handleDeleteShawarma = (id: number) => {
@@ -57,7 +56,7 @@ const ShawarmaList: React.FC = (/* {
                 <td>{s.name}</td>
                 <td>
                   <CiEdit
-                    onClick={() => handleEditShawarma(s.id, s.name)}
+                    onClick={() => handleEditShawarma(s)}
                     className={styles.listItem__editIcon}
                   />
                 </td>

@@ -46,6 +46,7 @@ class Shawarma {
       if (!req.params.id) {
         throw new Error('Shawarma ID not specified');
       }
+
       const shawarma = await ShawarmaModel.update(
         req.params.id,
         req.body,

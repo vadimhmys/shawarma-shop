@@ -6,12 +6,12 @@ import { ShawarmaAPIType } from "../@types/app.forms";
  */
 
 export const createCategory = async (name: string) => {
-  const { data } = await authInstance.post('categories/create', {name});
+  const { data } = await authInstance.post('categories/create', { name });
   return data;
 }
 
 export const updateCategory = async (id: number, name: string) => {
-  const { data } = await authInstance.put(`categories/update/${id}`, {name});
+  const { data } = await authInstance.put(`categories/update/${id}`, { name });
   return data;
 }
 
@@ -39,7 +39,7 @@ export const createShawarma = async (shawarma: ShawarmaAPIType) => {
   return data;
 }
 
-export const updateShawarma = async (id: number, shawarma: ShawarmaAPIType) => {
+export const updateShawarma = async (id: number, shawarma: FormData) => {
   const { data } = await authInstance.put(`shawarmas/update/${id}`, shawarma);
   return data;
 }
