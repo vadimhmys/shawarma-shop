@@ -56,6 +56,19 @@ class Shawarma {
     return shawarmas;
   }
 
+  async getAllForAdmin() {
+    const shawarmas = await ShawarmaMapping.findAll({
+      include: [
+        { model: ShawarmaPropMapping, as: 'props' },
+        { model: ShawarmaComponentMapping, as: 'components' },
+      ],
+    });
+    if (!shawarmas) {
+      throw new Error('Shawarmas not found in DB');
+    }
+    return shawarmas;
+  }
+
   async getOne(id) {
     const shawarma = await ShawarmaMapping.findOne({
       where: { id: id },

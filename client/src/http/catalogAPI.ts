@@ -50,7 +50,7 @@ export const deleteShawarma = async (id: number) => {
 }
 
 export const fetchShawarmas = async () => {
-  const { data } = await guestInstance.get('shawarmas/getall');
+  const { data } = await authInstance.get('shawarmas/getallForAdmin');
   return data;
 }
 

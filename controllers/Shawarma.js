@@ -11,6 +11,15 @@ class Shawarma {
     }
   }
 
+  async getAllForAdmin(req, res, next) {
+    try {
+      const shawarmas = await ShawarmaModel.getAllForAdmin();
+      res.json(shawarmas);
+    } catch (e) {
+      next(AppError.badRequest(e.message));
+    }
+  }
+
   async getOne(req, res, next) {
     try {
       if (!req.params.id) {
