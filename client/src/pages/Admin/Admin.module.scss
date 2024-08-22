@@ -1,5 +1,13 @@
 @import '../../scss/_all';
 
+.root {
+  padding-bottom: 110px;
+
+  @media(max-width: 786px) {
+    padding-bottom: 130px;
+  }
+}
+
 .infoBlock {
   margin-top: 20px;
 
@@ -53,12 +61,12 @@
       background: darken($white,20%);
 
       & th {
-        padding: 10px 0;
+        padding: 10px 3px;
       }
     }
 
     & tbody td {
-      padding: 5px 0;
+      padding: 5px 3px;
     }
 
     & tbody tr:nth-child(odd){
@@ -159,7 +167,6 @@
 .form {
   &__input {
     padding: 5px 10px;
-    margin-right: 10px;
     margin-bottom: 10px;
     border-radius: 3px;
     border: 1px solid $gray-light;
@@ -178,6 +185,18 @@
     &::placeholder {
       color: $gray-font;
     }
+  }
+
+  &__inputUpload {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  &__label {
+    margin-bottom: 5px;
+    font-family: "Lugrasimo", cursive;
+    color: $dark-font;
+    cursor: pointer;
   }
 
   &__errorMessage {
@@ -212,5 +231,30 @@
     &:active {
       background-color: $pink;
     }
+  }
+}
+
+input::-webkit-file-upload-button {
+  width: 130px;
+  height: 35px;
+  border: 1px solid $gray-light;
+  background-color: transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .3s ease;
+  margin-right: 10px;
+
+  &:hover {
+    background-color: $pink-light;
+    border: 1px solid $pink-light;
+  }
+
+  &:active {
+    background-color: $pink;
+  }
+
+  @media(max-width: 468px) {
+    height: 30px;
+    font-size: 12px;
   }
 }

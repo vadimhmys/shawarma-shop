@@ -31,7 +31,7 @@ const ShawarmaList: React.FC<ShawarmaListPropsType> = ({
 
   React.useEffect(() => {
     fetchShawarmas()
-      .then((data) => {setShawarmas(data); console.log('data: ', data)})
+      .then((data) => setShawarmas(data))
       .finally(() => setFetching(false));
   }, []);
 

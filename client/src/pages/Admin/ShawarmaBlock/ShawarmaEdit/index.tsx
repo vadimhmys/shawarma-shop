@@ -56,24 +56,30 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
     <div className={styles.formWrapper}>
       {isShowEditableShawarma && (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <label className={styles.form__label} htmlFor="shawarmaName">Редактировать полное название</label>
           <input
             className={styles.form__input}
+            id='shawarmaName'
             defaultValue={shawarma.name}
             {...register('name', { required: true })}
           />
           {errors.name && (
             <div className={styles.form__errorMessage}>Поле обязательно для заполнения</div>
           )}
+          <label className={styles.form__label} htmlFor="shawarmaTitle">Редактировать краткое название</label>
           <input
             className={styles.form__input}
+            id='shawarmaTitle'
             defaultValue={shawarma.title}
             {...register('title', { required: true })}
           />
           {errors.title && (
             <div className={styles.form__errorMessage}>Поле обязательно для заполнения</div>
           )}
+          <label className={styles.form__label} htmlFor="shawarmaImage">Загрузить изображение</label>
           <input
-            className={styles.form__input}
+            className={styles.form__inputUpload}
+            id='shawarmaImage'
             {...register('image')}
             type="file"
             onChange={(e) => handleImageChange(e)}
