@@ -10,8 +10,8 @@ type ShawarmaEditFields = {
   name: string;
   title: string;
   image?: File;
-  /* icon: File;
-  novelty: boolean;
+  icon?: File;
+  /* novelty: boolean;
   presence: boolean; */
 };
 
@@ -21,18 +21,21 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
   isShowEditableShawarma,
 }) => {
   const [image, setImage] = React.useState<File>();
+  const [icon, setIcon] = React.useState<File>();
   const [fetching, setFetching] = React.useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ShawarmaEditFields>({ mode: 'onChange' });
+
   const onSubmit: SubmitHandler<ShawarmaEditFields> = (data) => {
     setFetching(true);
     const info = new FormData();
     info.append('name', data.name.trim());
     info.append('title', data.title.trim());
     if (image) info.append('image', image);
+    if (icon) info.append('icon', icon);
 
     updateShawarma(shawarma.id, info)
       .catch((error) => console.log('Не удалось обновить шавуху'))
@@ -45,6 +48,12 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target) {
       setImage(event.target.files?.[0]);
+    }
+  };
+
+  const handleIconChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target) {
+      setIcon(event.target.files?.[0]);
     }
   };
 
@@ -83,6 +92,14 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
             {...register('image')}
             type="file"
             onChange={(e) => handleImageChange(e)}
+          />
+          <label className={styles.form__label} htmlFor="shawarmaImage">Загрузить иконку</label>
+          <input
+            className={styles.form__inputUpload}
+            id='shawarmaIcon'
+            {...register('icon')}
+            type="file"
+            onChange={(e) => handleIconChange(e)}
           />
           <input className={styles.form__btn} type="submit" value="Сохранить" />
           <input
