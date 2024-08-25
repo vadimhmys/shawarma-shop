@@ -23,11 +23,9 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
   };
 
   const changePrice = (id: number, value: string) => {
-    if (value === '') return;
-    const correctValue = parseFloat(value);
     setProperties(properties.map((item) => {
       if (item.id === id) {
-        return {...item, price: correctValue};
+        return {...item, price: value};
       } else {
         return item;
       }

@@ -13,7 +13,7 @@ const VariantList: React.FC<VariantListPropsType> = ({ propertyList }) => {
   return (
     <div className={styles.root}>
       {propertyList.map((p) => (
-        <VariantItem key={p.id} weight={p.weight} price={p.price} />
+        <VariantItem key={p.id} weight={p.weight} price={+p.price} />
       ))}
     </div>
   );

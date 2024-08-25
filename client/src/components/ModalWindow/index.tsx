@@ -41,7 +41,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
   const shawarma: ShawarmaType = structuredClone(activeShawarma);
   const activeProp = shawarma.props[activeRadioBoxIndex];
   const totalPrice = formatPrice(
-    activeProp.price +
+    +activeProp.price +
       addedIngredients.reduce(
         (sum: number, ing: BasketAddedComponentType) => sum + ing.count * ing.price,
         0,

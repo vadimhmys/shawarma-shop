@@ -22,7 +22,7 @@ export type ShawarmaType = {
 export type CardPropertyType = {
   id: number;
   shawarmaId: number;
-  price: number;
+  price: string;
   weight: number;
   createdAt: string;
   updatedAt: string;

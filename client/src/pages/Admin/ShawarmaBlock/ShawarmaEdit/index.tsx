@@ -25,7 +25,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
   const [icon, setIcon] = React.useState<File>();
   const [fetching, setFetching] = React.useState(false);
   const [properties, setProperties] = React.useState(shawarma.props);
-  console.log('PROPERTIES: ', properties);
+  
   const {
     register,
     handleSubmit,

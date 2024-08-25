@@ -63,7 +63,7 @@ const Card: React.FC<CardPropsType> = ({ shawarma }) => {
       <div className={styles.bottom}>
         <div className={styles.price}>
           <Price
-            price={shawarma.props[activeCardRadioBoxIndex].price}
+            price={+shawarma.props[activeCardRadioBoxIndex].price}
             currency="руб."
             isBottom={true}
           />
