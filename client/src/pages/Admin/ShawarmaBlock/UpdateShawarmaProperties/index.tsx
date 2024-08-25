@@ -11,6 +11,29 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
   properties,
   setProperties,
 }) => {
+
+  const changeWeight = (id: number, value: number) => {
+    setProperties(properties.map((item) => {
+      if (item.id === id) {
+        return {...item, weight: value};
+      } else {
+        return item;
+      }
+    }));
+  };
+
+  const changePrice = (id: number, value: string) => {
+    if (value === '') return;
+    const correctValue = parseFloat(value);
+    setProperties(properties.map((item) => {
+      if (item.id === id) {
+        return {...item, price: correctValue};
+      } else {
+        return item;
+      }
+    }));
+  };
+
   return (
     <>
       <h4>Характеристики</h4>
@@ -29,14 +52,14 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
                 <input
                   name={'weight_' + item.id}
                   value={item.weight}
-                  onChange={() => alert('Change weight')}
+                  onChange={(e) => changeWeight(item.id, +e.target.value)}
                 />
               </td>
               <td>
                 <input
                   name={'price_' + item.id}
                   value={item.price}
-                  onChange={() => alert('Change price')}
+                  onChange={(e) => changePrice(item.id, e.target.value)}
                 />
               </td>
               <td>

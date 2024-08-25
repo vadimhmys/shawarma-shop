@@ -25,6 +25,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
   const [icon, setIcon] = React.useState<File>();
   const [fetching, setFetching] = React.useState(false);
   const [properties, setProperties] = React.useState(shawarma.props);
+  console.log('PROPERTIES: ', properties);
   const {
     register,
     handleSubmit,
@@ -40,6 +41,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
     if (icon) info.append('icon', icon);
     info.append('novelty', data.novelty + '');
     info.append('presence', data.presence + '');
+    info.append('props', JSON.stringify(properties));
 
     updateShawarma(shawarma.id, info)
       .catch((error) => console.log('Не удалось обновить шавуху'))
