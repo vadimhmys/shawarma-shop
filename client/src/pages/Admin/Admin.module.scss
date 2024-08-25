@@ -199,11 +199,29 @@
     cursor: pointer;
   }
 
+  &__checkbox {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: auto;
+    position: relative;
+    top: 5px;
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__errorMessage {
     font-family: "Lugrasimo", cursive;
     color: $pink;
     font-size: 14px;
     padding: 5px;
+  }
+
+  &__btnsWrapper {
+    margin-top: 20px;
   }
 
   &__btn {

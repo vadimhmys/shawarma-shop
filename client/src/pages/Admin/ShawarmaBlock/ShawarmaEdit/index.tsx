@@ -11,8 +11,8 @@ type ShawarmaEditFields = {
   title: string;
   image?: File;
   icon?: File;
-  /* novelty: boolean;
-  presence: boolean; */
+  novelty: boolean;
+  //presence: boolean;
 };
 
 const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
@@ -36,6 +36,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
     info.append('title', data.title.trim());
     if (image) info.append('image', image);
     if (icon) info.append('icon', icon);
+    info.append('novelty', data.novelty + '');
 
     updateShawarma(shawarma.id, info)
       .catch((error) => console.log('Не удалось обновить шавуху'))
@@ -65,49 +66,69 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
     <div className={styles.formWrapper}>
       {isShowEditableShawarma && (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <label className={styles.form__label} htmlFor="shawarmaName">Редактировать полное название</label>
+          <label className={styles.form__label} htmlFor="shawarmaName">
+            Редактировать полное название
+          </label>
           <input
             className={styles.form__input}
-            id='shawarmaName'
+            id="shawarmaName"
             defaultValue={shawarma.name}
             {...register('name', { required: true })}
           />
           {errors.name && (
             <div className={styles.form__errorMessage}>Поле обязательно для заполнения</div>
           )}
-          <label className={styles.form__label} htmlFor="shawarmaTitle">Редактировать краткое название</label>
+          <label className={styles.form__label} htmlFor="shawarmaTitle">
+            Редактировать краткое название
+          </label>
           <input
             className={styles.form__input}
-            id='shawarmaTitle'
+            id="shawarmaTitle"
             defaultValue={shawarma.title}
             {...register('title', { required: true })}
           />
           {errors.title && (
             <div className={styles.form__errorMessage}>Поле обязательно для заполнения</div>
           )}
-          <label className={styles.form__label} htmlFor="shawarmaImage">Загрузить изображение</label>
+          <label className={styles.form__label} htmlFor="shawarmaImage">
+            Загрузить изображение
+          </label>
           <input
             className={styles.form__inputUpload}
-            id='shawarmaImage'
+            id="shawarmaImage"
             {...register('image')}
             type="file"
             onChange={(e) => handleImageChange(e)}
           />
-          <label className={styles.form__label} htmlFor="shawarmaImage">Загрузить иконку</label>
+          <label className={styles.form__label} htmlFor="shawarmaIcon">
+            Загрузить иконку
+          </label>
           <input
             className={styles.form__inputUpload}
-            id='shawarmaIcon'
+            id="shawarmaIcon"
             {...register('icon')}
             type="file"
             onChange={(e) => handleIconChange(e)}
           />
-          <input className={styles.form__btn} type="submit" value="Сохранить" />
+          <label className={styles.form__label} htmlFor="shawarmaNovelty">
+            Новинка?
+          </label>
           <input
-            className={styles.form__btn}
-            type="button"
-            value="Отмена"
-            onClick={() => setIsShowEditableShawarma(false)}
+            className={styles.form__checkbox}
+            id="shawarmaNovelty"
+            defaultChecked={shawarma.novelty}
+            {...register('novelty')}
+            type="checkbox"
           />
+          <div className={styles.form__btnsWrapper}>
+            <input className={styles.form__btn} type="submit" value="Сохранить" />
+            <input
+              className={styles.form__btn}
+              type="button"
+              value="Отмена"
+              onClick={() => setIsShowEditableShawarma(false)}
+            />
+          </div>
         </form>
       )}
     </div>
