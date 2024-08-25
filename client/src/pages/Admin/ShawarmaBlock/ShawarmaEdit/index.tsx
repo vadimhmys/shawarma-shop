@@ -3,16 +3,16 @@ import ReactLoading from 'react-loading';
 import { SubmitHandler, useForm } from 'react-hook-form';
 //import { ShawarmaEditPropsType, ShawarmaInputEdit } from '..';
 import { updateShawarma } from '../../../../http/catalogAPI';
-import styles from '../../Admin.module.scss';
 import { ShawarmaEditPropsType } from '..';
+import styles from '../../Admin.module.scss';
 
 type ShawarmaEditFields = {
   name: string;
   title: string;
   image?: File;
   icon?: File;
-  novelty: boolean;
-  //presence: boolean;
+  novelty?: boolean;
+  presence?: boolean;
 };
 
 const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
@@ -37,6 +37,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
     if (image) info.append('image', image);
     if (icon) info.append('icon', icon);
     info.append('novelty', data.novelty + '');
+    info.append('presence', data.presence + '');
 
     updateShawarma(shawarma.id, info)
       .catch((error) => console.log('Не удалось обновить шавуху'))
@@ -118,6 +119,16 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
             id="shawarmaNovelty"
             defaultChecked={shawarma.novelty}
             {...register('novelty')}
+            type="checkbox"
+          />
+          <label className={styles.form__label} htmlFor="shawarmaPresence">
+            В наличии?
+          </label>
+          <input
+            className={styles.form__checkbox}
+            id="shawarmaPresence"
+            defaultChecked={shawarma.presence}
+            {...register('presence')}
             type="checkbox"
           />
           <div className={styles.form__btnsWrapper}>
