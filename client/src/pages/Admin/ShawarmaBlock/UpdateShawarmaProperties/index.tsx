@@ -4,6 +4,7 @@ import { CardPropertyType } from '../../../../redux/shawarmas/types';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { Button } from '../../../../ui-kit';
 import { createShawarmaProperty } from '../../../../http/catalogAPI';
+import styles from '../../Admin.module.scss';
 
 export type UpdateShawarmaPropertiesPropsType = {
   shawarmaId: number;
@@ -66,9 +67,9 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
 
   return (
     <>
-      <h4>Характеристики</h4>
+      <h4 className={styles.infoBlock__title}>Характеристики</h4>
       <Button handleClick={(e) => addProperty(e, shawarmaId)}>Добавить</Button>
-      <table>
+      <table className={styles.infoBlock__list}>
         <thead>
           <tr>
             <th>Вес</th>
@@ -94,7 +95,7 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
                 />
               </td>
               <td>
-                <FaRegTrashCan onClick={() => removeProperty(item.id)} />
+                <FaRegTrashCan className={styles.listItem__trashIcon} onClick={() => removeProperty(item.id)} />
               </td>
             </tr>
           ))}

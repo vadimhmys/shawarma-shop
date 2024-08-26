@@ -67,6 +67,17 @@
 
     & tbody td {
       padding: 5px 3px;
+
+      & input {
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        text-align: center;
+
+        &:focus {
+          border-bottom: 1px solid $dark-font;
+        }
+      }
     }
 
     & tbody tr:nth-child(odd){
@@ -136,12 +147,12 @@
 
   &__btn {
     width: 100px;
-  padding: 10px 0;
-  font-size: 16px;
-  font-weight: bold;
-  border: 3px solid transparent;
-  border-radius: 3px;
-  cursor: pointer;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border: 3px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
 
   @media (max-width: 768px) {
     width: 80px;
