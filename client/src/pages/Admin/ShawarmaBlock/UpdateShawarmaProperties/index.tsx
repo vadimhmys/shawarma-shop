@@ -56,6 +56,10 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
       .finally(() => setFetching(false));
   };
 
+  const removeProperty = (id: number) => {
+    setProperties(properties.filter((item) => item.id !== id));
+  };
+
   if (fetching) {
     return <ReactLoading type={'spin'} color={'red'} height={80} width={80} />;
   }
@@ -90,7 +94,7 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
                 />
               </td>
               <td>
-                <FaRegTrashCan onClick={() => alert('Remove item')} />
+                <FaRegTrashCan onClick={() => removeProperty(item.id)} />
               </td>
             </tr>
           ))}
