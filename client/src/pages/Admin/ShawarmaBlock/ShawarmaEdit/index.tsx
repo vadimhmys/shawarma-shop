@@ -25,7 +25,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
   const [icon, setIcon] = React.useState<File>();
   const [fetching, setFetching] = React.useState(false);
   const [properties, setProperties] = React.useState(shawarma.props);
-  
+
   const {
     register,
     handleSubmit,
@@ -135,7 +135,11 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
             {...register('presence')}
             type="checkbox"
           />
-          <UpdateShawarmaProperties shawarmaId={shawarma.id} properties={properties} setProperties={setProperties} />
+          <UpdateShawarmaProperties
+            shawarmaId={shawarma.id}
+            properties={properties}
+            setProperties={setProperties}
+          />
           <div className={styles.form__btnsWrapper}>
             <input className={styles.form__btn} type="submit" value="Сохранить" />
             <input

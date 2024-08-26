@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactLoading from 'react-loading';
 import { CardPropertyType } from '../../../../redux/shawarmas/types';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { Button } from '../../../../ui-kit';
+import { createShawarmaProperty } from '../../../../http/catalogAPI';
 
 export type UpdateShawarmaPropertiesPropsType = {
   shawarmaId: number;
@@ -14,40 +16,54 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
   properties,
   setProperties,
 }) => {
+  const [fetching, setFetching] = React.useState(false);
 
   const changeWeight = (id: number, value: number) => {
-    setProperties(properties.map((item) => {
-      if (item.id === id) {
-        return {...item, weight: value};
-      } else {
-        return item;
-      }
-    }));
+    setProperties(
+      properties.map((item) => {
+        if (item.id === id) {
+          return { ...item, weight: value };
+        } else {
+          return item;
+        }
+      }),
+    );
   };
 
   const changePrice = (id: number, value: string) => {
-    setProperties(properties.map((item) => {
-      if (item.id === id) {
-        return {...item, price: value};
-      } else {
-        return item;
-      }
-    }));
+    setProperties(
+      properties.map((item) => {
+        if (item.id === id) {
+          return { ...item, price: value };
+        } else {
+          return item;
+        }
+      }),
+    );
   };
 
-  const addProperty = (shawarmaId: number) => {
-    const data = {
-      id: shawarmaId,
+  const addProperty = (e: React.MouseEvent<Element, MouseEvent>, shawarmaId: number) => {
+    e.preventDefault();
+    setFetching(true);
+    const property = {
+      shawarmaId,
       weight: 0,
-      price: '',
+      price: 0,
     };
-    console.log(data);
+    createShawarmaProperty(property)
+      .then((data) => setProperties([...properties, data]))
+      .catch((error) => alert("Не удалось создать характеристику!"))
+      .finally(() => setFetching(false));
+  };
+
+  if (fetching) {
+    return <ReactLoading type={'spin'} color={'red'} height={80} width={80} />;
   }
 
   return (
     <>
       <h4>Характеристики</h4>
-      <Button handleClick={() => addProperty(shawarmaId)}>Добавить</Button>
+      <Button handleClick={(e) => addProperty(e, shawarmaId)}>Добавить</Button>
       <table>
         <thead>
           <tr>

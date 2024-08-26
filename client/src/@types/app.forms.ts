@@ -95,3 +95,9 @@ export type ShawarmaAPIType = {
   novelty?: boolean;
   presence?: boolean;
 };
+
+export type ShawarmaPropertyAPIType = {
+  shawarmaId: number;
+  weight: number;
+  price: number;
+};
