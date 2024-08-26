@@ -135,7 +135,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
             {...register('presence')}
             type="checkbox"
           />
-          <UpdateShawarmaProperties properties={properties} setProperties={setProperties} />
+          <UpdateShawarmaProperties shawarmaId={shawarma.id} properties={properties} setProperties={setProperties} />
           <div className={styles.form__btnsWrapper}>
             <input className={styles.form__btn} type="submit" value="Сохранить" />
             <input

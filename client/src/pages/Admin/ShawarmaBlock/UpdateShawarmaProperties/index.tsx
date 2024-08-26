@@ -1,13 +1,16 @@
 import React from 'react';
 import { CardPropertyType } from '../../../../redux/shawarmas/types';
 import { FaRegTrashCan } from 'react-icons/fa6';
+import { Button } from '../../../../ui-kit';
 
 export type UpdateShawarmaPropertiesPropsType = {
+  shawarmaId: number;
   properties: CardPropertyType[];
   setProperties: React.Dispatch<React.SetStateAction<CardPropertyType[]>>;
 };
 
 const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
+  shawarmaId,
   properties,
   setProperties,
 }) => {
@@ -32,9 +35,19 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
     }));
   };
 
+  const addProperty = (shawarmaId: number) => {
+    const data = {
+      id: shawarmaId,
+      weight: 0,
+      price: '',
+    };
+    console.log(data);
+  }
+
   return (
     <>
       <h4>Характеристики</h4>
+      <Button handleClick={() => addProperty(shawarmaId)}>Добавить</Button>
       <table>
         <thead>
           <tr>
