@@ -4,8 +4,8 @@ import { ShawarmaType } from '../../../redux/shawarmas/types';
 import { Button } from '../../../ui-kit';
 import ShawarmaList from './ShawarmaList';
 import ShawarmaEdit from './ShawarmaEdit';
+import ShawarmaCreate from './ShawarmaCreate';
 //import ShawarmaDelete from './ShawarmaDelete';
-//mport ShawarmaCreate from './ShawarmaCreate';
 import styles from '../Admin.module.scss';
 
 export type ShawarmaListPropsType = {
@@ -36,10 +36,10 @@ export type ShawarmaEditPropsType = {
   setIsShowShawarmaList: React.Dispatch<React.SetStateAction<boolean>>;
 }; */
 
-/* export type ShawarmaCreatePropsType = {
+export type ShawarmaCreatePropsType = {
   setIsShowCreatedShawarma: React.Dispatch<React.SetStateAction<boolean>>;
   isShowCreatedShawarma: boolean;
-}; */
+};
 
 const ShawarmaBlock: React.FC = () => {
   const [isShowShawarmaList, setIsShowShawarmaList] = React.useState(false);
@@ -68,12 +68,12 @@ const ShawarmaBlock: React.FC = () => {
     setIsShowShawarmaList(!isShowShawarmaList);
   };
 
-  /* const handleCreatingShawarma = () => {
+  const handleCreatingShawarma = () => {
     if (isShowEditableShawarma) return;
     setIsShowShawarmaList(false);
     setIsShowEditableShawarma(false);
     setIsShowCreatedShawarma(true);
-  }; */
+  };
 
   return (
     <div className={clsx(`${styles.infoBlock}`, `${styles.Shawarma}`)}>
@@ -83,7 +83,7 @@ const ShawarmaBlock: React.FC = () => {
           <Button handleClick={toggleShowingShawarmas}>
             {isShowShawarmaList ? 'Скрыть' : 'Показать'} список
           </Button>
-          {/* <Button handleClick={handleCreatingShawarma}>Новая шавуха</Button> */}
+          <Button handleClick={handleCreatingShawarma}>Новая шавуха</Button>
         </div>
         {isShowShawarmaList && (
           <ShawarmaList
@@ -107,13 +107,13 @@ const ShawarmaBlock: React.FC = () => {
             setIsShowDeleteQuestion={setIsShowDeleteQuestion}
             setIsShowShawarmaList={setIsShowShawarmaList}
           />
-        )}
+        )} */}
         {isShowCreatedShawarma && (
           <ShawarmaCreate
             setIsShowCreatedShawarma={setIsShowCreatedShawarma}
             isShowCreatedShawarma={isShowCreatedShawarma}
           />
-        )} */}
+        )}
       </div>
     </div>
   );

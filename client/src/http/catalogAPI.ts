@@ -1,5 +1,5 @@
 import { authInstance, guestInstance } from ".";
-import { ShawarmaAPIType, ShawarmaComponentAPIType, ShawarmaPropertyAPIType } from "../@types/app.forms";
+import { ShawarmaComponentAPIType, ShawarmaPropertyAPIType } from "../@types/app.forms";
 
 /*
  * Create, update and delete a category, get a list of all categories
@@ -34,7 +34,7 @@ export const fetchCategory = async (id: number) => {
  * Create, update and delete a shawarma, get a list of all shawarmas
  */
 
-export const createShawarma = async (shawarma: ShawarmaAPIType) => {
+export const createShawarma = async (shawarma: FormData) => {
   const { data } = await authInstance.post('shawarmas/create', shawarma);
   return data;
 }
