@@ -298,3 +298,10 @@ input::-webkit-file-upload-button {
     font-size: 12px;
   }
 }
+
+.emptyPropertyMessage {
+  font-family: "Lugrasimo", cursive;
+  color: $dark-font;
+  margin: 10px 0;
+  text-align: center;
+}

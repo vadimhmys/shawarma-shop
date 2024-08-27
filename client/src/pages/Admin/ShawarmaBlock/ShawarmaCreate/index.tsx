@@ -5,6 +5,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { ShawarmaCreatePropsType } from '..';
 import { CategoryOptionType } from '../ShawarmaEdit';
 import { CategoryType } from '../../CategoryBlock';
+import CreateShawarmaProperties from '../CreateShawarmaProperties';
 import { createShawarma, fetchCategories } from '../../../../http/catalogAPI';
 import styles from '../../Admin.module.scss';
 
@@ -18,6 +19,12 @@ export type ShawarmaCreateFields = {
   presence: boolean;
 };
 
+export type PropertyType = {
+  weight: number;
+  price: string;
+  unique: string;
+};
+
 const ShawarmaCreate: React.FC<ShawarmaCreatePropsType> = ({
   setIsShowCreatedShawarma,
   isShowCreatedShawarma,
@@ -26,6 +33,7 @@ const ShawarmaCreate: React.FC<ShawarmaCreatePropsType> = ({
   const [image, setImage] = React.useState<File>();
   const [icon, setIcon] = React.useState<File>();
   const [options, setOptions] = React.useState<CategoryOptionType[]>([]);
+  const [properties, setProperties] = React.useState<PropertyType[]>([]);
   
   const getValue = React.useCallback(
     (value: number) => (value ? options.find((option) => option.value === value) : 0),
@@ -40,6 +48,7 @@ const ShawarmaCreate: React.FC<ShawarmaCreatePropsType> = ({
   } = useForm<ShawarmaCreateFields>({ mode: 'onChange' });
   const onSubmit: SubmitHandler<ShawarmaCreateFields> = (data) => {
     setFetching(true);
+    const props = properties.map((prop) => ({weight: prop.weight, price: parseFloat(prop.price)}));
     const shawarma = new FormData();
     shawarma.append('name', data.name.trim());
     shawarma.append('title', data.title.trim());
@@ -48,6 +57,7 @@ const ShawarmaCreate: React.FC<ShawarmaCreatePropsType> = ({
     shawarma.append('novelty', data.novelty + '');
     shawarma.append('presence', data.presence + '');
     if (data.category) shawarma.append('categoryId', data.category);
+    shawarma.append('props', JSON.stringify(props));
     createShawarma(shawarma)
       .catch((error) => console.log('Не удалось создать шавуху'))
       .finally(() => {
@@ -184,6 +194,8 @@ const ShawarmaCreate: React.FC<ShawarmaCreatePropsType> = ({
               </div>
             )}
           />
+
+          <CreateShawarmaProperties properties={properties} setProperties={setProperties}/>
 
           <input className={styles.form__btn} type="submit" value="Создать" />
           <input
