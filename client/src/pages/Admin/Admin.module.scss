@@ -84,6 +84,11 @@
           border-bottom: 1px solid $dark-font;
         }
       }
+
+      & input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     & tbody tr:nth-child(odd){

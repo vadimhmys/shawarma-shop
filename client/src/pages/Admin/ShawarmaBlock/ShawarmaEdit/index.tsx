@@ -58,8 +58,9 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
     if (icon) info.append('icon', icon);
     info.append('novelty', data.novelty + '');
     info.append('presence', data.presence + '');
-    info.append('props', JSON.stringify(properties));
     if (data.category) info.append('categoryId', data.category);
+    info.append('props', JSON.stringify(properties));
+    info.append('components', JSON.stringify(components));
 
     updateShawarma(shawarma.id, info)
       .catch((error) => console.log('Не удалось обновить шавуху'))

@@ -72,7 +72,6 @@ export const createShawarmaProperty = async (property: ShawarmaPropertyAPIType) 
  * Create component for shawarma
  */
 
-
 export const createShawarmaComponent = async (component: ShawarmaComponentAPIType) => {
   const { data } = await authInstance.post('shawarmas/component/create', component);
   return data;

@@ -1,6 +1,7 @@
 import express from 'express';
 import ShawarmaController from '../controllers/Shawarma.js';
 import ShawarmaPropertyController from '../controllers/ShawarmaProperty.js';
+import ShawarmaComponentController from '../controllers/ShawarmaComponent.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 import adminMiddleware from '../middleware/adminMiddleware.js';
 
@@ -16,5 +17,6 @@ router.delete(
   authMiddleware, adminMiddleware, ShawarmaController.delete,
 );
 router.post('/property/create', authMiddleware, adminMiddleware, ShawarmaPropertyController.create);
+router.post('/component/create', authMiddleware, adminMiddleware, ShawarmaComponentController.create);
 
 export default router;
