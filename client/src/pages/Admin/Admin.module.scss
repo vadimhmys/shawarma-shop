@@ -24,6 +24,12 @@
     color: $dark-font;
   }
 
+  &__subtitle {
+    font-family: "Lugrasimo", cursive;
+    color: $dark-font;
+    margin: 10px 0;
+  }
+
   &__content {
     margin: 10px 0;
     width: 80%;

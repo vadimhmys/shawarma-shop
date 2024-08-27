@@ -67,7 +67,7 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
 
   return (
     <>
-      <h4 className={styles.infoBlock__title}>Характеристики</h4>
+      <h4 className={styles.infoBlock__subtitle}>Характеристики</h4>
       <Button handleClick={(e) => addProperty(e, shawarmaId)}>Добавить</Button>
       <table className={styles.infoBlock__list}>
         <thead>

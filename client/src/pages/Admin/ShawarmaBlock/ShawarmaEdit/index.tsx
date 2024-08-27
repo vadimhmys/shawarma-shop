@@ -1,19 +1,27 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 //import { ShawarmaEditPropsType, ShawarmaInputEdit } from '..';
-import { updateShawarma } from '../../../../http/catalogAPI';
+import { fetchCategories, updateShawarma } from '../../../../http/catalogAPI';
 import { ShawarmaEditPropsType } from '..';
-import styles from '../../Admin.module.scss';
 import UpdateShawarmaProperties from '../UpdateShawarmaProperties';
+import ReactSelect from 'react-select';
+import styles from '../../Admin.module.scss';
+import { CategoryType } from '../../CategoryBlock';
 
-type ShawarmaEditFields = {
+export type ShawarmaEditFields = {
   name: string;
   title: string;
+  category: string;
   image?: File;
   icon?: File;
   novelty?: boolean;
   presence?: boolean;
+};
+
+export type CategoryOptionType = {
+  value: number;
+  label: string;
 };
 
 const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
@@ -25,11 +33,18 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
   const [icon, setIcon] = React.useState<File>();
   const [fetching, setFetching] = React.useState(false);
   const [properties, setProperties] = React.useState(shawarma.props);
+  const [options, setOptions] = React.useState<CategoryOptionType[]>([]);
+
+  const getValue = React.useCallback(
+    (value: number) => (value ? options.find((option) => option.value === value) : 0),
+    [options],
+  );
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<ShawarmaEditFields>({ mode: 'onChange' });
 
   const onSubmit: SubmitHandler<ShawarmaEditFields> = (data) => {
@@ -42,6 +57,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
     info.append('novelty', data.novelty + '');
     info.append('presence', data.presence + '');
     info.append('props', JSON.stringify(properties));
+    if (data.category) info.append('categoryId', data.category);
 
     updateShawarma(shawarma.id, info)
       .catch((error) => console.log('Не удалось обновить шавуху'))
@@ -62,6 +78,18 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
       setIcon(event.target.files?.[0]);
     }
   };
+
+  React.useEffect(() => {
+    fetchCategories().then((data) => {
+      const options = data
+        .filter((item: CategoryType) => item.id !== 0 && item.id !== 1)
+        .map((item: CategoryType) => ({
+          value: item.id,
+          label: item.name,
+        }));
+      setOptions(options);
+    });
+  }, []);
 
   if (fetching) {
     return <ReactLoading type={'spin'} color={'red'} height={80} width={80} />;
@@ -139,6 +167,24 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
             shawarmaId={shawarma.id}
             properties={properties}
             setProperties={setProperties}
+          />
+          <Controller
+            control={control}
+            name="category"
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <div>
+                <div className={styles.form__label}>
+                  Выберите категорию
+                </div>
+                <ReactSelect
+                  placeholder="Категории..."
+                  options={options}
+                  value={getValue(+value)}
+                  onChange={(newValue) => onChange((newValue as CategoryOptionType).value)}
+                />
+                {error && <div style={{ color: 'red' }}>{error.message}</div>}
+              </div>
+            )}
           />
           <div className={styles.form__btnsWrapper}>
             <input className={styles.form__btn} type="submit" value="Сохранить" />
