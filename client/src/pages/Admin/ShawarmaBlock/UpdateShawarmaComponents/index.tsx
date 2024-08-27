@@ -73,7 +73,7 @@ const UpdateShawarmaComponents: React.FC<UpdateShawarmaComponentsPropsType> = ({
         <thead>
           <tr>
             <th>Название</th>
-            <th>Обязательность</th>
+            <th>Нельзя <br/> исключить</th>
             <th>Удалить</th>
           </tr>
         </thead>
