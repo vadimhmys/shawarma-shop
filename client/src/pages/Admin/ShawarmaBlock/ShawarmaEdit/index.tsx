@@ -8,6 +8,7 @@ import UpdateShawarmaProperties from '../UpdateShawarmaProperties';
 import ReactSelect from 'react-select';
 import styles from '../../Admin.module.scss';
 import { CategoryType } from '../../CategoryBlock';
+import UpdateShawarmaComponents from '../UpdateShawarmaComponents';
 
 export type ShawarmaEditFields = {
   name: string;
@@ -33,6 +34,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
   const [icon, setIcon] = React.useState<File>();
   const [fetching, setFetching] = React.useState(false);
   const [properties, setProperties] = React.useState(shawarma.props);
+  const [components, setComponents] = React.useState(shawarma.components);
   const [options, setOptions] = React.useState<CategoryOptionType[]>([]);
 
   const getValue = React.useCallback(
@@ -163,11 +165,6 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
             {...register('presence')}
             type="checkbox"
           />
-          <UpdateShawarmaProperties
-            shawarmaId={shawarma.id}
-            properties={properties}
-            setProperties={setProperties}
-          />
           <Controller
             control={control}
             name="category"
@@ -185,6 +182,16 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
                 {error && <div style={{ color: 'red' }}>{error.message}</div>}
               </div>
             )}
+          />
+          <UpdateShawarmaProperties
+            shawarmaId={shawarma.id}
+            properties={properties}
+            setProperties={setProperties}
+          />
+          <UpdateShawarmaComponents
+            shawarmaId={shawarma.id}
+            components={components}
+            setComponents={setComponents}
           />
           <div className={styles.form__btnsWrapper}>
             <input className={styles.form__btn} type="submit" value="Сохранить" />

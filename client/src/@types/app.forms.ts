@@ -101,3 +101,9 @@ export type ShawarmaPropertyAPIType = {
   weight: number;
   price: number;
 };
+
+export type ShawarmaComponentAPIType = {
+  shawarmaId: number;
+  name: string;
+  necessity: boolean;
+};
