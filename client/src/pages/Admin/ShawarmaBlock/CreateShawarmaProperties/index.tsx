@@ -1,5 +1,4 @@
 import React from 'react';
-//import ReactLoading from 'react-loading';
 import uuid from 'react-uuid';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { Button } from '../../../../ui-kit';
@@ -15,8 +14,6 @@ const CreateShawarmaProperties: React.FC<CreateShawarmaPropertiesPropsType> = ({
   properties,
   setProperties,
 }) => {
-  //const [fetching, setFetching] = React.useState(false);
-
   const changeWeight = (unique: string, value: number) => {
     setProperties(
       properties.map((item) => {
@@ -54,10 +51,6 @@ const CreateShawarmaProperties: React.FC<CreateShawarmaPropertiesPropsType> = ({
   const removeProperty = (unique: string) => {
     setProperties(properties.filter((item) => item.unique !== unique));
   };
-
-  /* if (fetching) {
-    return <ReactLoading type={'spin'} color={'red'} height={80} width={80} />;
-  } */
 
   return (
     <>
