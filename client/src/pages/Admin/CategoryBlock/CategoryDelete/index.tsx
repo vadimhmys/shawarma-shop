@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { deleteCategory } from '../../../../http/catalogAPI';
-import { CategoryDeletePropsType } from '..';
+import { CategoryDeletePropsType } from '../types';
 import styles from '../../Admin.module.scss';
 
 const CategoryDelete: React.FC<CategoryDeletePropsType> = ({id, setIsShowDeleteQuestion, setIsShowCategoryList}) => {

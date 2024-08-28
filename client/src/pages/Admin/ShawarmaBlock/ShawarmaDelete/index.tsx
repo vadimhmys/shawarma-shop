@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { deleteShawarma } from '../../../../http/catalogAPI';
-import { ShawarmaDeletePropsType } from '..';
+import { ShawarmaDeletePropsType } from '../types';
 import styles from '../../Admin.module.scss';
 
 const ShawarmaDelete: React.FC<ShawarmaDeletePropsType> = ({

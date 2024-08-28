@@ -8,31 +8,6 @@ import ShawarmaCreate from './ShawarmaCreate';
 import ShawarmaDelete from './ShawarmaDelete';
 import styles from '../Admin.module.scss';
 
-export type ShawarmaListPropsType = {
-  setIsShowShawarmaList: React.Dispatch<React.SetStateAction<boolean>>;
-  setEditableShawarma: React.Dispatch<React.SetStateAction<ShawarmaType>>;
-  setIsShowEditableShawarma: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsShowDeleteQuestion: React.Dispatch<React.SetStateAction<boolean>>;
-  setDeletedShawarmaIndex: React.Dispatch<React.SetStateAction<number>>;
-};
-
-export type ShawarmaEditPropsType = {
-  shawarma: ShawarmaType;
-  setIsShowEditableShawarma: React.Dispatch<React.SetStateAction<boolean>>;
-  isShowEditableShawarma: boolean;
-};
-
-export type ShawarmaDeletePropsType = {
-  id: number;
-  setIsShowDeleteQuestion: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsShowShawarmaList: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export type ShawarmaCreatePropsType = {
-  setIsShowCreatedShawarma: React.Dispatch<React.SetStateAction<boolean>>;
-  isShowCreatedShawarma: boolean;
-};
-
 const ShawarmaBlock: React.FC = () => {
   const [isShowShawarmaList, setIsShowShawarmaList] = React.useState(false);
   const [editableShawarma, setEditableShawarma] = React.useState<ShawarmaType>({

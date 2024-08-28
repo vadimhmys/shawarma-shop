@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { CategoryCreatePropsType, CategoryInputCreate } from '..';
+import { CategoryCreatePropsType, CategoryInputCreate } from '../types';
 import { createCategory } from '../../../../http/catalogAPI';
 import styles from '../../Admin.module.scss';
 

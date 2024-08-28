@@ -2,35 +2,19 @@ import React from 'react';
 import ReactLoading from 'react-loading';
 import ReactSelect from 'react-select';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { ShawarmaCreatePropsType } from '..';
-import { CategoryOptionType } from '../ShawarmaEdit';
-import { CategoryType } from '../../CategoryBlock';
+
 import CreateShawarmaProperties from '../CreateShawarmaProperties';
 import CreateShawarmaComponents from '../CreateShawarmaComponents';
 import { createShawarma, fetchCategories } from '../../../../http/catalogAPI';
+import {
+  CategoryOptionType,
+  ComponentType,
+  PropertyType,
+  ShawarmaCreateFields,
+  ShawarmaCreatePropsType,
+} from '../types';
+import { CategoryType } from '../../CategoryBlock/types';
 import styles from '../../Admin.module.scss';
-
-export type ShawarmaCreateFields = {
-  name: string;
-  title: string;
-  category: string;
-  image: File;
-  icon: File;
-  novelty: boolean;
-  presence: boolean;
-};
-
-export type PropertyType = {
-  weight: number;
-  price: string;
-  unique: string;
-};
-
-export type ComponentType = {
-  name: string;
-  necessity: boolean;
-  unique: string;
-};
 
 const ShawarmaCreate: React.FC<ShawarmaCreatePropsType> = ({
   setIsShowCreatedShawarma,

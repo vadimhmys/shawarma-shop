@@ -2,13 +2,8 @@ import React from 'react';
 import uuid from 'react-uuid';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { Button } from '../../../../ui-kit';
-import { ComponentType } from '../ShawarmaCreate';
+import { CreateShawarmaComponentsPropsType } from '../types';
 import styles from '../../Admin.module.scss';
-
-export type CreateShawarmaComponentsPropsType = {
-  components: ComponentType[];
-  setComponents: React.Dispatch<React.SetStateAction<ComponentType[]>>;
-};
 
 const CreateShawarmaComponents: React.FC<CreateShawarmaComponentsPropsType> = ({
   components,

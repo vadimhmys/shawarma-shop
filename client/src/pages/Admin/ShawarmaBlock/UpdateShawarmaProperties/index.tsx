@@ -1,16 +1,10 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
-import { CardPropertyType } from '../../../../redux/shawarmas/types';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { Button } from '../../../../ui-kit';
 import { createShawarmaProperty } from '../../../../http/catalogAPI';
+import { UpdateShawarmaPropertiesPropsType } from '../types';
 import styles from '../../Admin.module.scss';
-
-export type UpdateShawarmaPropertiesPropsType = {
-  shawarmaId: number;
-  properties: CardPropertyType[];
-  setProperties: React.Dispatch<React.SetStateAction<CardPropertyType[]>>;
-};
 
 const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
   shawarmaId,
@@ -53,7 +47,7 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
     };
     createShawarmaProperty(property)
       .then((data) => setProperties([...properties, data]))
-      .catch((error) => alert("Не удалось создать характеристику!"))
+      .catch((error) => alert('Не удалось создать характеристику!'))
       .finally(() => setFetching(false));
   };
 
@@ -95,7 +89,10 @@ const UpdateShawarmaProperties: React.FC<UpdateShawarmaPropertiesPropsType> = ({
                 />
               </td>
               <td>
-                <FaRegTrashCan className={styles.listItem__trashIcon} onClick={() => removeProperty(item.id)} />
+                <FaRegTrashCan
+                  className={styles.listItem__trashIcon}
+                  onClick={() => removeProperty(item.id)}
+                />
               </td>
             </tr>
           ))}

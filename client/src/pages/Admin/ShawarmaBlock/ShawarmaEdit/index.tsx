@@ -1,29 +1,13 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-//import { ShawarmaEditPropsType, ShawarmaInputEdit } from '..';
 import { fetchCategories, updateShawarma } from '../../../../http/catalogAPI';
-import { ShawarmaEditPropsType } from '..';
 import UpdateShawarmaProperties from '../UpdateShawarmaProperties';
 import ReactSelect from 'react-select';
-import styles from '../../Admin.module.scss';
-import { CategoryType } from '../../CategoryBlock';
+import { CategoryType } from '../../CategoryBlock/types';
 import UpdateShawarmaComponents from '../UpdateShawarmaComponents';
-
-export type ShawarmaEditFields = {
-  name: string;
-  title: string;
-  category: string;
-  image?: File;
-  icon?: File;
-  novelty?: boolean;
-  presence?: boolean;
-};
-
-export type CategoryOptionType = {
-  value: number;
-  label: string;
-};
+import { CategoryOptionType, ShawarmaEditFields, ShawarmaEditPropsType } from '../types';
+import styles from '../../Admin.module.scss';
 
 const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
   shawarma,
@@ -171,9 +155,7 @@ const ShawarmaEdit: React.FC<ShawarmaEditPropsType> = ({
             name="category"
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <div>
-                <div className={styles.form__label}>
-                  Выберите категорию
-                </div>
+                <div className={styles.form__label}>Выберите категорию</div>
                 <ReactSelect
                   placeholder="Категории..."
                   options={options}

@@ -1,16 +1,10 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
-import { CardComponentType } from '../../../../redux/shawarmas/types';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { Button } from '../../../../ui-kit';
 import { createShawarmaComponent } from '../../../../http/catalogAPI';
+import { UpdateShawarmaComponentsPropsType } from '../types';
 import styles from '../../Admin.module.scss';
-
-export type UpdateShawarmaComponentsPropsType = {
-  shawarmaId: number;
-  components: CardComponentType[];
-  setComponents: React.Dispatch<React.SetStateAction<CardComponentType[]>>;
-};
 
 const UpdateShawarmaComponents: React.FC<UpdateShawarmaComponentsPropsType> = ({
   shawarmaId,
@@ -53,7 +47,7 @@ const UpdateShawarmaComponents: React.FC<UpdateShawarmaComponentsPropsType> = ({
     };
     createShawarmaComponent(component)
       .then((data) => setComponents([...components, data]))
-      .catch((error) => alert("Не удалось создать компонент!"))
+      .catch((error) => alert('Не удалось создать компонент!'))
       .finally(() => setFetching(false));
   };
 
@@ -73,7 +67,9 @@ const UpdateShawarmaComponents: React.FC<UpdateShawarmaComponentsPropsType> = ({
         <thead>
           <tr>
             <th>Название</th>
-            <th>Нельзя <br/> исключить</th>
+            <th>
+              Нельзя <br /> исключить
+            </th>
             <th>Удалить</th>
           </tr>
         </thead>
@@ -89,14 +85,17 @@ const UpdateShawarmaComponents: React.FC<UpdateShawarmaComponentsPropsType> = ({
               </td>
               <td>
                 <input
-                  type='checkbox'
+                  type="checkbox"
                   name={'necessity_' + item.id}
                   checked={item.necessity}
                   onChange={(e) => changeNecessity(item.id, e.target.checked)}
                 />
               </td>
               <td>
-                <FaRegTrashCan className={styles.listItem__trashIcon} onClick={() => removeComponent(item.id)} />
+                <FaRegTrashCan
+                  className={styles.listItem__trashIcon}
+                  onClick={() => removeComponent(item.id)}
+                />
               </td>
             </tr>
           ))}

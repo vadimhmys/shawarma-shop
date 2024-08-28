@@ -4,7 +4,7 @@ import { FaRegTrashCan } from 'react-icons/fa6';
 import { CiEdit } from 'react-icons/ci';
 import { fetchShawarmas } from '../../../../http/catalogAPI';
 import { ShawarmaType } from '../../../../redux/shawarmas/types';
-import { ShawarmaListPropsType } from '..';
+import { ShawarmaListPropsType } from '../types';
 import styles from '../../Admin.module.scss';
 
 const ShawarmaList: React.FC<ShawarmaListPropsType> = ({
