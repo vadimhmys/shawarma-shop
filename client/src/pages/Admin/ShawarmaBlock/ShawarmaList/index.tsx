@@ -24,9 +24,8 @@ const ShawarmaList: React.FC<ShawarmaListPropsType> = ({
   };
 
   const handleDeleteShawarma = (id: number) => {
-    /* setIsShowDeleteQuestion(true);
-    setDeletedShawarmaIndex(id); */
-    console.log(`Delete shawa with id: ${id}`);
+    setIsShowDeleteQuestion(true);
+    setDeletedShawarmaIndex(id);
   };
 
   React.useEffect(() => {

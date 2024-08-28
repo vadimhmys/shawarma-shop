@@ -5,7 +5,7 @@ import { Button } from '../../../ui-kit';
 import ShawarmaList from './ShawarmaList';
 import ShawarmaEdit from './ShawarmaEdit';
 import ShawarmaCreate from './ShawarmaCreate';
-//import ShawarmaDelete from './ShawarmaDelete';
+import ShawarmaDelete from './ShawarmaDelete';
 import styles from '../Admin.module.scss';
 
 export type ShawarmaListPropsType = {
@@ -16,25 +16,17 @@ export type ShawarmaListPropsType = {
   setDeletedShawarmaIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-/* export type ShawarmaInputEdit = {
-  ShawarmaEdit: string;
-}; */
-
-/* export type ShawarmaNameCreate = {
-  name: string;
-}; */
-
 export type ShawarmaEditPropsType = {
   shawarma: ShawarmaType;
   setIsShowEditableShawarma: React.Dispatch<React.SetStateAction<boolean>>;
   isShowEditableShawarma: boolean;
 };
 
-/* export type ShawarmaDeletePropsType = {
+export type ShawarmaDeletePropsType = {
   id: number;
   setIsShowDeleteQuestion: React.Dispatch<React.SetStateAction<boolean>>;
   setIsShowShawarmaList: React.Dispatch<React.SetStateAction<boolean>>;
-}; */
+};
 
 export type ShawarmaCreatePropsType = {
   setIsShowCreatedShawarma: React.Dispatch<React.SetStateAction<boolean>>;
@@ -101,13 +93,13 @@ const ShawarmaBlock: React.FC = () => {
             isShowEditableShawarma={isShowEditableShawarma}
           />
         )}
-        {/* {isShowDeleteQuestion && (
+        {isShowDeleteQuestion && (
           <ShawarmaDelete
             id={deletedShawarmaIndex}
             setIsShowDeleteQuestion={setIsShowDeleteQuestion}
             setIsShowShawarmaList={setIsShowShawarmaList}
           />
-        )} */}
+        )}
         {isShowCreatedShawarma && (
           <ShawarmaCreate
             setIsShowCreatedShawarma={setIsShowCreatedShawarma}
