@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import { ShawarmaType } from '../../../redux/shawarmas/types';
 import { Button } from '../../../ui-kit';
 import ShawarmaList from './ShawarmaList';
@@ -43,7 +42,7 @@ const ShawarmaBlock: React.FC = () => {
   };
 
   return (
-    <div className={clsx(`${styles.infoBlock}`, `${styles.Shawarma}`)}>
+    <div className={styles.infoBlock}>
       <h3 className={styles.infoBlock__title}>Шавухи</h3>
       <div className={styles.infoBlock__content}>
         <div className={styles.infoBlock__btnsBlock}>
