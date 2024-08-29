@@ -13,7 +13,7 @@ type UserOrderPropsType = {
   items: OrderDetailsType[];
 };
 
-type AddedComponentType = {
+export type AddedComponentType = {
   id: number;
   name: string;
   count: number;

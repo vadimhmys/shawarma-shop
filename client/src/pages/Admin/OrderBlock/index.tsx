@@ -1,10 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
+import ReactLoading from 'react-loading';
 import styles from '../Admin.module.scss';
 import { Button } from '../../../ui-kit';
 import { adminGetAll } from '../../../http/orderAPI';
+import AdminOrder from '../../../components/AdminOrder';
 
-type OrderForAdminType = {
+export type OrderForAdminType = {
   prettyCreatedAt: string;
   prettyUpdatedAt: string;
   id: number;
@@ -23,12 +25,20 @@ type OrderForAdminType = {
 const OrderBlock: React.FC = () => {
   const [isShowOrderList, setIsShowOrderList] = React.useState(false);
   const [orders, setOrders] = React.useState<OrderForAdminType[]>([]);
+  const [fetching, setFetching] = React.useState(false);
 
   React.useEffect(() => {
+    setFetching(true);
     adminGetAll()
       .then((data) => setOrders(data))
-      .catch(() => alert('Не удалось загрузить заказы'));
+      .catch(() => alert('Не удалось загрузить заказы'))
+      .finally(() => setFetching(false));
   }, []);
+
+  if (fetching) {
+    return <ReactLoading type={'spin'} color={'red'} height={80} width={80} />;
+  }
+
   return (
     <div className={clsx(`${styles.infoBlock}`, `${styles.order}`)}>
       <h3 className={styles.infoBlock__title}>Заказы</h3>
@@ -37,13 +47,11 @@ const OrderBlock: React.FC = () => {
           {isShowOrderList ? 'Скрыть' : 'Показать'} список
         </Button>
         {isShowOrderList && (
-          <ul>
+          <div className={styles.orders__wrapper}>
             {orders.map((order) => (
-              <li key={order.id}>
-                {order.userName}
-              </li>
+              <AdminOrder key={order.id} {...order}/>
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </div>

@@ -32,7 +32,6 @@
 
   &__content {
     margin: 10px 0;
-    width: 80%;
 
     @media(max-width: 786px) {
       width: 100%;
@@ -304,4 +303,8 @@ input::-webkit-file-upload-button {
   color: $dark-font;
   margin: 10px 0;
   text-align: center;
+}
+
+.orders__wrapper {
+  margin: 10px 0;
 }
