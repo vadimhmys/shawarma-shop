@@ -39,3 +39,20 @@
   height: 2px;
   background-color: $white;
 }
+
+.btnsWrapper {
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 648px) {
+    flex-direction: column;
+    min-height: 145px;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 389px) {
+    width: 100%;
+    margin: 0;
+  }
+}

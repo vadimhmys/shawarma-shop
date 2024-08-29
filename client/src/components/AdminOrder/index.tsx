@@ -18,8 +18,16 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
 }) => {
   const [isShowDetails, setIsShowDetails] = React.useState(false);
 
-  const handleClick = (e: React.MouseEvent) => {
+  const toggleDisplayingDiteils = () => {
     setIsShowDetails(!isShowDetails);
+  };
+
+  const finishOrder = () => {
+    console.log('Завершить заказ');
+  };
+
+  const removeOrder = () => {
+    console.log('Удалить заказ');
   };
 
   return (
@@ -53,7 +61,13 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
           Статус: <span>{status === 0 ? 'Готовится' : 'Приготовлен'}</span>
         </li>
       </ul>
-      <Button handleClick={handleClick}>{isShowDetails ? 'Скрыть' : 'Показать'} детали</Button>
+      <div className={styles.btnsWrapper}>
+        <Button handleClick={toggleDisplayingDiteils}>
+          {isShowDetails ? 'Скрыть' : 'Показать'} детали
+        </Button>
+        <Button handleClick={finishOrder}>Завершить заказ</Button>
+        <Button handleClick={removeOrder}>Удалить заказ</Button>
+      </div>
       {isShowDetails && <Details id={id} />}
     </div>
   );
