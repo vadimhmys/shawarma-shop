@@ -4,7 +4,7 @@ import ReactLoading from 'react-loading';
 import { Button } from '../../ui-kit';
 import { OrderForAdminType } from '../../pages/Admin/OrderBlock';
 import Details from './Details';
-import { adminDelete } from '../../http/orderAPI';
+import { adminDelete, adminUpdate } from '../../http/orderAPI';
 import styles from './AdminOrder.module.scss';
 
 const AdminOrder: React.FC<OrderForAdminType> = ({
@@ -21,13 +21,19 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
   const [isShowDetails, setIsShowDetails] = React.useState(false);
   const [fetching, setFetching] = React.useState(false);
   const [isShow, setIsShow] = React.useState(true);
+  const [currentStatus, setCurrentStatus] = React.useState(Boolean(status));
 
   const toggleDisplayingDiteils = () => {
     setIsShowDetails(!isShowDetails);
   };
 
   const finishOrder = () => {
-    console.log('Завершить заказ');
+    if (currentStatus) return;
+    setFetching(true);
+    adminUpdate(id)
+      .then(() => setCurrentStatus(true))
+      .catch(() => alert('Не удалось завершить заказ'))
+      .finally(() => setFetching(false));
   };
 
   const removeOrder = () => {
@@ -43,7 +49,7 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
   }
 
   return isShow ? (
-    <div className={clsx(`${styles.root}`, status !== 0 && `${styles.finished}`)}>
+    <div className={clsx(`${styles.root}`, currentStatus && `${styles.finished}`)}>
       <ul>
         <li className={styles.mainInfo__list__item}>
           Номер заказа: <span>{id}</span>
@@ -77,7 +83,7 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
         <Button handleClick={toggleDisplayingDiteils}>
           {isShowDetails ? 'Скрыть' : 'Показать'} детали
         </Button>
-        <Button handleClick={finishOrder}>Завершить заказ</Button>
+        <Button handleClick={finishOrder} disabled={currentStatus}>Завершить заказ</Button>
         <Button handleClick={removeOrder}>Удалить заказ</Button>
       </div>
       {isShowDetails && <Details id={id} />}
