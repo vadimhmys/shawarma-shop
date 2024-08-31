@@ -1,8 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
+import ReactLoading from 'react-loading';
 import { Button } from '../../ui-kit';
 import { OrderForAdminType } from '../../pages/Admin/OrderBlock';
 import Details from './Details';
+import { adminDelete } from '../../http/orderAPI';
 import styles from './AdminOrder.module.scss';
 
 const AdminOrder: React.FC<OrderForAdminType> = ({
@@ -17,6 +19,8 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
   status,
 }) => {
   const [isShowDetails, setIsShowDetails] = React.useState(false);
+  const [fetching, setFetching] = React.useState(false);
+  const [isShow, setIsShow] = React.useState(true);
 
   const toggleDisplayingDiteils = () => {
     setIsShowDetails(!isShowDetails);
@@ -27,10 +31,18 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
   };
 
   const removeOrder = () => {
-    console.log('Удалить заказ');
+    setFetching(true);
+    adminDelete(id)
+      .then(() => setIsShow(false))
+      .catch(() => alert('Не удалось удалить заказ'))
+      .finally(() => setFetching(false));
   };
 
-  return (
+  if (fetching) {
+    return <ReactLoading type={'spin'} color={'red'} height={80} width={80} />;
+  }
+
+  return isShow ? (
     <div className={clsx(`${styles.root}`, status !== 0 && `${styles.finished}`)}>
       <ul>
         <li className={styles.mainInfo__list__item}>
@@ -70,6 +82,8 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
       </div>
       {isShowDetails && <Details id={id} />}
     </div>
+  ) : (
+    <div></div>
   );
 };
 
