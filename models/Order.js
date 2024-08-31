@@ -128,6 +128,36 @@ class Order {
     return created;
   }
 
+  async update(id, userId) {
+    if (!userId) {
+      throw new Error('Access denied!');
+    }
+    let order = await OrderMapping.findByPk(id, {
+      include: [
+        {
+          model: OrderItemMapping,
+          as: 'items',
+          attributes: [
+            'title',
+            'weight',
+            'price',
+            'count',
+            'cake',
+            'addedComponentsList',
+            'removedComponentsList',
+          ],
+        },
+      ],
+    });
+    if (!order) {
+      throw new Error('Order not found in database');
+    }
+
+    await order.update({status: 1});
+    await order.reload();
+    return order;
+  }
+
   async delete(id) {
     let order = await OrderMapping.findByPk(id, {
       include: [

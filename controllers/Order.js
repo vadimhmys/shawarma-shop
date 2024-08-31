@@ -124,6 +124,22 @@ class Order {
     }
   }
 
+  async adminUpdate(req, res, next) {
+    try {
+      if (!req.params.id) {
+        throw new Error('Order id not specified');
+      }
+      const order = await OrderModel.update(req.params.id, req.auth.id);
+      if (!order) {
+        throw new Error('Order is absent in DB');
+      }
+
+      res.json(order);
+    } catch (e) {
+      next(AppError.badRequest(e.message));
+    }
+  }
+
   async userGetAll(req, res, next) {
     try {
       const orders = await OrderModel.getAll(req.auth.id);

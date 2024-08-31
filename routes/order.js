@@ -23,6 +23,12 @@ router.get(
   OrderController.adminGetOne,
 );
 router.post('/admin/create', authMiddleware, adminMiddleware, OrderController.adminCreate);
+router.put(
+  '/admin/update/:id([0-9]+)',
+  authMiddleware,
+  adminMiddleware,
+  OrderController.adminUpdate,
+)
 router.delete(
   '/admin/delete/:id([0-9]+)',
   authMiddleware,
