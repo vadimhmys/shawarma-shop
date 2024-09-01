@@ -2,7 +2,7 @@ import React from 'react';
 import ReactLoading from 'react-loading';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { Button } from '../../../../ui-kit';
-import { createShawarmaComponent } from '../../../../http/catalogAPI';
+import { createShawarmaComponent } from '../../../../http/shawarmaAPI';
 import { UpdateShawarmaComponentsPropsType } from '../types';
 import styles from '../../Admin.module.scss';
 

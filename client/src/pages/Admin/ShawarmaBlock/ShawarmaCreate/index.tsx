@@ -2,10 +2,10 @@ import React from 'react';
 import ReactLoading from 'react-loading';
 import ReactSelect from 'react-select';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-
 import CreateShawarmaProperties from '../CreateShawarmaProperties';
 import CreateShawarmaComponents from '../CreateShawarmaComponents';
-import { createShawarma, fetchCategories } from '../../../../http/catalogAPI';
+import { createShawarma } from '../../../../http/shawarmaAPI';
+import { fetchCategories } from '../../../../http/categoryAPI';
 import {
   CategoryOptionType,
   ComponentType,

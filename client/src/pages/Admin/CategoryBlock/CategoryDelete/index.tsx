@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
-import { deleteCategory } from '../../../../http/catalogAPI';
+import { deleteCategory } from '../../../../http/categoryAPI';
 import { CategoryDeletePropsType } from '../types';
 import styles from '../../Admin.module.scss';
 

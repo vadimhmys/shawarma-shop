@@ -2,7 +2,7 @@ import React from 'react';
 import ReactLoading from 'react-loading';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { CiEdit } from 'react-icons/ci';
-import { fetchCategories } from '../../../../http/catalogAPI';
+import { fetchCategories } from '../../../../http/categoryAPI';
 import { CategoryListPropsType, CategoryType } from '../types';
 import styles from '../../Admin.module.scss';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
-import { deleteShawarma } from '../../../../http/catalogAPI';
+import { deleteShawarma } from '../../../../http/shawarmaAPI';
 import { ShawarmaDeletePropsType } from '../types';
 import styles from '../../Admin.module.scss';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactLoading from 'react-loading';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { CiEdit } from 'react-icons/ci';
-import { fetchShawarmas } from '../../../../http/catalogAPI';
+import { fetchShawarmas } from '../../../../http/shawarmaAPI';
 import { ShawarmaType } from '../../../../redux/shawarmas/types';
 import { ShawarmaListPropsType } from '../types';
 import styles from '../../Admin.module.scss';

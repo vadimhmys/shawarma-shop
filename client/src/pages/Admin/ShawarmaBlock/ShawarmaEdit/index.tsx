@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { fetchCategories, updateShawarma } from '../../../../http/catalogAPI';
+import { updateShawarma } from '../../../../http/shawarmaAPI';
+import { fetchCategories } from '../../../../http/categoryAPI';
 import UpdateShawarmaProperties from '../UpdateShawarmaProperties';
 import ReactSelect from 'react-select';
 import { CategoryType } from '../../CategoryBlock/types';
