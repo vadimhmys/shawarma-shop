@@ -26,3 +26,9 @@ export type SauceEditFields = {
   price: number;
   image?: File;
 };
+
+export type SauceDeletePropsType = {
+  id: number;
+  setIsShowDeleteQuestion: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsShowSauceList: React.Dispatch<React.SetStateAction<boolean>>;
+};

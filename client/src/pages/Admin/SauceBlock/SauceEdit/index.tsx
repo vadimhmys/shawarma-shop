@@ -27,7 +27,7 @@ const SauceEdit: React.FC<SauceEditPropsType> = ({
     if (image) info.append('image', image);
 
     updateSauce(sauce.id, info)
-      .catch(() => console.log('Не удалось обновить шавуху'))
+      .catch(() => console.log('Не удалось обновить соус'))
       .finally(() => {
         setFetching(false);
         setIsShowEditableSauce(false);
