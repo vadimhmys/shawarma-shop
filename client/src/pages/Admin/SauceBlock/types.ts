@@ -32,3 +32,14 @@ export type SauceDeletePropsType = {
   setIsShowDeleteQuestion: React.Dispatch<React.SetStateAction<boolean>>;
   setIsShowSauceList: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type SauceCreateFields = {
+  name: string;
+  price: number;
+  image: File;
+};
+
+export type SauceCreatePropsType = {
+  setIsShowCreatedSauce: React.Dispatch<React.SetStateAction<boolean>>;
+  isShowCreatedSauce: boolean;
+};

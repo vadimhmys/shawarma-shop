@@ -4,7 +4,7 @@ import { Button } from '../../../ui-kit';
 import SauceList from './SauceList';
 import SauceEdit from './SauceEdit';
 import SauceDelete from './SauceDelete';
-//import SauceCreate from './SauceCreate';
+import SauceCreate from './SauceCreate';
 import { SauceType } from './types';
 import styles from '../Admin.module.scss';
 
@@ -63,11 +63,10 @@ const SauceBlock = () => {
           />
         )}
         {isShowCreatedSauce && (
-          <span>Создать соус</span>
-          /* <SauceCreate
+          <SauceCreate
             setIsShowCreatedSauce={setIsShowCreatedSauce}
             isShowCreatedSauce={isShowCreatedSauce}
-          /> */
+          />
         )}
       </div>
     </div>
