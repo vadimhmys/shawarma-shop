@@ -76,7 +76,7 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
           Способ оплаты: <span>{payment === 'CASH' ? 'Наличными' : 'Картой'}</span>
         </li>
         <li className={styles.mainInfo__list__item}>
-          Статус: <span>{status === 0 ? 'Готовится' : 'Приготовлен'}</span>
+          Статус: <span>{currentStatus ? 'Приготовлен' : 'Готовится'}</span>
         </li>
       </ul>
       <div className={styles.btnsWrapper}>
