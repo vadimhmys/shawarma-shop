@@ -25,11 +25,6 @@ export const fetchShawarmas = async () => {
   return data;
 }
 
-export const fetchShawarma = async (id: number) => {
-  const { data } = await guestInstance.get(`shawarmas/getone/${id}`);
-  return data;
-}
-
 /*
  * Create property for shawarma
  */

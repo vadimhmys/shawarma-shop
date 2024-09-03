@@ -6,14 +6,6 @@ class Category {
     return categories;
   }
 
-  async getOne(id) {
-    const category = await CategoryMapping.findByPk(id);
-    if (!category) {
-      throw new Error('Category not found in DB');
-    }
-    return category;
-  }
-
   async create(data) {
     const { name } = data;
     const exist = await CategoryMapping.findOne({ where: { name } });

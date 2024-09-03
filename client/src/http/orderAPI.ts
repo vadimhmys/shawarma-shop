@@ -24,18 +24,8 @@ export type AdminOrderType = {
  * only for admin
  */
 
-export const adminCreate = async (body: AdminOrderType) => {
-  const { data } = await authInstance.post('order/admin/create', body);
-  return data;
-}
-
 export const adminGetAll = async () => {
   const { data } = await authInstance.get('order/admin/getall');
-  return data;
-}
-
-export const adminGetUser = async (id: number) => {
-  const { data } = await authInstance.get(`order/admin/getall/user/${id}`);
   return data;
 }
 
@@ -68,7 +58,3 @@ export const userGetAll = async () => {
   return data;
 }
 
-export const userGetOne = async (id: number) => {  // dont use
-  const { data } = await authInstance.get(`order/user/getone/${id}`);
-  return data;
-}

@@ -19,8 +19,3 @@ export const fetchIngredients = async () => {
   const { data } = await guestInstance.get('ingredients/getall');
   return data;
 }
-
-export const fetchIngredient = async (id: number) => {
-  const { data } = await guestInstance.get(`ingredients/getone/${id}`);
-  return data;
-}

@@ -20,18 +20,6 @@ class Shawarma {
     }
   }
 
-  async getOne(req, res, next) {
-    try {
-      if (!req.params.id) {
-        throw new Error('Shawarma ID not specified');
-      }
-      const shawarma = await ShawarmaModel.getOne(req.params.id);
-      res.json(shawarma);
-    } catch (e) {
-      next(AppError.badRequest(e.message));
-    }
-  }
-
   async create(req, res, next) {
     try {
       const shawarma = await ShawarmaModel.create(req.body, req.files?.image, req.files?.icon);

@@ -7,14 +7,6 @@ class Sauce {
     return sauces;
   }
 
-  async getOne(id) {
-    const sauce = await SauceMapping.findByPk(id);
-    if (!sauce) {
-      throw new Error('Sauce not found in DB');
-    }
-    return sauce;
-  }
-
   async create(data, img) {
     const image = FileService.save(img) ?? '';
     const { name, price } = data;

@@ -68,20 +68,6 @@ class Shawarma {
     return shawarmas;
   }
 
-  async getOne(id) {
-    const shawarma = await ShawarmaMapping.findOne({
-      where: { id: id },
-      include: [
-        { model: ShawarmaPropMapping, as: 'props' },
-        { model: ShawarmaComponentMapping, as: 'components' },
-      ],
-    });
-    if (!shawarma) {
-      throw new Error('Shawarma not found in DB');
-    }
-    return shawarma;
-  }
-
   async create(data, img, logo) {
     const image = FileService.save(img) ?? '';
     const icon = FileService.save(logo);

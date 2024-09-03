@@ -7,14 +7,6 @@ class Ingredient {
     return ingredients;
   }
 
-  async getOne(id) {
-    const ingredient = await IngredientMapping.findByPk(id);
-    if (!ingredient) {
-      throw new Error('Ingredient not found in DB');
-    }
-    return ingredient;
-  }
-
   async create(data, img) {
     const image = FileService.save(img) ?? '';
     const { name, price } = data;

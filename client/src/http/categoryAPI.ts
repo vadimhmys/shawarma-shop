@@ -19,8 +19,3 @@ export const fetchCategories = async () => {
   const { data } = await guestInstance.get('categories/getall');
   return data;
 }
-
-export const fetchCategory = async (id: number) => {
-  const { data } = await guestInstance.get(`categories/getone/${id}`);
-  return data;
-}

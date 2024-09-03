@@ -9,7 +9,6 @@ const router = new express.Router();
 
 router.get('/getall', ShawarmaController.getAll);
 router.get('/getallForAdmin', authMiddleware, adminMiddleware, ShawarmaController.getAllForAdmin);
-router.get('/getone/:id([0-9]+)', ShawarmaController.getOne);
 router.post('/create', authMiddleware, adminMiddleware, ShawarmaController.create);
 router.put('/update/:id([0-9]+)', authMiddleware, adminMiddleware, ShawarmaController.update);
 router.delete('/delete/:id([0-9]+)', authMiddleware, adminMiddleware, ShawarmaController.delete);

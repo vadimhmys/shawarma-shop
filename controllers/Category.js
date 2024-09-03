@@ -2,22 +2,10 @@ import CategoryModel from '../models/Category.js';
 import AppError from '../errors/AppError.js';
 
 class Category {
-  async getAll(req, res, next) {
+  async getAll(_, res, next) {
     try {
       const categories = await CategoryModel.getAll();
       res.json(categories);
-    } catch (e) {
-      next(AppError.badRequest(e.message));
-    }
-  }
-
-  async getOne(req, res, next) {
-    try {
-      if (!req.params.id) {
-        throw new Error('Category id not specified');
-      }
-      const category = await CategoryModel.getOne(req.params.id);
-      res.json(category);
     } catch (e) {
       next(AppError.badRequest(e.message));
     }

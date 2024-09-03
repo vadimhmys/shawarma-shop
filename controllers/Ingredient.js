@@ -11,18 +11,6 @@ class Ingredient {
     }
   }
 
-  async getOne(req, res, next) {
-    try {
-      if (!req.params.id) {
-        throw new Error('Ingredient ID not specified');
-      }
-      const ingredient = await IngredientModel.getOne(req.params.id);
-      res.json(ingredient);
-    } catch (e) {
-      next(AppError.badRequest(e.message));
-    }
-  }
-
   async create(req, res, next) {
     try {
       const ingredient = await IngredientModel.create(req.body, req.files?.image);
