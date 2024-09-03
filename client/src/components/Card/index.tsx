@@ -29,7 +29,7 @@ const Card: React.FC<CardPropsType> = ({ shawarma }) => {
       <div className={styles.top}>
         <img
           className={styles.image}
-          src={`http://localhost:7000/${shawarma.image}`}
+          src={process.env.REACT_APP_IMG_URL + shawarma.image}
           alt={shawarma.title}
         />
         {shawarma.novelty && <Novelty />}
@@ -38,7 +38,7 @@ const Card: React.FC<CardPropsType> = ({ shawarma }) => {
             <div className={styles.header__text}>{shawarma.title}</div>
             <img
               className={styles.header__icon}
-              src={`http://localhost:7000/${shawarma.icon}`}
+              src={process.env.REACT_APP_IMG_URL + shawarma.icon}
               alt={shawarma.title}
             />
           </div>

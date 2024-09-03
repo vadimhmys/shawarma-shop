@@ -16,7 +16,7 @@ type CategoryType = {
 
 const Categories: React.FC<CategoriesPropsType> = React.memo(({ value, onChangeCategory }) => {
   const [categories, setCategories] = React.useState<CategoryType[]>([]);
-  const url = 'http://localhost:7000/api/categories/getall';
+  const url = `${process.env.REACT_APP_API_URL}categories/getall`;
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +31,7 @@ const Categories: React.FC<CategoriesPropsType> = React.memo(({ value, onChangeC
     };
 
     fetchData();
-  }, []);
+  }, [url]);
 
   return (
     <ul className={styles.list}>

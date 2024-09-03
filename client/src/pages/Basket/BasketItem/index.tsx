@@ -62,7 +62,7 @@ const BasketItem: React.FC<BasketItemPropsType> = ({
       <li className={styles.list__item}>
         <div className={styles.wrapper}>
           <div className={styles.image}>
-            <img src={`http://localhost:7000/${image}`} alt={title} />
+            <img src={process.env.REACT_APP_IMG_URL + image} alt={title} />
           </div>
           <div className={styles.content}>
             <h3>{title}</h3>

@@ -35,7 +35,7 @@ export const fetchIncrementShawarma = createAsyncThunk<BasketItemsFromDBType, nu
 
 export const fetchDecrementShawarma = createAsyncThunk<BasketItemsFromDBType, number>('basket/fetchDecrementShawarmaFromBasket', async (id) => {
   const { data } = await authInstance.put<BasketItemsFromDBType>(
-    `http://localhost:7000/api/basketshawarmas/decrement`,
+    `${process.env.REACT_APP_API_URL}basketshawarmas/decrement`,
     { id }
   );
   return data;
