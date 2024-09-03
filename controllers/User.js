@@ -4,9 +4,6 @@ import UserModel from '../models/User.js';
 import BasketModel from '../models/Basket.js';
 import AppError from '../errors/AppError.js';
 
-const maxAge = 60 * 60 * 1000 * 24 * 365;
-const signed = true;
-
 const makeJwt = (id, email, role) => {
   return jwt.sign({ id, email, role }, process.env.SECRET_KEY, { expiresIn: '24h' });
 };
@@ -31,7 +28,6 @@ class User {
         throw new Error('Basket was not created');
       }
       const token = makeJwt(user.id, user.email, user.role);
-      res.cookie('basketId', basket.id, { maxAge, signed });
       return res.json({ token });
     } catch (e) {
       next(AppError.badRequest(e.message));
@@ -57,7 +53,6 @@ class User {
         throw new Error('Basket was not created');
       }
       const token = makeJwt(user.id, user.email, user.role);
-      res.cookie('basketId', basket.id, { maxAge, signed });
       return res.json({ token });
     } catch (e) {
       next(AppError.badRequest(e.message));
@@ -108,7 +103,6 @@ class User {
       if (!basket) {
         throw new Error('Basket was not created');
       }
-      res.cookie('basketId', basket.id, { maxAge, signed });
       return res.json(user);
     } catch (e) {
       next(AppError.badRequest(e.message));
