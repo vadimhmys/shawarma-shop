@@ -28,7 +28,7 @@ router.put(
   authMiddleware,
   adminMiddleware,
   OrderController.adminUpdate,
-)
+);
 router.delete(
   '/admin/delete/:id([0-9]+)',
   authMiddleware,

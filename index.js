@@ -17,7 +17,6 @@ app.use(express.static('static'));
 app.use(fileUpload());
 app.use(cookieParser(process.env.SECRET_KEY));
 app.use('/api', router);
-
 app.use(ErrorHandler);
 
 const start = async () => {

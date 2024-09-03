@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/user/selectors';
 import CheckAuth from '../CheckAuth/CheckAuth';
-
 import styles from './NavBar.module.scss';
 
 const NavBar: React.FC = () => {
@@ -28,10 +27,10 @@ const NavBar: React.FC = () => {
             </>
           )}
           {user.isAdmin && (
-          <NavLink to="/admin" className={styles.nav__link}>
-            Панель управления
-          </NavLink>
-        )}
+            <NavLink to="/admin" className={styles.nav__link}>
+              Панель управления
+            </NavLink>
+          )}
         </CheckAuth>
       </div>
     </div>

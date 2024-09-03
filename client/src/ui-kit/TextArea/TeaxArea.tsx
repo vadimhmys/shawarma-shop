@@ -17,7 +17,7 @@ export const TextArea: React.FC<TeaxtAreaPropsType> = ({
   requiredMessage,
   placeholder,
   maxLength,
-  maxCharCount
+  maxCharCount,
 }) => {
   const [text, setText] = React.useState('');
   return (
@@ -30,10 +30,8 @@ export const TextArea: React.FC<TeaxtAreaPropsType> = ({
           name={name}
           rules={{
             required: isRequired && requiredMessage,
-            maxLength: maxLength
-            
+            maxLength: maxLength,
           }}
-
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <div>
               <textarea

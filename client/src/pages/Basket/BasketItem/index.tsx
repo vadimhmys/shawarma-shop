@@ -7,7 +7,6 @@ import { removeItem } from '../../../redux/basket/slice';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import Counter from '../../../ui-kit/Counter';
 import { formatPrice } from '../../../utils/formatPrice';
-
 import styles from './BasketItem.module.scss';
 
 type AddedComponentType = {
@@ -52,7 +51,7 @@ const BasketItem: React.FC<BasketItemPropsType> = ({
 
   const onClickRemove = (uniqueId: string) => {
     if (isAuth) {
-      dispatch(fetchDeleteShawarma(id))
+      dispatch(fetchDeleteShawarma(id));
     } else {
       dispatch(removeItem(uniqueId));
     }
@@ -94,7 +93,7 @@ const BasketItem: React.FC<BasketItemPropsType> = ({
           </div>
         </div>
         <div className={styles.wrapper}>
-          <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} basketItemId={id}/>
+          <Counter maxCount={10} initialValue={count} uniqueId={uniqueId} basketItemId={id} />
           <div className={styles.sum}>{totalPrice} р.</div>
           <FaRegTrashCan onClick={() => onClickRemove(uniqueId)} className={styles.trash} />
         </div>

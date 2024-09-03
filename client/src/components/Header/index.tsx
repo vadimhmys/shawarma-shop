@@ -9,7 +9,6 @@ import { useAppDispatch } from '../../redux/store';
 import { BsFillCartFill } from 'react-icons/bs';
 import Search from '../Search';
 import { getTotalPrice } from '../../utils/getTotalPrice';
-
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
@@ -26,9 +25,7 @@ const Header: React.FC = () => {
   const isShowBasket = !forbiddenPathsForBasket.includes(pathname);
 
   const getBasketItemsFromDB = React.useCallback(async () => {
-      dispatch(
-        fetchShawarmasFromBasket({id: String(id)})
-      );
+    dispatch(fetchShawarmasFromBasket({ id: String(id) }));
   }, [dispatch, id]);
 
   React.useEffect(() => {

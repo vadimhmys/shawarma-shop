@@ -1,6 +1,5 @@
 import React from 'react';
 import VariantItem from './VariantItem';
-
 import styles from './VariantList.module.scss';
 
 import type { CardPropertyType } from '../../redux/shawarmas/types';

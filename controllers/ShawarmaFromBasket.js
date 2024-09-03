@@ -110,7 +110,7 @@ class ShawarmaFromBasket {
       if (!Array.isArray(items) || items.length === 0) {
         throw new Error('The recording data is incorrect');
       }
-      
+
       const shawarmas = await ShawarmaFromBasketModel.recordAll(items, userId);
       res.json(shawarmas);
     } catch (e) {

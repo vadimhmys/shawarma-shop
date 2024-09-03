@@ -10,7 +10,6 @@ import Button from '../../ui-kit/Button';
 import BasketModalWindow from './BasketModalWindow';
 import EmptyBasket from './EmptyBasket';
 import PageTitle from '../../components/PageTitle';
-
 import styles from './Basket.module.scss';
 
 const Basket: React.FC = () => {

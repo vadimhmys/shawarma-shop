@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styles from './Switcher.module.scss';
 
 type SwitcherDataType = {
@@ -42,4 +41,3 @@ export const Switcher: React.FC<SwitcherPropsType> = ({
     </div>
   );
 };
-

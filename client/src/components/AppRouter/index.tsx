@@ -19,9 +19,10 @@ const publicRoutes = [
   { path: 'basket', Component: Basket },
   { path: '*', Component: NotFound },
 ];
-
-const authRoutes = [{ path: 'user', Component: User }, { path: 'order', Component: Order }];
-
+const authRoutes = [
+  { path: 'user', Component: User },
+  { path: 'order', Component: Order },
+];
 const adminRoutes = [{ path: 'admin', Component: Admin }];
 
 const AppRouter: React.FC = () => {

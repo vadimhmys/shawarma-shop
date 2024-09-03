@@ -12,11 +12,13 @@ router.get('/getallForAdmin', authMiddleware, adminMiddleware, ShawarmaControlle
 router.get('/getone/:id([0-9]+)', ShawarmaController.getOne);
 router.post('/create', authMiddleware, adminMiddleware, ShawarmaController.create);
 router.put('/update/:id([0-9]+)', authMiddleware, adminMiddleware, ShawarmaController.update);
-router.delete(
-  '/delete/:id([0-9]+)',
-  authMiddleware, adminMiddleware, ShawarmaController.delete,
-);
+router.delete('/delete/:id([0-9]+)', authMiddleware, adminMiddleware, ShawarmaController.delete);
 router.post('/property/create', authMiddleware, adminMiddleware, ShawarmaPropertyController.create);
-router.post('/component/create', authMiddleware, adminMiddleware, ShawarmaComponentController.create);
+router.post(
+  '/component/create',
+  authMiddleware,
+  adminMiddleware,
+  ShawarmaComponentController.create,
+);
 
 export default router;

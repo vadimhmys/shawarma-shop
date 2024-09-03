@@ -4,7 +4,6 @@ import { setSearchValue } from '../../redux/filter/slice';
 import { CiSearch } from 'react-icons/ci';
 import { IoCloseOutline } from 'react-icons/io5';
 import { debounce } from '../../utils/debounce';
-
 import styles from './Search.module.scss';
 
 const Search: React.FC = () => {
@@ -20,7 +19,7 @@ const Search: React.FC = () => {
 
   const handleChangeSearchValue = React.useMemo(
     () => debounce((str: string) => dispatch(setSearchValue(str)), 500),
-    [dispatch]
+    [dispatch],
   );
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {

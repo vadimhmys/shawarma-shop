@@ -7,7 +7,6 @@ import type { ComponentType } from '../../components/ComponentList';
 import { useSelector } from 'react-redux';
 import { selectUserIsAuth } from '../../redux/user/selectors';
 import { formatPrice } from '../../utils/formatPrice';
-
 import styles from './Counter.module.scss';
 
 type CounterPropsType = {

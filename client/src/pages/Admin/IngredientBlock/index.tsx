@@ -7,9 +7,14 @@ import IngredientCreate from './IngredientCreate';
 import { IngredientType } from './types';
 import styles from '../Admin.module.scss';
 
-const IngredientBlock = () => {
+const IngredientBlock: React.FC = () => {
   const [isShowIngredientList, setIsShowIngredientList] = React.useState(false);
-  const [editableIngredient, setEditableIngredient] = React.useState<IngredientType>({ id: 0, name: '', price: 0, image: '' });
+  const [editableIngredient, setEditableIngredient] = React.useState<IngredientType>({
+    id: 0,
+    name: '',
+    price: 0,
+    image: '',
+  });
   const [isShowEditableIngredient, setIsShowEditableIngredient] = React.useState(false);
   const [deletedIngredientIndex, setDeletedIngredientIndex] = React.useState(0);
   const [isShowDeleteQuestion, setIsShowDeleteQuestion] = React.useState(false);

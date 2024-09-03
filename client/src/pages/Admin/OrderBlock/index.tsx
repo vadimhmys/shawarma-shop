@@ -1,10 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
 import ReactLoading from 'react-loading';
-import styles from '../Admin.module.scss';
 import { Button } from '../../../ui-kit';
 import { adminGetAll } from '../../../http/orderAPI';
 import AdminOrder from '../../../components/AdminOrder';
+import styles from '../Admin.module.scss';
 
 export type OrderForAdminType = {
   prettyCreatedAt: string;
@@ -49,7 +49,7 @@ const OrderBlock: React.FC = () => {
         {isShowOrderList && (
           <div className={styles.orders__wrapper}>
             {orders.map((order) => (
-              <AdminOrder key={order.id} {...order}/>
+              <AdminOrder key={order.id} {...order} />
             ))}
           </div>
         )}

@@ -8,8 +8,8 @@ import { loginUser } from '../../redux/user/slice';
 import { UserType } from '../../redux/user/types';
 import { selectUser } from '../../redux/user/selectors';
 import { fetchShawarmasFromLS } from '../../redux/basket/asyncAction';
-import styles from './Signup.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import styles from './Signup.module.scss';
 
 export interface ISignupFormData {
   email: string;

@@ -1,7 +1,6 @@
 import React from 'react';
 import axios, { AxiosResponse } from 'axios';
 import Counter from '../../ui-kit/Counter';
-
 import styles from './ComponentList.module.scss';
 
 export type ComponentType = {
@@ -46,7 +45,7 @@ const ComponentList: React.FC<ComponentListPropsType> = ({ title, url }) => {
             {components.map((component) => (
               <li key={component.id} className={styles.list__item}>
                 <div className={styles.content}>
-                  <img src={`http://localhost:7000/${component.image}`} alt={component.name} />
+                  <img src={process.env.REACT_APP_IMG_URL + component.image} alt={component.name} />
                   <span>{component.name}</span>
                 </div>
                 <Counter component={component} maxCount={4} isSimple={false} />

@@ -14,7 +14,6 @@ import Switcher from '../../ui-kit/Switcher';
 import ComponentList from '../ComponentList';
 import Button from '../../ui-kit/Button';
 import ComponentToRemove from '../ComponentToRemove';
-
 import styles from './ModalWindow.module.scss';
 
 type ModalWindowPropsType = {

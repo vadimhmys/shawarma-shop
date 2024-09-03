@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styles from './Novelty.module.scss';
 
 const Novelty: React.FC = () => {

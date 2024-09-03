@@ -43,7 +43,7 @@ export const check = async () => {
     userToken = response.data.token;
     userData = jwtDecode(userToken) as UserType;
     localStorage.setItem('token', userToken);
-    const structuredData = {id: userData.id, email: userData.email, role: userData.role}
+    const structuredData = { id: userData.id, email: userData.email, role: userData.role }
     return structuredData;
   } catch (e) {
     localStorage.removeItem('token');

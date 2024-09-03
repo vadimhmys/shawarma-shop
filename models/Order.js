@@ -153,7 +153,7 @@ class Order {
       throw new Error('Order not found in database');
     }
 
-    await order.update({status: 1});
+    await order.update({ status: 1 });
     await order.reload();
     return order;
   }

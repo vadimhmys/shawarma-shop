@@ -55,12 +55,12 @@
   }
 
   &:active {
-        background-color: darken($bg-btn, 8%);
-      }
+      background-color: darken($bg-btn, 8%);
+  }
 
-      &.active {
-        background-color: $bg-btn-active;
-        color: $white;
-      }
+  &.active {
+    background-color: $bg-btn-active;
+    color: $white;
+  }
 }
 

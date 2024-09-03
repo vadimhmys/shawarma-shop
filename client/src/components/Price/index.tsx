@@ -1,6 +1,5 @@
 import React from 'react';
 import { formatPrice } from '../../utils/formatPrice';
-
 import styles from './Price.module.scss';
 
 type PricePropsType = {

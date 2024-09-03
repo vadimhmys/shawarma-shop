@@ -83,7 +83,9 @@ const AdminOrder: React.FC<OrderForAdminType> = ({
         <Button handleClick={toggleDisplayingDiteils}>
           {isShowDetails ? 'Скрыть' : 'Показать'} детали
         </Button>
-        <Button handleClick={finishOrder} disabled={currentStatus}>Завершить заказ</Button>
+        <Button handleClick={finishOrder} disabled={currentStatus}>
+          Завершить заказ
+        </Button>
         <Button handleClick={removeOrder}>Удалить заказ</Button>
       </div>
       {isShowDetails && <Details id={id} />}

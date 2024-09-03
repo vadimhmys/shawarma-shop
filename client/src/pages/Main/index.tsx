@@ -6,17 +6,14 @@ import { RootState, useAppDispatch } from '../../redux/store';
 import { setCategoryId, setCurrentPage, setFilterParams } from '../../redux/filter/slice';
 import { fetchShawarmas } from '../../redux/shawarmas/asyncAction';
 import { StatusEnum } from '../../redux/shawarmas/types';
-
+import type { SearchShawarmaParamsType, ShawarmaType } from '../../redux/shawarmas/types';
 import Card from '../../components/Card';
 import Categories from '../../components/Categories';
 import Sorting, { sortingTypes } from '../../components/Sorting';
 import CardLoader from '../../components/Card/CardLoader';
 import Pagination from '../../components/Pagination';
 import PageTitle from '../../components/PageTitle';
-
 import styles from './Main.module.scss';
-
-import type { SearchShawarmaParamsType, ShawarmaType } from '../../redux/shawarmas/types';
 
 const Main: React.FC = () => {
   const navigate = useNavigate();

@@ -3,6 +3,6 @@ export function debounce(fn: (str: string) => void, ms: number) {
 
   return function func(str: string) {
     clearTimeout(timerId);
-    timerId = setTimeout(function(this: typeof func) { fn.apply(this, [str]) }, ms);
+    timerId = setTimeout(function (this: typeof func) { fn.apply(this, [str]) }, ms);
   };
 }

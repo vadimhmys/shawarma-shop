@@ -8,7 +8,7 @@ import CategoryCreate from './CategoryCreate';
 import { CategoryType } from './types';
 import styles from '../Admin.module.scss';
 
-const CategoryBlock = () => {
+const CategoryBlock: React.FC = () => {
   const [isShowCategoryList, setIsShowCategoryList] = React.useState(false);
   const [editableCategory, setEditableCategory] = React.useState<CategoryType>({ id: 0, name: '' });
   const [isShowEditableCategory, setIsShowEditableCategory] = React.useState(false);

@@ -8,9 +8,14 @@ import SauceCreate from './SauceCreate';
 import { SauceType } from './types';
 import styles from '../Admin.module.scss';
 
-const SauceBlock = () => {
+const SauceBlock: React.FC = () => {
   const [isShowSauceList, setIsShowSauceList] = React.useState(false);
-  const [editableSauce, setEditableSauce] = React.useState<SauceType>({ id: 0, name: '', price: 0, image: '' });
+  const [editableSauce, setEditableSauce] = React.useState<SauceType>({
+    id: 0,
+    name: '',
+    price: 0,
+    image: '',
+  });
   const [isShowEditableSauce, setIsShowEditableSauce] = React.useState(false);
   const [deletedSauceIndex, setDeletedSauceIndex] = React.useState(0);
   const [isShowDeleteQuestion, setIsShowDeleteQuestion] = React.useState(false);

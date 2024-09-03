@@ -1,5 +1,4 @@
 import { Op } from 'sequelize';
-
 import { Shawarma as ShawarmaMapping } from './mapping.js';
 import { ShawarmaProp as ShawarmaPropMapping } from './mapping.js';
 import { ShawarmaComponent as ShawarmaComponentMapping } from './mapping.js';

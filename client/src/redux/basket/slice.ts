@@ -18,15 +18,15 @@ export const basketSlice = createSlice({
       const findItem = state.items.find(
         (item) =>
           item.id +
-            item.cake +
-            item.weight +
-            JSON.stringify(item.addedComponentsList) +
-            JSON.stringify(item.removedComponentsList) ===
+          item.cake +
+          item.weight +
+          JSON.stringify(item.addedComponentsList) +
+          JSON.stringify(item.removedComponentsList) ===
           action.payload.id +
-            action.payload.cake +
-            action.payload.weight +
-            JSON.stringify(action.payload.addedComponentsList) +
-            JSON.stringify(action.payload.removedComponentsList),
+          action.payload.cake +
+          action.payload.weight +
+          JSON.stringify(action.payload.addedComponentsList) +
+          JSON.stringify(action.payload.removedComponentsList),
       );
       if (findItem) {
         const findItemUniqueId =
@@ -54,10 +54,10 @@ export const basketSlice = createSlice({
       const findItem = state.items.find(
         (item) =>
           item.id +
-            item.cake +
-            item.weight +
-            JSON.stringify(item.addedComponentsList) +
-            JSON.stringify(item.removedComponentsList) ===
+          item.cake +
+          item.weight +
+          JSON.stringify(item.addedComponentsList) +
+          JSON.stringify(item.removedComponentsList) ===
           action.payload,
       );
       if (findItem) findItem.count++;
@@ -66,10 +66,10 @@ export const basketSlice = createSlice({
       const findItem = state.items.find(
         (item) =>
           item.id +
-            item.cake +
-            item.weight +
-            JSON.stringify(item.addedComponentsList) +
-            JSON.stringify(item.removedComponentsList) ===
+          item.cake +
+          item.weight +
+          JSON.stringify(item.addedComponentsList) +
+          JSON.stringify(item.removedComponentsList) ===
           action.payload,
       );
       if (findItem) findItem.count--;
@@ -78,10 +78,10 @@ export const basketSlice = createSlice({
       state.items = state.items.filter(
         (item) =>
           item.id +
-            item.cake +
-            item.weight +
-            JSON.stringify(item.addedComponentsList) +
-            JSON.stringify(item.removedComponentsList) !==
+          item.cake +
+          item.weight +
+          JSON.stringify(item.addedComponentsList) +
+          JSON.stringify(item.removedComponentsList) !==
           action.payload,
       );
     },
@@ -104,15 +104,15 @@ export const basketSlice = createSlice({
         state.status = StatusEnum.ERROR;
       })
       .addCase(fetchIncrementShawarma.fulfilled, (state, action: PayloadAction<BasketItemsFromDBType>) => {
-        const {id, cake, weight, addedComponentsList, removedComponentsList } = action.payload;
+        const { id, cake, weight, addedComponentsList, removedComponentsList } = action.payload;
         const keyForSearch = id + cake + weight + addedComponentsList + removedComponentsList;
         const findItem = state.items.find(
           (item) =>
             item.id +
-              item.cake +
-              item.weight +
-              JSON.stringify(item.addedComponentsList) +
-              JSON.stringify(item.removedComponentsList) ===
+            item.cake +
+            item.weight +
+            JSON.stringify(item.addedComponentsList) +
+            JSON.stringify(item.removedComponentsList) ===
             keyForSearch,
         );
         if (findItem) findItem.count++;
@@ -122,15 +122,15 @@ export const basketSlice = createSlice({
         state.status = StatusEnum.ERROR;
       })
       .addCase(fetchDecrementShawarma.fulfilled, (state, action: PayloadAction<BasketItemsFromDBType>) => {
-        const {id, cake, weight, addedComponentsList, removedComponentsList } = action.payload;
+        const { id, cake, weight, addedComponentsList, removedComponentsList } = action.payload;
         const keyForSearch = id + cake + weight + addedComponentsList + removedComponentsList;
         const findItem = state.items.find(
           (item) =>
             item.id +
-              item.cake +
-              item.weight +
-              JSON.stringify(item.addedComponentsList) +
-              JSON.stringify(item.removedComponentsList) ===
+            item.cake +
+            item.weight +
+            JSON.stringify(item.addedComponentsList) +
+            JSON.stringify(item.removedComponentsList) ===
             keyForSearch,
         );
         if (findItem) findItem.count--;
@@ -140,15 +140,15 @@ export const basketSlice = createSlice({
         state.status = StatusEnum.ERROR;
       })
       .addCase(fetchDeleteShawarma.fulfilled, (state, action: PayloadAction<BasketItemsFromDBType>) => {
-        const {id, cake, weight, addedComponentsList, removedComponentsList } = action.payload;
+        const { id, cake, weight, addedComponentsList, removedComponentsList } = action.payload;
         const keyForSearch = id + cake + weight + addedComponentsList + removedComponentsList;
         state.items = state.items.filter(
           (item) =>
             item.id +
-              item.cake +
-              item.weight +
-              JSON.stringify(item.addedComponentsList) +
-              JSON.stringify(item.removedComponentsList) !==
+            item.cake +
+            item.weight +
+            JSON.stringify(item.addedComponentsList) +
+            JSON.stringify(item.removedComponentsList) !==
             keyForSearch,
         );
       })

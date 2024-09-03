@@ -6,7 +6,6 @@ import Select from './Select';
 import InputPhone from './InputPhone';
 import TextArea from './TextArea';
 
-
 export {
   Input,
   Switcher,

@@ -7,8 +7,8 @@ type PageTitlePropsType = {
   className?: string;
 };
 
-const PageTitle: React.FC<PageTitlePropsType> = ({children, className}) => {
+const PageTitle: React.FC<PageTitlePropsType> = ({ children, className }) => {
   return <h2 className={clsx(`${styles.title}`, `${className}`)}>{children}</h2>;
-}
+};
 
 export default PageTitle;

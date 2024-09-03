@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { clearBasket } from '../../../redux/basket/slice';
 import { fetchClearBasket } from '../../../redux/basket/asyncAction';
 import { selectUser } from '../../../redux/user/selectors';
-
 import styles from './BasketModalWindow.module.scss';
 
 type BasketModalWindowPropsType = {
@@ -13,7 +12,7 @@ type BasketModalWindowPropsType = {
 
 const BasketModalWindow: React.FC<BasketModalWindowPropsType> = ({ hideModalWindow }) => {
   const dispatch = useAppDispatch();
-  const {id, isAuth} = useSelector(selectUser);
+  const { id, isAuth } = useSelector(selectUser);
 
   const onClickClear = () => {
     if (isAuth && id) {

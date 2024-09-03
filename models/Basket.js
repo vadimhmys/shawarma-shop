@@ -1,5 +1,4 @@
 import { Basket as BasketMapping } from './mapping.js';
-import { ShawarmaFromBasket as ShawarmaFromBasketMapping } from './mapping.js';
 
 class Basket {
   async getOne(userId) {

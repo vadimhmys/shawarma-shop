@@ -1,6 +1,5 @@
 import React from 'react';
 import Price from '../../Price';
-
 import styles from './VariantItem.module.scss';
 
 type VariantItemPropsType = {

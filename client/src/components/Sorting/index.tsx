@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { SortCriteryEnum, SortType } from '../../redux/filter/types';
 import { setSort } from '../../redux/filter/slice';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
-
 import styles from './Sorting.module.scss';
 
 type PopupClickType = MouseEvent & {

@@ -4,7 +4,11 @@ import { deleteCategory } from '../../../../http/categoryAPI';
 import { CategoryDeletePropsType } from '../types';
 import styles from '../../Admin.module.scss';
 
-const CategoryDelete: React.FC<CategoryDeletePropsType> = ({id, setIsShowDeleteQuestion, setIsShowCategoryList}) => {
+const CategoryDelete: React.FC<CategoryDeletePropsType> = ({
+  id,
+  setIsShowDeleteQuestion,
+  setIsShowCategoryList,
+}) => {
   const [fetching, setFetching] = React.useState(false);
 
   const handleDelete = () => {
@@ -12,23 +16,25 @@ const CategoryDelete: React.FC<CategoryDeletePropsType> = ({id, setIsShowDeleteQ
     setIsShowCategoryList(false);
     setFetching(true);
     deleteCategory(id)
-      .catch(error => console.log('Не удалось удалить категорию'))
+      .catch((error) => console.log('Не удалось удалить категорию'))
       .finally(() => setFetching(false));
-  }
+  };
 
   const handleCancel = () => {
     setIsShowDeleteQuestion(false);
-  }
+  };
 
   if (fetching) {
     return <ReactLoading type={'spin'} color={'red'} height={80} width={80} />;
   }
-  
+
   return (
     <div className={styles.modalWin}>
       <div>
         <h2 className={styles.modalWin__header}>Вы уверены, что хотите удалить категорию?</h2>
-        <p className={styles.modalWin__warning}>Вместе с категорией удалятся все шавухи, относящиеся к ней!</p>
+        <p className={styles.modalWin__warning}>
+          Вместе с категорией удалятся все шавухи, относящиеся к ней!
+        </p>
         <div className={styles.modalWin__btnBlock}>
           <button className={styles.modalWin__btn} onClick={handleDelete}>
             Да

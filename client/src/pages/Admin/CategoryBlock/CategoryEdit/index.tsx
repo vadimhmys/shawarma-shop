@@ -35,10 +35,21 @@ const CategoryEdit: React.FC<CategoryEditPropsType> = ({
     <div className={styles.formWrapper}>
       {isShowEditableCategory && (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <input className={styles.form__input} defaultValue={name} {...register('categoryEdit', { required: true })} />
-          <input className={styles.form__btn} type="submit" value="Сохранить"/>
-          <input className={styles.form__btn} type="button" value="Отмена" onClick={() => setIsShowEditableCategory(false)}/>
-          {errors.categoryEdit && <div className={styles.form__errorMessage}>This field is required</div>}
+          <input
+            className={styles.form__input}
+            defaultValue={name}
+            {...register('categoryEdit', { required: true })}
+          />
+          <input className={styles.form__btn} type="submit" value="Сохранить" />
+          <input
+            className={styles.form__btn}
+            type="button"
+            value="Отмена"
+            onClick={() => setIsShowEditableCategory(false)}
+          />
+          {errors.categoryEdit && (
+            <div className={styles.form__errorMessage}>This field is required</div>
+          )}
         </form>
       )}
     </div>

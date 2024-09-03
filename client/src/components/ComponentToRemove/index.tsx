@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { addComponent, removeComponent } from '../../redux/shawarma/slice';
 import { HiArrowPath } from 'react-icons/hi2';
 import { TfiClose } from 'react-icons/tfi';
-
 import styles from './ComponentToRemove.module.scss';
 
 type ComponentToRemovePropsType = {
