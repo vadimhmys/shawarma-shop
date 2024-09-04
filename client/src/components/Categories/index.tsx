@@ -39,7 +39,7 @@ const Categories: React.FC<CategoriesPropsType> = React.memo(({ value, onChangeC
         <li
           key={c.id}
           className={i === value ? `${styles.item} ${styles.active}` : `${styles.item}`}
-          onClick={() => onChangeCategory(i)}>
+          onClick={() => onChangeCategory(c.id)}>
           {c.name}
         </li>
       ))}
