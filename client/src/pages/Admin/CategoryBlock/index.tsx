@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import { Button } from '../../../ui-kit';
 import CategoryList from './CategoryList';
 import CategoryEdit from './CategoryEdit';
@@ -30,7 +29,7 @@ const CategoryBlock: React.FC = () => {
   };
 
   return (
-    <div className={clsx(`${styles.infoBlock}`, `${styles.category}`)}>
+    <div className={styles.infoBlock}>
       <h3 className={styles.infoBlock__title}>Категории</h3>
       <div className={styles.infoBlock__content}>
         <div className={styles.infoBlock__btnsBlock}>

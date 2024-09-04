@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import { Button } from '../../../ui-kit';
 import SauceList from './SauceList';
 import SauceEdit from './SauceEdit';
@@ -35,7 +34,7 @@ const SauceBlock: React.FC = () => {
   };
 
   return (
-    <div className={clsx(`${styles.infoBlock}`, `${styles.Sauce}`)}>
+    <div className={styles.infoBlock}>
       <h3 className={styles.infoBlock__title}>Соусы</h3>
       <div className={styles.infoBlock__content}>
         <div className={styles.infoBlock__btnsBlock}>

@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import ReactLoading from 'react-loading';
 import { Button } from '../../../ui-kit';
 import { adminGetAll } from '../../../http/orderAPI';
@@ -40,7 +39,7 @@ const OrderBlock: React.FC = () => {
   }
 
   return (
-    <div className={clsx(`${styles.infoBlock}`, `${styles.order}`)}>
+    <div className={styles.infoBlock}>
       <h3 className={styles.infoBlock__title}>Заказы</h3>
       <div className={styles.infoBlock__content}>
         <Button handleClick={() => setIsShowOrderList(!isShowOrderList)}>
