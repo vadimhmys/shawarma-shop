@@ -5,6 +5,7 @@ import ShawarmaBlock from './ShawarmaBlock';
 import SauceBlock from './SauceBlock';
 import OrderBlock from './OrderBlock';
 import IngredientBlock from './IngredientBlock';
+import UsersBlock from './UsersBlock';
 import styles from './Admin.module.scss';
 
 const Admin: React.FC = () => {
@@ -13,9 +14,10 @@ const Admin: React.FC = () => {
       <PageTitle>Панель управления</PageTitle>
       <CategoryBlock />
       <ShawarmaBlock />
-      <IngredientBlock/>
-      <SauceBlock/>
-      <OrderBlock/>
+      <IngredientBlock />
+      <SauceBlock />
+      <OrderBlock />
+      <UsersBlock />
     </div>
   );
 };
