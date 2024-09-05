@@ -1,4 +1,4 @@
-import { authInstance, guestInstance } from ".";
+import { authInstance } from ".";
 import { ShawarmaComponentAPIType, ShawarmaPropertyAPIType } from "../@types/app.forms";
 
 /*
