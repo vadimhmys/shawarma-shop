@@ -61,6 +61,10 @@
     @media(max-width: 468px) {
       font-size: 14px;
     }
+
+    @media(max-width: 356px) {
+      font-size: 12px;
+    }
     
     & thead {
       background: darken($white,20%);
