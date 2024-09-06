@@ -10,7 +10,7 @@ import ErrorHandler from './middleware/ErrorHandler.js';
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(cors({ origin: ['https://shawarma-7f3078b82282.herokuapp.com/'], credentials: true }));
+app.use(cors({ origin: ['*'], credentials: true }));
 app.use(express.json());
 app.use(express.static('static'));
 app.use(fileUpload());
