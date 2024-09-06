@@ -1,12 +1,12 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
 const guestInstance = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'https://shawarma-7f3078b82282.herokuapp.com/api/' : process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL,
   withCredentials: true
 });
 
 const authInstance = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'https://shawarma-7f3078b82282.herokuapp.com/' : process.env.REACT_APP_IMG_URL,
+  baseURL: process.env.REACT_APP_IMG_URL,
   withCredentials: true
 });
 
