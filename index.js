@@ -10,7 +10,7 @@ import ErrorHandler from './middleware/ErrorHandler.js';
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
+app.use(cors({ origin: ['https://66db512651bc25f152f3d0d2--shawarmasshop.netlify.app/'], credentials: true }));
 app.use(express.json());
 app.use(express.static('static'));
 app.use(fileUpload());
