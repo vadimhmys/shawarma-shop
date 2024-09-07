@@ -20,12 +20,12 @@
   }
 
   &__title {
-    font-family: "Lugrasimo", cursive;
+    font-family: "Comfortaa", cursive;
     color: $dark-font;
   }
 
   &__subtitle {
-    font-family: "Lugrasimo", cursive;
+    font-family: "Comfortaa", cursive;
     color: $dark-font;
     margin: 10px 0;
   }
@@ -219,7 +219,7 @@
 
   &__label {
     margin-bottom: 5px;
-    font-family: "Lugrasimo", cursive;
+    font-family: "Comfortaa", cursive;
     color: $dark-font;
     cursor: pointer;
   }
@@ -239,7 +239,7 @@
   }
 
   &__errorMessage {
-    font-family: "Lugrasimo", cursive;
+    font-family: "Comfortaa", cursive;
     color: $pink;
     font-size: 14px;
     padding: 5px;
@@ -303,7 +303,7 @@ input::-webkit-file-upload-button {
 }
 
 .emptyPropertyMessage {
-  font-family: "Lugrasimo", cursive;
+  font-family: "Comfortaa", cursive;
   color: $dark-font;
   margin: 10px 0;
   text-align: center;
